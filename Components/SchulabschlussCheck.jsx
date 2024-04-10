@@ -16,7 +16,7 @@ const SchulCheck = () => {
           onValueChange={() => setCheckbox1(1)}
           style={styles.checkbox}
           />
-        <Text style={styles.label}>Ohne Schulabschluss</Text>
+        <Text style={styles.beschreibung}>Ohne Schulabschluss</Text>
       </View>
             <View style={styles.checkboxContainer}>
         <CheckBox
@@ -25,7 +25,7 @@ const SchulCheck = () => {
           onValueChange={() => setCheckbox1(2)}
           style={styles.checkbox}
           />
-        <Text style={styles.label}>Haupt-/Volksschulabschluss</Text>
+        <Text style={styles.beschreibung}>Haupt-/Volksschulabschluss</Text>
       </View>
       <View style={styles.checkboxContainer}>
         <CheckBox
@@ -34,7 +34,7 @@ const SchulCheck = () => {
           onValueChange={() => setCheckbox1(3)}
           style={styles.checkbox}
           />
-        <Text style={styles.label}>Mittlere Reife oder gleichwertiger Abschluss</Text>
+        <Text style={styles.beschreibung}>Mittlere Reife oder gleichwertiger Abschluss</Text>
       </View>
       <View style={styles.checkboxContainer}>
         <CheckBox
@@ -43,7 +43,7 @@ const SchulCheck = () => {
         onValueChange={() => setCheckbox1(4)}
         style={styles.checkbox}
         />
-        <Text style={styles.label}>Abitur/Fachabitur</Text>
+        <Text style={styles.beschreibung}>Abitur/Fachabitur</Text>
       </View>
       </View>
   );
@@ -76,11 +76,11 @@ const styles = StyleSheet.create({
   checkboxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    padding:'3%',
+        
   },
-  checkboxLabel: {
-    marginLeft: 8,
-    fontWeight: 500,
-    fontSize: 18,
+  beschreibung: {
+    marginLeft: '5%',
   },
 });
 

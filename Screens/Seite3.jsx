@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TextInput,Button } from 'react-native';
 import React from 'react';
 
 export default function Seite3({navigation}) {
+  
   return (
     <View style={styles.container}>
       <Text style={styles.Überschrift}>Bankverbindung</Text>

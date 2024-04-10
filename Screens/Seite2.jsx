@@ -1,8 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
-import React from 'react';
+import React, { useContext } from 'react';
+import { TransactionContext } from '../utils/Context';
 
 export default function Seite2({navigation}) {
+  const [sprache,setzesprache]=useContext(TransactionContext)
   return (
     <View style={styles.container}>
       <Text style={styles.Überschrift}>Angaben zur Sozialversicherung</Text>

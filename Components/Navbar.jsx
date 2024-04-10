@@ -5,9 +5,9 @@ import Seite2 from '../Screens/Seite2';
 import Seite3 from '../Screens/Seite3';
 import Seite4 from '../Screens/Seite4';
 import Seite5 from '../Screens/Seite5';
+import { TransactionProvider } from '../utils/Context';
  
-export default function Navbar() {
- 
+const Navbar=(Prop)=> { 
     const Stack = createStackNavigator();
  
  
@@ -15,10 +15,11 @@ export default function Navbar() {
  
  
   return (
+    <TransactionProvider>
     <NavigationContainer>
  
     <Stack.Navigator initialRouteName="Seite1" screenOptions={{headerShown:false, headerMode:'screen', headerTintColor:'white', headerStyle: {backgroundColor:'rgba(0,15,40,0.95)'}}}>
-    <Stack.Screen name = "Seite1" component = {Seite1} />
+    <Stack.Screen name = "Seite1" component = {Seite1} Prop={Prop} />
     <Stack.Screen name = "Seite2" component = {Seite2} options={{headerShown:false}}/>
     <Stack.Screen name = "Seite3" component = {Seite3} options={{headerShown:false}} />
     <Stack.Screen name = "Seite4" component = {Seite4} options={{headerShown:false}} />
@@ -26,6 +27,7 @@ export default function Navbar() {
    
   </Stack.Navigator>
   </NavigationContainer>
- 
+  </TransactionProvider> 
   );
 }
+export default Navbar;

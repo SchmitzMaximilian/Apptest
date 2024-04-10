@@ -16,14 +16,14 @@ const AusbildungsCheck = () => {
           onValueChange={() => setCheckbox1(1)}
           style={styles.checkbox}
           />
-        <Text style={styles.label}>Ohne berufliche Ausbildungsabschluss</Text>
+        <Text style={styles.beschreibung}>Ohne berufliche Ausbildungsabschluss</Text>
       </View><View style={styles.checkboxContainer}>
         <CheckBox
           value={Checkbox1==2?true:false}
           onValueChange={() => setCheckbox1(2)}
           style={styles.checkbox}
           />
-        <Text style={styles.label}>Abschluss einer anerkannten Berufsausbildung</Text>
+        <Text style={styles.beschreibung}>Abschluss einer anerkannten Berufsausbildung</Text>
       </View>
       <View style={styles.checkboxContainer}>
         <CheckBox
@@ -31,7 +31,7 @@ const AusbildungsCheck = () => {
           onValueChange={() => setCheckbox1(3)}
           style={styles.checkbox}
           />
-        <Text style={styles.label}>Meister-/Techniker- oder gleichwertige Fachschulabschluss</Text>
+        <Text style={styles.beschreibung}>Meister-/Techniker- oder gleichwertige Fachschulabschluss</Text>
       </View>
       <View style={styles.checkboxContainer}>
         <CheckBox
@@ -39,7 +39,7 @@ const AusbildungsCheck = () => {
           onValueChange={() => setCheckbox1(4)}
           style={styles.checkbox}
           />
-        <Text style={styles.label}>Bachlor</Text>
+        <Text style={styles.beschreibung}>Bachlor</Text>
       </View>
       <View style={styles.checkboxContainer}>
         <CheckBox
@@ -47,7 +47,7 @@ const AusbildungsCheck = () => {
           onValueChange={() => setCheckbox1(5)}
           style={styles.checkbox}
           />
-        <Text style={styles.label}>Diplom/Magister/Master/Staatsexamen</Text>
+        <Text style={styles.beschreibung}>Diplom/Magister/Master/Staatsexamen</Text>
       </View>
       <View style={styles.checkboxContainer}>
         <CheckBox
@@ -55,7 +55,7 @@ const AusbildungsCheck = () => {
           onValueChange={() => setCheckbox1(6)}
           style={styles.checkbox}
           />
-        <Text style={styles.label}>Promotion</Text>
+        <Text style={styles.beschreibung}>Promotion</Text>
       </View>
             
       </View>
@@ -89,11 +89,11 @@ const styles = StyleSheet.create({
   checkboxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    padding:'3%'
   },
-  checkboxLabel: {
-    marginLeft: 8,
-    fontWeight: 500,
-    fontSize: 18,
+  beschreibung: {
+    marginLeft: '5%',
+    
   },
 });
 

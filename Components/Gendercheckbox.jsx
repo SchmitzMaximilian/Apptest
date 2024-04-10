@@ -1,41 +1,45 @@
-import React, { useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import React, { useContext, useState } from 'react';
+import {StyleSheet, Text, View } from 'react-native';
 import CheckBox from 'expo-checkbox';
+import { TransactionContext } from '../utils/Context';
+import LANG from '../lang/lang';
+
+
 
 export default function GenderCheck() {
   const [checked1, setChecked1] = useState(0);
-  
+  const [sprache,setzesprache]=useContext(TransactionContext)
   
 
 
-  return (<><View style={{flexDirection:"row"}}>
+  return (<><View style={styles.checkboxContainer}>
         <CheckBox
           value={checked1==1?true:false}
           onValueChange={() => setChecked1(1)}
           style={styles.checkbox}
           />    
-      <Text>weiblich</Text></View>
-      <View style={{flexDirection:"row"}}>
+      <Text style={styles.beschreibung}>{sprache?LANG.Gendercheckbox.Genderoptionen.w.De:LANG.Gendercheckbox.Genderoptionen.w.EN}</Text></View>
+      <View style={styles.checkboxContainer}>
         <CheckBox
           value={checked1==2?true:false}
           onValueChange={() => setChecked1(2)}
           style={styles.checkbox}
           />    
-      <Text>männlich</Text></View>
-      <View style={{flexDirection:"row"}}>
+      <Text style={styles.beschreibung}>{sprache?LANG.Gendercheckbox.Genderoptionen.m.De:LANG.Gendercheckbox.Genderoptionen.m.EN}</Text></View>
+      <View style={styles.checkboxContainer}>
         <CheckBox
           value={checked1==3?true:false}
           onValueChange={() => setChecked1(3)}
           style={styles.checkbox}
           />    
-      <Text>divers</Text></View>
-      <View style={{flexDirection:"row"}}>
+      <Text style={styles.beschreibung}>{sprache?LANG.Gendercheckbox.Genderoptionen.d.De:LANG.Gendercheckbox.Genderoptionen.d.EN}</Text></View>
+      <View style={styles.checkboxContainer}>
         <CheckBox
           value={checked1==4?true:false}
           onValueChange={() => setChecked1(4)}
           style={styles.checkbox}
           />    
-      <Text>unbestimmt</Text></View>
+      <Text style={styles.beschreibung}>{sprache?LANG.Gendercheckbox.Genderoptionen.u.De:LANG.Gendercheckbox.Genderoptionen.u.EN}</Text></View>
     
    </>
   );
@@ -69,11 +73,16 @@ const styles = StyleSheet.create({
   },
   checkboxContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
+    
+    padding:'3%'
   },
   checkboxLabel: {
     marginLeft: 8,
     fontWeight: 500,
     fontSize: 18,
+  },
+  beschreibung: {
+    marginLeft: '3%',
+    
   },
 });

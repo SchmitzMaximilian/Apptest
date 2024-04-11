@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as SecureStore from 'expo-secure-store';
-import Eingabefeld from "../../Components/Texteingabebp";
-import { StyleSheet, Text, View, TextInput,Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity } from 'react-native';
 import { EingabeFeld } from "./regcomps/Comps";
 import { BorderRadiuses } from "react-native-ui-lib/src/style/borderRadiuses";
 /**
@@ -41,40 +40,146 @@ const Registrierung =()=>{
     speichern('Admin', "true")
   },[])
   return(
-
+    <SafeAreaView style={styles.sav} backgroundColor={'#334155'}>
 <View style={styles.container}>
-<EingabeFeld  P={"Benutzername"} V={ersteeingabe.toString()} S={setText}    />
-<Text>Username</Text>
-<EingabeFeld P={"Passwort"} V={ersteeingabe.toString()} S={setText}    />
-<Text>Passwort</Text>
-<EingabeFeld P={"Name Betrieb"} V={ersteeingabe.toString()} S={setText}    />
-<Text>Betrieb</Text>
-<EingabeFeld P={"Standortadresse Betrieb"} V={ersteeingabe.toString()} S={setText}    />
-<Text>Adresse Betrieb</Text>
-<EingabeFeld P={"Max.Mustermann@Email.de"} V={ersteeingabe.toString()} S={setText}    />
-<Text>E-Mail-Adresse</Text><Button title='Weitere Email hizufügen' />
+  <View style={styles.AdminButtonContainer}>
+  <TouchableOpacity  style={styles.AdminButton}> 
+    <Text style={{color:'#60a5fa'}} >Admin</Text>
+  </TouchableOpacity>
+  </View>
+  <View>
+    <Text style={styles.Titel}>Registrierung</Text>
+  </View>
+  <View style={styles.angabenfeld}>
+<EingabeFeld  Icon={'User'}  Labname={'Benutzername'}   /> 
+<EingabeFeld   Icon={'Pass'}  Labname={'Passwort'} />{/*(disable/hide password conten)Button/Icon onPress show pasword  */} 
+<EingabeFeld   Icon={'Company'}  Labname={'Firma'}/> 
+<EingabeFeld  Icon={'Address'}   Labname={'Adresse'}/> 
+<EingabeFeld   Icon={'Mail'}     Labname={'E-mail Adresse'}/> 
+<TouchableOpacity  style={styles.Hinzufuegen}> 
+    <Text style={{color:'#FFF'}} >+</Text>
+  </TouchableOpacity>
 {/*onPress <EingabeFeld P={"Max.Mustermann@Email.de"} V={ersteeingabe.toString()} S={setText}    /> hinzufügen*/}
+</View>
+<TouchableOpacity style={styles.Abbrechen}>
+    <Text style={{color:'#dc2626'}}>Abbrechen</Text>
+</TouchableOpacity>
 
-<Button title='Submit/Register' style={styles.submitData}/>
+<TouchableOpacity style={styles.Abspeichern}>
+    <Text style={{color:'black'}}>Speichern</Text>
+</TouchableOpacity>
+
+
     </View>
-
+    </SafeAreaView>
   );
 }
 
 export default Registrierung
 
 const styles = StyleSheet.create({
-  container: {
+  sav:{
     flex: 1,
-    backgroundColor: '#fff',
+    flexDirection:'column',
+    backgroundColor: '#334155',
+    width:'100%',
+    height:'100%',
+    justifyContent: 'flex-start',
+  },  
+  container: {    
+    backgroundColor: '#334155',
+    width:'100%',   
+    height:'100%',  
     alignItems: 'center',
-    justifyContent: 'center',
-    padding: '5%'    
+    justifyContent:'flex-start',
   },
-  submitData:{
+  AdminButtonContainer:{
+    width:'100%', 
+    padding:15,
+  },
+  AdminButton:{
+    alignItems: 'center',
+    backgroundColor: '#0f172a',
+    padding: 10,
+    height:'auto',
+    marginTop:20,
+    borderRadius:5,
+    borderTopColor:'#1e3a8a',
+    borderTopWidth:2,
+    borderBottomColor:'#1e3a8a',
+    borderBottomWidth:2,
+    width:'25%',
+    marginLeft:'75%',
+  },
+  Hinzufuegen:{
+    alignItems: 'center',
+    backgroundColor: '#2563eb',
+    padding: 10,
+    height:'auto',
+    width:'auto',
+    marginTop:20,
+    borderRadius:90,
+    borderTopColor:'#1e3a8a',
+    borderTopWidth:2,
+    borderBottomColor:'#1e3a8a',
+    borderBottomWidth:2, 
+    marginLeft:'85%',
+    marginRight:'5%'
+  },
+  Titel:{
+    fontSize:35,
+    marginTop:40,
+    textShadowColor:'#000',
+    textShadowRadius:5,
+    textShadowOffset:{width:3,height:3},
+    color:'#FFF',
+  },
+  angabenfeld:{
+    width:'90%', 
+    backgroundColor: '#1e293b', 
+    paddingVertical:30,
+    paddingHorizontal:20,
+    borderRadius:20, 
+    marginVertical:20,
+    borderColor:'#64748b',
+    borderWidth:1,
+    marginTop:50,
+    alignSelf:'center',
+  },
+  Abspeichern:{
+    alignSelf: 'flex-end',
+    alignItems: 'center',
+    backgroundColor: '#166534',
+    padding: 10,
+    height:'auto',
+    marginBottom:20,
+    borderRadius:5,
+    borderTopColor:'#1e3a8a',
+    borderTopWidth:2,
+    borderBottomColor:'#1e3a8a',
+    borderBottomWidth:2,
+    width:'25%',
+    marginLeft:'75%',
     
-
-  }
-
+  },
+  Abbrechen:{
+    alignSelf: 'flex-start',
+    alignItems: 'center',
+    backgroundColor: '#0f172a',
+    padding: 10,
+    height:'auto',
+    marginTop:20,
+    borderRadius:5,
+    borderTopColor:'#dc2626',
+    borderTopWidth:2,
+    borderBottomColor:'#dc2626',
+    borderBottomWidth:2,
+    width:'25%',
+    marginright:'75%',
+    
+  },
+  
+  
+  
 
 });

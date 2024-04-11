@@ -24,7 +24,7 @@ async function getValueFor(key) {
 }
  */
 export default function App() { 
-  const[isAdmin,setisAdmin]=useState(false);
+  const[isAdmin,setisAdmin]=useState(false);/*true für Login screen false für Bogen */
   const loeschen = async (param)=>{
     await SecureStore.deleteItemAsync(param)
   }
@@ -43,9 +43,9 @@ export default function App() {
   const componentWillMount=async()=>{     
      const data= await lesen('Admin')
     if(data===null){  
-      setisAdmin(true)
+      //setisAdmin(true)
   }else{
-      setisAdmin(false)
+      //setisAdmin(false)
     }
   }
 
@@ -72,6 +72,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height:'100%',
+    width:'100%',
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',

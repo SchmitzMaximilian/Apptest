@@ -12,19 +12,19 @@ export default function Block1gname() {
  
     return (
       <>
-      <Text style={styles.Überschrift}>{sprache?LANG.SEITE1.Block1.Title.De:LANG.SEITE1.Block1.Title.En}</Text>
+      
       <View style= {styles.GeteilteReihe}>
 
         <View >
         <GenderCheck /></View>
         <View style={styles.Spaltenauflistung}>
         <TextInput
-        style={{ height: 40,width :'86%', borderColor: 'black', borderBottomWidth: 1 ,}}
+        style={{ height: 40,width :'86%', borderColor: '#fff', borderBottomWidth: 1 ,}}
         
       />
       <Text style={styles.Datenanfrage}>{sprache?LANG.SEITE1.Block1.Vorname.De:LANG.SEITE1.Block1.Vorname.En}</Text>
       <TextInput
-        style={{ height: 40,width :'86%', borderColor: 'black', borderBottomWidth: 1 ,}}
+        style={{ height: 40,width :'86%', borderColor: '#fff', borderBottomWidth: 1 ,}}
         
       />
       <Text style={styles.Datenanfrage}>{sprache?LANG.SEITE1.Block1.Nachname.De:LANG.SEITE1.Block1.Nachname.En}</Text></View>
@@ -34,7 +34,7 @@ export default function Block1gname() {
 
   const styles = StyleSheet.create({
 
-Überschrift: {
+    Ueberschrift: {
   width: '90%',
       backgroundColor: '#d3d3d3',
   borderWidth: 1,
@@ -42,6 +42,7 @@ export default function Block1gname() {
   
 },
 Datenanfrage: {fontSize: 10,
+  color:'#fff',
   
   
 },

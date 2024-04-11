@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import {View,Text,Button, TextInput, StyleSheet} from 'react-native'
-import {Octicons, Ionicons} from '@expo/vector-icons';
+import {View,StyleSheet} from 'react-native' 
 import LeftIcon from './LeftIcon';
 import StyledTextInput from './StyledTextInput'; 
 import StyledInputLabel from './StyledInputLabel';

@@ -13,10 +13,10 @@ export default function Block2adresse(){
 
   <View style={styles.GeteilteReihe}>
   <TextInput
-        style={{ height: 40,width :'30%', borderColor: 'black', borderBottomWidth: 1 ,}}
+        style={{ height: 40,width :'30%', borderColor: '#fff', borderBottomWidth: 1 ,}}
         
       /><TextInput
-      style={{ height: 40,width :'58%', borderColor: 'black', borderBottomWidth: 1 ,marginHorizontal: 10}}
+      style={{ height: 40,width :'58%', borderColor: '#fff', borderBottomWidth: 1 ,marginHorizontal: 10}}
       
     />
   </View>
@@ -39,10 +39,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     
   },
-  Datenanfrage: {fontSize: 10,paddingLeft: '1%'
+  Datenanfrage: {fontSize: 10,paddingLeft: '1%',color:'#fff',
         
   },
-  Datenanfrage2: {fontSize: 10,paddingLeft: '23%'
+  Datenanfrage2: {fontSize: 10,paddingLeft: '23%',color:'#fff',
         
   },
   GeteilteReihe:{flexDirection:"row",

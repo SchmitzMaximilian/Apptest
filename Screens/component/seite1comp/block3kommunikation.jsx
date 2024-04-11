@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     
   },
-  Datenanfrage: {fontSize: 10,
+  Datenanfrage: {fontSize: 10,color:'#fff',
         
   },
   

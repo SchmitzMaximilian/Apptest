@@ -1,7 +1,7 @@
 const LangOb={
   /* "Adresse":{
     "Haus":{
-      "De":"",
+      "DE":"",
       "EN":"",
     }
   },*/
@@ -20,11 +20,92 @@ const LangOb={
       "EN":"Email address (only if available)",
     },
   },
+  "Angabenueberschriften":{
+    "Personendaten":{
+      DE:"Name und Anschrift",
+      EN:"Name and Address",
+    },
+    "Sozial":{
+      "DE":"Angaben zur Sozialversicherung",
+      "EN":"Social security information",
+    },
+    "Kommunikation":{
+        "DE":"Kommunikation",
+        "EN":"Contact details",
+      },
+    "Bank":{
+      "DE":"Bankverbindung",
+      "EN":"Bank details",
+    },
+    "Steuer":{
+      "DE":"Angaben zur Steuer",
+      "EN":"Tax information",
+    },
+    "Schule":{
+      "DE":"Schulabschluss",
+      "EN": "Graduation",
+    },
+    "Ausbildung":{
+      "DE":"Ausbildungsabschluss",
+      "EN":"Training qualification",
+    },
+  },
+  "MinijobBogenUeberschriften":{
+    "TitelOben":{
+      "DE":"Personalerfassungsbogen für Minijobber",
+      "EN":"Personnel entry form for mini-jobbers",
+    },
+    "TitelUnten":{
+      "DE":"in einer geringfügig entlohnten Beschäftigung",
+      "EN":"in low-paid employment",
+    },
+    "Personendaten":{
+      "DE":"Name und Anschrift",
+      "EN":"Name and Address",
+    },    
+    "Kommunikation":{
+        "DE":"Kommunikation",
+        "EN":"Contact details",
+      },
+      "Sozial":{
+      "DE":"Sozialversicherung",
+      "EN":"Social security information",
+    },
+    "Bank":{
+      "DE":"Bankverbindung",
+      "EN":"Bank details",
+    },
+    "Steuer":{
+      "DE":"Steuer",
+      "EN":"Tax information",
+    },
+    "Schule":{
+      "DE":"Schulabschluss",
+      "EN": "Graduation",
+    },
+    "Ausbildung":{
+      "DE":"Ausbildungsabschluss",
+      "EN":"Training qualification",
+    },
+    "Krankenversicherung":{
+      "DE":"Krankenversicherung",
+      "EN":"Health insurance",
+    },
+    "Arbeitsverhältnis":{
+      "DE":"Status zu Beginn der Beschäftigung",
+      "EN":"Status at the start of employment",
+    },
+    "OtherJobs":{
+      "DE":"Angaben zu weiteren Beschäftigungen",
+      "EN":"Information about other employment",
+    },
+  },
+  
 
 
 
   "Blocktop":{
-    "Überschrift":{
+    "Ueberschrift":{
       "De": "Personalerfassungsbogen für Festpersonal",
       "EN": "Personnel registration form for permanent staff"
     }

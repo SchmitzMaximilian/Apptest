@@ -7,7 +7,7 @@ const Container = (props) => {
     <>
     {
       props.S&&(props.Icon.length>0)&&props.Icon.map((item,index)=>(
-      <View>
+      <View key={index}>
         <EingabeFeld Icon={item} Labname={props.Labname[index]}/>
       </View>
       )) 

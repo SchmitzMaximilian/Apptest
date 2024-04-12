@@ -10,7 +10,7 @@ export default function Blocktop() {
    
   return( 
   <Text style={styles.Titel}  >{
-  sprache?LANG.Blocktop.Überschrift.De:LANG.Blocktop.Überschrift.EN}
+  sprache?LANG.Blocktop.Ueberschrift.De:LANG.Blocktop.Ueberschrift.EN}
   </Text>  
   )
 

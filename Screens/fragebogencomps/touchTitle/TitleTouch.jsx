@@ -1,16 +1,20 @@
 import React from 'react'
 import {TouchableOpacity, Text, StyleSheet} from 'react-native' 
+import RightIcon from '../textFeldcomp/RightIcon'
 const TitleTouch = (props) => {
   return (
     <>
     {
       props.S?
-      <TouchableOpacity  onPress={()=>props.F(!props.S)}>
+      <TouchableOpacity  onPress={()=>props.F(!props.S)}><RightIcon/>
       <Text style={styles.Ueberschrift}>{props.T}</Text>
+      
+
       </TouchableOpacity>
       :
       <TouchableOpacity onPress={()=>props.F(!props.S)}>
       <Text style={styles.Ueberschrift}>{props.T}</Text>
+      <RightIcon/>
       </TouchableOpacity>
     }
     </>

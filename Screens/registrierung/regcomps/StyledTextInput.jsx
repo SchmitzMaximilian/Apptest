@@ -44,9 +44,9 @@ export default StyledTextInput
 const styles = StyleSheet.create({
   StyledInputLabel : {
     color: '#FFF',
-    fontsize:'16px',
-    marginbottom:'4px',
-    textalign:'left',
+    fontSize:16,
+    marginBottom:4,
+    textAlign:'left',
     padding: 10,
     paddingLeft:60,
     paddingHorizontal:15,

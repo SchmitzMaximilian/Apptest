@@ -1,6 +1,6 @@
 import React from "react";
 import { View,StyleSheet } from "react-native";
-import {Octicons} from '@expo/vector-icons';
+import {Octicons,Ionicons} from '@expo/vector-icons';
 
 
 const LeftIcon = (props) => {
@@ -16,12 +16,19 @@ const LeftIcon = (props) => {
     case "Company":
       Icon='organization'
       break;
-      case "Address":
+    case "Address":
       Icon='location'
       break;
     case "Mail":
       Icon='mail'
       break;
+    case "Bank":
+      Icon='credit-card'
+      break;
+    case "Dropdown":
+      Icon='multi-select'
+      break;
+    
       default:
         Icon='lock'
         break;

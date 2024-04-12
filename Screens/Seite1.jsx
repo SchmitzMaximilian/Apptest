@@ -1,11 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
-import Eingabefeld from '../Components/Texteingabebp';
-import GenderCheck from '../Components/Gendercheckbox';
-import Block1gname from './component/seite1comp/block1gname';
-import Block2adresse from './component/seite1comp/block2adresse';
-import Block3Komunikation from './component/seite1comp/block3kommunikation';
 import LANG from './../lang/lang'
 import Blocktop from './component/seite1comp/blocktop'; 
 import { TransactionContext } from '../utils/Context'; 
@@ -13,14 +8,23 @@ import {Octicons, Ionicons} from '@expo/vector-icons';
 import Container from './fragebogencomps/containercomp/Container';
 import TitleTouch from './fragebogencomps/touchTitle/TitleTouch';
 import { Dataset } from '../utils/Dataset';
+import { Textdataset } from '../utils/Textdataset';
+import { Checkboxdataset } from '../utils/Checkboxdataset';
+import SelectPicker from './fragebogencomps/selectBoxencomp/PickerSelectBox';
+
+
+
 export default function Seite1({navigation}) {
   const [sprache,setzesprache]=useContext(TransactionContext)  
   const [tab1,settab1]=useState(false)  
   const [tab2,settab2]=useState(false)  
-  const [tab3,settab3]=useState(false) 
-    
+   
+  const [tab4,settab4]=useState(false)
+  const [tab5,settab5]=useState(false)
+  const [tab6,settab6]=useState(false)
+  const [tab7,settab7]=useState(false)  
   return (
-    <SafeAreaView style={styles.sav} backgroundColor={'#334155'}>
+    <SafeAreaView style={styles.sav} backgroundColor={'#335155'}>
       <View style={styles.container}>
       <View style={styles.AdminButtonContainer}>
         <TouchableOpacity  style={styles.BackButton}> 
@@ -32,7 +36,7 @@ export default function Seite1({navigation}) {
           <Text style={{color:'#FFFFFF'}} >{sprache?'EN':'DE'}</Text>
         </TouchableOpacity>
         </View>
-        <TouchableOpacity  style={styles.AdminButton}> 
+        <TouchableOpacity onPress={()=>navigation.navigate("Seite2")} style={styles.AdminButton}> 
           <Text style={{color:'#FFFFFF'}} >Next</Text>
         </TouchableOpacity>
       </View>
@@ -44,14 +48,27 @@ export default function Seite1({navigation}) {
   <View style={styles.ContainerFragebogen}> 
   <View>
     <Blocktop/>
-    <Text style={{color:'#fff'}}>{Dataset(sprache?'DE':'EN').Texte.Rechtsbelehrung}</Text>{/**für pur Text style direkt in der text box */}
+    <SelectPicker />
+    <Text style={{color:'#fff'}}>{Textdataset(sprache?'DE':'EN').Texte.Rechtsbelehrung}</Text>{/**für pur Text style direkt in der text box */}
   </View>
   <View style={{flexDirection:'column', width:'100%'}}>
-  <TitleTouch F={settab1} S={tab1} T={sprache?LANG.SEITE1.Block1.Title.De:LANG.SEITE1.Block1.Title.En} />
+  {/**Name und Anschrift */}
+  <SelectPicker />
+  <TitleTouch F={settab1} S={tab1} T={sprache?LANG.Angabenueberschriften.Personendaten.DE:LANG.Angabenueberschriften.Personendaten.EN} />
   <Container Icon={Dataset(sprache?'DE':'EN').PerData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').PerData.Eingabefelder} F={settab1} S={tab1} /> 
-  <TitleTouch F={settab2} S={tab2} T={sprache?LANG.Kommunikation.Überschrift.De:LANG.Kommunikation.Überschrift.EN} /> 
+  {/**Kommunikation */}
+  <TitleTouch F={settab2} S={tab2} T={sprache?LANG.Angabenueberschriften.Kommunikation.DE:LANG.Angabenueberschriften.Kommunikation.EN} /> 
   <Container Icon={Dataset(sprache?'DE':'EN').KontaktData.EingabefelderIcons}Labname={Dataset(sprache?'DE': 'EN').KontaktData.Eingabefelder} F={settab2} S={tab2}  />
-  <TitleTouch F={settab3} S={tab3} T={sprache?LANG.SEITE1.Block1.Title.De:LANG.SEITE1.Block1.Title.En} />
+  {/**Bankverbindung */}
+  <TitleTouch F={settab4} S={tab4} T={sprache?LANG.Angabenueberschriften.Bank.DE:LANG.Angabenueberschriften.Bank.EN}/>
+  <Container Icon={Dataset(sprache?'DE':'EN').BankData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').BankData.Eingabefelder} F={settab4} S={tab4}/>
+  {/**Angaben zur Steuer */}
+  <TitleTouch F={settab5} S={tab5} T={sprache?LANG.Angabenueberschriften.Steuer.DE:LANG.Angabenueberschriften.Steuer.EN}/>
+  {/**Schulabschluss */}
+  <TitleTouch F={settab6} S={tab6} T={sprache?LANG.Angabenueberschriften.Schule.DE:LANG.Angabenueberschriften.Schule.EN}/>
+  {/**Ausbildungsabschluss */}
+  <TitleTouch F= {settab7} S={tab7} T={sprache?LANG.Angabenueberschriften.Ausbildung.DE:LANG.Angabenueberschriften.Ausbildung.EN}/>
+  
   
   
   </View>

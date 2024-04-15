@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {View,StyleSheet} from 'react-native' 
 import LeftIcon from './LeftIcon';
 import StyledTextInput from './StyledTextInput'; 
@@ -12,15 +12,14 @@ import StyledInputLabel from './StyledInputLabel';
  * @returns 
  */
 export const EingabeFeld=(props)=>{
-  const [text,settext]=useState('')
-  const [showPass,setshowPass]=useState(false)
-  console.log(props.Icon)
-  
+  const [text,settext]=useState('')  
+  useEffect(()=>{
+  },[text])
   return(
     <View style={{marginTop:20}}>
         <LeftIcon P={props.Icon}/> 
         <StyledInputLabel P={props.Labname}>Label</StyledInputLabel>
-        <StyledTextInput {...props} P={showPass} S={setshowPass}/>
+        <StyledTextInput {...props}  />
     </View>
   )
 }

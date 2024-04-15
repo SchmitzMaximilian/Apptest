@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity } from 'react-native';
 import React, { useContext } from 'react';
-import ArbeitszeitCheckbox from '../../../Components/Arbeitszeitcheck';
 import LANG from '../../../lang/lang';
 import { TransactionContext } from '../../../utils/Context'; 
 
@@ -12,8 +11,8 @@ export default function Blocktop() {
   <Text style={styles.Titel}  >{
   sprache?LANG.Blocktop.Ueberschrift.De:LANG.Blocktop.Ueberschrift.EN}
   </Text>  
-  )
-
+  
+)
 };
 
 const styles = StyleSheet.create({
@@ -24,5 +23,6 @@ const styles = StyleSheet.create({
     textShadowRadius:5,
     textShadowOffset:{width:3,height:3},
     color:'#FFF',
+    marginHorizontal: '10%',
   }
 });

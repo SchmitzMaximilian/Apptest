@@ -7,11 +7,16 @@ import { TransactionContext } from '../utils/Context';
 import {Octicons, Ionicons} from '@expo/vector-icons';
 import Container from './fragebogencomps/containercomp/Container';
 import TitleTouch from './fragebogencomps/touchTitle/TitleTouch';
-import { Dataset } from '../utils/Dataset';
+import { Dataset } from '../utils/Dataset'; 
 import SelectPicker from './fragebogencomps/selectBoxencomp/PickerSelectBox';
+import SVNummer from './fragebogencomps/selectBoxencomp/SozialCheckbox';
+import { Textdataset } from '../utils/Textdataset';
+
+
 export default function Seite2({navigation}) {
   const [sprache,setzesprache]=useContext(TransactionContext)
   const [tab3,settab3]=useState(false)
+  const [SVCheck,setSVCheck]=useState(false)
   return (
     <SafeAreaView style={styles.sav} backgroundColor={'#335155'}>
       <View style={styles.container}>
@@ -31,12 +36,37 @@ export default function Seite2({navigation}) {
       </View>
 
 
-      {/**Angabensozialversicherung*/}
-      <View style={styles.ContainerFragebogen}>
-<TitleTouch F={settab3} S={tab3} T={sprache?LANG.Angabenueberschriften.Sozial.DE:LANG.Angabenueberschriften.Sozial.EN} />
-  <Container Icon={Dataset(sprache?'DE':'EN').SozialData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').SozialData.Eingabefelder} F={settab3} S={tab3}/>
+    {/**Angabensozialversicherung*/}
+    <View style={styles.ContainerFragebogen}>
+    <TitleTouch F={settab3} S={tab3} T={sprache?LANG.Angabenueberschriften.Sozial.DE:LANG.Angabenueberschriften.Sozial.EN} />
+    {
+      tab3?
+      <>
+      <SVNummer S={SVCheck} F={setSVCheck}/>
+      {
+      SVCheck?
+      ""
+      :
+      <Container Icon={["Krankenversicherung"]} Labname={[sprache?"Sozialversicherungsnummer":"Social Security Number"]} F={settab3} S={tab3}/> 
+     }
+     </>
+    :
+    ""
+    }
   
-  <SelectPicker />
+  
+  <Container Icon={Dataset(sprache?'DE':'EN').SozialData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').SozialData.Eingabefelder} F={settab3} S={tab3}/>
+  {
+	tab3?
+<>
+ 
+</>
+:
+""
+}
+  
+  
+  <SelectPicker  S={sprache?'DE':'EN'} V={tab3} I={1}/>
   </View>
   </View>
     </SafeAreaView>
@@ -129,6 +159,9 @@ const styles = StyleSheet.create({
       marginTop:50,
       alignSelf:'center',
     },
+    Textelemente:{
+      color:'#fff'
+    }
      
 
 });

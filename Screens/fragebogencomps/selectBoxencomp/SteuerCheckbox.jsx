@@ -4,7 +4,7 @@ import CheckBox from 'expo-checkbox';
 import { Textdataset } from '../../../utils/Textdataset';
 import { TransactionContext } from '../../../utils/Context';
 
-export default function Zahlungsart(props) {
+export default function SteuerID(props) {
   const [checked1, setChecked1] = useState(0)
   const [sprache,setzesprache]=useContext(TransactionContext)
   {/* useState{Anzal der Optionen} 
@@ -20,7 +20,7 @@ export default function Zahlungsart(props) {
           value={props.S?true:false}
           onValueChange={() => props.S?props.F(0):props.F(1)}
           style={styles.checkbox}
-          /><Text style={styles.beschreibung}>{Textdataset(sprache?'DE':'EN').SoloCheckboxText.Bank}</Text>
+          /><Text style={styles.beschreibung}>{Textdataset(sprache?'DE':'EN').SoloCheckboxText.Steuer}</Text>
           </View >         
             
             
@@ -65,6 +65,6 @@ const styles = StyleSheet.create({
   },
   beschreibung: {
     marginLeft: '3%',
-    color: '#fff'
+    color:'#fff'
   },
 })

@@ -1,15 +1,16 @@
-export const Checkboxdataset=(p)=>{
-  let BoxData
+export const PickerSelectBoxDataSet=(p)=>{
+  let BoxData;
+  /*p="DE"
   if(p=="DE"){
-  BoxData={
-    "TopSelectboxenLabel":["Geschlecht","Art der Krankenversicherung","Schulabschluss","Ausbildungsabschluss"],
-      "SubSelectboxenLabel":[["weiblich","männlich","divers","unbestimmt"],
-      ["Gesetzlich","Freiwillig","Privat","Ich habe oder eine Elterneigensschaft (Nachweis z.B. Geburtsurkunde)","Ich bin nicht Rentenversicherungspflichtig (z.B. Beamter oder Selbständiger, Nachweis)","Ich übe neben dieser noch weitere Beschäftigungen aus(vollständige Liste beifügen)","Dies ist nicht meine Hauptbeschäftigung"],
-      ["Ohne Schulabschluss (1)","Haupt-/Volksschulabschluss (2)","Mittlere Reife oder gleichwertiger Abschluss (3)","Abitur/ Fachabitur (4)"],
-      ["Ohne beruflichen Ausbildungsabschluss (1)","Abschluss einer anerkannten Berufsausbildung (2)","Meister-/Techniker- oder gleichwertige Fachschulabschluss (3)","Bachlor (4)","Diplom/Magister/Master/Staatsexamen (5)","Promotion (6)"],
-    ],
-    
-  } 
+   BoxData={
+  "TopSelectboxenLabel":["Geschlecht","Art der Krankenversicherung","Schulabschluss","Ausbildungsabschluss"],
+    "SubSelectboxenLabel":[["weiblich","männlich","divers","unbestimmt"],
+    ["Gesetzlich","Freiwillig","Privat","Ich habe oder eine Elterneigensschaft (Nachweis z.B. Geburtsurkunde)","Ich bin nicht Rentenversicherungspflichtig (z.B. Beamter oder Selbständiger, Nachweis)","Ich übe neben dieser noch weitere Beschäftigungen aus(vollständige Liste beifügen)","Dies ist nicht meine Hauptbeschäftigung"],
+    ["Ohne Schulabschluss (1)","Haupt-/Volksschulabschluss (2)","Mittlere Reife oder gleichwertiger Abschluss (3)","Abitur/ Fachabitur (4)"],
+    ["Ohne beruflichen Ausbildungsabschluss (1)","Abschluss einer anerkannten Berufsausbildung (2)","Meister-/Techniker- oder gleichwertige Fachschulabschluss (3)","Bachlor (4)","Diplom/Magister/Master/Staatsexamen (5)","Promotion (6)"],
+  ],
+  
+}
 }else{
   BoxData={
     "TopSelectboxenLabel":["Gender","Type of health insurance","Graduation","Training qualification"],
@@ -20,8 +21,7 @@ export const Checkboxdataset=(p)=>{
     ],
     
   } 
-}
+} */
 
-return BoxData;
- 
+return BoxData; 
 }

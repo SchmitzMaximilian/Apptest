@@ -1,48 +1,58 @@
 import {Picker} from '@react-native-picker/picker';
-import React, { Fragment, useContext, useState } from 'react';
-import {StyleSheet, Text, View } from 'react-native';
-import { TransactionContext } from '../../../utils/Context';
-import LangOb from '../../../lang/lang';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
+import {StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { TransactionContext } from '../../../utils/Context'; 
+import { Checkboxdataset } from '../../../utils/Checkboxdataset';
 
-
-export default function SelectPicker () {
-const [selectedLanguage, setSelectedLanguage] = useState();
+const SelectPicker = (props)=> {
+const [SelectedLanguage, setSelectedLanguage] = useState();
 const [sprache,setzesprache]=useContext(TransactionContext);
-
-return(<Fragment>
-  <Picker dropdownIconColor={"white"}
-  selectedValue={selectedLanguage}
-  onValueChange={(itemValue, itemIndex) =>
+console.log(props)
+useEffect(()=>{ 
+  
+},[])
+return( <Fragment>
+  {
+    props.V?
+    <><Fragment>
+   {
+    props.S?
+    <>
+    <Text style={styles.Textelemente}>{Checkboxdataset(props.S).TopSelectboxenLabel[props.I]}</Text>
+    <View style={{borderRadius:2,borderWidth:1,borderColor:'#4b5563', width:'80%',marginLeft:'10%'}}>
+     <Picker style={{color:'#FFF'}}  dropdownIconColor={"#FFF"} selectedValue={SelectedLanguage} multiline={true} numberOfLines={2} onValueChange={(itemValue, itemIndex) =>
     setSelectedLanguage(itemValue)
-  }>
-  <Picker.Item color="grey" label="Java" value="java" />
-  <Picker.Item color="grey" label="JavaScript" value="js" />
-</Picker>
-</Fragment>
+  }  >
+      {
+        Checkboxdataset(props.S).SubSelectboxenLabel[props.I].length>0&&Checkboxdataset(props.S).SubSelectboxenLabel[props.I].map((item,index)=>(
+          <Picker.Item  key={'pickup'+index+item}  color="#000" label={item} value={item} />
 
+        ))
+      }
+    </Picker> 
+    </View>
+    </>
+    :
+    ''
+    }   
+  </Fragment>
+    </>
+    :
 
-)};
-//** Einbindung der Übersetzungsdatenbanken fehlt noch */
+    ""
 
+  
+  }</Fragment>
+  
+)
+};
+export default SelectPicker
 
-{/**
-const pickerRef = useRef();
-
-function open() {
-  pickerRef.current.focus();
-}
-
-function close() {
-  pickerRef.current.blur();
-}
-
-return <Picker
-  ref={pickerRef}
-  selectedValue={selectedLanguage}
-  onValueChange={(itemValue, itemIndex) =>
-    setSelectedLanguage(itemValue)
-  }>
-  <Picker.Item label="Java" value="java" />
-  <Picker.Item label="JavaScript" value="js" />
-</Picker>
-*/}
+const styles = StyleSheet.create({
+  
+  Textelemente:{
+    color:'#fff',
+    paddingHorizontal:80,
+    marginVertical:5,
+  },
+});

@@ -10,19 +10,22 @@ import TitleTouch from './fragebogencomps/touchTitle/TitleTouch';
 import { Dataset } from '../utils/Dataset';
 import { Textdataset } from '../utils/Textdataset';
 import { Checkboxdataset } from '../utils/Checkboxdataset';
-import SelectPicker from './fragebogencomps/selectBoxencomp/PickerSelectBox';
-
-
+import SelectPicker from './fragebogencomps/selectBoxencomp/PickerSelectBox'; 
+import SteuerID from './fragebogencomps/selectBoxencomp/SteuerCheckbox';
+import SVNummer from './fragebogencomps/selectBoxencomp/SozialCheckbox';
+import Zahlungsart from './fragebogencomps/selectBoxencomp/Checkbox';
+import spacingInstance from 'react-native-ui-lib/src/style/spacings';
 
 export default function Seite1({navigation}) {
   const [sprache,setzesprache]=useContext(TransactionContext)  
   const [tab1,settab1]=useState(false)  
   const [tab2,settab2]=useState(false)  
-   
+  const [Steuercheck,setSteuercheck]=useState(false)
+  const [Bargeldcheck,setBargeldcheck]=useState(false)
   const [tab4,settab4]=useState(false)
   const [tab5,settab5]=useState(false)
   const [tab6,settab6]=useState(false)
-  const [tab7,settab7]=useState(false)  
+  const [tab7,settab7]=useState(false)    
   return (
     <SafeAreaView style={styles.sav} backgroundColor={'#335155'}>
       <View style={styles.container}>
@@ -41,34 +44,93 @@ export default function Seite1({navigation}) {
         </TouchableOpacity>
       </View>
 
-      {/**           Hier Beginnt der Inhalt des  Fragebogen Containers                                                   */}
+  {/**           Hier Beginnt der Inhalt des  Fragebogen Containers                                                   */}
 
 
       
   <View style={styles.ContainerFragebogen}> 
   <View>
-    <Blocktop/>
-    <SelectPicker />
-    <Text style={{color:'#fff'}}>{Textdataset(sprache?'DE':'EN').Texte.Rechtsbelehrung}</Text>{/**für pur Text style direkt in der text box */}
+    <Blocktop/> 
+    <SelectPicker S={sprache?'DE':'EN'} V={true} I={4}/>
+    <Text style={{color:'#fff', marginHorizontal: '10%'}}>{Textdataset(sprache?'DE':'EN').Texte.Rechtsbelehrung}</Text>{/**für pur Text style direkt in der text box */}
   </View>
   <View style={{flexDirection:'column', width:'100%'}}>
-  {/**Name und Anschrift */}
-  <SelectPicker />
+
+
+  {/**Name und Anschrift */}  
   <TitleTouch F={settab1} S={tab1} T={sprache?LANG.Angabenueberschriften.Personendaten.DE:LANG.Angabenueberschriften.Personendaten.EN} />
-  <Container Icon={Dataset(sprache?'DE':'EN').PerData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').PerData.Eingabefelder} F={settab1} S={tab1} /> 
+  <SelectPicker S={sprache?'DE':'EN'} V={tab1} I={0}/>
+  <Container Icon={Dataset(sprache?'DE':'EN').PerData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').PerData.Eingabefelder} F={settab1} S={tab1}  /> 
+  
+
   {/**Kommunikation */}
   <TitleTouch F={settab2} S={tab2} T={sprache?LANG.Angabenueberschriften.Kommunikation.DE:LANG.Angabenueberschriften.Kommunikation.EN} /> 
   <Container Icon={Dataset(sprache?'DE':'EN').KontaktData.EingabefelderIcons}Labname={Dataset(sprache?'DE': 'EN').KontaktData.Eingabefelder} F={settab2} S={tab2}  />
-  {/**Bankverbindung */}
-  <TitleTouch F={settab4} S={tab4} T={sprache?LANG.Angabenueberschriften.Bank.DE:LANG.Angabenueberschriften.Bank.EN}/>
-  <Container Icon={Dataset(sprache?'DE':'EN').BankData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').BankData.Eingabefelder} F={settab4} S={tab4}/>
+  
+
+  {/**Bankverbindung */}  
+  <TitleTouch F={settab4} S={tab4} T={sprache?LANG.Angabenueberschriften.Bank.DE:LANG.Angabenueberschriften.Bank.EN}/>  
+  {
+    tab4?
+    <>
+    <Zahlungsart S={Bargeldcheck} F={setBargeldcheck}/>
+    {
+      Bargeldcheck?
+      ""
+      :
+      <Container Icon={Dataset(sprache?'DE':'EN').BankData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').BankData.Eingabefelder} F={settab4} S={tab4}/>
+    }
+    </>
+    :
+    ""
+  }
+
+
   {/**Angaben zur Steuer */}
   <TitleTouch F={settab5} S={tab5} T={sprache?LANG.Angabenueberschriften.Steuer.DE:LANG.Angabenueberschriften.Steuer.EN}/>
+  {
+    tab5?
+    <>
+    <SteuerID S={Steuercheck} F={setSteuercheck}/>
+  <Text style={styles.Textelemente}>{Textdataset(sprache?'DE':'EN').Texte.SteuerKlasseNachweis}</Text>
+  {
+      Steuercheck?
+      ""
+      :
+   <Container Icon={["Steuer"]} Labname={[sprache?"Steuer-ID (Pflichtangabe)":"Tax ID (mandatory information)"]} F={settab5} S={tab5}/>
+     }  
+    </>
+    :
+    ""
+  }  
+  <Container Icon={Dataset(sprache?'DE':'EN').SteuerData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').SteuerData.Eingabefelder} F={settab5} S={tab5}/>
+  
+
   {/**Schulabschluss */}
   <TitleTouch F={settab6} S={tab6} T={sprache?LANG.Angabenueberschriften.Schule.DE:LANG.Angabenueberschriften.Schule.EN}/>
+  {
+    tab6?
+    <>
+    
+    </>
+    
+    :
+    ""
+  }  
+  <SelectPicker S={sprache?'DE':'EN'} V={tab6} I={2}/>
+
+
   {/**Ausbildungsabschluss */}
   <TitleTouch F= {settab7} S={tab7} T={sprache?LANG.Angabenueberschriften.Ausbildung.DE:LANG.Angabenueberschriften.Ausbildung.EN}/>
-  
+  {
+  	tab7?
+    <>
+    
+    </>
+    :
+    ""
+  }  
+  <SelectPicker S={sprache?'DE':'EN'} V={tab7} I={3} />
   
   
   </View>
@@ -166,6 +228,10 @@ const styles = StyleSheet.create({
       marginTop:50,
       alignSelf:'center',
     },
+    Textelemente:{
+      color:'#fff',
+      marginHorizontal: '10%',
+    }
      
 
 });

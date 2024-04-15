@@ -6,7 +6,7 @@ export const Textdataset=(p)=>{
       "Rechtsbelehrung":"Bitte machen Sie nachfolgend vollständige Angaben um spätere Rückfragen und Verzögerungen bei der Sachbearbeitung der Abrechnungen zu vermeiden. Schäden die durch falsche oder unverständliche Angaben entstehen gehen zu Ihren Lasten.",
       "KrankenversicherungNachweis":"Privat : Krankenversicherte fügen bitte Nachweise über die Beitragshöhe, die Basisgrundversicherung und ggf. das Bestehen einer Tagesgeldversicherung bei",
       "SteuerHinweis":"Ihre immer 11stellige Steuer-ID finden Sie auf einem Anschreiben des Bundeszentralamtes für Steuern sowie Ihrem Einkommensteuerbescheid.",
-      "SteuerKlasseNachweis":"Soweit SIe keine Steuer-ID angeben, ist ein gültiger Ersatzbeleg des zuständigen Finanzamts beizufügen, der reine Ausdruck der ELStAM ist nicht ausreichend. Ohne ID oder Gültige Nachweise wird die Versteuerung nach Steuerklasse 6(Maximalsteuersatz) vorgenommen",
+      "SteuerKlasseNachweis":"Soweit Sie keine Steuer-ID angeben, ist ein gültiger Ersatzbeleg des zuständigen Finanzamts beizufügen, der reine Ausdruck der ELStAM ist nicht ausreichend. Ohne ID oder Gültige Nachweise wird die Versteuerung nach Steuerklasse 6(Maximalsteuersatz) vorgenommen",
       "Einverstaendniserklaerung":"Ich versichere, dass die vorstehenden Angaben der Wahrheit entsprechen. Ich verpflichte mich, meinem Arbeitgeber alle Änderungen an meinen vorsthehend erhobenen Daten unverzüglich mitzuteilen. Mir ist bekannt, dass unrichtige Angaben eine bußgeldbewährte Ordnungswidrigkeit nach §111 Abs. 1 Nr.4 SGV IV darstellen und mein Arbeitgeber zudem weitergehende Schäden aus Nachforderungen von Steuer und Sozialversicherung gegen mich geltend machen wird, sofern diese auf Grund meiner Angaben entstehen.",
 
     },

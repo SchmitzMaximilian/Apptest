@@ -28,10 +28,15 @@ const LeftIcon = (props) => {
     case "Dropdown":
       Icon='multi-select'
       break;
-    
-      default:
-        Icon='lock'
-        break;
+    case "Krankenversicherung":
+      Icon='organization'
+      break;
+    case "Steuer":
+      Icon='checklist'
+      break;
+    default:
+      Icon='lock'
+      break;
   }
   return (
     <View style={styles.LeftIcon}>

@@ -23,8 +23,8 @@ export const Dataset=(p)=>{
     },
     "SozialData":
     {
-      "Eingabefelder":["Sozialversicherungsnummer","Staatsangehärigkeit","Geburtsdatum","Geburtsname (Pflichtangabe, bei abweichendem Nachnamen)","Geburtsort (Pflichtangabe)","Geburtsland(nur falls nicht Deutschland)","Krankenkasse (Bitte kompletter Name, also zB. AOK NordWest, nicht AOK)"],
-      "EingabefelderIcons":["User","User","User","User","User","User","User"],
+      "Eingabefelder":["Staatsangehärigkeit","Geburtsdatum","Geburtsname (Pflichtangabe, bei abweichendem Nachnamen)","Geburtsort (Pflichtangabe)","Geburtsland(nur falls nicht Deutschland)","Krankenkasse (Bitte kompletter Name, also zB. AOK NordWest, nicht AOK)"],
+      "EingabefelderIcons":["Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung"],
     },
     "BankData":
     {
@@ -33,8 +33,8 @@ export const Dataset=(p)=>{
     },
     "SteuerData":
     {
-      "Eingabefelder":["Steuer-ID (Pflichtangabe)","Steuerklasse","Anzahl Kinder","Konfession","Konfession Partner (falls abweichend)"],
-      "EingabefelderIcons":["","","","","",""],
+      "Eingabefelder":["Steuerklasse","Anzahl Kinder","Konfession","Konfession Partner (falls abweichend)"],
+      "EingabefelderIcons":["Steuer","Steuer","Steuer","Steuer"],
     },
   } 
   }else{
@@ -52,8 +52,8 @@ export const Dataset=(p)=>{
       },
       "SozialData":
     {
-      "Eingabefelder":["Social Security Number","nationality","Birth date","Birth name (mandatory, if last name is different)","Place of birth (mandatory)","Country of birth (only if not Germany)","Health insurance company (please complete name, e.g. AOK NordWest, not AOK)"],
-      "EingabefelderIcons":["User","User","User","User","User","User","User"],
+      "Eingabefelder":["nationality","Birth date","Birth name (mandatory, if last name is different)","Place of birth (mandatory)","Country of birth (only if not Germany)","Health insurance company (please complete name, e.g. AOK NordWest, not AOK)"],
+      "EingabefelderIcons":["Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung"],
     },
     "BankData":
     {
@@ -62,8 +62,8 @@ export const Dataset=(p)=>{
     },
     "SteuerData":
     {
-      "Eingabefelder":["Tax ID (mandatory information)","Tax class","Number of children","Denomination","Denomination partner (if different)"],
-      "EingabefelderIcons":["","","","","",""],
+      "Eingabefelder":["Tax class","Number of children","Denomination","Denomination partner (if different)"],
+      "EingabefelderIcons":["Steuer","Steuer","Steuer","Steuer"],
     },
     } 
   }

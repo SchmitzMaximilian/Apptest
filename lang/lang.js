@@ -22,8 +22,8 @@ const LangOb={
   },
   "Angabenueberschriften":{
     "Personendaten":{
-      DE:"Name und Anschrift",
-      EN:"Name and Address",
+      "DE":"Name und Anschrift",
+      "EN":"Name and Address",
     },
     "Sozial":{
       "DE":"Angaben zur Sozialversicherung",

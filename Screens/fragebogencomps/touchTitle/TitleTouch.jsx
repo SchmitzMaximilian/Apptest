@@ -8,13 +8,13 @@ const TitleTouch = (props) => {
       props.S?
       <TouchableOpacity  onPress={()=>props.F(!props.S)}><RightIcon/>
       <Text style={styles.Ueberschrift}>{props.T}</Text>
-      
+      <RightIcon S={props.S}/>
 
       </TouchableOpacity>
       :
       <TouchableOpacity onPress={()=>props.F(!props.S)}>
       <Text style={styles.Ueberschrift}>{props.T}</Text>
-      <RightIcon/>
+      <RightIcon S={props.S}/>
       </TouchableOpacity>
     }
     </>

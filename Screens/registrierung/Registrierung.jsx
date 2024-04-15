@@ -61,6 +61,8 @@ const Registrierung =()=>{
   </TouchableOpacity>
 {/*onPress <EingabeFeld P={"Max.Mustermann@Email.de"} V={ersteeingabe.toString()} S={setText}    /> hinzufügen*/}
 </View>
+
+<View style={styles.UntenButton}>
 <TouchableOpacity style={styles.Abbrechen}>
     <Text style={{color:'#dc2626'}}>Abbrechen</Text>
 </TouchableOpacity>
@@ -68,7 +70,7 @@ const Registrierung =()=>{
 <TouchableOpacity style={styles.Abspeichern}>
     <Text style={{color:'black'}}>Speichern</Text>
 </TouchableOpacity>
-
+</View>
 
     </View>
     </SafeAreaView>
@@ -152,14 +154,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#166534',
     padding: 10,
     height:'auto',
-    marginBottom:20,
+    
     borderRadius:5,
     borderTopColor:'#1e3a8a',
     borderTopWidth:2,
     borderBottomColor:'#1e3a8a',
     borderBottomWidth:2,
     width:'25%',
-    marginLeft:'75%',
+    
     
   },
   Abbrechen:{
@@ -175,10 +177,16 @@ const styles = StyleSheet.create({
     borderBottomColor:'#dc2626',
     borderBottomWidth:2,
     width:'25%',
-    marginright:'75%',
+    
+    
     
   },
-  
+
+  UntenButton:{
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  } 
   
   
 

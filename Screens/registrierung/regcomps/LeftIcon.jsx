@@ -22,6 +22,9 @@ const LeftIcon = (props) => {
     case "Mail":
       Icon='mail'
       break;
+    case "x-circle-fill":
+      Icon="mail"
+      break;
       default:
         Icon='lock'
         break;

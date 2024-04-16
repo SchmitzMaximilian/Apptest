@@ -8,7 +8,8 @@ export const Textdataset=(p)=>{
       "SteuerHinweis":"Ihre immer 11stellige Steuer-ID finden Sie auf einem Anschreiben des Bundeszentralamtes für Steuern sowie Ihrem Einkommensteuerbescheid.",
       "SteuerKlasseNachweis":"Soweit Sie keine Steuer-ID angeben, ist ein gültiger Ersatzbeleg des zuständigen Finanzamts beizufügen, der reine Ausdruck der ELStAM ist nicht ausreichend. Ohne ID oder Gültige Nachweise wird die Versteuerung nach Steuerklasse 6(Maximalsteuersatz) vorgenommen",
       "Einverstaendniserklaerung":"Ich versichere, dass die vorstehenden Angaben der Wahrheit entsprechen. Ich verpflichte mich, meinem Arbeitgeber alle Änderungen an meinen vorsthehend erhobenen Daten unverzüglich mitzuteilen. Mir ist bekannt, dass unrichtige Angaben eine bußgeldbewährte Ordnungswidrigkeit nach §111 Abs. 1 Nr.4 SGV IV darstellen und mein Arbeitgeber zudem weitergehende Schäden aus Nachforderungen von Steuer und Sozialversicherung gegen mich geltend machen wird, sofern diese auf Grund meiner Angaben entstehen.",
-
+      "BicHinweis":"Bei deutschen Bankverbindungen wird keine Bic benötigt",
+      "Zahlung":"Falls keine Kontoverbindung: ",
     },
     "CheckBoxTitel":{
 
@@ -30,6 +31,8 @@ export const Textdataset=(p)=>{
     "SteuerHinweis":"You can find your 11-digit tax ID on a cover letter from Federal Central Tax Office and your income tax assessment.",
     "SteuerKlasseNachweis":"If you do not provide a tax ID, a valid replacement receipt from the responsible tax office must be enclosed, the pure expression of the ELStAM is not sufficient. Without ID or valid proof, taxation will be based on tax class 6(maximum tax rate).",
     "Einverstaendniserklaerung":"I certify that the above information is true. I undertake to inform my employer immediately of any changes to my data collected above. I am aware that incorrect information constitutes an administrative offense punishable by a fine in accordance with Section 111 Paragraph 1 No. 4 SGV IV and that my employer will also assert further damages against me from additional tax and social security claims if these arise based on my information.",
+    "BicHinweis":"Bic is not required for German bank details",
+    "Zahlung":"If no account details:",
   },
   "CheckBoxTitel":{
 
@@ -39,7 +42,7 @@ export const Textdataset=(p)=>{
   },
   "SoloCheckboxText":{
     "Sozial":"SV number not available",
-    "Bank":"cash payment",
+    "Bank":"Cash payment",
     "Steuer":"I declare that I do not have a tax ID"
   },
   } 

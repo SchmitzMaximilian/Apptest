@@ -46,9 +46,11 @@ const LeftIcon = (props) => {
 }
 const styles = StyleSheet.create({
   LeftIcon : {
-    left: 90, top: 55,
-    position:'absolute',
-    zindex:0},
+    left: 90,
+    top: 28,    
+    position:'absolute',    
+    zindex:0,
+  },
 
 
 });

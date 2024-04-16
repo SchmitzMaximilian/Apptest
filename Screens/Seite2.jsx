@@ -1,8 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
-import LANG from './../lang/lang'
-import Blocktop from './component/seite1comp/blocktop'; 
+import LANG from './../lang/lang'; 
 import { TransactionContext } from '../utils/Context'; 
 import {Octicons, Ionicons} from '@expo/vector-icons';
 import Container from './fragebogencomps/containercomp/Container';
@@ -10,15 +9,44 @@ import TitleTouch from './fragebogencomps/touchTitle/TitleTouch';
 import { Dataset } from '../utils/Dataset'; 
 import SelectPicker from './fragebogencomps/selectBoxencomp/PickerSelectBox';
 import SVNummer from './fragebogencomps/selectBoxencomp/SozialCheckbox';
-import { Textdataset } from '../utils/Textdataset';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 export default function Seite2({navigation}) {
   const [sprache,setzesprache]=useContext(TransactionContext)
   const [tab3,settab3]=useState(false)
   const [SVCheck,setSVCheck]=useState(false)
+
+  const datenabruf=async()=>{
+    try{ 
+      const request = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            "W":"tests",
+            "P":"tests"
+        }) 
+    };
+    
+        const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
+        let e = await d.json();
+        if(e){
+  
+          console.log(e)
+        }
+  }
+  catch(err){
+     // handle rejection
+     console.error(err)
+  }
+    
+  }
+  useEffect(()=>{
+
+  },[])
   return (
     <SafeAreaView style={styles.sav} backgroundColor={'#335155'}>
+      <ScrollView style={{backgroundColor: '#334155'}}>
       <View style={styles.container}>
       <View style={styles.AdminButtonContainer}>
         <TouchableOpacity onPress={()=>navigation.pop()} style={styles.BackButton}> 
@@ -30,8 +58,8 @@ export default function Seite2({navigation}) {
           <Text style={{color:'#FFFFFF'}} >{sprache?'EN':'DE'}</Text>
         </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={()=>navigation.navigate("Seite3")} style={styles.AdminButton}> 
-          <Text style={{color:'#FFFFFF'}} >Next</Text>
+        <TouchableOpacity  style={styles.AdminButton}> 
+          <Text style={{color:'#FFFFFF'}} >Submit</Text>
         </TouchableOpacity>
       </View>
 
@@ -44,34 +72,34 @@ export default function Seite2({navigation}) {
       <>
       <SVNummer S={SVCheck} F={setSVCheck}/>
       {
-      SVCheck?
-      ""
+        SVCheck?
+        ""
+        :
+        <Container Icon={["Krankenversicherung"]} Labname={[sprache?"Sozialversicherungsnummer":"Social Security Number"]} F={settab3} S={tab3}/> 
+      }
+      </>
       :
-      <Container Icon={["Krankenversicherung"]} Labname={[sprache?"Sozialversicherungsnummer":"Social Security Number"]} F={settab3} S={tab3}/> 
-     }
-     </>
-    :
-    ""
-    }
-  
+      ""
+    }  
   
   <Container Icon={Dataset(sprache?'DE':'EN').SozialData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').SozialData.Eingabefelder} F={settab3} S={tab3}/>
   {
-	tab3?
-<>
- 
-</>
-:
-""
-}
-  
-  
+	  tab3?
+    <> 
+    </>
+    :
+    ""
+  } 
+  <TouchableOpacity onPress={()=>datenabruf()}>
+    <Text>Button</Text>
+  </TouchableOpacity>
   <SelectPicker  S={sprache?'DE':'EN'} V={tab3} I={1}/>
   </View>
   </View>
+  </ScrollView>
     </SafeAreaView>
   );
-} 
+}
 
 const styles = StyleSheet.create({
   sav:{

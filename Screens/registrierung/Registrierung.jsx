@@ -3,6 +3,8 @@ import * as SecureStore from 'expo-secure-store';
 import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity } from 'react-native';
 import { EingabeFeld } from "./regcomps/Comps";
 import { BorderRadiuses } from "react-native-ui-lib/src/style/borderRadiuses";
+import { ScrollView } from "react-native-gesture-handler";
+import Emailfeld from "./regcomps/Emailfeld";
 /**
  
 Username
@@ -23,6 +25,8 @@ import { Restart } from "fiction-expo-restart";
 
 const Registrierung =()=>{
   const [ersteeingabe,setersteeingabe]=useState('')
+  const [clap,setclap]=useState(false)
+  const [counter,setcounter]=useState([])
   const loeschen = async (param)=>{
     await SecureStore.deleteItemAsync(param)
   }
@@ -36,11 +40,23 @@ const Registrierung =()=>{
   const setText=(p)=>{
     setersteeingabe(p)
   }
+  const ergaenzenFeld=()=>{ 
+    let altarr=[...counter]
+    if(altarr.length!=2)
+    {
+    altarr.push(altarr.length)
+    setcounter(altarr)
+    console.log("Test altarr")}
+    altarr.length>0?setTimeout(()=>{setclap(true)},200):''
+  }
+  
   useEffect(()=>{
     speichern('Admin', "true")
-  },[])
+    console.log("test")
+  },[counter])
   return(
     <SafeAreaView style={styles.sav} backgroundColor={'#334155'}>
+      <ScrollView>
 <View style={styles.container}>
   <View style={styles.AdminButtonContainer}>
   <TouchableOpacity  style={styles.AdminButton}> 
@@ -52,14 +68,18 @@ const Registrierung =()=>{
   </View>
   <View style={styles.angabenfeld}>
 <EingabeFeld  Icon={'User'}  Labname={'Benutzername'}   /> 
-<EingabeFeld   Icon={'Pass'}  Labname={'Passwort'} />{/*(disable/hide password conten)Button/Icon onPress show pasword  */} 
+<EingabeFeld   Icon={'Pass'}  Labname={'Passwort'} />
 <EingabeFeld   Icon={'Company'}  Labname={'Firma'}/> 
 <EingabeFeld  Icon={'Address'}   Labname={'Adresse'}/> 
 <EingabeFeld   Icon={'Mail'}     Labname={'E-mail Adresse'}/> 
-<TouchableOpacity  style={styles.Hinzufuegen}> 
+{
+  clap? 
+  <Emailfeld changeArray={(newArray)=>setcounter(newArray)} Arr={counter} /> :''
+}
+<TouchableOpacity onPress={()=>ergaenzenFeld()}  style={styles.Hinzufuegen}> 
     <Text style={{color:'#FFF'}} >+</Text>
   </TouchableOpacity>
-{/*onPress <EingabeFeld P={"Max.Mustermann@Email.de"} V={ersteeingabe.toString()} S={setText}    /> hinzufügen*/}
+
 </View>
 
 <View style={styles.UntenButton}>
@@ -71,8 +91,9 @@ const Registrierung =()=>{
     <Text style={{color:'black'}}>Speichern</Text>
 </TouchableOpacity>
 </View>
-
+ 
     </View>
+    </ScrollView>
     </SafeAreaView>
   );
 }
@@ -161,22 +182,24 @@ const styles = StyleSheet.create({
     borderBottomColor:'#1e3a8a',
     borderBottomWidth:2,
     width:'25%',
+    marginBottom: 20,
     
     
   },
   Abbrechen:{
-    alignSelf: 'flex-start',
+    alignSelf: 'flex-end',
     alignItems: 'center',
     backgroundColor: '#0f172a',
     padding: 10,
     height:'auto',
-    marginTop:20,
+    marginRight: '50%',
     borderRadius:5,
     borderTopColor:'#dc2626',
     borderTopWidth:2,
     borderBottomColor:'#dc2626',
     borderBottomWidth:2,
     width:'25%',
+    marginBottom: 20,
     
     
     
@@ -185,7 +208,9 @@ const styles = StyleSheet.create({
   UntenButton:{
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    width: '100%',
+    padding: 10,
   } 
   
   

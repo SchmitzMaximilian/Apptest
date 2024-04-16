@@ -7,7 +7,7 @@ const TitleTouch = (props) => {
     {
       props.S?
       <TouchableOpacity  onPress={()=>props.F(!props.S)}><RightIcon/>
-      <Text style={styles.Ueberschrift}>{props.T}</Text>
+      <Text style={styles.Ueberschrift2pressed}>{props.T}</Text>
       <RightIcon S={props.S}/>
 
       </TouchableOpacity>
@@ -26,6 +26,15 @@ const styles=StyleSheet.create({
     alignSelf: 'center',
     width: '80%',
     backgroundColor: '#6b7280',
+    borderWidth: 1,
+    textAlign: 'center',
+    
+  },
+  Ueberschrift2pressed: {
+    padding: 10,
+    alignSelf: 'center',
+    width: '80%',
+    backgroundColor: '#0ea5e9',
     borderWidth: 1,
     textAlign: 'center',
     

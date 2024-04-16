@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { View,StyleSheet,TextInput } from "react-native";
 import {Octicons, Ionicons} from '@expo/vector-icons'; 
 import RightIcon from "./RightIcon";
+import {MdDelete} from 'react-icons';
+
 
 function StyledTextInput(props) {
   const [showHide,setshowHide]=useState(false);
@@ -18,7 +20,10 @@ function StyledTextInput(props) {
     </TextInput>
     {
       props.Icon=="Pass"?
-      <RightIcon S={showHide} F={setshowHide} />
+      <RightIcon S={showHide} F={setshowHide} P={props.Icon} />
+      :
+      props.Icon=="x-circle-fill"?
+      <RightIcon customOnPress={()=>props.customRightPress()} S={showHide} F={setshowHide} P={"x-circle-fill"} />
       :
       ''
     }
@@ -29,7 +34,10 @@ function StyledTextInput(props) {
     </TextInput>
     {
       props.Icon=="Pass"?
-      <RightIcon S={showHide} F={setshowHide} />
+      <RightIcon S={showHide} F={setshowHide} P={props.Icon} />
+      :
+      props.Icon=="x-circle-fill"?
+      <RightIcon customOnPress={()=>props.customRightPress()} S={showHide} F={setshowHide} P={"x-circle-fill"} />
       :
       ''
     } 

@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react'
-import {View,StyleSheet} from 'react-native' 
-import LeftIcon from './LeftIcon';
+import { useEffect, useState } from 'react';
+import {View,StyleSheet} from 'react-native' ;
 import StyledTextInput from './StyledTextInput'; 
 import StyledInputLabel from './StyledInputLabel';
 /**
@@ -17,7 +16,7 @@ export const EingabeFeld=(props)=>{
   },[text])
   return(
     <View style={{marginTop:20}}>
-        <LeftIcon P={props.Icon}/> 
+         
         <StyledInputLabel P={props.Labname}>Label</StyledInputLabel>
         <StyledTextInput {...props}  />
     </View>

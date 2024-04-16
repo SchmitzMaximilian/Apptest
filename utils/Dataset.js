@@ -52,7 +52,7 @@ export const Dataset=(p)=>{
       },
       "SozialData":
     {
-      "Eingabefelder":["nationality","Birth date","Birth name (mandatory, if last name is different)","Place of birth (mandatory)","Country of birth (only if not Germany)","Health insurance company (please complete name, e.g. AOK NordWest, not AOK)"],
+      "Eingabefelder":["Nationality","Birth date","Birth name (mandatory, if last name is different)","Place of birth (mandatory)","Country of birth (only if not Germany)","Health insurance company (please complete name, e.g. AOK NordWest, not AOK)"],
       "EingabefelderIcons":["Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung"],
     },
     "BankData":

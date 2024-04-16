@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
-import LANG from './../lang/lang'
+import LANG from './../lang/lang';
 import Blocktop from './component/seite1comp/blocktop'; 
 import { TransactionContext } from '../utils/Context'; 
 import {Octicons, Ionicons} from '@expo/vector-icons';
@@ -9,12 +9,10 @@ import Container from './fragebogencomps/containercomp/Container';
 import TitleTouch from './fragebogencomps/touchTitle/TitleTouch';
 import { Dataset } from '../utils/Dataset';
 import { Textdataset } from '../utils/Textdataset';
-import { Checkboxdataset } from '../utils/Checkboxdataset';
 import SelectPicker from './fragebogencomps/selectBoxencomp/PickerSelectBox'; 
 import SteuerID from './fragebogencomps/selectBoxencomp/SteuerCheckbox';
-import SVNummer from './fragebogencomps/selectBoxencomp/SozialCheckbox';
 import Zahlungsart from './fragebogencomps/selectBoxencomp/Checkbox';
-import spacingInstance from 'react-native-ui-lib/src/style/spacings';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default function Seite1({navigation}) {
   const [sprache,setzesprache]=useContext(TransactionContext)  
@@ -28,6 +26,7 @@ export default function Seite1({navigation}) {
   const [tab7,settab7]=useState(false)    
   return (
     <SafeAreaView style={styles.sav} backgroundColor={'#335155'}>
+      <ScrollView style={{backgroundColor: '#334155'}}>
       <View style={styles.container}>
       <View style={styles.AdminButtonContainer}>
         <TouchableOpacity  style={styles.BackButton}> 
@@ -46,13 +45,13 @@ export default function Seite1({navigation}) {
 
   {/**           Hier Beginnt der Inhalt des  Fragebogen Containers                                                   */}
 
-
+  
       
   <View style={styles.ContainerFragebogen}> 
-  <View>
+  <View >
     <Blocktop/> 
     <SelectPicker S={sprache?'DE':'EN'} V={true} I={4}/>
-    <Text style={{color:'#fff', marginHorizontal: '10%'}}>{Textdataset(sprache?'DE':'EN').Texte.Rechtsbelehrung}</Text>{/**für pur Text style direkt in der text box */}
+    <Text style={{color:'#fff', marginHorizontal: '10%',paddingVertical:10}}>{Textdataset(sprache?'DE':'EN').Texte.Rechtsbelehrung}</Text>
   </View>
   <View style={{flexDirection:'column', width:'100%'}}>
 
@@ -73,6 +72,8 @@ export default function Seite1({navigation}) {
   {
     tab4?
     <>
+    <Text style={styles.Bichinweis}>{Textdataset(sprache?'DE':'EN').Texte.BicHinweis}</Text>
+    <Text style={styles.Textelemente}>{Textdataset(sprache?'DE':'EN').Texte.Zahlung}</Text>
     <Zahlungsart S={Bargeldcheck} F={setBargeldcheck}/>
     {
       Bargeldcheck?
@@ -91,6 +92,7 @@ export default function Seite1({navigation}) {
   {
     tab5?
     <>
+    <Text style={styles.Textelemente}>{Textdataset(sprache?'DE':'EN').Texte.SteuerHinweis}</Text>
     <SteuerID S={Steuercheck} F={setSteuercheck}/>
   <Text style={styles.Textelemente}>{Textdataset(sprache?'DE':'EN').Texte.SteuerKlasseNachweis}</Text>
   {
@@ -138,6 +140,7 @@ export default function Seite1({navigation}) {
 
   </View>
       </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -231,7 +234,14 @@ const styles = StyleSheet.create({
     Textelemente:{
       color:'#fff',
       marginHorizontal: '10%',
-    }
-     
+      paddingVertical:5
+    },
+    Bichinweis:{
+      color:'#fff',
+      marginHorizontal: '10%',
+      paddingBottom: 5,
+      fontSize: 10,
+    },
+    
 
 });

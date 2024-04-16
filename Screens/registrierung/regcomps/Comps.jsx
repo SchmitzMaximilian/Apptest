@@ -4,6 +4,7 @@ import {Octicons, Ionicons} from '@expo/vector-icons';
 import LeftIcon from './LeftIcon';
 import StyledTextInput from './StyledTextInput'; 
 import StyledInputLabel from './StyledInputLabel';
+import {MdDelete} from 'react-icons'
 /**
  * Texteingabefeld
  * @param {*} listener usestate  
@@ -19,7 +20,12 @@ export const EingabeFeld=(props)=>{
   
   return(
     <View style={{marginTop:20}}>
-        <LeftIcon P={props.Icon}/> 
+        {
+          props.Icon=="x-circle-fill"?
+          <LeftIcon P={"x-circle-fill"}/> 
+          :
+          <LeftIcon P={props.Icon}/> 
+        }
         <StyledInputLabel P={props.Labname}>Label</StyledInputLabel>
         <StyledTextInput {...props} P={showPass} S={setshowPass}/>
     </View>

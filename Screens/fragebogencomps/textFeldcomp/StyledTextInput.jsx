@@ -1,36 +1,17 @@
 import React, { useEffect, useState } from "react";
-import {  StyleSheet,TextInput } from "react-native"; 
-
+import {  StyleSheet,TextInput, View } from "react-native"; 
+import LeftIcon from './LeftIcon';
 function StyledTextInput(props) { 
   function setData(){
     console.log(txt)
-    /*settxt(e.target.value)
-    const Arr=props.DD
-    const ex=Arr.filter((e)=>e.name==props.Labname).length
-    let oldArr=Arr;
-    let nArr=[];
-    let label=props.Labname
-    console.log(e)
-    if(ex>0){
-    for(let i=0;i<oldArr.length;i++){
-      if(Arr[i].name==props.Labname){
-        nArr.push({label:e.target.value})
-      }else{
-        nArr.push(Arr[i])
-      }
-    }
-    console.log(nArr)
-    props.SS(nArr)
-  }else{
-    oldArr.push({label:e.target.value})
-    console.log(oldArr)
-    props.SS(oldArr)
-  }*/
+    
 
   } 
-  return ( 
+  return ( <View>
+    <LeftIcon P={props.Icon}/>
     <TextInput  style={styles.StyledInputLabel}  placeholder={props.Labname} placeholderTextColor={'#f1f5f9'}> 
     </TextInput> 
+    </View>
   )
 }
 
@@ -55,4 +36,25 @@ const styles = StyleSheet.create({
   },
 
 
-});
+});/*settxt(e.target.value)
+    const Arr=props.DD
+    const ex=Arr.filter((e)=>e.name==props.Labname).length
+    let oldArr=Arr;
+    let nArr=[];
+    let label=props.Labname
+    console.log(e)
+    if(ex>0){
+    for(let i=0;i<oldArr.length;i++){
+      if(Arr[i].name==props.Labname){
+        nArr.push({label:e.target.value})
+      }else{
+        nArr.push(Arr[i])
+      }
+    }
+    console.log(nArr)
+    props.SS(nArr)
+  }else{
+    oldArr.push({label:e.target.value})
+    console.log(oldArr)
+    props.SS(oldArr)
+  }*/

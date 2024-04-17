@@ -6,8 +6,15 @@ import {MdDelete} from 'react-icons';
 
 
 function StyledTextInput(props) {
+  console.log(props)
+  const[txtvalue,settxtvalue]=useState();
   const [showHide,setshowHide]=useState(false);
-
+  function textChangeHandler(t){ 
+    console.log(t)
+    settxtvalue(t)
+    props.SF(t)
+     text = t;
+    }
   useEffect(()=>{
     props.P?setshowHide(true):setshowHide(false)
   },[])
@@ -16,7 +23,7 @@ function StyledTextInput(props) {
     {
     showHide?
     <>
-    <TextInput style={styles.StyledInputLabel} secureTextEntry={true} placeholder={props.Labname} placeholderTextColor={'#f1f5f9'}> 
+    <TextInput style={styles.StyledInputLabel} onChangeText={text=>textChangeHandler(text)} value={txtvalue} secureTextEntry={true} placeholder={props.Labname} placeholderTextColor={'#f1f5f9'}> 
     </TextInput>
     {
       props.Icon=="Pass"?
@@ -30,7 +37,7 @@ function StyledTextInput(props) {
     </>
     :
     <>
-    <TextInput style={styles.StyledInputLabel} secureTextEntry={false} placeholder={props.Labname} placeholderTextColor={'#f1f5f9'}> 
+    <TextInput style={styles.StyledInputLabel} onChangeText={text=>textChangeHandler(text)} value={txtvalue} secureTextEntry={false} placeholder={props.Labname} placeholderTextColor={'#f1f5f9'}> 
     </TextInput>
     {
       props.Icon=="Pass"?

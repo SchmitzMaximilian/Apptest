@@ -24,7 +24,7 @@ async function getValueFor(key) {
 }
  */
 export default function App() { 
-  const[isAdmin,setisAdmin]=useState(false);/*true für Login screen false für Bogen */
+  const[isAdmin,setisAdmin]=useState(true);/*true für Login screen false für Bogen */
   const loeschen = async (param)=>{
     await SecureStore.deleteItemAsync(param)
   }

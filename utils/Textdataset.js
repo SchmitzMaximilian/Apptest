@@ -10,6 +10,9 @@ export const Textdataset=(p)=>{
       "Einverstaendniserklaerung":"Ich versichere, dass die vorstehenden Angaben der Wahrheit entsprechen. Ich verpflichte mich, meinem Arbeitgeber alle Änderungen an meinen vorsthehend erhobenen Daten unverzüglich mitzuteilen. Mir ist bekannt, dass unrichtige Angaben eine bußgeldbewährte Ordnungswidrigkeit nach §111 Abs. 1 Nr.4 SGV IV darstellen und mein Arbeitgeber zudem weitergehende Schäden aus Nachforderungen von Steuer und Sozialversicherung gegen mich geltend machen wird, sofern diese auf Grund meiner Angaben entstehen.",
       "BicHinweis":"Bei deutschen Bankverbindungen wird keine Bic benötigt",
       "Zahlung":"Falls keine Kontoverbindung: ",
+      "Fehlermeldung":"Achtung bitte überprüfen Sie alle ihre Angaben, da eine oder mehrere nicht die nötigen Voraussetzungen erfüllt.",
+      "Fehlermeldungdatenbank":"Achtung es ist ein Fehler aufgetreten versuchen Sie es bitte erneut.",
+      "Speichernerfolgreich":"Ihre Daten wurden erfolgreich gespeichert.",
     },
     "CheckBoxTitel":{
 
@@ -33,6 +36,9 @@ export const Textdataset=(p)=>{
     "Einverstaendniserklaerung":"I certify that the above information is true. I undertake to inform my employer immediately of any changes to my data collected above. I am aware that incorrect information constitutes an administrative offense punishable by a fine in accordance with Section 111 Paragraph 1 No. 4 SGV IV and that my employer will also assert further damages against me from additional tax and social security claims if these arise based on my information.",
     "BicHinweis":"Bic is not required for German bank details",
     "Zahlung":"If no account details:",
+    "Fehlermeldung":"Attention, please check all of your information as one or more does not meet the necessary requirements.",
+    "Fehlermeldungdatenbank":"Attention, an error has occurred, please try again.",
+    "Speichernerfolgreich":"Your data has been saved successfully.",
   },
   "CheckBoxTitel":{
 

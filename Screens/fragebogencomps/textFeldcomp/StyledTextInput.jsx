@@ -2,6 +2,14 @@ import React, { useEffect, useState } from "react";
 import {  StyleSheet,TextInput, View } from "react-native"; 
 import LeftIcon from './LeftIcon';
 function StyledTextInput(props) { 
+
+  const[txtvalue,settxtvalue]=useState();  
+  function textChangeHandler(t){ 
+    
+    settxtvalue(t)
+    props.SF(t)
+     text = t;
+    }
   function setData(){
     console.log(txt)
     
@@ -9,7 +17,7 @@ function StyledTextInput(props) {
   } 
   return ( <View>
     <LeftIcon P={props.Icon}/>
-    <TextInput  style={styles.StyledInputLabel}  placeholder={props.Labname} placeholderTextColor={'#f1f5f9'}> 
+    <TextInput  style={styles.StyledInputLabel} onChangeText={text=>textChangeHandler(text)} value={txtvalue}  placeholder={props.Labname} placeholderTextColor={'#f1f5f9'}> 
     </TextInput> 
     </View>
   )

@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import * as SecureStore from 'expo-secure-store';
 import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity } from 'react-native';
 import { EingabeFeld } from "./regcomps/Comps";
 import { BorderRadiuses } from "react-native-ui-lib/src/style/borderRadiuses";
 import { ScrollView } from "react-native-gesture-handler";
 import Emailfeld from "./regcomps/Emailfeld";
+import { TransactionContext } from './../../utils/Context'; 
+import { Textdataset } from "../../utils/Textdataset";
 /**
  
 Username
@@ -24,7 +26,103 @@ import { Restart } from "fiction-expo-restart";
  */
 
 const Registrierung =()=>{
-  const [ersteeingabe,setersteeingabe]=useState('')
+  const [sprache,setzesprache]=useContext(TransactionContext)
+  const [eingabe1,seteingabe1]=useState('')
+  const [eingabe2,seteingabe2]=useState('')
+  const [eingabe3,seteingabe3]=useState('')
+  const [eingabe4,seteingabe4]=useState('')
+  const [eingabe5,seteingabe5]=useState('')
+  const [eingabe6,seteingabe6]=useState('')
+  const [eingabe7,seteingabe7]=useState('')
+  const [Fehlercheck,setFehlercheck]=useState(false)
+  const [FehlerText,setFehlerText]=useState(false)
+  const [Erfolgscheck,setErfolgscheck]=useState(false)
+
+   const submitdata=async()=>{
+    let check=true
+    setFehlercheck(false)
+    setErfolgscheck(false)
+
+    
+    if(!eingabe1.trim().length>2){
+      check=false
+
+    }
+    
+    if(!eingabe2.trim().length>7){
+      check=false
+
+    } 
+    if(!eingabe3.trim().length>2){
+      check=false
+
+    }
+    
+    if(!eingabe4.trim().length>2){
+      check=false
+
+    }
+    if(!eingabe5.trim().length>10){
+      check=false
+
+    } 
+    let mail2=eingabe6,
+        mail3=eingabe7
+    if(eingabe6.trim().length==0){ 
+      mail2='';
+    }
+    if(eingabe7.trim().length==0){ 
+      mail3='';
+
+    }
+    if(check){
+      try{ 
+        const request = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                "query":1,
+                "username":eingabe1.toString(),
+                "passwort":eingabe2.toString(),
+                "firma":eingabe3.toString(),
+                "adresse":eingabe4.toString(),
+                "email1":eingabe5.toString(),
+                "email2":eingabe6.toString(),
+                "email3":eingabe7.toString()
+            }) 
+        };
+      
+        const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
+        let e = await d.json();
+        if(e.ergebnis==true){
+          setErfolgscheck(true)  
+          console.log(e)
+        }
+        else if(e.ergebnis=='DBerror'){//zeigt Datenbankfehler an keine speicherung
+          setFehlercheck(true)
+          setFehlerText(true)
+        }else{//Fehler bei der Eingabe füllen
+          setFehlercheck(true)
+          setFehlerText(false)
+          console.log('Fehler')
+        }
+    }
+    catch(err){
+       // handle rejection
+       console.error(err)
+    }
+
+    }else{
+      setFehlercheck(true)
+      setFehlerText(false)
+      setErfolgscheck(false)
+    }
+  
+  }
+
+   
+
+
   const [clap,setclap]=useState(false)
   const [counter,setcounter]=useState([])
   const loeschen = async (param)=>{
@@ -37,10 +135,10 @@ const Registrierung =()=>{
       return false;
     }
   }
-  const setText=(p)=>{
-    setersteeingabe(p)
-  }
-  const ergaenzenFeld=()=>{ 
+
+  
+  
+  {/*const ergaenzenFeld=()=>{ 
     let altarr=[...counter]
     if(altarr.length!=2)
     {
@@ -48,12 +146,13 @@ const Registrierung =()=>{
     setcounter(altarr)
     console.log("Test altarr")}
     altarr.length>0?setTimeout(()=>{setclap(true)},200):''
-  }
+  }*/}
   
   useEffect(()=>{
     speichern('Admin', "true")
     console.log("test")
   },[counter])
+
   return(
     <SafeAreaView style={styles.sav} backgroundColor={'#334155'}>
       <ScrollView>
@@ -66,20 +165,53 @@ const Registrierung =()=>{
   <View>
     <Text style={styles.Titel}>Registrierung</Text>
   </View>
+  
   <View style={styles.angabenfeld}>
-<EingabeFeld  Icon={'User'}  Labname={'Benutzername'}   /> 
-<EingabeFeld   Icon={'Pass'}  Labname={'Passwort'} />
-<EingabeFeld   Icon={'Company'}  Labname={'Firma'}/> 
-<EingabeFeld  Icon={'Address'}   Labname={'Adresse'}/> 
-<EingabeFeld   Icon={'Mail'}     Labname={'E-mail Adresse'}/> 
+
+
+    {
+      Erfolgscheck?
+      <View style={styles.abgespeichert}>
+        <Text style={{color:'black'}}>
+          {Textdataset(sprache?'DE':'EN').Texte.Speichernerfolgreich}
+        </Text></View>
+      :
+      ""
+    } 
+
+  {
+    Fehlercheck?
+    <View style={styles.fehlermeldung}><Text style={{color:'#fff'}}>
+      {
+        FehlerText?
+        Textdataset(sprache?'DE':'EN').Texte.Fehlermeldungdatenbank
+        :
+        Textdataset(sprache?'DE':'EN').Texte.Fehlermeldung}
+      </Text></View>
+    :
+    ""
+  }
+  
+<EingabeFeld  Icon={'User'}     Labname={'Benutzername'} SF={seteingabe1}      />
+<EingabeFeld  Icon={'Pass'}     Labname={'Passwort'}       SF={seteingabe2}     />
+<EingabeFeld  Icon={'Company'}  Labname={'Firma'}          SF={seteingabe3}     /> 
+<EingabeFeld  Icon={'Address'}  Labname={'Adresse'}        SF={seteingabe4}     /> 
+<EingabeFeld  Icon={'Mail'}     Labname={'E-mail Adresse'} SF={seteingabe5}    />
+<EingabeFeld  Icon={'Mail'}     Labname={'E-mail Adresse'} SF={seteingabe6}    />
+<EingabeFeld  Icon={'Mail'}     Labname={'E-mail Adresse'} SF={seteingabe7}    /> 
+
+
+
+
+{/** 
 {
   clap? 
-  <Emailfeld changeArray={(newArray)=>setcounter(newArray)} Arr={counter} /> :''
+  <Emailfeld changeArray={(newArray)=>setcounter(newArray)} Arr={counter} SF={seteingabe6} /> :''
 }
 <TouchableOpacity onPress={()=>ergaenzenFeld()}  style={styles.Hinzufuegen}> 
     <Text style={{color:'#FFF'}} >+</Text>
-  </TouchableOpacity>
-
+  </TouchableOpacity>}
+*/}
 </View>
 
 <View style={styles.UntenButton}>
@@ -87,7 +219,7 @@ const Registrierung =()=>{
     <Text style={{color:'#dc2626'}}>Abbrechen</Text>
 </TouchableOpacity>
 
-<TouchableOpacity style={styles.Abspeichern}>
+<TouchableOpacity onPress={()=>submitdata()} style={styles.Abspeichern}>
     <Text style={{color:'black'}}>Speichern</Text>
 </TouchableOpacity>
 </View>
@@ -125,7 +257,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#0f172a',
     padding: 10,
     height:'auto',
-    marginTop:20,
+    marginTop:10,
     borderRadius:5,
     borderTopColor:'#1e3a8a',
     borderTopWidth:2,
@@ -211,8 +343,32 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
     padding: 10,
-  } 
-  
-  
+  } ,
+  fehlermeldung:{padding: 10,
+    paddingHorizontal:15,
+    borderWidth:1,
+    width:'80%',
+    alignSelf:'center',
+    borderColor: '#9d174d',
+    borderRadius:6,
+    marginVertical:15,
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    backgroundColor: '#db2777',
+  },
+  abgespeichert:{
+    padding: 10,
+    paddingHorizontal:15,
+    borderWidth:1,
+    width:'80%',
+    alignSelf:'center',
+    borderColor: '#65a30d',
+    borderRadius:6,
+    marginVertical:15,
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    backgroundColor: '#84cc16',
+
+  }
 
 });

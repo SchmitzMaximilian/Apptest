@@ -10,12 +10,14 @@ import { Dataset } from '../utils/Dataset';
 import SelectPicker from './fragebogencomps/selectBoxencomp/PickerSelectBox';
 import SVNummer from './fragebogencomps/selectBoxencomp/SozialCheckbox';
 import { ScrollView } from 'react-native-gesture-handler';
+import PersoenlicheDatenObject from '../utils/Objects/PersoenlicheDatenObject';
 
 
 export default function Seite2({navigation}) {
   const [sprache,setzesprache]=useContext(TransactionContext)
   const [tab3,settab3]=useState(false)
   const [SVCheck,setSVCheck]=useState(false)
+  const [PrivateDatenArr,setPrivateDatenArr]=useState(PersoenlicheDatenObject)
 
   const datenabruf=async()=>{
     try{ 
@@ -70,19 +72,19 @@ export default function Seite2({navigation}) {
     {
       tab3?
       <>
-      <SVNummer S={SVCheck} F={setSVCheck}/>
+      <SVNummer S={SVCheck} F={setSVCheck} meineErkennung={'Ändere Mich'} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
       {
         SVCheck?
         ""
         :
-        <Container Icon={["Krankenversicherung"]} Labname={[sprache?"Sozialversicherungsnummer":"Social Security Number"]} F={settab3} S={tab3}/> 
+        <Container Icon={["Krankenversicherung"]} Labname={[sprache?"Sozialversicherungsnummer":"Social Security Number"]} F={settab3} S={tab3} SV={PrivateDatenArr} SF={setPrivateDatenArr}/> 
       }
       </>
       :
       ""
     }  
   
-  <Container Icon={Dataset(sprache?'DE':'EN').SozialData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').SozialData.Eingabefelder} F={settab3} S={tab3}/>
+  <Container Icon={Dataset(sprache?'DE':'EN').SozialData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').SozialData.Eingabefelder} F={settab3} S={tab3} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
   {
 	  tab3?
     <> 
@@ -93,7 +95,7 @@ export default function Seite2({navigation}) {
   <TouchableOpacity onPress={()=>datenabruf()}>
     <Text>Button</Text>
   </TouchableOpacity>
-  <SelectPicker  S={sprache?'DE':'EN'} V={tab3} I={1}/>
+  <SelectPicker  S={sprache?'DE':'EN'} V={tab3} I={1} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
   </View>
   </View>
   </ScrollView>

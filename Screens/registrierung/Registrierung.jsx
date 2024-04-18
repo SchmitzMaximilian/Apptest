@@ -36,6 +36,7 @@ const Registrierung =()=>{
   const [Fehlercheck,setFehlercheck]=useState(false)
   const [FehlerText,setFehlerText]=useState(false)
   const [Erfolgscheck,setErfolgscheck]=useState(false)
+  
 
    const submitdata=async()=>{
     let check=true
@@ -83,12 +84,12 @@ const Registrierung =()=>{
             body: JSON.stringify({
                 "query":1,
                 "username":eingabe1.toString(),
-                "passwort":eingabe2.toString(),
-                "firma":eingabe3.toString(),
-                "adresse":eingabe4.toString(),
-                "email1":eingabe5.toString(),
-                "email2":eingabe6.toString(),
-                "email3":eingabe7.toString()
+                "passwort":sha256.create().update(eingabe2.toString()).digest().toHex(),
+                "firma"   :eingabe3.toString(),
+                "adresse" :eingabe4.toString(),
+                "email1"  :eingabe5.toString(),
+                "email2"  :eingabe6.toString(),
+                "email3"  :eingabe7.toString()
             }) 
         };
       
@@ -99,12 +100,14 @@ const Registrierung =()=>{
           let AO=AdminObject;
           AO.Benutzername=eingabe1;
           AO.PasswordSha256=sha256.create().update(eingabe2.toString()).digest().toHex()
-          AO.Firma=eingabe1;
-          AO.Adresse=eingabe1;
-          AO.Mail=eingabe1;
+          AO.Firma=eingabe3;
+          AO.Adresse=eingabe4;
+          AO.Mail=eingabe5;
+          AO.Mail2=eingabe6;
+          AO.Mail3=eingabe7;
 
           let value=JSON.stringify(AO)
-          //speichern('Admin',value)
+          speichern('Admin',value)
           console.log('Erfolg')
           
 
@@ -142,8 +145,10 @@ const Registrierung =()=>{
   }
   const speichern = async (key,param)=>{
     if(await SecureStore.setItemAsync(key, param)){
+      
       return true;
     }else{
+      
       return false;
     }
   }
@@ -316,17 +321,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#166534',
     padding: 10,
-    height:'auto',
-    
+    height:'auto',    
     borderRadius:5,
     borderTopColor:'#1e3a8a',
     borderTopWidth:2,
     borderBottomColor:'#1e3a8a',
     borderBottomWidth:2,
     width:'25%',
-    marginBottom: 20,
-    
-    
+    marginBottom: 20,      
   },
   Abbrechen:{
     alignSelf: 'flex-end',
@@ -341,10 +343,7 @@ const styles = StyleSheet.create({
     borderBottomColor:'#dc2626',
     borderBottomWidth:2,
     width:'25%',
-    marginBottom: 20,
-    
-    
-    
+    marginBottom: 20,        
   },
 
   UntenButton:{
@@ -353,7 +352,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
     padding: 10,
-  } ,
+  },
   fehlermeldung:{padding: 10,
     paddingHorizontal:15,
     borderWidth:1,
@@ -379,6 +378,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     backgroundColor: '#84cc16',
 
-  }
+  },
 
 });

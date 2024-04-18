@@ -8,6 +8,16 @@ const SelectPicker = (props)=> {
 const [SelectedLanguage, setSelectedLanguage] = useState();
 const [sprache,setzesprache]=useContext(TransactionContext);
 console.log(props)
+const selectionHandler=(I)=>{
+  console.log(I+1)
+  setSelectedLanguage(I)
+  let O=props?.SV
+
+  O.Geschlecht=I+1
+  
+  props.SF(O) 
+
+}
 useEffect(()=>{ 
   
 },[])
@@ -21,11 +31,11 @@ return( <Fragment>
     <Text style={styles.Textelemente}>{Checkboxdataset(props.S).TopSelectboxenLabel[props.I]}</Text>
     <View style={{borderRadius:2,borderWidth:1,borderColor:'#4b5563', width:'80%',marginLeft:'10%'}}>
      <Picker style={{color:'#FFF'}}  dropdownIconColor={"#FFF"} selectedValue={SelectedLanguage} multiline={true} numberOfLines={2} onValueChange={(itemValue, itemIndex) =>
-    setSelectedLanguage(itemValue)
+    selectionHandler(itemValue)
   }  >
       {
         Checkboxdataset(props.S).SubSelectboxenLabel[props.I].length>0&&Checkboxdataset(props.S).SubSelectboxenLabel[props.I].map((item,index)=>(
-          <Picker.Item  key={'pickup'+index+item}  color="#000" label={item} value={item} />
+          <Picker.Item  key={'pickup'+index+item}  color="#000" label={item} value={index} />
 
         ))
       }

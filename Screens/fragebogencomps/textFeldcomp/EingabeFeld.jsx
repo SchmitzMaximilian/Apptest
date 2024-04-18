@@ -18,7 +18,7 @@ export const EingabeFeld=(props)=>{
     <View style={{marginTop:20}}>
          
         <StyledInputLabel P={props.Labname}>Label</StyledInputLabel>
-        <StyledTextInput {...props}  />
+        <StyledTextInput {...props}  SV={props.SV} SF={props.SF} />
     </View>
   )
 }

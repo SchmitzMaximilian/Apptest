@@ -13,6 +13,7 @@ import SelectPicker from './fragebogencomps/selectBoxencomp/PickerSelectBox';
 import SteuerID from './fragebogencomps/selectBoxencomp/SteuerCheckbox';
 import Zahlungsart from './fragebogencomps/selectBoxencomp/Checkbox';
 import { ScrollView } from 'react-native-gesture-handler';
+import PersoenlicheDatenObject from '../utils/Objects/PersoenlicheDatenObject';
 
 export default function Seite1({navigation}) {
   const [sprache,setzesprache]=useContext(TransactionContext)  
@@ -24,6 +25,213 @@ export default function Seite1({navigation}) {
   const [tab5,settab5]=useState(false)
   const [tab6,settab6]=useState(false)
   const [tab7,settab7]=useState(false)    
+  const [PrivateDatenArr,setPrivateDatenArr]=useState(PersoenlicheDatenObject)    
+
+  //PrivateDatenArr
+  //PrivateDatenArr.Geschlecht
+
+  const submitdata1=async()=>{
+    console.log('klicked')
+    let check=true
+    if(!PrivateDatenArr.Vname.trim().length>2){
+      check=false
+    }
+    if(!PrivateDatenArr.Nname.trim().length>2){
+      check=false
+    }
+    if(!PrivateDatenArr.Adresse.trim().length>2){
+      check=false
+    }
+    if(!PrivateDatenArr.PCode.trim().length==5){
+      check=false
+    }
+    if(!PrivateDatenArr.City.trim().length>2){
+      check=false
+    }
+
+    if(check){
+      try{
+        const request ={
+          method: 'POST',
+          headers: { 'Content-Type' : 'application/json'},
+          body: JSON.stringify({
+            
+            //
+          })
+        };
+        const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
+        let e = await d.json();
+        if(e.ergebnis==true){
+  
+          console.log('speichertestyeah')
+        }
+        else if(e.ergebnis=='DBerror'){//zeigt Datenbankfehler an keine speicherung
+          console.log('no Update')
+        }else{//Fehler bei der Eingabe füllen
+          
+          console.log('Fehler')
+        }
+      }
+      catch(err){
+        console.error(err)
+      }
+    }else{
+      //
+    }
+  }
+
+  const submitdata2=async()=>{
+    console.log('klicked')
+    let check=true
+    if(!PrivateDatenArr.Festnetz.trim().length>2){
+      check=false
+    }
+    if(!PrivateDatenArr.Mobil.trim().length>2){
+      check=false
+    }
+    if(!PrivateDatenArr.Email.trim().length>2){
+      check=false
+    }
+    
+
+    if(check){
+      try{
+        const request ={
+          method: 'POST',
+          headers: { 'Content-Type' : 'application/json'},
+          body: JSON.stringify({
+            
+            //
+          })
+        };
+        const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
+        let e = await d.json();
+        if(e.ergebnis==true){
+  
+          console.log('speichertestyeah')
+        }
+        else if(e.ergebnis=='DBerror'){//zeigt Datenbankfehler an keine speicherung
+          console.log('no Update')
+        }else{//Fehler bei der Eingabe füllen
+          
+          console.log('Fehler')
+        }
+      }
+      catch(err){
+        console.error(err)
+      }
+    }else{
+      //
+    }
+  }
+
+  const submitdata3=async()=>{
+    console.log('klicked')
+    let check=true
+    if(!PrivateDatenArr.Barzahlung.trim().length>2){
+      check=false
+    }
+    if(!PrivateDatenArr.Bankname.trim().length>2){
+      check=false
+    }
+    if(!PrivateDatenArr.iban.trim().length>2){
+      check=false
+    }
+    if(!PrivateDatenArr.bank5_12.trim().length==5){
+      check=false
+    }
+    if(!PrivateDatenArr.bank13_22.trim().length>2){
+      check=false
+    }
+    if(!PrivateDatenArr.Inhaber.trim().length>2){
+      check=false
+    }
+
+    if(check){
+      try{
+        const request ={
+          method: 'POST',
+          headers: { 'Content-Type' : 'application/json'},
+          body: JSON.stringify({
+            
+            //
+          })
+        };
+        const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
+        let e = await d.json();
+        if(e.ergebnis==true){
+  
+          console.log('speichertestyeah')
+        }
+        else if(e.ergebnis=='DBerror'){//zeigt Datenbankfehler an keine speicherung
+          console.log('no Update')
+        }else{//Fehler bei der Eingabe füllen
+          
+          console.log('Fehler')
+        }
+      }
+      catch(err){
+        console.error(err)
+      }
+    }else{
+      //
+    }
+  }
+
+  
+  const submitdata4=async()=>{
+    console.log('klicked')
+    let check=true
+    if(!PrivateDatenArr.Barzahlung.trim().length>2){
+      check=false
+    }
+    if(!PrivateDatenArr.Bankname.trim().length>2){
+      check=false
+    }
+    if(!PrivateDatenArr.iban.trim().length>2){
+      check=false
+    }
+    if(!PrivateDatenArr.bank5_12.trim().length==5){
+      check=false
+    }
+    if(!PrivateDatenArr.bank13_22.trim().length>2){
+      check=false
+    }
+    if(!PrivateDatenArr.Inhaber.trim().length>2){
+      check=false
+    }
+
+    if(check){
+      try{
+        const request ={
+          method: 'POST',
+          headers: { 'Content-Type' : 'application/json'},
+          body: JSON.stringify({
+            
+            //
+          })
+        };
+        const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
+        let e = await d.json();
+        if(e.ergebnis==true){
+  
+          console.log('speichertestyeah')
+        }
+        else if(e.ergebnis=='DBerror'){//zeigt Datenbankfehler an keine speicherung
+          console.log('no Update')
+        }else{//Fehler bei der Eingabe füllen
+          
+          console.log('Fehler')
+        }
+      }
+      catch(err){
+        console.error(err)
+      }
+    }else{
+      //
+    }
+  }
+
   return (
     <SafeAreaView style={styles.sav} backgroundColor={'#335155'}>
       <ScrollView style={{backgroundColor: '#334155'}}>
@@ -50,7 +258,7 @@ export default function Seite1({navigation}) {
   <View style={styles.ContainerFragebogen}> 
   <View >
     <Blocktop/> 
-    <SelectPicker S={sprache?'DE':'EN'} V={true} I={4}/>
+    <SelectPicker S={sprache?'DE':'EN'} V={true} I={4} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
     <Text style={{color:'#fff', marginHorizontal: '10%',paddingVertical:10}}>{Textdataset(sprache?'DE':'EN').Texte.Rechtsbelehrung}</Text>
   </View>
   <View style={{flexDirection:'column', width:'100%'}}>
@@ -58,13 +266,14 @@ export default function Seite1({navigation}) {
 
   {/**Name und Anschrift */}  
   <TitleTouch F={settab1} S={tab1} T={sprache?LANG.Angabenueberschriften.Personendaten.DE:LANG.Angabenueberschriften.Personendaten.EN} />
-  <SelectPicker S={sprache?'DE':'EN'} V={tab1} I={0}/>
-  <Container Icon={Dataset(sprache?'DE':'EN').PerData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').PerData.Eingabefelder} F={settab1} S={tab1}  /> 
+  <SelectPicker S={sprache?'DE':'EN'} V={tab1} I={0} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
+  <Container W={submitdata1} Icon={Dataset(sprache?'DE':'EN').PerData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').PerData.Eingabefelder} F={settab1} S={tab1}  SV={PrivateDatenArr} SF={setPrivateDatenArr} /> 
   
+ 
 
   {/**Kommunikation */}
   <TitleTouch F={settab2} S={tab2} T={sprache?LANG.Angabenueberschriften.Kommunikation.DE:LANG.Angabenueberschriften.Kommunikation.EN} /> 
-  <Container Icon={Dataset(sprache?'DE':'EN').KontaktData.EingabefelderIcons}Labname={Dataset(sprache?'DE': 'EN').KontaktData.Eingabefelder} F={settab2} S={tab2}  />
+  <Container W={submitdata2} Icon={Dataset(sprache?'DE':'EN').KontaktData.EingabefelderIcons}Labname={Dataset(sprache?'DE': 'EN').KontaktData.Eingabefelder} F={settab2} S={tab2}   SV={PrivateDatenArr} SF={setPrivateDatenArr} />
   
 
   {/**Bankverbindung */}  
@@ -74,12 +283,12 @@ export default function Seite1({navigation}) {
     <>
     <Text style={styles.Bichinweis}>{Textdataset(sprache?'DE':'EN').Texte.BicHinweis}</Text>
     <Text style={styles.Textelemente}>{Textdataset(sprache?'DE':'EN').Texte.Zahlung}</Text>
-    <Zahlungsart S={Bargeldcheck} F={setBargeldcheck}/>
+    <Zahlungsart S={Bargeldcheck} F={setBargeldcheck} meineErkennung={'Ändere Mich'} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
     {
       Bargeldcheck?
       ""
       :
-      <Container Icon={Dataset(sprache?'DE':'EN').BankData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').BankData.Eingabefelder} F={settab4} S={tab4}/>
+      <Container W={submitdata3} Icon={Dataset(sprache?'DE':'EN').BankData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').BankData.Eingabefelder} F={settab4} S={tab4}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
     }
     </>
     :
@@ -93,19 +302,19 @@ export default function Seite1({navigation}) {
     tab5?
     <>
     <Text style={styles.Textelemente}>{Textdataset(sprache?'DE':'EN').Texte.SteuerHinweis}</Text>
-    <SteuerID S={Steuercheck} F={setSteuercheck}/>
+    <SteuerID S={Steuercheck} F={setSteuercheck} meineErkennung={'Ändere Mich'} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
   <Text style={styles.Textelemente}>{Textdataset(sprache?'DE':'EN').Texte.SteuerKlasseNachweis}</Text>
   {
       Steuercheck?
       ""
       :
-   <Container Icon={["Steuer"]} Labname={[sprache?"Steuer-ID (Pflichtangabe)":"Tax ID (mandatory information)"]} F={settab5} S={tab5}/>
+   <Container W={submitdata4} Icon={["Steuer"]} Labname={[sprache?"Steuer-ID (Pflichtangabe)":"Tax ID (mandatory information)"]} F={settab5} S={tab5}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
      }  
     </>
     :
     ""
   }  
-  <Container Icon={Dataset(sprache?'DE':'EN').SteuerData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').SteuerData.Eingabefelder} F={settab5} S={tab5}/>
+  <Container W={submitdata4} Icon={Dataset(sprache?'DE':'EN').SteuerData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').SteuerData.Eingabefelder} F={settab5} S={tab5}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
   
 
   {/**Schulabschluss */}
@@ -119,7 +328,7 @@ export default function Seite1({navigation}) {
     :
     ""
   }  
-  <SelectPicker S={sprache?'DE':'EN'} V={tab6} I={2}/>
+  <SelectPicker S={sprache?'DE':'EN'} V={tab6} I={2}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
 
 
   {/**Ausbildungsabschluss */}
@@ -132,7 +341,7 @@ export default function Seite1({navigation}) {
     :
     ""
   }  
-  <SelectPicker S={sprache?'DE':'EN'} V={tab7} I={3} />
+  <SelectPicker S={sprache?'DE':'EN'} V={tab7} I={3}  SV={PrivateDatenArr} SF={setPrivateDatenArr} />
   
   
   </View>
@@ -242,6 +451,7 @@ const styles = StyleSheet.create({
       paddingBottom: 5,
       fontSize: 10,
     },
+    
     
 
 });

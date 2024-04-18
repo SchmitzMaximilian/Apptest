@@ -7,11 +7,11 @@ import { TransactionContext } from '../../../utils/Context';
 export default function SteuerID(props) {
   const [checked1, setChecked1] = useState(0)
   const [sprache,setzesprache]=useContext(TransactionContext)
-  {/* useState{Anzal der Optionen} 
-      value={checked1==Optionsnummer?true:false}
-      onValueChange={() => setChecked1(Optionsnummer)}
-      {sprache?LangOb.}
+  
+   {/*
+  function auswahlspeicher=(F)=>{
 
+  }
 */}
   
   return( 

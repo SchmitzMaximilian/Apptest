@@ -24,12 +24,12 @@ async function getValueFor(key) {
 }
  */
 export default function App() { 
-  const[isAdmin,setisAdmin]=useState(true);/*true für Login screen false für Bogen */
+  const[isAdmin,setisAdmin]=useState(false);/*true für Login screen false für Bogen */
   const loeschen = async (param)=>{
     await SecureStore.deleteItemAsync(param)
   }
   const lesen = async (param)=>{
-    loeschen(param)
+    //loeschen(param)
     const data=await SecureStore.getItemAsync(param);
     return data;
   }
@@ -42,6 +42,7 @@ export default function App() {
   }
   const componentWillMount=async()=>{     
      const data= await lesen('Admin')
+     console.log('Appjs' +data)
     if(data===null){  
       //setisAdmin(true)
   }else{
@@ -50,7 +51,7 @@ export default function App() {
   }
 
   useEffect(()=>{
-    speichern('Admin',"true")
+    //speichern('Admin',"true")
     componentWillMount()
   },[])
   return (

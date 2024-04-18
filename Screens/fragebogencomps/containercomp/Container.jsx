@@ -1,20 +1,43 @@
 import React,{useState} from 'react'
-import { Text ,View} from 'react-native'
+import { Text ,View,StyleSheet,TouchableOpacity} from 'react-native'
 import { EingabeFeld } from '../textFeldcomp/EingabeFeld'
 
-const Container = (props) => {
-  const [Fragebogeneingabe,setFragebogeneingabe]=useState([])
+const Container = (props) => { 
+  console.log(props)
+
   return (
     <>
     {
       props.S&&(props.Icon.length>0)&&props.Icon.map((item,index)=>(
       <View key={index}>
-        <EingabeFeld Icon={item} Labname={props.Labname[index] } SF={setFragebogeneingabe}/>
+        <EingabeFeld Icon={item} Labname={props.Labname[index] }  SV={props.SV} SF={props.SF}/>
       </View>
       )) 
+    }
+    {
+      props.S?
+    <TouchableOpacity onPress={()=>props.W()} style={style.Abspeichern}>
+      <Text style={{color:'black'}}>Speichern</Text>
+    </TouchableOpacity>:''
     }
     </>
   )
 }
-
+const style=StyleSheet.create({
+  Abspeichern:{
+    alignSelf: 'flex-end',
+    alignItems: 'center',
+    backgroundColor: '#166534',
+    padding: 10,
+    height:'auto',    
+    borderRadius:5,
+    borderTopColor:'#1e3a8a',
+    borderTopWidth:2,
+    borderBottomColor:'#1e3a8a',
+    borderBottomWidth:2,
+    width:'25%',
+    marginHorizontal: '10%',      
+    marginVertical: 30,      
+  },
+})
 export default Container

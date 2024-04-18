@@ -7,6 +7,9 @@ import { ScrollView } from "react-native-gesture-handler";
 import Emailfeld from "./regcomps/Emailfeld";
 import { TransactionContext } from './../../utils/Context'; 
 import { Textdataset } from "../../utils/Textdataset";
+import AdminObject from "../../utils/Objects/AdminObject";
+import { sha256 } from "node-forge";
+//import { Restart } from "fiction-expo-restart";
 /**
  
 Username
@@ -17,11 +20,7 @@ Mehrfach Eingabe maximal 3 E-mail
 
 Speicher button
 
-hot reload
-import { Restart } from "fiction-expo-restart";
-
-
-  Restart();
+hot reload  
 
  */
 
@@ -41,9 +40,10 @@ const Registrierung =()=>{
    const submitdata=async()=>{
     let check=true
     setFehlercheck(false)
-    setErfolgscheck(false)
-
+    setFehlerText(false)
+    setErfolgscheck(false) 
     
+
     if(!eingabe1.trim().length>2){
       check=false
 
@@ -96,7 +96,19 @@ const Registrierung =()=>{
         let e = await d.json();
         if(e.ergebnis==true){
           setErfolgscheck(true)  
-          console.log(e)
+          let AO=AdminObject;
+          AO.Benutzername=eingabe1;
+          AO.PasswordSha256=sha256.create().update(eingabe2.toString()).digest().toHex()
+          AO.Firma=eingabe1;
+          AO.Adresse=eingabe1;
+          AO.Mail=eingabe1;
+
+          let value=JSON.stringify(AO)
+          //speichern('Admin',value)
+          console.log('Erfolg')
+          
+
+          //Restart();
         }
         else if(e.ergebnis=='DBerror'){//zeigt Datenbankfehler an keine speicherung
           setFehlercheck(true)
@@ -118,13 +130,13 @@ const Registrierung =()=>{
       setErfolgscheck(false)
     }
   
-  }
-
-   
+  }   
 
 
   const [clap,setclap]=useState(false)
   const [counter,setcounter]=useState([])
+
+
   const loeschen = async (param)=>{
     await SecureStore.deleteItemAsync(param)
   }
@@ -135,8 +147,6 @@ const Registrierung =()=>{
       return false;
     }
   }
-
-  
   
   {/*const ergaenzenFeld=()=>{ 
     let altarr=[...counter]
@@ -192,10 +202,10 @@ const Registrierung =()=>{
     ""
   }
   
-<EingabeFeld  Icon={'User'}     Labname={'Benutzername'} SF={seteingabe1}      />
-<EingabeFeld  Icon={'Pass'}     Labname={'Passwort'}       SF={seteingabe2}     />
-<EingabeFeld  Icon={'Company'}  Labname={'Firma'}          SF={seteingabe3}     /> 
-<EingabeFeld  Icon={'Address'}  Labname={'Adresse'}        SF={seteingabe4}     /> 
+<EingabeFeld  Icon={'User'}     Labname={'Benutzername'}   SF={seteingabe1}    />
+<EingabeFeld  Icon={'Pass'}     Labname={'Passwort'}       SF={seteingabe2}    />
+<EingabeFeld  Icon={'Company'}  Labname={'Firma'}          SF={seteingabe3}    /> 
+<EingabeFeld  Icon={'Address'}  Labname={'Adresse'}        SF={seteingabe4}    /> 
 <EingabeFeld  Icon={'Mail'}     Labname={'E-mail Adresse'} SF={seteingabe5}    />
 <EingabeFeld  Icon={'Mail'}     Labname={'E-mail Adresse'} SF={seteingabe6}    />
 <EingabeFeld  Icon={'Mail'}     Labname={'E-mail Adresse'} SF={seteingabe7}    /> 

@@ -19,20 +19,27 @@ export default function Seite1({navigation}) {
   const [sprache,setzesprache]=useContext(TransactionContext)  
   const [tab1,settab1]=useState(false)  
   const [tab2,settab2]=useState(false)  
-  const [Steuercheck,setSteuercheck]=useState(false)
-  const [Bargeldcheck,setBargeldcheck]=useState(false)
+  const [Steuercheck,setSteuercheck]=useState(false)  
   const [tab4,settab4]=useState(false)
   const [tab5,settab5]=useState(false)
-  const [tab6,settab6]=useState(false)
-  const [tab7,settab7]=useState(false)    
+  const [Fehlercheck,setFehlercheck]=useState(false)
+  const [FehlerText,setFehlerText]=useState(false)
+  const [Erfolgscheck,setErfolgscheck]=useState(false)
   const [PrivateDatenArr,setPrivateDatenArr]=useState(PersoenlicheDatenObject)    
 
   //PrivateDatenArr
   //PrivateDatenArr.Geschlecht
 
   const submitdata1=async()=>{
+    //setFehlercheck(false)
+    //setFehlerText(false)
+    //setErfolgscheck(false)
+    
     console.log('klicked')
     let check=true
+    if(!PrivateDatenArr.Geschlecht.length>0){
+      check=false
+    }
     if(!PrivateDatenArr.Vname.trim().length>2){
       check=false
     }
@@ -55,20 +62,31 @@ export default function Seite1({navigation}) {
           method: 'POST',
           headers: { 'Content-Type' : 'application/json'},
           body: JSON.stringify({
-            
-            //
+            "query":2,
+            "geschlechtSelect":PrivateDatenArr.Geschlecht.toString(),
+            "vorname":PrivateDatenArr.Vname.toString(),
+            "nachname":PrivateDatenArr.Nname.toString(),
+            "straßeuzahl":PrivateDatenArr.Adresse.toString(),
+            "plz":PrivateDatenArr.PCode.toString(),
+            "wohnort":PrivateDatenArr.City.toString()
+
+            //"username":eingabe1.toString(),
           })
         };
         const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
         let e = await d.json();
         if(e.ergebnis==true){
+          setErfolgscheck(true)
   
           console.log('speichertestyeah')
         }
         else if(e.ergebnis=='DBerror'){//zeigt Datenbankfehler an keine speicherung
+          setFehlercheck(true)
+          setFehlerText(true)
           console.log('no Update')
         }else{//Fehler bei der Eingabe füllen
-          
+          setFehlercheck(true)
+          setFehlerText(false)
           console.log('Fehler')
         }
       }
@@ -77,6 +95,9 @@ export default function Seite1({navigation}) {
       }
     }else{
       //
+      setFehlercheck(true)
+      setFehlerText(false)
+      setErfolgscheck(false)
     }
   }
 
@@ -100,7 +121,10 @@ export default function Seite1({navigation}) {
           method: 'POST',
           headers: { 'Content-Type' : 'application/json'},
           body: JSON.stringify({
-            
+            "query":3,
+            "festnetz":PrivateDatenArr.Festnetz.toString(),
+            "mobil":PrivateDatenArr.Mobil.toString(),
+            "emailbw":PrivateDatenArr.Email.toString(),
             //
           })
         };
@@ -128,9 +152,7 @@ export default function Seite1({navigation}) {
   const submitdata3=async()=>{
     console.log('klicked')
     let check=true
-    if(!PrivateDatenArr.Barzahlung.trim().length>2){
-      check=false
-    }
+    
     if(!PrivateDatenArr.Bankname.trim().length>2){
       check=false
     }
@@ -153,7 +175,12 @@ export default function Seite1({navigation}) {
           method: 'POST',
           headers: { 'Content-Type' : 'application/json'},
           body: JSON.stringify({
-            
+            "query":4,
+            "bankname":PrivateDatenArr.Bankname.toString(),
+            "iban":PrivateDatenArr.iban.toString(),
+            "blz512":PrivateDatenArr.bank5_12,
+            "blz1322":PrivateDatenArr.bank13_22,
+            "inhaber":PrivateDatenArr.Inhaber.toString(),
             //
           })
         };
@@ -182,24 +209,22 @@ export default function Seite1({navigation}) {
   const submitdata4=async()=>{
     console.log('klicked')
     let check=true
-    if(!PrivateDatenArr.Barzahlung.trim().length>2){
+    if(!PrivateDatenArr.SteueridCheck.trim().length>0){
       check=false
     }
-    if(!PrivateDatenArr.Bankname.trim().length>2){
+    if(!PrivateDatenArr.SteuerID.trim().length>10){
       check=false
     }
-    if(!PrivateDatenArr.iban.trim().length>2){
+    if(!PrivateDatenArr.Steuerklasse.trim().length>2){
       check=false
     }
-    if(!PrivateDatenArr.bank5_12.trim().length==5){
+    if(!PrivateDatenArr.Kinder.trim().length==5){
       check=false
     }
-    if(!PrivateDatenArr.bank13_22.trim().length>2){
+    if(!PrivateDatenArr.Konfession.trim().length>2){
       check=false
     }
-    if(!PrivateDatenArr.Inhaber.trim().length>2){
-      check=false
-    }
+    
 
     if(check){
       try{
@@ -207,7 +232,11 @@ export default function Seite1({navigation}) {
           method: 'POST',
           headers: { 'Content-Type' : 'application/json'},
           body: JSON.stringify({
-            
+            "query":5,
+            "steuerid":PrivateDatenArr.SteuerID.toString(),
+            "steuerklasse":PrivateDatenArr.Steuerklasse.toString(),
+            "kinder":PrivateDatenArr.Kinder.toString(),
+            "konfession":PrivateDatenArr.Konfession.toString()
             //
           })
         };
@@ -256,6 +285,30 @@ export default function Seite1({navigation}) {
   
       
   <View style={styles.ContainerFragebogen}> 
+
+  {
+      Erfolgscheck?
+      <View style={styles.abgespeichert}>
+        <Text style={{color:'black'}}>
+          {Textdataset(sprache?'DE':'EN').Texte.Speichernerfolgreich}
+        </Text></View>
+      :
+      ""
+    } 
+
+  {
+    Fehlercheck?
+    <View style={styles.fehlermeldung}><Text style={{color:'#fff'}}>
+      {
+        FehlerText?
+        Textdataset(sprache?'DE':'EN').Texte.Fehlermeldungdatenbank
+        :
+        Textdataset(sprache?'DE':'EN').Texte.Fehlermeldung}
+      </Text></View>
+    :
+    ""
+  }
+
   <View >
     <Blocktop/> 
     <SelectPicker S={sprache?'DE':'EN'} V={true} I={4} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
@@ -268,13 +321,31 @@ export default function Seite1({navigation}) {
   <TitleTouch F={settab1} S={tab1} T={sprache?LANG.Angabenueberschriften.Personendaten.DE:LANG.Angabenueberschriften.Personendaten.EN} />
   <SelectPicker S={sprache?'DE':'EN'} V={tab1} I={0} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
   <Container W={submitdata1} Icon={Dataset(sprache?'DE':'EN').PerData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').PerData.Eingabefelder} F={settab1} S={tab1}  SV={PrivateDatenArr} SF={setPrivateDatenArr} /> 
-  
+  {
+	  tab1?
+    <> 
+    <TouchableOpacity onPress={()=>submitdata1()} style={styles.Abspeichern}>
+    <Text style={{color:'black'}}>Speichern</Text>
+</TouchableOpacity>
+    </>
+    :
+    ""
+  }
  
 
   {/**Kommunikation */}
   <TitleTouch F={settab2} S={tab2} T={sprache?LANG.Angabenueberschriften.Kommunikation.DE:LANG.Angabenueberschriften.Kommunikation.EN} /> 
   <Container W={submitdata2} Icon={Dataset(sprache?'DE':'EN').KontaktData.EingabefelderIcons}Labname={Dataset(sprache?'DE': 'EN').KontaktData.Eingabefelder} F={settab2} S={tab2}   SV={PrivateDatenArr} SF={setPrivateDatenArr} />
-  
+  {
+	  tab2?
+    <> 
+    <TouchableOpacity onPress={()=>submitdata2()} style={styles.Abspeichern}>
+    <Text style={{color:'black'}}>Speichern</Text>
+</TouchableOpacity>
+    </>
+    :
+    ""
+  }
 
   {/**Bankverbindung */}  
   <TitleTouch F={settab4} S={tab4} T={sprache?LANG.Angabenueberschriften.Bank.DE:LANG.Angabenueberschriften.Bank.EN}/>  
@@ -283,18 +354,23 @@ export default function Seite1({navigation}) {
     <>
     <Text style={styles.Bichinweis}>{Textdataset(sprache?'DE':'EN').Texte.BicHinweis}</Text>
     <Text style={styles.Textelemente}>{Textdataset(sprache?'DE':'EN').Texte.Zahlung}</Text>
-    <Zahlungsart S={Bargeldcheck} F={setBargeldcheck} meineErkennung={'Ändere Mich'} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
-    {
-      Bargeldcheck?
-      ""
-      :
+    
       <Container W={submitdata3} Icon={Dataset(sprache?'DE':'EN').BankData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').BankData.Eingabefelder} F={settab4} S={tab4}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
-    }
+    
     </>
     :
     ""
   }
-
+{
+	  tab4?
+    <> 
+    <TouchableOpacity onPress={()=>submitdata3()} style={styles.Abspeichern}>
+    <Text style={{color:'black'}}>Speichern</Text>
+</TouchableOpacity>
+    </>
+    :
+    ""
+  }
 
   {/**Angaben zur Steuer */}
   <TitleTouch F={settab5} S={tab5} T={sprache?LANG.Angabenueberschriften.Steuer.DE:LANG.Angabenueberschriften.Steuer.EN}/>
@@ -302,7 +378,7 @@ export default function Seite1({navigation}) {
     tab5?
     <>
     <Text style={styles.Textelemente}>{Textdataset(sprache?'DE':'EN').Texte.SteuerHinweis}</Text>
-    <SteuerID S={Steuercheck} F={setSteuercheck} meineErkennung={'Ändere Mich'} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
+    <SteuerID S={Steuercheck} F={setSteuercheck}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
   <Text style={styles.Textelemente}>{Textdataset(sprache?'DE':'EN').Texte.SteuerKlasseNachweis}</Text>
   {
       Steuercheck?
@@ -316,32 +392,17 @@ export default function Seite1({navigation}) {
   }  
   <Container W={submitdata4} Icon={Dataset(sprache?'DE':'EN').SteuerData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').SteuerData.Eingabefelder} F={settab5} S={tab5}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
   
-
-  {/**Schulabschluss */}
-  <TitleTouch F={settab6} S={tab6} T={sprache?LANG.Angabenueberschriften.Schule.DE:LANG.Angabenueberschriften.Schule.EN}/>
   {
-    tab6?
-    <>
-    
-    </>
-    
-    :
-    ""
-  }  
-  <SelectPicker S={sprache?'DE':'EN'} V={tab6} I={2}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
-
-
-  {/**Ausbildungsabschluss */}
-  <TitleTouch F= {settab7} S={tab7} T={sprache?LANG.Angabenueberschriften.Ausbildung.DE:LANG.Angabenueberschriften.Ausbildung.EN}/>
-  {
-  	tab7?
-    <>
-    
+	  tab5?
+    <> 
+    <TouchableOpacity onPress={()=>submitdata4()} style={styles.Abspeichern}>
+    <Text style={{color:'black'}}>Speichern</Text>
+</TouchableOpacity>
     </>
     :
     ""
-  }  
-  <SelectPicker S={sprache?'DE':'EN'} V={tab7} I={3}  SV={PrivateDatenArr} SF={setPrivateDatenArr} />
+  }
+  
   
   
   </View>
@@ -451,7 +512,46 @@ const styles = StyleSheet.create({
       paddingBottom: 5,
       fontSize: 10,
     },
-    
-    
+    Abspeichern:{
+      alignSelf: 'flex-end',
+      alignItems: 'center',
+      backgroundColor: '#166534',
+      padding: 10,
+      height:'auto',    
+      borderRadius:5,
+      borderTopColor:'#1e3a8a',
+      borderTopWidth:2,
+      borderBottomColor:'#1e3a8a',
+      borderBottomWidth:2,
+      width:'25%',
+      marginHorizontal: '10%',      
+      marginVertical: 30,      
+    },
+    fehlermeldung:{padding: 10,
+    paddingHorizontal:15,
+    borderWidth:1,
+    width:'80%',
+    alignSelf:'center',
+    borderColor: '#9d174d',
+    borderRadius:6,
+    marginVertical:15,
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    backgroundColor: '#db2777',
+  },
+  abgespeichert:{
+    padding: 10,
+    paddingHorizontal:15,
+    borderWidth:1,
+    width:'80%',
+    alignSelf:'center',
+    borderColor: '#65a30d',
+    borderRadius:6,
+    marginVertical:15,
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    backgroundColor: '#84cc16',
+
+  },
 
 });

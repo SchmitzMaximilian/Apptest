@@ -23,8 +23,8 @@ export const Dataset=(p)=>{
     },
     "SozialData":
     {
-      "Eingabefelder":["Staatsangehärigkeit","Geburtsdatum","Geburtsname (Pflichtangabe, bei abweichendem Nachnamen)","Geburtsort (Pflichtangabe)","Geburtsland(nur falls nicht Deutschland)","Krankenkasse (Bitte kompletter Name, also zB. AOK NordWest, nicht AOK)"],
-      "EingabefelderIcons":["Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung"],
+      "Eingabefelder":["Staatsangehärigkeit","Geburtsdatum","Geburtsort (Pflichtangabe)","Geburtsland(nur falls nicht Deutschland)","Krankenkasse (Bitte kompletter Name, also zB. AOK NordWest, nicht AOK)"],
+      "EingabefelderIcons":["Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung"],
     },
     "BankData":
     {
@@ -33,8 +33,8 @@ export const Dataset=(p)=>{
     },
     "SteuerData":
     {
-      "Eingabefelder":["Steuerklasse","Anzahl Kinder","Konfession","Konfession Partner (falls abweichend)"],
-      "EingabefelderIcons":["Steuer","Steuer","Steuer","Steuer"],
+      "Eingabefelder":["Steuerklasse","Anzahl Kinder","Konfession"],
+      "EingabefelderIcons":["Steuer","Steuer","Steuer"],
     },
   } 
   }else{
@@ -52,8 +52,8 @@ export const Dataset=(p)=>{
       },
       "SozialData":
     {
-      "Eingabefelder":["Nationality","Birth date","Birth name (mandatory, if last name is different)","Place of birth (mandatory)","Country of birth (only if not Germany)","Health insurance company (please complete name, e.g. AOK NordWest, not AOK)"],
-      "EingabefelderIcons":["Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung"],
+      "Eingabefelder":["Nationality","Birth date","Place of birth (mandatory)","Country of birth (only if not Germany)","Health insurance company (please complete name, e.g. AOK NordWest, not AOK)"],
+      "EingabefelderIcons":["Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung"],
     },
     "BankData":
     {
@@ -62,8 +62,8 @@ export const Dataset=(p)=>{
     },
     "SteuerData":
     {
-      "Eingabefelder":["Tax class","Number of children","Denomination","Denomination partner (if different)"],
-      "EingabefelderIcons":["Steuer","Steuer","Steuer","Steuer"],
+      "Eingabefelder":["Tax class","Number of children","Denomination"],
+      "EingabefelderIcons":["Steuer","Steuer","Steuer"],
     },
     } 
   }

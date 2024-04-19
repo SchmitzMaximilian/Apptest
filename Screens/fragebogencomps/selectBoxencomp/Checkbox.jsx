@@ -5,14 +5,23 @@ import { Textdataset } from '../../../utils/Textdataset';
 import { TransactionContext } from '../../../utils/Context';
 
 export default function Zahlungsart(props) {
-  const [checked1, setChecked1] = useState(0)
+  const [checked1, setChecked1] = useState(0)//value abfrage hier
   const [sprache,setzesprache]=useContext(TransactionContext)
+  
 
+  
+  
+{/*
+const auswahlspeicher=(meineErkennung)=>{
+        
+    let V=props?.SV
+    
+    props.SF(V)
 
-  {/*
-  function auswahlspeicher=(F)=>{
 
   }
+
+
 */}
   
   return( 

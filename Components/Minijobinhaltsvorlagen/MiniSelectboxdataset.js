@@ -3,12 +3,12 @@ export const Minijobdataset=(p)=>{
   if(p=="DE"){
   BoxData={
     "TopSelectboxenLabel":["Arbeitsstatus"],
-      "SubSelectboxenLabel":[["Schüler(in)","Student(in)","Schulentlassene(r)","Studienbewerber(in)","Wehr-/Zivvildienstleistend","Auszubildende(r)","Beamtin/Beamter","Selbstständige(r)","Arbeitslose(r)","AN in Elternzeit","AN in unbezahltem Urlaub","Arbeitnehmer(in)","Hausfrau/-mann","Altersrentner(in)",],],
+      "SubSelectboxenLabel":[["(1)Schüler(in)","(2)Student(in)","(3)Beamtin/Beamter","(4)Sonstiger"],],
   } 
 }else{
   BoxData={
     "TopSelectboxenLabel":["Work status"],
-    "SubSelectboxenLabel":[["Pupil","student","school leavers","Applicant","Performing military/civil service","Apprentice","civil servant","self-employed person","unemployed","AN on parental leave","AN on unpaid leave","employee","Housewife/husband","old age pensioner",],],
+    "SubSelectboxenLabel":[["(1)Pupil","(2)student","(3)civil servant","(4)Other"],],
   
   } 
 }

@@ -11,6 +11,8 @@ import SelectPicker from './fragebogencomps/selectBoxencomp/PickerSelectBox';
 import SVNummer from './fragebogencomps/selectBoxencomp/SozialCheckbox';
 import { ScrollView } from 'react-native-gesture-handler';
 import PersoenlicheDatenObject from '../utils/Objects/PersoenlicheDatenObject';
+import { EingabeFeld } from './fragebogencomps/textFeldcomp/EingabeFeld';
+import { Textdataset } from '../utils/Textdataset';
 
 
 export default function Seite2({navigation}) {
@@ -18,29 +20,86 @@ export default function Seite2({navigation}) {
   const [tab3,settab3]=useState(false)
   const [SVCheck,setSVCheck]=useState(false)
   const [PrivateDatenArr,setPrivateDatenArr]=useState(PersoenlicheDatenObject)
-
+  const[JobCheck,setJobCheck]=useState(false)
+  const [Fehlercheck,setFehlercheck]=useState(false)
+  const [FehlerText,setFehlerText]=useState(false)
+  const [Erfolgscheck,setErfolgscheck]=useState(false)
   const datenabruf=async()=>{
-    try{ 
-      const request = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            "W":"tests",
-            "P":"tests"
-        }) 
-    };
+    let check=true
+    //setFehlercheck(false)
+    //setFehlerText(false)
+    //setErfolgscheck(false)
+    {/*
+    if(!PrivateDatenArr.RentenCheck.trim().length>0){
+      check=false
+    }
+
     
+  */}
+    if(!PrivateDatenArr.SVNummerfeld.trim().length>11){
+      check=false
+    }
+    if(!PrivateDatenArr.Staatsbuergerschaft.trim().length>0){
+      check=false
+    }
+    if(!PrivateDatenArr.GBDatum.trim().length>0){
+      check=false
+    }
+    if(!PrivateDatenArr.GBOrt.trim().length>0){
+      check=false
+    }
+    if(!PrivateDatenArr.GBLand.trim().length>0){
+      check=false
+    }
+    if(!PrivateDatenArr.Kassename.trim().length>0){
+      check=false
+    } 
+    if(!PrivateDatenArr.KVArt.trim().length>0){
+      check=false
+    }  
+
+    if(check){
+      try{
+        const request ={
+          method: 'POST',
+          headers: { 'Content-Type' : 'application/json'},
+          body: JSON.stringify({
+            "query":6,
+            "sozinummer":PrivateDatenArr.SVNummerfeld.toString(),
+            "herkunft":PrivateDatenArr.Staatsbuergerschaft.toString(),
+            "gbdatum":PrivateDatenArr.GBDatum.toString(),
+            "gbort":PrivateDatenArr.GBOrt.toString(),
+            "gbland":PrivateDatenArr.GBLand.toString(),
+            "krankenkassename":PrivateDatenArr.Kassename.toString(),
+            "soziSelect":PrivateDatenArr.KVArt.toString()
+            //"":,
+          })
+        };
         const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
         let e = await d.json();
-        if(e){
-  
-          console.log(e)
+        if(e.ergebnis==true){
+          setErfolgscheck(true)  
+          console.log('speichertestyeah')
         }
-  }
-  catch(err){
-     // handle rejection
-     console.error(err)
-  }
+        else if(e.ergebnis=='DBerror'){//zeigt Datenbankfehler an keine speicherung
+          setFehlercheck(true)
+          setFehlerText(true)
+          console.log('no Update')
+        }else{//Fehler bei der Eingabe füllen
+          setFehlercheck(true)
+          setFehlerText(false)
+          console.log('Fehler')
+        }
+      }
+      catch(err){
+        console.error(err)
+      }
+    }else{
+      //
+      setFehlercheck(true)
+      setFehlerText(false)
+      setErfolgscheck(false)
+    }
     
   }
   useEffect(()=>{
@@ -68,16 +127,39 @@ export default function Seite2({navigation}) {
 
     {/**Angabensozialversicherung*/}
     <View style={styles.ContainerFragebogen}>
+
+    {
+      Erfolgscheck?
+      <View style={styles.abgespeichert}>
+        <Text style={{color:'black'}}>
+          {Textdataset(sprache?'DE':'EN').Texte.Speichernerfolgreich}
+        </Text></View>
+      :
+      ""
+    } 
+
+  {
+    Fehlercheck?
+    <View style={styles.fehlermeldung}><Text style={{color:'#fff'}}>
+      {
+        FehlerText?
+        Textdataset(sprache?'DE':'EN').Texte.Fehlermeldungdatenbank
+        :
+        Textdataset(sprache?'DE':'EN').Texte.Fehlermeldung}
+      </Text></View>
+    :
+    ""
+  }
     <TitleTouch F={settab3} S={tab3} T={sprache?LANG.Angabenueberschriften.Sozial.DE:LANG.Angabenueberschriften.Sozial.EN} />
     {
       tab3?
       <>
-      <SVNummer S={SVCheck} F={setSVCheck} meineErkennung={'Ändere Mich'} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
+      <SVNummer S={SVCheck} F={setSVCheck}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
       {
         SVCheck?
         ""
         :
-        <Container Icon={["Krankenversicherung"]} Labname={[sprache?"Sozialversicherungsnummer":"Social Security Number"]} F={settab3} S={tab3} SV={PrivateDatenArr} SF={setPrivateDatenArr}/> 
+        <Container Icon={["Krankenversicherung"]} Labname={[sprache?"Sozialversicherungsnummer/Rentennummer":"Social security number/pension number"]} F={settab3} S={tab3} SV={PrivateDatenArr} SF={setPrivateDatenArr}/> 
       }
       </>
       :
@@ -85,17 +167,46 @@ export default function Seite2({navigation}) {
     }  
   
   <Container Icon={Dataset(sprache?'DE':'EN').SozialData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').SozialData.Eingabefelder} F={settab3} S={tab3} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
-  {
+  
+   
+ 
+  <SelectPicker  S={sprache?'DE':'EN'} V={tab3} I={1} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
+
+{/*
+    
+      if(PrivateDatenArr.KVArt==4){
+        setJobCheck=true
+
+      }
+      
+*/}
+
+   {tab3?
+   <>
+   {
+    JobCheck?
+      <>
+      <EingabeFeld Icon={"Krankenversicherung"} Labname={Textdataset(sprache?'DE':'EN').SoloCheckboxText.OtherJobs}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
+      </>
+      :
+      "" }</>
+      :
+      ""
+      }
+    
+
+   {
 	  tab3?
     <> 
+    <TouchableOpacity onPress={()=>datenabruf()} style={styles.Abspeichern}>
+    <Text style={{color:'black'}}>Speichern</Text>
+</TouchableOpacity>
     </>
     :
     ""
-  } 
-  <TouchableOpacity onPress={()=>datenabruf()}>
-    <Text>Button</Text>
-  </TouchableOpacity>
-  <SelectPicker  S={sprache?'DE':'EN'} V={tab3} I={1} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
+  }
+
+   
   </View>
   </View>
   </ScrollView>
@@ -191,7 +302,47 @@ const styles = StyleSheet.create({
     },
     Textelemente:{
       color:'#fff'
-    }
-     
+    },
+    Abspeichern:{
+      alignSelf: 'flex-end',
+      alignItems: 'center',
+      backgroundColor: '#166534',
+      padding: 10,
+      height:'auto',    
+      borderRadius:5,
+      borderTopColor:'#1e3a8a',
+      borderTopWidth:2,
+      borderBottomColor:'#1e3a8a',
+      borderBottomWidth:2,
+      width:'25%',
+      marginHorizontal: '10%',      
+      marginVertical: 30,      
+    },
+    fehlermeldung:{padding: 10,
+      paddingHorizontal:15,
+      borderWidth:1,
+      width:'80%',
+      alignSelf:'center',
+      borderColor: '#9d174d',
+      borderRadius:6,
+      marginVertical:15,
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+      backgroundColor: '#db2777',
+    },
+    abgespeichert:{
+      padding: 10,
+      paddingHorizontal:15,
+      borderWidth:1,
+      width:'80%',
+      alignSelf:'center',
+      borderColor: '#65a30d',
+      borderRadius:6,
+      marginVertical:15,
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+      backgroundColor: '#84cc16',
+  
+    },
 
 });

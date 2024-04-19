@@ -14,12 +14,7 @@ const Container = (props) => {
       </View>
       )) 
     }
-    {
-      props.S?
-    <TouchableOpacity onPress={()=>props.W()} style={style.Abspeichern}>
-      <Text style={{color:'black'}}>Speichern</Text>
-    </TouchableOpacity>:''
-    }
+    
     </>
   )
 }

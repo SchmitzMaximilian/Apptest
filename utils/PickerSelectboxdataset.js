@@ -1,8 +1,8 @@
 export const PickerSelectBoxDataSet=(p)=>{
-  let BoxData;
+  let PickData;
   /*p="DE"
   if(p=="DE"){
-   BoxData={
+   PickData={
   "TopSelectboxenLabel":["Geschlecht","Art der Krankenversicherung","Schulabschluss","Ausbildungsabschluss"],
     "SubSelectboxenLabel":[["weiblich","männlich","divers","unbestimmt"],
     ["Gesetzlich","Freiwillig","Privat","Ich habe oder eine Elterneigensschaft (Nachweis z.B. Geburtsurkunde)","Ich bin nicht Rentenversicherungspflichtig (z.B. Beamter oder Selbständiger, Nachweis)","Ich übe neben dieser noch weitere Beschäftigungen aus(vollständige Liste beifügen)","Dies ist nicht meine Hauptbeschäftigung"],
@@ -12,7 +12,7 @@ export const PickerSelectBoxDataSet=(p)=>{
   
 }
 }else{
-  BoxData={
+  PickData={
     "TopSelectboxenLabel":["Gender","Type of health insurance","Graduation","Training qualification"],
       "SubSelectboxenLabel":[["female","male","non-binary","gender neutral"],
       ["Legally","Voluntarily","Private","I have or have parental status (proof e.g. birth certificate)","I am not subject to pension insurance (e.g. civil servant or self-employed, include proof)","I have other jobs besides this one (enclose complete list)","This is not my main job"],
@@ -23,5 +23,5 @@ export const PickerSelectBoxDataSet=(p)=>{
   } 
 } */
 
-return BoxData; 
+return PickData; 
 }

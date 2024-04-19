@@ -5,14 +5,17 @@ import { Textdataset } from '../../../utils/Textdataset';
 import { TransactionContext } from '../../../utils/Context';
 
 export default function SVNummer(props) {
-  const [checked1, setChecked1] = useState(0)
+  const [checked2, setChecked2] = useState(0)
   const [sprache,setzesprache]=useContext(TransactionContext)
   console.log(props)
-   {/*
-  function auswahlspeicher=(F)=>{
+  
+  const speicherSozialdata=()=>{
 
+    let O=props?.SV
+   props.SF(O)
   }
-*/}
+  
+   
   
   return( 
         <View style={styles.checkboxContainer}>

@@ -23,7 +23,8 @@ export const Textdataset=(p)=>{
     "SoloCheckboxText":{
       "Sozial":"SV-Nummer nicht vorhanden",
       "Bank":"Barzahlung",
-      "Steuer":"Ich erkläre, nicht im Besitz einer Steuer-ID zu sein"
+      "Steuer":"Ich erkläre, nicht im Besitz einer Steuer-ID zu sein",
+      "OtherJobs":"Name Ihrer anderen Arbeitgeber",
     },
   } 
 }else{
@@ -49,7 +50,8 @@ export const Textdataset=(p)=>{
   "SoloCheckboxText":{
     "Sozial":"SV number not available",
     "Bank":"Cash payment",
-    "Steuer":"I declare that I do not have a tax ID"
+    "Steuer":"I declare that I do not have a tax ID",
+    "OtherJobs":"Name of your other employers",
   },
   } 
 }

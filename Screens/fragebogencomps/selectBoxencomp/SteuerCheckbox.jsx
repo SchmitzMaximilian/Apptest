@@ -5,14 +5,13 @@ import { Textdataset } from '../../../utils/Textdataset';
 import { TransactionContext } from '../../../utils/Context';
 
 export default function SteuerID(props) {
-  const [checked1, setChecked1] = useState(0)
+  const [checked1, setChecked1] = useState(0)//value abfrage hier
   const [sprache,setzesprache]=useContext(TransactionContext)
-  
-   {/*
-  function auswahlspeicher=(F)=>{
-
+  const speicherSteuerdata=()=>{
+   
+   let O=props?.SV
+   props.SF(O)
   }
-*/}
   
   return( 
         <View style={styles.checkboxContainer}>

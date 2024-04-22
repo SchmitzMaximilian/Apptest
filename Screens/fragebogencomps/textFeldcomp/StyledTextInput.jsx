@@ -28,49 +28,65 @@ const[txtvalue,settxtvalue]=useState();
 
       //Kommunikation
       case "Vorwahl / Rufnummer Festnetz (nur falls verfügbar)"||"Area code / phone number landline (only if available)":
-        O.Vname=t
+        O.Festnetz=t
         break;
       case "Vorwahl / Rufnummer Mobiltelefon (nur falls verfügbar)"||"Area code / phone number mobile phone (only if available)":
-        O.Nname=t
+        O.Mobil=t
         break;
       case "E-Mail-Adresse (nur falls verfügbar)"||"Email address (only if available)":
-        O.Adresse=t
+        O.Email=t
         break;
+
+
+      //Bankverbindung
+      case"Name des Kreditinstituts" || "Name of institute of credit" :
+      O.Bankname=t
+      break;
+      case"IBAN" || "IBAN" :
+      O.iban=t
+      break;
+      case"Bankleitzahl Stellen 5 bis 12" || "Bank sort code digits 5 to 12" :
+      O.bank5_12=t
+      break;
+      case"Kontonummer (IBAN Stellen 13 bis 22)" || "Account number (IBAN digits 13 to 22)" :
+      O.bank13_22=t
+      break;
+      case"Kontoinhaber (falls abweichend)" || "Account holder (if different)" :
+      O.Inhaber=t
+      break;
+
+
+
 
 
       //Steuer
       
       case "Steuerklasse"||"Tax class":
-        O.PCode=t
+        O.Steuerklasse=t
         break;
       case "Anzahl Kinder"||"Number of children":
-        O.City=t
+        O.Kinder=t
         break;
       case "Konfession"||"Denomination":
-        O.City=t
+        O.Konfession=t
         break; 
-      case "Konfession Partner (falls abweichend)"||"Denomination partner (if different)":
-        O.City=t
-        break;
-
+      
       //Sozialversicherung      
       case "Staatsangehärigkeit"||"Nationality":
-        O.Vname=t
+        O.Staatsbuergerschaft=t
         break;
       case "Geburtsdatum"||"Birth date":
-        O.Nname=t
+        O.GBDatum=t
         break;
-      case "Geburtsname (Pflichtangabe, bei abweichendem Nachnamen)"||"Birth name (mandatory, if last name is different)":
-        O.Adresse=t
-        break;
+      
       case "Geburtsort (Pflichtangabe)"||"Place of birth (mandatory)":
-        O.PCode=t
+        O.GBOrt=t
         break;
       case "Geburtsland(nur falls nicht Deutschland)"||"Country of birth (only if not Germany)":
-        O.City=t
+        O.GBLand=t
         break;
       case "Krankenkasse (Bitte kompletter Name, also zB. AOK NordWest, nicht AOK)"||"Health insurance company (please complete name, e.g. AOK NordWest, not AOK)":
-        O.Vname=t
+        O.Kassename=t
         break;
       
       

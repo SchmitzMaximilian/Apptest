@@ -8,16 +8,17 @@ export default function SteuerID(props) {
   const [checked1, setChecked1] = useState(0)//value abfrage hier
   const [sprache,setzesprache]=useContext(TransactionContext)
   const speicherSteuerdata=()=>{
-   
+   props.S?props.F(0):props.F(1)
    let O=props?.SV
    props.SF(O)
+   setChecked1(props.F)
   }
   
   return( 
         <View style={styles.checkboxContainer}>
         <CheckBox
           value={props.S?true:false}
-          onValueChange={() => props.S?props.F(0):props.F(1)}
+          onValueChange={(itemValue) => speicherSteuerdata(itemValue)}
           style={styles.checkbox}
           /><Text style={styles.beschreibung}>{Textdataset(sprache?'DE':'EN').SoloCheckboxText.Steuer}</Text>
           </View >         

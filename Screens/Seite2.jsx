@@ -13,29 +13,40 @@ import { ScrollView } from 'react-native-gesture-handler';
 import PersoenlicheDatenObject from '../utils/Objects/PersoenlicheDatenObject';
 import { EingabeFeld } from './fragebogencomps/textFeldcomp/EingabeFeld';
 import { Textdataset } from '../utils/Textdataset';
-
+import {Picker} from '@react-native-picker/picker';
+import { Checkboxdataset } from '../utils/Checkboxdataset';
 
 export default function Seite2({navigation}) {
   const [sprache,setzesprache]=useContext(TransactionContext)
   const [tab3,settab3]=useState(false)
   const [SVCheck,setSVCheck]=useState(false)
   const [PrivateDatenArr,setPrivateDatenArr]=useState(PersoenlicheDatenObject)
-  const[JobCheck,setJobCheck]=useState(false)
+  const [JobCheck,setJobCheck]=useState(false)
   const [Fehlercheck,setFehlercheck]=useState(false)
   const [FehlerText,setFehlerText]=useState(false)
   const [Erfolgscheck,setErfolgscheck]=useState(false)
+  const [SelectedLanguage, setSelectedLanguage] = useState();
+  
+
+
+const selectPruefer=(T)=>{
+  if((T+1)==4){
+    setJobCheck(true)
+  }else{
+    setJobCheck(false)
+
+  }
+}
+
   const datenabruf=async()=>{
     let check=true
     //setFehlercheck(false)
     //setFehlerText(false)
     //setErfolgscheck(false)
-    {/*
-    if(!PrivateDatenArr.RentenCheck.trim().length>0){
-      check=false
-    }
-
     
-  */}
+    if(!PrivateDatenArr.RentenCheck>0){
+      check=false
+    }  
     if(!PrivateDatenArr.SVNummerfeld.trim().length>11){
       check=false
     }
@@ -54,7 +65,10 @@ export default function Seite2({navigation}) {
     if(!PrivateDatenArr.Kassename.trim().length>0){
       check=false
     } 
-    if(!PrivateDatenArr.KVArt.trim().length>0){
+    if(!PrivateDatenArr.KVArt>0){
+      check=false
+    }
+    if(!PrivateDatenArr.AndereArbeitgeber.trim().length>4){
       check=false
     }  
 
@@ -71,8 +85,9 @@ export default function Seite2({navigation}) {
             "gbort":PrivateDatenArr.GBOrt.toString(),
             "gbland":PrivateDatenArr.GBLand.toString(),
             "krankenkassename":PrivateDatenArr.Kassename.toString(),
-            "soziSelect":PrivateDatenArr.KVArt.toString()
-            //"":,
+            "soziSelect":PrivateDatenArr.KVArt.toString(),
+            "arbeitgeberListe":PrivateDatenArr.AndereArbeitgeber.toString(),
+            "mitarbeiterID":mitarbeiterID
           })
         };
         const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
@@ -167,24 +182,25 @@ export default function Seite2({navigation}) {
     }  
   
   <Container Icon={Dataset(sprache?'DE':'EN').SozialData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').SozialData.Eingabefelder} F={settab3} S={tab3} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
-  
-   
- 
-  <SelectPicker  S={sprache?'DE':'EN'} V={tab3} I={1} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
+  {
+    tab3?
+  <>
+    <Text OP={2} style={styles.TextElemente}>Art der Krankenversicherung (Pflichtangabe, zutreffendes makieren)</Text>
+    <View style={{borderRadius:2,borderWidth:1,borderColor:'#4b5563', width:'80%',marginLeft:'10%'}}>
+     <Picker style={{color:'#FFF'}}  dropdownIconColor={"#FFF"} selectedValue={SelectedLanguage} multiline={true} numberOfLines={2} onValueChange={(itemValue, itemIndex) =>
+    {selectPruefer(itemValue);setSelectedLanguage(itemValue)}
+  }  >
+    {
+      ["(1)Gesetzlich","(2)Freiwillig","(3)Privat","(4)Ich übe neben dieser noch weitere Beschäftigungen aus(Bitte fügen Sie eine vollständige Liste aller weiteren Arbeitgeber bei)"].map((item,index)=>(
+        <Picker.Item  key={'pickup'+index+item}  color="#000" label={item} value={index} />
 
-{/*
-    
-      if(PrivateDatenArr.KVArt==4){
-        setJobCheck=true
-
-      }
-      
-*/}
-
+      ))
+    }
+  </Picker> 
    {tab3?
    <>
    {
-    JobCheck?
+    JobCheck&&tab3?
       <>
       <EingabeFeld Icon={"Krankenversicherung"} Labname={Textdataset(sprache?'DE':'EN').SoloCheckboxText.OtherJobs}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
       </>
@@ -193,6 +209,14 @@ export default function Seite2({navigation}) {
       :
       ""
       }
+  </View>
+  </>
+  :''
+   }
+ 
+   
+
+
     
 
    {
@@ -229,7 +253,11 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent:'flex-start',
     },
-    
+    TextElemente:{
+      color:'#fff',
+      paddingHorizontal:80,
+      marginVertical:5,
+    },
     AdminButtonContainer:{
       width:'100%', 
       padding:15, 

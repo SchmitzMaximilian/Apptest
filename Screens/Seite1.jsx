@@ -11,7 +11,6 @@ import { Dataset } from '../utils/Dataset';
 import { Textdataset } from '../utils/Textdataset';
 import SelectPicker from './fragebogencomps/selectBoxencomp/PickerSelectBox'; 
 import SteuerID from './fragebogencomps/selectBoxencomp/SteuerCheckbox';
-import Zahlungsart from './fragebogencomps/selectBoxencomp/Checkbox';
 import { ScrollView } from 'react-native-gesture-handler';
 import PersoenlicheDatenObject from '../utils/Objects/PersoenlicheDatenObject';
 
@@ -26,18 +25,24 @@ export default function Seite1({navigation}) {
   const [FehlerText,setFehlerText]=useState(false)
   const [Erfolgscheck,setErfolgscheck]=useState(false)
   const [PrivateDatenArr,setPrivateDatenArr]=useState(PersoenlicheDatenObject)    
+  const [mitarbeiterID,setmitarbeiterID]=useState(3)//Nach dem teste nwieder auf 0 setzen
 
   //PrivateDatenArr
   //PrivateDatenArr.Geschlecht
 
+
+  //---------------------------------------------> Name und Anschrift Inhalstabspeicherung
   const submitdata1=async()=>{
-    //setFehlercheck(false)
-    //setFehlerText(false)
-    //setErfolgscheck(false)
+    setFehlercheck(false)
+    setFehlerText(false)
+    setErfolgscheck(false)
     
-    console.log('klicked')
+    
     let check=true
-    if(!PrivateDatenArr.Geschlecht.length>0){
+    if(!PrivateDatenArr.ArbeitsGrundlage>0){
+      check=false
+    }
+    if(!PrivateDatenArr.Geschlecht>0){
       check=false
     }
     if(!PrivateDatenArr.Vname.trim().length>2){
@@ -68,16 +73,18 @@ export default function Seite1({navigation}) {
             "nachname":PrivateDatenArr.Nname.toString(),
             "straßeuzahl":PrivateDatenArr.Adresse.toString(),
             "plz":PrivateDatenArr.PCode.toString(),
-            "wohnort":PrivateDatenArr.City.toString()
+            "wohnort":PrivateDatenArr.City.toString(),
+            "grundlage":PrivateDatenArr.ArbeitsGrundlage.toString()
 
-            //"username":eingabe1.toString(),
+            //"username":eingabe1.toString(), teilzeit check box einbinden
           })
         };
         const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
         let e = await d.json();
-        if(e.ergebnis==true){
+        console.log(e)
+        if(e.ergebnis>0 &&(!isNaN(e.ergebnis))){
           setErfolgscheck(true)
-  
+          setmitarbeiterID(e.ergebnis)
           console.log('speichertestyeah')
         }
         else if(e.ergebnis=='DBerror'){//zeigt Datenbankfehler an keine speicherung
@@ -101,20 +108,24 @@ export default function Seite1({navigation}) {
     }
   }
 
+
+  //------------------------------------------------> Kommunikation Inhalstabspeicherung
   const submitdata2=async()=>{
-    console.log('klicked')
+    setFehlercheck(false)
+    setFehlerText(false)
+    setErfolgscheck(false)  
     let check=true
     if(!PrivateDatenArr.Festnetz.trim().length>2){
       check=false
     }
+    console.log("klicked")
     if(!PrivateDatenArr.Mobil.trim().length>2){
       check=false
     }
     if(!PrivateDatenArr.Email.trim().length>2){
       check=false
     }
-    
-
+     
     if(check){
       try{
         const request ={
@@ -125,13 +136,17 @@ export default function Seite1({navigation}) {
             "festnetz":PrivateDatenArr.Festnetz.toString(),
             "mobil":PrivateDatenArr.Mobil.toString(),
             "emailbw":PrivateDatenArr.Email.toString(),
-            //
+            "mitarbeiterID":mitarbeiterID //für test ID Festlegen
+            
           })
-        };
+        }; 
         const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
         let e = await d.json();
+        console.log(e)
+        /*console.log('is it working yet?')
         if(e.ergebnis==true){
   
+          setErfolgscheck(true)
           console.log('speichertestyeah')
         }
         else if(e.ergebnis=='DBerror'){//zeigt Datenbankfehler an keine speicherung
@@ -139,30 +154,38 @@ export default function Seite1({navigation}) {
         }else{//Fehler bei der Eingabe füllen
           
           console.log('Fehler')
-        }
+        }*/
       }
       catch(err){
         console.error(err)
       }
     }else{
       //
+      setFehlercheck(true)
+      setFehlerText(false)
+      setErfolgscheck(false)
     }
   }
 
+
+  //-------------------------------------> Bankverbindung Inhaltsabspeicherung
   const submitdata3=async()=>{
+    setFehlercheck(false)
+    setFehlerText(false)
+    setErfolgscheck(false)
     console.log('klicked')
     let check=true
     
     if(!PrivateDatenArr.Bankname.trim().length>2){
       check=false
     }
-    if(!PrivateDatenArr.iban.trim().length>2){
+    if(!PrivateDatenArr.iban.trim().length==4){
       check=false
     }
-    if(!PrivateDatenArr.bank5_12.trim().length==5){
+    if(!PrivateDatenArr.bank5_12.trim().length==8){
       check=false
     }
-    if(!PrivateDatenArr.bank13_22.trim().length>2){
+    if(!PrivateDatenArr.bank13_22.trim().length==10){
       check=false
     }
     if(!PrivateDatenArr.Inhaber.trim().length>2){
@@ -181,13 +204,16 @@ export default function Seite1({navigation}) {
             "blz512":PrivateDatenArr.bank5_12,
             "blz1322":PrivateDatenArr.bank13_22,
             "inhaber":PrivateDatenArr.Inhaber.toString(),
+            "mitarbeiterID":mitarbeiterID
             //
           })
         };
         const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
         let e = await d.json();
+        console.log(e)
         if(e.ergebnis==true){
   
+          setErfolgscheck(true)
           console.log('speichertestyeah')
         }
         else if(e.ergebnis=='DBerror'){//zeigt Datenbankfehler an keine speicherung
@@ -202,14 +228,20 @@ export default function Seite1({navigation}) {
       }
     }else{
       //
+      setFehlercheck(true)
+      setFehlerText(false)
+      setErfolgscheck(false)
     }
   }
 
-  
+  //--------------------------------------------------> Angaben zur Steuer
   const submitdata4=async()=>{
+    setFehlercheck(false)
+    setFehlerText(false)
+    setErfolgscheck(false)
     console.log('klicked')
     let check=true
-    if(!PrivateDatenArr.SteueridCheck.trim().length>0){
+    if(!PrivateDatenArr.SteueridCheck>0){
       check=false
     }
     if(!PrivateDatenArr.SteuerID.trim().length>10){
@@ -236,14 +268,17 @@ export default function Seite1({navigation}) {
             "steuerid":PrivateDatenArr.SteuerID.toString(),
             "steuerklasse":PrivateDatenArr.Steuerklasse.toString(),
             "kinder":PrivateDatenArr.Kinder.toString(),
-            "konfession":PrivateDatenArr.Konfession.toString()
+            "konfession":PrivateDatenArr.Konfession.toString(),
+            "mitarbeiterID":mitarbeiterID
             //
           })
         };
         const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
         let e = await d.json();
+        console.log(e)
         if(e.ergebnis==true){
   
+          setErfolgscheck(true)
           console.log('speichertestyeah')
         }
         else if(e.ergebnis=='DBerror'){//zeigt Datenbankfehler an keine speicherung
@@ -258,6 +293,9 @@ export default function Seite1({navigation}) {
       }
     }else{
       //
+      setFehlercheck(true)
+      setFehlerText(false)
+      setErfolgscheck(false)
     }
   }
 

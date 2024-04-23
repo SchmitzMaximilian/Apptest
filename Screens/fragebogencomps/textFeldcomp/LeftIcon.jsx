@@ -3,8 +3,7 @@ import { View,StyleSheet } from "react-native";
 import {Octicons,Ionicons} from '@expo/vector-icons';
 
 
-const LeftIcon = (props) => {
-  console.log(props.P)
+const LeftIcon = (props) => { 
   let Icon;
   switch(props.P.toString()){
     case "User":

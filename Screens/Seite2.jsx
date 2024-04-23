@@ -16,20 +16,22 @@ import { Textdataset } from '../utils/Textdataset';
 import {Picker} from '@react-native-picker/picker';
 import { Checkboxdataset } from '../utils/Checkboxdataset';
 
-export default function Seite2({navigation}) {
+export default function Seite2({route, navigation}) {
+  console.log()
   const [sprache,setzesprache]=useContext(TransactionContext)
   const [tab3,settab3]=useState(false)
   const [SVCheck,setSVCheck]=useState(false)
-  const [PrivateDatenArr,setPrivateDatenArr]=useState(PersoenlicheDatenObject)
+  const [PrivateDatenArr,setPrivateDatenArr]=useState(route.params.PrivateDatenArr)
   const [JobCheck,setJobCheck]=useState(false)
   const [Fehlercheck,setFehlercheck]=useState(false)
   const [FehlerText,setFehlerText]=useState(false)
   const [Erfolgscheck,setErfolgscheck]=useState(false)
-  const [SelectedLanguage, setSelectedLanguage] = useState();
-  
-
-
+  const [SelectedLanguage, setSelectedLanguage] = useState(); 
+  const [mitarbeiterID,setmitarbeiterID]=useState(route.params.PrivateDatenArr.MitarbeiterID)
 const selectPruefer=(T)=>{
+  let O=PrivateDatenArr;
+  O.KVArt=T+1;
+  setPrivateDatenArr(O)
   if((T+1)==4){
     setJobCheck(true)
   }else{
@@ -39,17 +41,17 @@ const selectPruefer=(T)=>{
 }
 
   const datenabruf=async()=>{
-    let check=true
-    //setFehlercheck(false)
-    //setFehlerText(false)
-    //setErfolgscheck(false)
-    
+    setFehlercheck(false)
+    setFehlerText(false)
+    setErfolgscheck(false)
+    let check=true 
+    console.log(["ssjds",PrivateDatenArr])
     if(!PrivateDatenArr.RentenCheck>0){
-      check=false
-    }  
-    if(!PrivateDatenArr.SVNummerfeld.trim().length>11){
+      if(PrivateDatenArr.SVNummerfeld==0){
       check=false
     }
+    }  
+    
     if(!PrivateDatenArr.Staatsbuergerschaft.trim().length>0){
       check=false
     }
@@ -59,8 +61,9 @@ const selectPruefer=(T)=>{
     if(!PrivateDatenArr.GBOrt.trim().length>0){
       check=false
     }
-    if(!PrivateDatenArr.GBLand.trim().length>0){
-      check=false
+    if(PrivateDatenArr.GBLand==0){
+      PrivateDatenArr.GBLand='Deutschland'
+      
     }
     if(!PrivateDatenArr.Kassename.trim().length>0){
       check=false
@@ -68,10 +71,14 @@ const selectPruefer=(T)=>{
     if(!PrivateDatenArr.KVArt>0){
       check=false
     }
-    if(!PrivateDatenArr.AndereArbeitgeber.trim().length>4){
-      check=false
-    }  
 
+    if(PrivateDatenArr.KVArt==4){
+      if(!PrivateDatenArr.AndereArbeitgeber.trim().length>4){
+      check=false
+    } 
+    }
+     
+console.log(PrivateDatenArr)
     if(check){
       try{
         const request ={
@@ -79,6 +86,7 @@ const selectPruefer=(T)=>{
           headers: { 'Content-Type' : 'application/json'},
           body: JSON.stringify({
             "query":6,
+            "sozialCheck":PrivateDatenArr.RentenCheck.toString(),
             "sozinummer":PrivateDatenArr.SVNummerfeld.toString(),
             "herkunft":PrivateDatenArr.Staatsbuergerschaft.toString(),
             "gbdatum":PrivateDatenArr.GBDatum.toString(),
@@ -90,19 +98,30 @@ const selectPruefer=(T)=>{
             "mitarbeiterID":mitarbeiterID
           })
         };
+        console.log(request.body)
         const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
         let e = await d.json();
+        console.log(e)
         if(e.ergebnis==true){
           setErfolgscheck(true)  
+          setTimeout(()=>{
+            setErfolgscheck(false)
+          },2000)
           console.log('speichertestyeah')
         }
         else if(e.ergebnis=='DBerror'){//zeigt Datenbankfehler an keine speicherung
           setFehlercheck(true)
           setFehlerText(true)
+          setTimeout(()=>{
+            setFehlercheck(false)
+          },2000)
           console.log('no Update')
         }else{//Fehler bei der Eingabe füllen
           setFehlercheck(true)
           setFehlerText(false)
+          setTimeout(()=>{
+            setFehlercheck(false)
+          },2000)
           console.log('Fehler')
         }
       }
@@ -113,12 +132,15 @@ const selectPruefer=(T)=>{
       //
       setFehlercheck(true)
       setFehlerText(false)
+      setTimeout(()=>{
+        setFehlercheck(false)
+      },2000)
       setErfolgscheck(false)
     }
     
   }
-  useEffect(()=>{
-
+  useEffect(()=>{ 
+    selectPruefer(0)
   },[])
   return (
     <SafeAreaView style={styles.sav} backgroundColor={'#335155'}>
@@ -134,7 +156,7 @@ const selectPruefer=(T)=>{
           <Text style={{color:'#FFFFFF'}} >{sprache?'EN':'DE'}</Text>
         </TouchableOpacity>
         </View>
-        <TouchableOpacity  style={styles.AdminButton}> 
+        <TouchableOpacity   style={styles.AdminButton}> 
           <Text style={{color:'#FFFFFF'}} >Submit</Text>
         </TouchableOpacity>
       </View>
@@ -185,13 +207,13 @@ const selectPruefer=(T)=>{
   {
     tab3?
   <>
-    <Text OP={2} style={styles.TextElemente}>Art der Krankenversicherung (Pflichtangabe, zutreffendes makieren)</Text>
+    <Text  style={styles.TextElemente}>{(sprache?'Art der Krankenversicherung (Pflichtangabe, zutreffendes makieren)':'Type of health insurance (mandatory information, mark as applicable)')}</Text>
     <View style={{borderRadius:2,borderWidth:1,borderColor:'#4b5563', width:'80%',marginLeft:'10%'}}>
      <Picker style={{color:'#FFF'}}  dropdownIconColor={"#FFF"} selectedValue={SelectedLanguage} multiline={true} numberOfLines={2} onValueChange={(itemValue, itemIndex) =>
     {selectPruefer(itemValue);setSelectedLanguage(itemValue)}
   }  >
     {
-      ["(1)Gesetzlich","(2)Freiwillig","(3)Privat","(4)Ich übe neben dieser noch weitere Beschäftigungen aus(Bitte fügen Sie eine vollständige Liste aller weiteren Arbeitgeber bei)"].map((item,index)=>(
+      (sprache?["(1)Gesetzlich","(2)Freiwillig","(3)Privat","(4)Ich übe neben dieser noch weitere Beschäftigungen aus(Bitte fügen Sie eine vollständige Liste aller weiteren Arbeitgeber bei)"]:["(1)Legally","(2)Voluntarily","(3)Private","(4)I have other jobs besides this one (please include a complete list of all other employers)"]).map((item,index)=>(
         <Picker.Item  key={'pickup'+index+item}  color="#000" label={item} value={index} />
 
       ))

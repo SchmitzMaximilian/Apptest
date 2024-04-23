@@ -28,8 +28,8 @@ export const Dataset=(p)=>{
     },
     "BankData":
     {
-      "Eingabefelder":["Name des Kreditinstituts","IBAN","Bankleitzahl Stellen 5 bis 12","Kontonummer (IBAN Stellen 13 bis 22)","Kontoinhaber (falls abweichend)"],
-      "EingabefelderIcons":["Bank","Bank","Bank","Bank","Bank"],
+      "Eingabefelder":["Name des Kreditinstituts","IBAN","Kontoinhaber (falls abweichend)"],
+      "EingabefelderIcons":["Bank","Bank","Bank"],
     },
     "SteuerData":
     {
@@ -57,8 +57,8 @@ export const Dataset=(p)=>{
     },
     "BankData":
     {
-      "Eingabefelder":["Name of institute of credit","IBAN","Bank sort code digits 5 to 12","Account number (IBAN digits 13 to 22)","Account holder (if different)"],
-      "EingabefelderIcons":["Bank","Bank","Bank","Bank","Bank"],
+      "Eingabefelder":["Name of institute of credit","IBAN","Account holder (if different)"],
+      "EingabefelderIcons":["Bank","Bank","Bank",],
     },
     "SteuerData":
     {

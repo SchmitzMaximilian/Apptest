@@ -12,7 +12,9 @@ import { Textdataset } from '../utils/Textdataset';
 import SelectPicker from './fragebogencomps/selectBoxencomp/PickerSelectBox'; 
 import SteuerID from './fragebogencomps/selectBoxencomp/SteuerCheckbox';
 import { ScrollView } from 'react-native-gesture-handler';
-import PersoenlicheDatenObject from '../utils/Objects/PersoenlicheDatenObject';
+import PersoenlicheDatenObject from '../utils/Objects/PersoenlicheDatenObject'; 
+import {isValid} from 'iban'
+import { isSteuerIdValid } from 'validate-steuerid'
 
 export default function Seite1({navigation}) {
   const [sprache,setzesprache]=useContext(TransactionContext)  
@@ -25,7 +27,8 @@ export default function Seite1({navigation}) {
   const [FehlerText,setFehlerText]=useState(false)
   const [Erfolgscheck,setErfolgscheck]=useState(false)
   const [PrivateDatenArr,setPrivateDatenArr]=useState(PersoenlicheDatenObject)    
-  const [mitarbeiterID,setmitarbeiterID]=useState(3)//Nach dem teste nwieder auf 0 setzen
+  const [mitarbeiterID,setmitarbeiterID]=useState(0)//Nach dem testen wieder auf 0 setzen
+
 
   //PrivateDatenArr
   //PrivateDatenArr.Geschlecht
@@ -37,28 +40,40 @@ export default function Seite1({navigation}) {
     setFehlerText(false)
     setErfolgscheck(false)
     
-    
+    console.log(PrivateDatenArr.ArbeitsGrundlage)
     let check=true
+    if(!PrivateDatenArr.BewerberStandort>0){
+            check=false
+            console.log('ich binfals1')
+    } 
     if(!PrivateDatenArr.ArbeitsGrundlage>0){
-      check=false
+      check=false 
+      console.log('ich binfals2')
     }
     if(!PrivateDatenArr.Geschlecht>0){
       check=false
+      console.log('ich binfals3')
     }
     if(!PrivateDatenArr.Vname.trim().length>2){
       check=false
+      console.log('ich binfals4')
     }
     if(!PrivateDatenArr.Nname.trim().length>2){
       check=false
+      console.log('ich binfals5')
     }
+    
     if(!PrivateDatenArr.Adresse.trim().length>2){
       check=false
+      console.log('ich binfals6')
     }
     if(!PrivateDatenArr.PCode.trim().length==5){
       check=false
+      console.log('ich binfals7')
     }
     if(!PrivateDatenArr.City.trim().length>2){
       check=false
+      console.log('ich binfals8')
     }
 
     if(check){
@@ -68,6 +83,7 @@ export default function Seite1({navigation}) {
           headers: { 'Content-Type' : 'application/json'},
           body: JSON.stringify({
             "query":2,
+            "standortSelect": PrivateDatenArr.BewerberStandort.toString(),
             "geschlechtSelect":PrivateDatenArr.Geschlecht.toString(),
             "vorname":PrivateDatenArr.Vname.toString(),
             "nachname":PrivateDatenArr.Nname.toString(),
@@ -80,20 +96,31 @@ export default function Seite1({navigation}) {
           })
         };
         const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
-        let e = await d.json();
-        console.log(e)
+        let e = await d.json(); 
         if(e.ergebnis>0 &&(!isNaN(e.ergebnis))){
           setErfolgscheck(true)
+          setTimeout(()=>{
+            setErfolgscheck(false)
+          },2000)
           setmitarbeiterID(e.ergebnis)
+          let NO=PrivateDatenArr
+          NO.MitarbeiterID=e.ergebnis
+          setPrivateDatenArr(NO)
           console.log('speichertestyeah')
         }
         else if(e.ergebnis=='DBerror'){//zeigt Datenbankfehler an keine speicherung
           setFehlercheck(true)
           setFehlerText(true)
+          setTimeout(()=>{
+            setFehlercheck(false)
+          },2000)
           console.log('no Update')
         }else{//Fehler bei der Eingabe füllen
           setFehlercheck(true)
           setFehlerText(false)
+          setTimeout(()=>{
+            setFehlercheck(false)
+          },2000)
           console.log('Fehler')
         }
       }
@@ -104,6 +131,9 @@ export default function Seite1({navigation}) {
       //
       setFehlercheck(true)
       setFehlerText(false)
+      setTimeout(()=>{
+        setFehlercheck(false)
+      },2000)
       setErfolgscheck(false)
     }
   }
@@ -142,19 +172,29 @@ export default function Seite1({navigation}) {
         }; 
         const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
         let e = await d.json();
-        console.log(e)
-        /*console.log('is it working yet?')
+        
         if(e.ergebnis==true){
   
-          setErfolgscheck(true)
-          console.log('speichertestyeah')
+          setErfolgscheck(true) 
+          setTimeout(()=>{
+            setErfolgscheck(false)
+          },2000)
         }
         else if(e.ergebnis=='DBerror'){//zeigt Datenbankfehler an keine speicherung
           console.log('no Update')
+          setFehlercheck(true)
+          setFehlerText(true)
+          setTimeout(()=>{
+            setFehlercheck(false)
+          },2000)
         }else{//Fehler bei der Eingabe füllen
-          
+          setFehlercheck(true)
+          setFehlerText(false)
+          setTimeout(()=>{
+            setFehlercheck(false)
+          },2000)
           console.log('Fehler')
-        }*/
+        }
       }
       catch(err){
         console.error(err)
@@ -163,6 +203,9 @@ export default function Seite1({navigation}) {
       //
       setFehlercheck(true)
       setFehlerText(false)
+      setTimeout(()=>{
+        setFehlercheck(false)
+      },2000)
       setErfolgscheck(false)
     }
   }
@@ -172,26 +215,18 @@ export default function Seite1({navigation}) {
   const submitdata3=async()=>{
     setFehlercheck(false)
     setFehlerText(false)
-    setErfolgscheck(false)
-    console.log('klicked')
-    let check=true
-    
-    if(!PrivateDatenArr.Bankname.trim().length>2){
+    setErfolgscheck(false) 
+    let check=true 
+    if(!PrivateDatenArr.Bankname.trim().length>2){ 
       check=false
     }
-    if(!PrivateDatenArr.iban.trim().length==4){
+    if((isValid(PrivateDatenArr.iban.trim().toString())==false)){ 
       check=false
     }
-    if(!PrivateDatenArr.bank5_12.trim().length==8){
-      check=false
-    }
-    if(!PrivateDatenArr.bank13_22.trim().length==10){
-      check=false
-    }
-    if(!PrivateDatenArr.Inhaber.trim().length>2){
-      check=false
-    }
-
+     
+    if(PrivateDatenArr.Inhaber==0){ 
+      PrivateDatenArr.Inhaber=PrivateDatenArr.Vname.toString()+' '+PrivateDatenArr.Nname.toString()
+    } 
     if(check){
       try{
         const request ={
@@ -200,26 +235,34 @@ export default function Seite1({navigation}) {
           body: JSON.stringify({
             "query":4,
             "bankname":PrivateDatenArr.Bankname.toString(),
-            "iban":PrivateDatenArr.iban.toString(),
-            "blz512":PrivateDatenArr.bank5_12,
-            "blz1322":PrivateDatenArr.bank13_22,
+            "iban":PrivateDatenArr.iban.toString(), 
             "inhaber":PrivateDatenArr.Inhaber.toString(),
-            "mitarbeiterID":mitarbeiterID
-            //
+            "mitarbeiterID":mitarbeiterID 
           })
         };
         const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
-        let e = await d.json();
-        console.log(e)
+        let e = await d.json(); 
         if(e.ergebnis==true){
   
           setErfolgscheck(true)
+          setTimeout(()=>{
+            setErfolgscheck(false)
+          },2000)
           console.log('speichertestyeah')
         }
         else if(e.ergebnis=='DBerror'){//zeigt Datenbankfehler an keine speicherung
           console.log('no Update')
+          setFehlercheck(true)
+          setFehlerText(true)
+          setTimeout(()=>{
+            setFehlercheck(false)
+          },2000)
         }else{//Fehler bei der Eingabe füllen
-          
+          setFehlercheck(true)
+          setFehlerText(false)
+          setTimeout(()=>{
+            setFehlercheck(false)
+          },2000)
           console.log('Fehler')
         }
       }
@@ -230,7 +273,11 @@ export default function Seite1({navigation}) {
       //
       setFehlercheck(true)
       setFehlerText(false)
+      setTimeout(()=>{
+        setFehlercheck(false)
+      },2000)
       setErfolgscheck(false)
+      
     }
   }
 
@@ -238,26 +285,25 @@ export default function Seite1({navigation}) {
   const submitdata4=async()=>{
     setFehlercheck(false)
     setFehlerText(false)
-    setErfolgscheck(false)
-    console.log('klicked')
+    setErfolgscheck(false) 
     let check=true
-    if(!PrivateDatenArr.SteueridCheck>0){
+    
+    //if(!PrivateDatenArr.SteueridCheck>0){
+      //if(!isSteuerIdValid(PrivateDatenArr.SteuerID.trim())){
+      //check=false
+      
+    //}
+    //}
+    
+    if(!PrivateDatenArr.Steuerklasse.trim().length>0){
       check=false
     }
-    if(!PrivateDatenArr.SteuerID.trim().length>10){
-      check=false
-    }
-    if(!PrivateDatenArr.Steuerklasse.trim().length>2){
-      check=false
-    }
-    if(!PrivateDatenArr.Kinder.trim().length==5){
+    if(!PrivateDatenArr.Kinder.trim().length>0){
       check=false
     }
     if(!PrivateDatenArr.Konfession.trim().length>2){
       check=false
-    }
-    
-
+    }  
     if(check){
       try{
         const request ={
@@ -265,6 +311,7 @@ export default function Seite1({navigation}) {
           headers: { 'Content-Type' : 'application/json'},
           body: JSON.stringify({
             "query":5,
+            "steuerCheck":PrivateDatenArr.SteueridCheck.toString(),
             "steuerid":PrivateDatenArr.SteuerID.toString(),
             "steuerklasse":PrivateDatenArr.Steuerklasse.toString(),
             "kinder":PrivateDatenArr.Kinder.toString(),
@@ -274,17 +321,28 @@ export default function Seite1({navigation}) {
           })
         };
         const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
-        let e = await d.json();
-        console.log(e)
+        let e = await d.json(); 
+        
         if(e.ergebnis==true){
   
           setErfolgscheck(true)
+          setTimeout(()=>{
+            setErfolgscheck(false)
+          },2000)
           console.log('speichertestyeah')
         }
-        else if(e.ergebnis=='DBerror'){//zeigt Datenbankfehler an keine speicherung
-          console.log('no Update')
+        else if(e.ergebnis=='DBerror'){//zeigt Datenbankfehler an keine speicherung 
+          setFehlercheck(true)
+          setFehlerText(true)
+          setTimeout(()=>{
+            setFehlercheck(false)
+          },2000)
         }else{//Fehler bei der Eingabe füllen
-          
+          setFehlercheck(true)
+          setFehlerText(false)
+          setTimeout(()=>{
+            setFehlercheck(false)
+          },2000)
           console.log('Fehler')
         }
       }
@@ -293,8 +351,11 @@ export default function Seite1({navigation}) {
       }
     }else{
       //
-      setFehlercheck(true)
+      setFehlercheck(true) 
       setFehlerText(false)
+      setTimeout(()=>{
+        setFehlercheck(false)
+      },2000)
       setErfolgscheck(false)
     }
   }
@@ -313,7 +374,7 @@ export default function Seite1({navigation}) {
           <Text style={{color:'#FFFFFF'}} >{sprache?'EN':'DE'}</Text>
         </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={()=>navigation.navigate("Seite2")} style={styles.AdminButton}> 
+        <TouchableOpacity onPress={()=>navigation.navigate({name:"Seite2",params:{PrivateDatenArr}})} style={styles.AdminButton}> 
           <Text style={{color:'#FFFFFF'}} >Next</Text>
         </TouchableOpacity>
       </View>
@@ -348,8 +409,9 @@ export default function Seite1({navigation}) {
   }
 
   <View >
-    <Blocktop/> 
+    <Blocktop/>    
     <SelectPicker S={sprache?'DE':'EN'} V={true} I={4} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
+    <SelectPicker S={sprache?'DE':'EN'} V={true} I={5} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
     <Text style={{color:'#fff', marginHorizontal: '10%',paddingVertical:10}}>{Textdataset(sprache?'DE':'EN').Texte.Rechtsbelehrung}</Text>
   </View>
   <View style={{flexDirection:'column', width:'100%'}}>
@@ -391,7 +453,6 @@ export default function Seite1({navigation}) {
     tab4?
     <>
     <Text style={styles.Bichinweis}>{Textdataset(sprache?'DE':'EN').Texte.BicHinweis}</Text>
-    <Text style={styles.Textelemente}>{Textdataset(sprache?'DE':'EN').Texte.Zahlung}</Text>
     
       <Container W={submitdata3} Icon={Dataset(sprache?'DE':'EN').BankData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').BankData.Eingabefelder} F={settab4} S={tab4}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
     

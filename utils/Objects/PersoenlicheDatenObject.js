@@ -1,5 +1,6 @@
 const PersoenlicheDatenObject={
   MitarbeiterID:0,
+  BewerberStandort:0,
   //------PersonenDaten-----
   Geschlecht:0,
   Vname:0,
@@ -16,9 +17,7 @@ const PersoenlicheDatenObject={
 
   //------BankDaten-----
   Bankname:0,
-  iban:0,
-  bank5_12:0,
-  bank13_22:0,
+  iban:0, 
   Inhaber:0,
 
   //------SteuerDaten-----

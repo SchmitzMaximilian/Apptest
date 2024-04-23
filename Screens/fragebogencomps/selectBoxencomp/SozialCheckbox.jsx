@@ -9,10 +9,17 @@ export default function SVNummer(props) {
   const [sprache,setzesprache]=useContext(TransactionContext)
   console.log(props)
   
-  const speicherSozialdata=()=>{
-
+  const speicherSozialdata=(I)=>{
+    props.S?props.F(0):props.F(1)
     let O=props?.SV
-   props.SF(O)
+    if(I==true){
+      O.RentenCheck=(1)
+    }else{
+      O.RentenCheck=(0)
+    }
+    props.SF(O) 
+
+    
   }
   
    
@@ -21,7 +28,7 @@ export default function SVNummer(props) {
         <View style={styles.checkboxContainer}>
         <CheckBox
           value={props.S?true:false}
-          onValueChange={() => props.S?props.F(0):props.F(1)}
+          onValueChange={(I) => speicherSozialdata(I)}
           style={styles.checkbox}
           /><Text style={styles.beschreibung}>{Textdataset(sprache?'DE':'EN').SoloCheckboxText.Sozial}</Text>
           </View >         

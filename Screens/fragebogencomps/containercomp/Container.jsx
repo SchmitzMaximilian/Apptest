@@ -2,8 +2,7 @@ import React,{useState} from 'react'
 import { Text ,View,StyleSheet,TouchableOpacity} from 'react-native'
 import { EingabeFeld } from '../textFeldcomp/EingabeFeld'
 
-const Container = (props) => { 
-  console.log(props)
+const Container = (props) => {   
 
   return (
     <>

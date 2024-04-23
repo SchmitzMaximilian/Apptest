@@ -7,11 +7,17 @@ import { TransactionContext } from '../../../utils/Context';
 export default function SteuerID(props) {
   const [checked1, setChecked1] = useState(0)//value abfrage hier
   const [sprache,setzesprache]=useContext(TransactionContext)
-  const speicherSteuerdata=()=>{
+  const speicherSteuerdata=(I)=>{
    props.S?props.F(0):props.F(1)
    let O=props?.SV
-   props.SF(O)
-   setChecked1(props.F)
+    props.SF(O) 
+   if(I==true){
+    O.SteueridCheck=(1)
+   }else{
+    O.SteueridCheck=(0)
+   } 
+   
+   
   }
   
   return( 

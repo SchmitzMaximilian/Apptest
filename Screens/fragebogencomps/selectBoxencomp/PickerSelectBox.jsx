@@ -6,19 +6,23 @@ import { Checkboxdataset } from '../../../utils/Checkboxdataset';
 
 const SelectPicker = (props)=> {
 const [SelectedLanguage, setSelectedLanguage] = useState();
-const [sprache,setzesprache]=useContext(TransactionContext);
-console.log(props)
+const [sprache,setzesprache]=useContext(TransactionContext); 
 const selectionHandler=(I)=>{
-  if(props.I==4){
-    console.log(I+1)
+  if(props.I==4){ 
     setSelectedLanguage(I)
     let O=props?.SV
 
     O.ArbeitsGrundlage=I+1
     
     props.SF(O) 
-  }else{  
-    console.log(I+1)
+  }else if(props.I==5){ 
+    setSelectedLanguage(I)
+    let O=props?.SV
+
+    O.BewerberStandort=I+1
+    
+    props.SF(O) 
+  }else{   
     setSelectedLanguage(I)
     let O=props?.SV
 
@@ -28,7 +32,7 @@ const selectionHandler=(I)=>{
   }
 }
 useEffect(()=>{ 
-  
+  selectionHandler(0)
 },[])
 return( <Fragment>
   {

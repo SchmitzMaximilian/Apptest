@@ -42,7 +42,7 @@ return( <Fragment>
     props.S?
     <>
     <Text style={styles.Textelemente}>{Checkboxdataset(props.S).TopSelectboxenLabel[props.I]}</Text>
-    <View style={{borderRadius:2,borderWidth:1,borderColor:'#4b5563', width:'80%',marginLeft:'10%'}}>
+    <View style={{borderRadius:2,borderWidth:1,borderColor:'#4b5563', width:'80%',marginLeft:'10%',paddingVertical:10,marginVertical:10,backgroundColor:'#6b728090'}}>
      <Picker style={{color:'#FFF'}}  dropdownIconColor={"#FFF"} selectedValue={SelectedLanguage} multiline={true} numberOfLines={2} 
      onValueChange={(itemValue, itemIndex) =>selectionHandler(itemValue)}  >
       {
@@ -76,5 +76,6 @@ const styles = StyleSheet.create({
     color:'#fff',
     paddingHorizontal:80,
     marginVertical:5,
+    paddingTop:20,
   },
 });

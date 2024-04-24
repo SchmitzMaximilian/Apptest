@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import * as SecureStore from 'expo-secure-store';
-import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity,ImageBackground } from 'react-native';
 import { EingabeFeld } from "./regcomps/Comps";
 import { BorderRadiuses } from "react-native-ui-lib/src/style/borderRadiuses";
 import { ScrollView } from "react-native-gesture-handler";
@@ -9,6 +9,7 @@ import { TransactionContext } from './../../utils/Context';
 import { Textdataset } from "../../utils/Textdataset";
 import AdminObject from "../../utils/Objects/AdminObject";
 import { sha256 } from "node-forge";
+import {Picker} from '@react-native-picker/picker';
 //import { Restart } from "fiction-expo-restart";
 /**
  
@@ -36,7 +37,25 @@ const Registrierung =()=>{
   const [Fehlercheck,setFehlercheck]=useState(false)
   const [FehlerText,setFehlerText]=useState(false)
   const [Erfolgscheck,setErfolgscheck]=useState(false)
+  const [imageWiedergabe,setimageWiedergabe]=useState({uri: 'https://images.unsplash.com/photo-1630395822970-acd6a691d97e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fERpc2NvfGVufDB8fDB8fHww'})
+
+  const imageObjekt=[{name:'image1' ,uri: 'https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YnVpc25lc3N8ZW58MHx8MHx8fDA%3D'},
+  {name:'image2' ,uri: 'https://images.unsplash.com/photo-1630395822970-acd6a691d97e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fERpc2NvfGVufDB8fDB8fHww'}
+  ,{name:'image3' ,uri: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fFJlc3RhdXJhbnRlfGVufDB8fDB8fHww'}
+,{name:'image4' ,uri: 'https://images.unsplash.com/photo-1516458464372-eea4ab222b31?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fEJhcnxlbnwwfHwwfHx8MA%3D%3D'}
+,{name:'image5' ,uri: 'https://images.unsplash.com/photo-1569924995012-c4c706bfcd51?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8TmlnaHRjbHVifGVufDB8fDB8fHww'}
+,{name:'image6' ,uri: 'https://images.unsplash.com/photo-1622743941533-cde694bff56a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fE5pZ2h0Y2x1YnxlbnwwfHwwfHx8MA%3D%3D'}
+,{name:'image7' ,uri: 'https://images.unsplash.com/photo-1568738558403-f4e8c8f7a842?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODh8fENsdWJ8ZW58MHx8MHx8fDA%3D'}
+]
   
+    const image=imageWiedergabe  //const image={uri: 'https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YnVpc25lc3N8ZW58MHx8MHx8fDA%3D'};
+  //const image={uri: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fFJlc3RhdXJhbnRlfGVufDB8fDB8fHww'};
+  //const image ={uri: 'https://images.unsplash.com/photo-1630395822970-acd6a691d97e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fERpc2NvfGVufDB8fDB8fHww'};
+  //const image={uri: 'https://images.unsplash.com/photo-1516458464372-eea4ab222b31?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fEJhcnxlbnwwfHwwfHx8MA%3D%3D'};
+  //const image={uri: 'https://images.unsplash.com/photo-1569924995012-c4c706bfcd51?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8TmlnaHRjbHVifGVufDB8fDB8fHww'};
+  //const image={uri: 'https://images.unsplash.com/photo-1622743941533-cde694bff56a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fE5pZ2h0Y2x1YnxlbnwwfHwwfHx8MA%3D%3D'};
+  //const image={uri: 'https://images.unsplash.com/photo-1568738558403-f4e8c8f7a842?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODh8fENsdWJ8ZW58MHx8MHx8fDA%3D'};
+  //const image={uri: ''};
 
    const submitdata=async()=>{
     let check=true
@@ -169,8 +188,9 @@ const Registrierung =()=>{
   },[counter])
 
   return(
-    <SafeAreaView style={styles.sav} backgroundColor={'#334155'}>
-      <ScrollView>
+    <SafeAreaView style={styles.sav} >
+      <ImageBackground source={image} resizeMode='cover' style={styles.image}>
+      <ScrollView style={{backgroundColor: 'transparent'}}>
 <View style={styles.container}>
   <View style={styles.AdminButtonContainer}>
   <TouchableOpacity  style={styles.AdminButton}> 
@@ -182,6 +202,17 @@ const Registrierung =()=>{
   </View>
   
   <View style={styles.angabenfeld}>
+
+
+    
+    <Picker style={{color:'#FFF'}}  dropdownIconColor={"#FFF"} selectedValue={imageObjekt}  
+     onValueChange={(itemValue, itemIndex) =>setimageWiedergabe(itemValue)}>
+      {
+      imageObjekt.map((item,index)=>(
+      <Picker.Item  key={'pickup'+index+item}  label={item.name} value={index} />
+      ))
+      }    
+    </Picker>
 
 
     {
@@ -241,6 +272,7 @@ const Registrierung =()=>{
  
     </View>
     </ScrollView>
+    </ImageBackground>
     </SafeAreaView>
   );
 }
@@ -248,16 +280,23 @@ const Registrierung =()=>{
 export default Registrierung
 
 const styles = StyleSheet.create({
+  image:{
+    flex: 1,
+    justifyContent: 'center',
+    
+       
+    zIndex: 50,
+  },
   sav:{
     flex: 1,
     flexDirection:'column',
-    backgroundColor: '#334155',
+    
     width:'100%',
     height:'100%',
     justifyContent: 'flex-start',
   },  
   container: {    
-    backgroundColor: '#334155',
+    
     width:'100%',   
     height:'100%',  
     alignItems: 'center',
@@ -306,7 +345,7 @@ const styles = StyleSheet.create({
   },
   angabenfeld:{
     width:'90%', 
-    backgroundColor: '#1e293b', 
+    backgroundColor: '#00000099', 
     paddingVertical:30,
     paddingHorizontal:20,
     borderRadius:20, 

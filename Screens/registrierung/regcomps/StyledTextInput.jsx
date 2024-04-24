@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
     borderRadius:6,
     marginVertical:15,
     color:'#f8fafc',
+    backgroundColor:'#6b728090'
   },
 
 

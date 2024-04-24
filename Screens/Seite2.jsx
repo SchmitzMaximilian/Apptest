@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity ,ImageBackground} from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
 import LANG from './../lang/lang'; 
 import { TransactionContext } from '../utils/Context'; 
@@ -19,7 +19,7 @@ import { Checkboxdataset } from '../utils/Checkboxdataset';
 export default function Seite2({route, navigation}) {
   console.log()
   const [sprache,setzesprache]=useContext(TransactionContext)
-  const [tab3,settab3]=useState(false)
+  const [tab3,settab3]=useState(true)
   const [SVCheck,setSVCheck]=useState(false)
   const [PrivateDatenArr,setPrivateDatenArr]=useState(route.params.PrivateDatenArr)
   const [JobCheck,setJobCheck]=useState(false)
@@ -28,6 +28,8 @@ export default function Seite2({route, navigation}) {
   const [Erfolgscheck,setErfolgscheck]=useState(false)
   const [SelectedLanguage, setSelectedLanguage] = useState(); 
   const [mitarbeiterID,setmitarbeiterID]=useState(route.params.PrivateDatenArr.MitarbeiterID)
+
+  const image={uri: 'https://images.unsplash.com/photo-1622743941533-cde694bff56a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fE5pZ2h0Y2x1YnxlbnwwfHwwfHx8MA%3D%3D'};
 const selectPruefer=(T)=>{
   let O=PrivateDatenArr;
   O.KVArt=T+1;
@@ -52,20 +54,20 @@ const selectPruefer=(T)=>{
     }
     }  
     
-    if(!PrivateDatenArr.Staatsbuergerschaft.trim().length>0){
+    if(!PrivateDatenArr.Staatsbuergerschaft.trim().toString().length>0){
       check=false
     }
-    if(!PrivateDatenArr.GBDatum.trim().length>0){
+    if(!PrivateDatenArr.GBDatum.trim().toString().length>0){
       check=false
     }
-    if(!PrivateDatenArr.GBOrt.trim().length>0){
+    if(!PrivateDatenArr.GBOrt.trim().toString().length>0){
       check=false
     }
     if(PrivateDatenArr.GBLand==0){
       PrivateDatenArr.GBLand='Deutschland'
       
     }
-    if(!PrivateDatenArr.Kassename.trim().length>0){
+    if(!PrivateDatenArr.Kassename.trim().toString().length>0){
       check=false
     } 
     if(!PrivateDatenArr.KVArt>0){
@@ -73,7 +75,7 @@ const selectPruefer=(T)=>{
     }
 
     if(PrivateDatenArr.KVArt==4){
-      if(!PrivateDatenArr.AndereArbeitgeber.trim().length>4){
+      if(!PrivateDatenArr.AndereArbeitgeber.trim().toString().length>4){
       check=false
     } 
     }
@@ -86,15 +88,15 @@ console.log(PrivateDatenArr)
           headers: { 'Content-Type' : 'application/json'},
           body: JSON.stringify({
             "query":6,
-            "sozialCheck":PrivateDatenArr.RentenCheck.toString(),
-            "sozinummer":PrivateDatenArr.SVNummerfeld.toString(),
-            "herkunft":PrivateDatenArr.Staatsbuergerschaft.toString(),
-            "gbdatum":PrivateDatenArr.GBDatum.toString(),
-            "gbort":PrivateDatenArr.GBOrt.toString(),
-            "gbland":PrivateDatenArr.GBLand.toString(),
-            "krankenkassename":PrivateDatenArr.Kassename.toString(),
-            "soziSelect":PrivateDatenArr.KVArt.toString(),
-            "arbeitgeberListe":PrivateDatenArr.AndereArbeitgeber.toString(),
+            "sozialCheck":PrivateDatenArr.RentenCheck.toString().trim(),
+            "sozinummer":PrivateDatenArr.SVNummerfeld.toString().trim(),
+            "herkunft":PrivateDatenArr.Staatsbuergerschaft.toString().trim(),
+            "gbdatum":PrivateDatenArr.GBDatum.toString().trim(),
+            "gbort":PrivateDatenArr.GBOrt.toString().trim(),
+            "gbland":PrivateDatenArr.GBLand.toString().trim(),
+            "krankenkassename":PrivateDatenArr.Kassename.toString().trim(),
+            "soziSelect":PrivateDatenArr.KVArt.toString().trim(),
+            "arbeitgeberListe":PrivateDatenArr.AndereArbeitgeber.toString().trim(),
             "mitarbeiterID":mitarbeiterID
           })
         };
@@ -106,7 +108,7 @@ console.log(PrivateDatenArr)
           setErfolgscheck(true)  
           setTimeout(()=>{
             setErfolgscheck(false)
-          },2000)
+          },4000)
           console.log('speichertestyeah')
         }
         else if(e.ergebnis=='DBerror'){//zeigt Datenbankfehler an keine speicherung
@@ -114,14 +116,14 @@ console.log(PrivateDatenArr)
           setFehlerText(true)
           setTimeout(()=>{
             setFehlercheck(false)
-          },2000)
+          },4000)
           console.log('no Update')
         }else{//Fehler bei der Eingabe füllen
           setFehlercheck(true)
           setFehlerText(false)
           setTimeout(()=>{
             setFehlercheck(false)
-          },2000)
+          },4000)
           console.log('Fehler')
         }
       }
@@ -134,7 +136,7 @@ console.log(PrivateDatenArr)
       setFehlerText(false)
       setTimeout(()=>{
         setFehlercheck(false)
-      },2000)
+      },4000)
       setErfolgscheck(false)
     }
     
@@ -143,8 +145,9 @@ console.log(PrivateDatenArr)
     selectPruefer(0)
   },[])
   return (
-    <SafeAreaView style={styles.sav} backgroundColor={'#335155'}>
-      <ScrollView style={{backgroundColor: '#334155'}}>
+    <SafeAreaView style={styles.sav} >
+      <ImageBackground source={image} resizeMode='cover' style={styles.image}>
+      <ScrollView style={{backgroundColor: 'transparent'}}>
       <View style={styles.container}>
       <View style={styles.AdminButtonContainer}>
         <TouchableOpacity onPress={()=>navigation.pop()} style={styles.BackButton}> 
@@ -187,7 +190,7 @@ console.log(PrivateDatenArr)
     :
     ""
   }
-    <TitleTouch F={settab3} S={tab3} T={sprache?LANG.Angabenueberschriften.Sozial.DE:LANG.Angabenueberschriften.Sozial.EN} />
+    <TitleTouch  F={settab3} S={tab3} T={sprache?LANG.Angabenueberschriften.Sozial.DE:LANG.Angabenueberschriften.Sozial.EN} />
     {
       tab3?
       <>
@@ -208,7 +211,7 @@ console.log(PrivateDatenArr)
     tab3?
   <>
     <Text  style={styles.TextElemente}>{(sprache?'Art der Krankenversicherung (Pflichtangabe, zutreffendes makieren)':'Type of health insurance (mandatory information, mark as applicable)')}</Text>
-    <View style={{borderRadius:2,borderWidth:1,borderColor:'#4b5563', width:'80%',marginLeft:'10%'}}>
+    <View style={{borderRadius:2,borderWidth:1,borderColor:'#4b5563', width:'80%',marginLeft:'10%',backgroundColor:'#6b728090'}}>
      <Picker style={{color:'#FFF'}}  dropdownIconColor={"#FFF"} selectedValue={SelectedLanguage} multiline={true} numberOfLines={2} onValueChange={(itemValue, itemIndex) =>
     {selectPruefer(itemValue);setSelectedLanguage(itemValue)}
   }  >
@@ -256,20 +259,28 @@ console.log(PrivateDatenArr)
   </View>
   </View>
   </ScrollView>
+  </ImageBackground>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  image:{
+    flex: 1,
+    justifyContent: 'center',
+    
+       
+    zIndex: 50,
+  },
   sav:{
     flex: 1,
     flexDirection:'column',
-    backgroundColor: '#334155',
+    
     width:'100%',
     height:'100%',
     justifyContent: 'flex-start',},
     container: {    
-      backgroundColor: '#334155',
+      
       width:'100%',   
       height:'100%',  
       alignItems: 'center',
@@ -341,7 +352,7 @@ const styles = StyleSheet.create({
     },
     ContainerFragebogen:{
       width:'90%', 
-      backgroundColor: '#1e293b',  
+      backgroundColor: '#00000099',  
       paddingHorizontal:20,
       borderRadius:20, 
       marginVertical:20,
@@ -349,6 +360,7 @@ const styles = StyleSheet.create({
       borderWidth:1,
       marginTop:50,
       alignSelf:'center',
+      paddingVertical:15,
     },
     Textelemente:{
       color:'#fff'

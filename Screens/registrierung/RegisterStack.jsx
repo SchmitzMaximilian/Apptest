@@ -8,13 +8,13 @@ const RegisterStack=(Prop)=> {
  
  
  
- 
+ //headerShow von true auf false gewechselt
  
   return (
     <TransactionProvider>
     <NavigationContainer >
- 
-    <Stack.Navigator initialRouteName="Seite1"  screenOptions={{headerShown:true, headerMode:'screen', headerTintColor:'white', headerStyle: {backgroundColor:'rgba(0,15,40,0.95)'}}}>
+      
+    <Stack.Navigator initialRouteName="Seite1"  screenOptions={{headerShown:false, headerMode:'screen', headerTintColor:'white', headerStyle: {backgroundColor:'rgba(0,15,40,0.95)'}}}>
     <Stack.Screen name = "Seite1" component = {Registrierung} options={{headerBackTitle: 'Custom Back',
       headerBackTitleStyle: { fontSize: 30 }}}  />
    

@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity,ImageBackground } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
 import LANG from './../lang/lang';
 import Blocktop from './component/seite1comp/blocktop'; 
@@ -18,18 +18,30 @@ import { isSteuerIdValid } from 'validate-steuerid'
 
 export default function Seite1({navigation}) {
   const [sprache,setzesprache]=useContext(TransactionContext)  
-  const [tab1,settab1]=useState(false)  
-  const [tab2,settab2]=useState(false)  
+  const [tab1,settab1]=useState(false)
+  const [tab1ausgefuellt,settab1ausgefuellt]=useState(false)  
+  const [tab2,settab2]=useState(false)
+  const [tab2ausgefuellt,settab2ausgefuellt]=useState(false)  
   const [Steuercheck,setSteuercheck]=useState(false)  
   const [tab4,settab4]=useState(false)
+  const [tab4ausgefuellt,settab4ausgefuellt]=useState(false)
   const [tab5,settab5]=useState(false)
+  const [tab5ausgefuellt,settab5ausgefuellt]=useState(false)
   const [Fehlercheck,setFehlercheck]=useState(false)
   const [FehlerText,setFehlerText]=useState(false)
   const [Erfolgscheck,setErfolgscheck]=useState(false)
   const [PrivateDatenArr,setPrivateDatenArr]=useState(PersoenlicheDatenObject)    
   const [mitarbeiterID,setmitarbeiterID]=useState(0)//Nach dem testen wieder auf 0 setzen
 
-
+  //const image={uri: 'https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YnVpc25lc3N8ZW58MHx8MHx8fDA%3D'};
+  //const image={uri: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fFJlc3RhdXJhbnRlfGVufDB8fDB8fHww'};
+  //const image ={uri: 'https://images.unsplash.com/photo-1630395822970-acd6a691d97e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fERpc2NvfGVufDB8fDB8fHww'};
+  //const image={uri: 'https://images.unsplash.com/photo-1516458464372-eea4ab222b31?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fEJhcnxlbnwwfHwwfHx8MA%3D%3D'};
+  //const image={uri: 'https://images.unsplash.com/photo-1569924995012-c4c706bfcd51?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8TmlnaHRjbHVifGVufDB8fDB8fHww'};
+  const image={uri: 'https://images.unsplash.com/photo-1622743941533-cde694bff56a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fE5pZ2h0Y2x1YnxlbnwwfHwwfHx8MA%3D%3D'};
+  //const image={uri: 'https://images.unsplash.com/photo-1568738558403-f4e8c8f7a842?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODh8fENsdWJ8ZW58MHx8MHx8fDA%3D'};
+  //const image={uri: ''};
+  
   //PrivateDatenArr
   //PrivateDatenArr.Geschlecht
 
@@ -40,38 +52,38 @@ export default function Seite1({navigation}) {
     setFehlerText(false)
     setErfolgscheck(false)
     
-    console.log(PrivateDatenArr.ArbeitsGrundlage)
+    console.log(PrivateDatenArr)
     let check=true
-    if(!PrivateDatenArr.BewerberStandort>0){
+    if(!(PrivateDatenArr.BewerberStandort>0)){
             check=false
             console.log('ich binfals1')
     } 
-    if(!PrivateDatenArr.ArbeitsGrundlage>0){
+    if(!(PrivateDatenArr.ArbeitsGrundlage>0)){
       check=false 
       console.log('ich binfals2')
     }
-    if(!PrivateDatenArr.Geschlecht>0){
+    if(!(PrivateDatenArr.Geschlecht>0)){
       check=false
       console.log('ich binfals3')
-    }
-    if(!PrivateDatenArr.Vname.trim().length>2){
+    } 
+    if(!(PrivateDatenArr.Vname.trim().toString().length>2)){
       check=false
       console.log('ich binfals4')
     }
-    if(!PrivateDatenArr.Nname.trim().length>2){
+    if(!(PrivateDatenArr.Nname.trim().toString().length>2)){
       check=false
       console.log('ich binfals5')
     }
     
-    if(!PrivateDatenArr.Adresse.trim().length>2){
+    if(!(PrivateDatenArr.Adresse.trim().toString().length>2)){
       check=false
       console.log('ich binfals6')
     }
-    if(!PrivateDatenArr.PCode.trim().length==5){
+    if(!(PrivateDatenArr.PCode.trim().toString().length==5)){
       check=false
       console.log('ich binfals7')
     }
-    if(!PrivateDatenArr.City.trim().length>2){
+    if(!(PrivateDatenArr.City.trim().toString().length>2)){
       check=false
       console.log('ich binfals8')
     }
@@ -83,14 +95,14 @@ export default function Seite1({navigation}) {
           headers: { 'Content-Type' : 'application/json'},
           body: JSON.stringify({
             "query":2,
-            "standortSelect": PrivateDatenArr.BewerberStandort.toString(),
-            "geschlechtSelect":PrivateDatenArr.Geschlecht.toString(),
-            "vorname":PrivateDatenArr.Vname.toString(),
-            "nachname":PrivateDatenArr.Nname.toString(),
-            "straßeuzahl":PrivateDatenArr.Adresse.toString(),
-            "plz":PrivateDatenArr.PCode.toString(),
-            "wohnort":PrivateDatenArr.City.toString(),
-            "grundlage":PrivateDatenArr.ArbeitsGrundlage.toString()
+            "standortSelect": PrivateDatenArr.BewerberStandort.toString().trim(),
+            "geschlechtSelect":PrivateDatenArr.Geschlecht.toString().trim(),
+            "vorname":PrivateDatenArr.Vname.toString().trim(),
+            "nachname":PrivateDatenArr.Nname.toString().trim(),
+            "straßeuzahl":PrivateDatenArr.Adresse.toString().trim(),
+            "plz":PrivateDatenArr.PCode.toString().trim(),
+            "wohnort":PrivateDatenArr.City.toString().trim(),
+            "grundlage":PrivateDatenArr.ArbeitsGrundlage.toString().trim()
 
             //"username":eingabe1.toString(), teilzeit check box einbinden
           })
@@ -101,7 +113,9 @@ export default function Seite1({navigation}) {
           setErfolgscheck(true)
           setTimeout(()=>{
             setErfolgscheck(false)
-          },2000)
+          },4000)
+          settab1(false)
+          settab1ausgefuellt(true)
           setmitarbeiterID(e.ergebnis)
           let NO=PrivateDatenArr
           NO.MitarbeiterID=e.ergebnis
@@ -113,14 +127,14 @@ export default function Seite1({navigation}) {
           setFehlerText(true)
           setTimeout(()=>{
             setFehlercheck(false)
-          },2000)
+          },4000)
           console.log('no Update')
         }else{//Fehler bei der Eingabe füllen
           setFehlercheck(true)
           setFehlerText(false)
           setTimeout(()=>{
             setFehlercheck(false)
-          },2000)
+          },4000)
           console.log('Fehler')
         }
       }
@@ -133,7 +147,7 @@ export default function Seite1({navigation}) {
       setFehlerText(false)
       setTimeout(()=>{
         setFehlercheck(false)
-      },2000)
+      },4000)
       setErfolgscheck(false)
     }
   }
@@ -145,17 +159,17 @@ export default function Seite1({navigation}) {
     setFehlerText(false)
     setErfolgscheck(false)  
     let check=true
-    if(!PrivateDatenArr.Festnetz.trim().length>2){
+    if(!PrivateDatenArr.Festnetz.trim().toString().length>2){
       check=false
     }
-    console.log("klicked")
-    if(!PrivateDatenArr.Mobil.trim().length>2){
+    
+    if(!PrivateDatenArr.Mobil.trim().toString().length>2){
       check=false
     }
-    if(!PrivateDatenArr.Email.trim().length>2){
+    if(!PrivateDatenArr.Email.trim().toString().length>2){
       check=false
     }
-     
+     console.log(mitarbeiterID)
     if(check){
       try{
         const request ={
@@ -163,9 +177,9 @@ export default function Seite1({navigation}) {
           headers: { 'Content-Type' : 'application/json'},
           body: JSON.stringify({
             "query":3,
-            "festnetz":PrivateDatenArr.Festnetz.toString(),
-            "mobil":PrivateDatenArr.Mobil.toString(),
-            "emailbw":PrivateDatenArr.Email.toString(),
+            "festnetz":PrivateDatenArr.Festnetz.toString().trim(),
+            "mobil":PrivateDatenArr.Mobil.toString().trim(),
+            "emailbw":PrivateDatenArr.Email.toString().trim(),
             "mitarbeiterID":mitarbeiterID //für test ID Festlegen
             
           })
@@ -178,7 +192,9 @@ export default function Seite1({navigation}) {
           setErfolgscheck(true) 
           setTimeout(()=>{
             setErfolgscheck(false)
-          },2000)
+          },4000)
+          settab2(false)
+          settab2ausgefuellt(true)
         }
         else if(e.ergebnis=='DBerror'){//zeigt Datenbankfehler an keine speicherung
           console.log('no Update')
@@ -186,13 +202,13 @@ export default function Seite1({navigation}) {
           setFehlerText(true)
           setTimeout(()=>{
             setFehlercheck(false)
-          },2000)
+          },4000)
         }else{//Fehler bei der Eingabe füllen
           setFehlercheck(true)
           setFehlerText(false)
           setTimeout(()=>{
             setFehlercheck(false)
-          },2000)
+          },4000)
           console.log('Fehler')
         }
       }
@@ -205,7 +221,7 @@ export default function Seite1({navigation}) {
       setFehlerText(false)
       setTimeout(()=>{
         setFehlercheck(false)
-      },2000)
+      },4000)
       setErfolgscheck(false)
     }
   }
@@ -217,7 +233,7 @@ export default function Seite1({navigation}) {
     setFehlerText(false)
     setErfolgscheck(false) 
     let check=true 
-    if(!PrivateDatenArr.Bankname.trim().length>2){ 
+    if(!PrivateDatenArr.Bankname.trim().toString().length>2){ 
       check=false
     }
     if((isValid(PrivateDatenArr.iban.trim().toString())==false)){ 
@@ -234,9 +250,9 @@ export default function Seite1({navigation}) {
           headers: { 'Content-Type' : 'application/json'},
           body: JSON.stringify({
             "query":4,
-            "bankname":PrivateDatenArr.Bankname.toString(),
-            "iban":PrivateDatenArr.iban.toString(), 
-            "inhaber":PrivateDatenArr.Inhaber.toString(),
+            "bankname":PrivateDatenArr.Bankname.toString().trim(),
+            "iban":PrivateDatenArr.iban.toString().trim(), 
+            "inhaber":PrivateDatenArr.Inhaber.toString().trim(),
             "mitarbeiterID":mitarbeiterID 
           })
         };
@@ -247,7 +263,9 @@ export default function Seite1({navigation}) {
           setErfolgscheck(true)
           setTimeout(()=>{
             setErfolgscheck(false)
-          },2000)
+          },4000)
+          settab4(false)
+          settab4ausgefuellt(true)
           console.log('speichertestyeah')
         }
         else if(e.ergebnis=='DBerror'){//zeigt Datenbankfehler an keine speicherung
@@ -256,13 +274,13 @@ export default function Seite1({navigation}) {
           setFehlerText(true)
           setTimeout(()=>{
             setFehlercheck(false)
-          },2000)
+          },4000)
         }else{//Fehler bei der Eingabe füllen
           setFehlercheck(true)
           setFehlerText(false)
           setTimeout(()=>{
             setFehlercheck(false)
-          },2000)
+          },4000)
           console.log('Fehler')
         }
       }
@@ -275,7 +293,7 @@ export default function Seite1({navigation}) {
       setFehlerText(false)
       setTimeout(()=>{
         setFehlercheck(false)
-      },2000)
+      },4000)
       setErfolgscheck(false)
       
     }
@@ -295,13 +313,13 @@ export default function Seite1({navigation}) {
     //}
     //}
     
-    if(!PrivateDatenArr.Steuerklasse.trim().length>0){
+    if(!(Number(PrivateDatenArr.Steuerklasse)==0) && (Number(PrivateDatenArr.Steuerklasse)>6)){
       check=false
     }
-    if(!PrivateDatenArr.Kinder.trim().length>0){
+    if(!PrivateDatenArr.Kinder.trim().toString().length>0){
       check=false
     }
-    if(!PrivateDatenArr.Konfession.trim().length>2){
+    if(!PrivateDatenArr.Konfession.trim().toString().length>2){
       check=false
     }  
     if(check){
@@ -311,11 +329,11 @@ export default function Seite1({navigation}) {
           headers: { 'Content-Type' : 'application/json'},
           body: JSON.stringify({
             "query":5,
-            "steuerCheck":PrivateDatenArr.SteueridCheck.toString(),
-            "steuerid":PrivateDatenArr.SteuerID.toString(),
-            "steuerklasse":PrivateDatenArr.Steuerklasse.toString(),
-            "kinder":PrivateDatenArr.Kinder.toString(),
-            "konfession":PrivateDatenArr.Konfession.toString(),
+            "steuerCheck":PrivateDatenArr.SteueridCheck.toString().trim(),
+            "steuerid":PrivateDatenArr.SteuerID.toString().trim(),
+            "steuerklasse":PrivateDatenArr.Steuerklasse.toString().trim(),
+            "kinder":PrivateDatenArr.Kinder.toString().trim(),
+            "konfession":PrivateDatenArr.Konfession.toString().trim(),
             "mitarbeiterID":mitarbeiterID
             //
           })
@@ -328,7 +346,9 @@ export default function Seite1({navigation}) {
           setErfolgscheck(true)
           setTimeout(()=>{
             setErfolgscheck(false)
-          },2000)
+          },4000)
+          settab5(false)
+          settab5ausgefuellt(true)
           console.log('speichertestyeah')
         }
         else if(e.ergebnis=='DBerror'){//zeigt Datenbankfehler an keine speicherung 
@@ -336,13 +356,13 @@ export default function Seite1({navigation}) {
           setFehlerText(true)
           setTimeout(()=>{
             setFehlercheck(false)
-          },2000)
+          },4000)
         }else{//Fehler bei der Eingabe füllen
           setFehlercheck(true)
           setFehlerText(false)
           setTimeout(()=>{
             setFehlercheck(false)
-          },2000)
+          },4000)
           console.log('Fehler')
         }
       }
@@ -355,15 +375,17 @@ export default function Seite1({navigation}) {
       setFehlerText(false)
       setTimeout(()=>{
         setFehlercheck(false)
-      },2000)
+      },4000)
       setErfolgscheck(false)
     }
   }
 
   return (
-    <SafeAreaView style={styles.sav} backgroundColor={'#335155'}>
-      <ScrollView style={{backgroundColor: '#334155'}}>
-      <View style={styles.container}>
+    <SafeAreaView style={styles.sav} >
+      <ImageBackground source={image} resizeMode='cover' style={styles.image}>
+      <ScrollView style={{backgroundColor: 'transparent'}}>
+        
+      <View style={styles.container}>      
       <View style={styles.AdminButtonContainer}>
         <TouchableOpacity  style={styles.BackButton}> 
         <Ionicons  name={'arrow-back'} color={'#FFFFFF'} style={{marginRight:8}}/>
@@ -385,6 +407,14 @@ export default function Seite1({navigation}) {
       
   <View style={styles.ContainerFragebogen}> 
 
+  
+
+  <View >
+    <Blocktop/>   
+    <SelectPicker S={sprache?'DE':'EN'} V={true} I={4} SV={PrivateDatenArr} SF={setPrivateDatenArr} />
+    <SelectPicker S={sprache?'DE':'EN'} V={true} I={5} SV={PrivateDatenArr} SF={setPrivateDatenArr} />
+    <Text style={{color:'#fff', marginHorizontal: '10%',paddingVertical:10}}>{Textdataset(sprache?'DE':'EN').Texte.Rechtsbelehrung}</Text>
+  </View>
   {
       Erfolgscheck?
       <View style={styles.abgespeichert}>
@@ -407,18 +437,11 @@ export default function Seite1({navigation}) {
     :
     ""
   }
-
-  <View >
-    <Blocktop/>    
-    <SelectPicker S={sprache?'DE':'EN'} V={true} I={4} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
-    <SelectPicker S={sprache?'DE':'EN'} V={true} I={5} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
-    <Text style={{color:'#fff', marginHorizontal: '10%',paddingVertical:10}}>{Textdataset(sprache?'DE':'EN').Texte.Rechtsbelehrung}</Text>
-  </View>
-  <View style={{flexDirection:'column', width:'100%'}}>
+  <View style={{flexDirection:'column', width:'100%',paddingTop:10}}>
 
 
   {/**Name und Anschrift */}  
-  <TitleTouch F={settab1} S={tab1} T={sprache?LANG.Angabenueberschriften.Personendaten.DE:LANG.Angabenueberschriften.Personendaten.EN} />
+  <TitleTouch AGB={tab1ausgefuellt} F={settab1} S={tab1} T={sprache?LANG.Angabenueberschriften.Personendaten.DE:LANG.Angabenueberschriften.Personendaten.EN} />
   <SelectPicker S={sprache?'DE':'EN'} V={tab1} I={0} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
   <Container W={submitdata1} Icon={Dataset(sprache?'DE':'EN').PerData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').PerData.Eingabefelder} F={settab1} S={tab1}  SV={PrivateDatenArr} SF={setPrivateDatenArr} /> 
   {
@@ -434,7 +457,7 @@ export default function Seite1({navigation}) {
  
 
   {/**Kommunikation */}
-  <TitleTouch F={settab2} S={tab2} T={sprache?LANG.Angabenueberschriften.Kommunikation.DE:LANG.Angabenueberschriften.Kommunikation.EN} /> 
+  <TitleTouch AGB={tab2ausgefuellt} F={settab2} S={tab2} T={sprache?LANG.Angabenueberschriften.Kommunikation.DE:LANG.Angabenueberschriften.Kommunikation.EN} /> 
   <Container W={submitdata2} Icon={Dataset(sprache?'DE':'EN').KontaktData.EingabefelderIcons}Labname={Dataset(sprache?'DE': 'EN').KontaktData.Eingabefelder} F={settab2} S={tab2}   SV={PrivateDatenArr} SF={setPrivateDatenArr} />
   {
 	  tab2?
@@ -448,7 +471,7 @@ export default function Seite1({navigation}) {
   }
 
   {/**Bankverbindung */}  
-  <TitleTouch F={settab4} S={tab4} T={sprache?LANG.Angabenueberschriften.Bank.DE:LANG.Angabenueberschriften.Bank.EN}/>  
+  <TitleTouch AGB={tab4ausgefuellt} F={settab4} S={tab4} T={sprache?LANG.Angabenueberschriften.Bank.DE:LANG.Angabenueberschriften.Bank.EN}/>  
   {
     tab4?
     <>
@@ -472,7 +495,7 @@ export default function Seite1({navigation}) {
   }
 
   {/**Angaben zur Steuer */}
-  <TitleTouch F={settab5} S={tab5} T={sprache?LANG.Angabenueberschriften.Steuer.DE:LANG.Angabenueberschriften.Steuer.EN}/>
+  <TitleTouch AGB={tab5ausgefuellt} F={settab5} S={tab5} T={sprache?LANG.Angabenueberschriften.Steuer.DE:LANG.Angabenueberschriften.Steuer.EN}/>
   {
     tab5?
     <>
@@ -510,20 +533,33 @@ export default function Seite1({navigation}) {
   </View>
       </View>
       </ScrollView>
+      </ImageBackground>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  image:{
+    flex: 1,
+    justifyContent: 'center',
+    
+       
+    zIndex: 50,
+  },
   sav:{
+    backfaceVisibility:'hidden',
     flex: 1,
     flexDirection:'column',
-    backgroundColor: '#334155',
+    position:'absolute',
     width:'100%',
     height:'100%',
     justifyContent: 'flex-start',},
+
     container: {    
-      backgroundColor: '#334155',
+      flexGrow:1,
+      flexDirection:'column',
+      flex: 1,
+      
       width:'100%',   
       height:'100%',  
       alignItems: 'center',
@@ -591,7 +627,7 @@ const styles = StyleSheet.create({
     },
     ContainerFragebogen:{
       width:'90%', 
-      backgroundColor: '#1e293b',  
+      backgroundColor: '#00000099',  
       paddingHorizontal:20,
       borderRadius:20, 
       marginVertical:20,
@@ -599,6 +635,7 @@ const styles = StyleSheet.create({
       borderWidth:1,
       marginTop:50,
       alignSelf:'center',
+      paddingVertical:60,
     },
     Textelemente:{
       color:'#fff',

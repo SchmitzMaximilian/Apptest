@@ -37,7 +37,7 @@ export const Minijobtextdataset=(p)=>{
       "":"",
     },
     "SoloCheckboxText":{
-      "Steuereinwilligung":"I allow my ELStAM to be accessed (only useful if items 1 to 4).",
+      "Steuereinwilligung":"I allow my ELStAM to be accessed (only useful if tax class 1 to 4).",
       "Bank":"cash payment",
       "VersicherungPrivat":"I am a member or family member of a private health insurance company",
 

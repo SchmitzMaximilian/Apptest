@@ -1,4 +1,4 @@
-export const Dataset=(p)=>{
+export const MiniDataset=(p)=>{
   let Data
   if(p=="DE"){
   Data={
@@ -16,13 +16,13 @@ export const Dataset=(p)=>{
     },
     "SozialData":
     {
-      "Eingabefelder":["Sozialversicherungsnummer","Staatsangehärigkeit","Geburtsdatum","Geburtsname (Pflichtangabe, bei abweichendem Nachnamen)","Geburtsort (Pflichtangabe)","Geburtsland(nur falls nicht Deutschland)","Krankenkasse (Bitte kompletter Name, also zB. AOK NordWest, nicht AOK)"],
-      "EingabefelderIcons":["User","User","User","User","User","User","User"],
+      "Eingabefelder":["Sozialversicherungsnummer","Staatsangehärigkeit","Geburtsdatum","Geburtsname (Pflichtangabe, bei abweichendem Nachnamen)","Geburtsort (Pflichtangabe)","Geburtsland(nur falls nicht Deutschland)"],
+      "EingabefelderIcons":["User","User","User","User","User","User"],
     },
     "BankData":
     {
-      "Eingabefelder":["Name des Kreditinstituts","IBAN","Bankleitzahl Stellen 5 bis 22","Kontonummer (IBAN Stellen 13 bis 22)"],
-      "EingabefelderIcons":["Bank","Bank","Bank","Bank"],
+      "Eingabefelder":["Name des Kreditinstituts","IBAN"],
+      "EingabefelderIcons":["Bank","Bank"],
     },
     "SteuerData":
     {
@@ -45,13 +45,13 @@ export const Dataset=(p)=>{
       },
       "SozialData":
     {
-      "Eingabefelder":["Social Security Number","nationality","Birth date","Birth name (mandatory, if last name is different)","Place of birth (mandatory)","Country of birth (only if not Germany)","Health insurance company (please complete name, e.g. AOK NordWest, not AOK)"],
-      "EingabefelderIcons":["User","User","User","User","User","User","User"],
+      "Eingabefelder":["Social Security Number","nationality","Birth date","Birth name (mandatory, if last name is different)","Place of birth (mandatory)","Country of birth (only if not Germany)"],
+      "EingabefelderIcons":["User","User","User","User","User","User"],
     },
     "BankData":
     {
-      "Eingabefelder":["Name of institute of credit","IBAN","Bank sort code digits 5 to 22","Account number (IBAN digits 13 to 22)"],
-      "EingabefelderIcons":["Bank","Bank","Bank","Bank"],
+      "Eingabefelder":["Name of institute of credit","IBAN"],
+      "EingabefelderIcons":["Bank","Bank"],
     },
     "SteuerData":
     {

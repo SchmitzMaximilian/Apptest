@@ -101,10 +101,102 @@ const[txtvalue,settxtvalue]=useState();
     settxtvalue(t) 
     text = t; 
     }
-  function setData(){ 
-    
+    const lastEingabe=()=>{
+      let O=props?.SV
+      switch(props.Labname){
+      
+        //Name und Anschrift
+        case "Vorname"||"Firstname":
+          O.Vname.trim().toString().length>2?settxtvalue(O.Vname.toString()):''
+          break;
+          case "Nachname"||"Surname":
+            O.Nname.trim().toString().length>2?settxtvalue(O.Nname.toString()):''
+            break;
+        case "Straße und Hausnummer"||"Street name and house number":
+          O.Adresse.trim().toString().length>2?settxtvalue(O.Adresse.toString()):''
+          break;
+        case "Postleitzahl"||"Postal Code":
+          O.PCode==5?settxtvalue(O.PCode):''
+          break;
+        case "Wohnort"||"Location/City name":
+          O.City.trim().toString().length>2?settxtvalue(O.City.toString()):''
+          break;
+          
+  
+        //Kommunikation
+        case "Vorwahl / Rufnummer Festnetz (nur falls verfügbar)"||"Area code / phone number landline (only if available)":
+          O.Festnetz.trim().toString().length>2?settxtvalue(O.Festnetz.toString()):''
+          break;
+        case "Vorwahl / Rufnummer Mobiltelefon (nur falls verfügbar)"||"Area code / phone number mobile phone (only if available)":
+          O.Mobil.trim().toString().length>2?settxtvalue(O.Mobil.toString()):''
+          break;
+        case "E-Mail-Adresse (nur falls verfügbar)"||"Email address (only if available)":
+          O.Email.trim().toString().length>2?settxtvalue(O.Email.toString()):''
+          break;
+  
+  
+        //Bankverbindung
+        case"Name des Kreditinstituts" || "Name of institute of credit" :
+        O.Bankname.trim().toString().length>2?settxtvalue(O.Bankname.toString()):''
+        break;
+        case"IBAN" || "IBAN" :
+        O.iban.trim().toString().length>2?settxtvalue(O.iban.toString()):''
+        break; 
+        case"Kontoinhaber (falls abweichend)" || "Account holder (if different)" :
+        O.Inhaber.toString().length>1?settxtvalue(O.Inhaber.toString()):''
+        break;
+  
+  
+  
+  
+  
+        //Steuer
+        
+        
+        case "Steuer-ID (Pflichtangabe)"||"Tax ID (mandatory information)":
+          O.SteuerID>0?settxtvalue(O.SteuerID):''
+          break;
+        case "Steuerklasse"||"Tax class":
+          O.Steuerklasse>0?settxtvalue(O.Steuerklasse):''
+          break;
+        case "Anzahl Kinder"||"Number of children":
+          O.Kinder>0?settxtvalue(O.Kinder):''
+          break;
+        case "Konfession"||"Denomination":
+          O.Konfession.trim().toString().length>2?settxtvalue(O.Konfession.toString()):''
+          break; 
+        
+        //Sozialversicherung      
+        case "Sozialversicherungsnummer/Rentennummer"||"Social security number/pension number":
+          O.SVNummerfeld>2?settxtvalue(O.SVNummerfeld):''
+          break;
+        case "Staatsangehärigkeit"||"Nationality":
+          O.Staatsbuergerschaft.trim().toString().length>0?settxtvalue(O.Staatsbuergerschaft.toString()):''
+          break;
+        case "Geburtsdatum"||"Birth date":
+          O.GBDatum.trim().toString().length>0?settxtvalue(O.GBDatum.toString()):''
+          break;
+        
+        case "Geburtsort (Pflichtangabe)"||"Place of birth (mandatory)":
+          O.GBOrt.trim().toString().length>0?settxtvalue(O.GBOrt.toString()):''
+          break;
+        case "Geburtsland(nur falls nicht Deutschland)"||"Country of birth (only if not Germany)":
+          O.GBLand>0?settxtvalue(O.GBLand):''
+          break;
+        case "Krankenkasse (Bitte kompletter Name, also zB. AOK NordWest, nicht AOK)"||"Health insurance company (please complete name, e.g. AOK NordWest, not AOK)":
+          O.Kassename.trim().toString().length>0?settxtvalue(O.Kassename.toString()):''
+          break;
+        case "Name Ihrer anderen Arbeitgeber"||"Name of your other employers":
+          O.AndereArbeitgeber.trim().toString().length>4?settxtvalue(O.AndereArbeitgeber.toString()):''
+          break;
+        
+        
+      }
 
-  } 
+    }
+   useEffect(()=>{
+    lastEingabe()
+   },[])
   return ( 
   <View>  
       <LeftIcon P={props.Icon}/>

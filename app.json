@@ -9,7 +9,7 @@
     "splash": {
       "image": "./assets/CVC.png",
       "resizeMode": "contain",
-      "backgroundColor": "black"
+      "backgroundColor": "#fff"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -21,7 +21,7 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/CVC.png",
         "resizeMode": "contain",
-        "backgroundColor": "black"
+        "backgroundColor": "#fff"
       },
       "orientation": "portrait"
     },

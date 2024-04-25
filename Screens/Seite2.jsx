@@ -15,6 +15,7 @@ import { EingabeFeld } from './fragebogencomps/textFeldcomp/EingabeFeld';
 import { Textdataset } from '../utils/Textdataset';
 import {Picker} from '@react-native-picker/picker';
 import { Checkboxdataset } from '../utils/Checkboxdataset';
+import * as SecureStore from 'expo-secure-store';
 
 export default function Seite2({route, navigation}) {
   console.log()
@@ -28,8 +29,9 @@ export default function Seite2({route, navigation}) {
   const [Erfolgscheck,setErfolgscheck]=useState(false)
   const [SelectedLanguage, setSelectedLanguage] = useState(); 
   const [mitarbeiterID,setmitarbeiterID]=useState(route.params.PrivateDatenArr.MitarbeiterID)
+  const [image,setimage]=useState({uri: 'https://images.unsplash.com/photo-1622743941533-cde694bff56a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fE5pZ2h0Y2x1YnxlbnwwfHwwfHx8MA%3D%3D'})
 
-  const image={uri: 'https://images.unsplash.com/photo-1622743941533-cde694bff56a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fE5pZ2h0Y2x1YnxlbnwwfHwwfHx8MA%3D%3D'};
+  
 const selectPruefer=(T)=>{
   let O=PrivateDatenArr;
   O.KVArt=T+1;
@@ -141,8 +143,15 @@ console.log(PrivateDatenArr)
     }
     
   }
+  const imglesen = async (param)=>{
+    //loeschen(param)
+    const data=await SecureStore.getItemAsync(param);//BGImage
+    data?setimage({uri:data.toString()}):'';
+  }
+  
   useEffect(()=>{ 
     selectPruefer(0)
+    imglesen('BGImage')
   },[])
   return (
     <SafeAreaView style={styles.sav} >

@@ -15,6 +15,10 @@ import { ScrollView } from 'react-native-gesture-handler';
 import PersoenlicheDatenObject from '../utils/Objects/PersoenlicheDatenObject'; 
 import {isValid} from 'iban'
 import { isSteuerIdValid } from 'validate-steuerid'
+import * as SecureStore from 'expo-secure-store';
+import {Picker} from '@react-native-picker/picker';
+import SVNummer from './fragebogencomps/selectBoxencomp/SozialCheckbox';
+import { EingabeFeld } from './fragebogencomps/textFeldcomp/EingabeFeld';
 
 export default function Seite1({navigation}) {
   const [sprache,setzesprache]=useContext(TransactionContext)  
@@ -22,7 +26,12 @@ export default function Seite1({navigation}) {
   const [tab1ausgefuellt,settab1ausgefuellt]=useState(false)  
   const [tab2,settab2]=useState(false)
   const [tab2ausgefuellt,settab2ausgefuellt]=useState(false)  
-  const [Steuercheck,setSteuercheck]=useState(false)  
+  const [Steuercheck,setSteuercheck]=useState(false)
+  const [tab3,settab3]=useState(false)
+  const [tab3ausgefuellt,settab3ausgefuellt]=useState(false)
+  const [SVCheck,setSVCheck]=useState(false) 
+  const [JobCheck,setJobCheck]=useState(false) 
+  const [SelectedLanguage, setSelectedLanguage] = useState();
   const [tab4,settab4]=useState(false)
   const [tab4ausgefuellt,settab4ausgefuellt]=useState(false)
   const [tab5,settab5]=useState(false)
@@ -32,18 +41,134 @@ export default function Seite1({navigation}) {
   const [Erfolgscheck,setErfolgscheck]=useState(false)
   const [PrivateDatenArr,setPrivateDatenArr]=useState(PersoenlicheDatenObject)    
   const [mitarbeiterID,setmitarbeiterID]=useState(0)//Nach dem testen wieder auf 0 setzen
+  const [image,setimage]=useState({uri: 'https://images.unsplash.com/photo-1622743941533-cde694bff56a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fE5pZ2h0Y2x1YnxlbnwwfHwwfHx8MA%3D%3D'})
 
   //const image={uri: 'https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YnVpc25lc3N8ZW58MHx8MHx8fDA%3D'};
   //const image={uri: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fFJlc3RhdXJhbnRlfGVufDB8fDB8fHww'};
   //const image ={uri: 'https://images.unsplash.com/photo-1630395822970-acd6a691d97e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fERpc2NvfGVufDB8fDB8fHww'};
   //const image={uri: 'https://images.unsplash.com/photo-1516458464372-eea4ab222b31?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fEJhcnxlbnwwfHwwfHx8MA%3D%3D'};
   //const image={uri: 'https://images.unsplash.com/photo-1569924995012-c4c706bfcd51?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8TmlnaHRjbHVifGVufDB8fDB8fHww'};
-  const image={uri: 'https://images.unsplash.com/photo-1622743941533-cde694bff56a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fE5pZ2h0Y2x1YnxlbnwwfHwwfHx8MA%3D%3D'};
+  //const image={uri: 'https://images.unsplash.com/photo-1622743941533-cde694bff56a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fE5pZ2h0Y2x1YnxlbnwwfHwwfHx8MA%3D%3D'};
   //const image={uri: 'https://images.unsplash.com/photo-1568738558403-f4e8c8f7a842?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODh8fENsdWJ8ZW58MHx8MHx8fDA%3D'};
   //const image={uri: ''};
   
   //PrivateDatenArr
   //PrivateDatenArr.Geschlecht
+
+
+  //Seite2 Integration Sozial Inhaltsspeicherung
+
+  const selectPruefer=(T)=>{
+    let O=PrivateDatenArr;
+    O.KVArt=T+1;
+    setPrivateDatenArr(O)
+    if((T+1)==4){
+      setJobCheck(true)
+    }else{
+      setJobCheck(false)
+  
+    }
+  }
+  const datenabruf=async()=>{
+    setFehlercheck(false)
+    setFehlerText(false)
+    setErfolgscheck(false)
+    let check=true 
+    console.log(["ssjds",PrivateDatenArr])
+    if(!PrivateDatenArr.RentenCheck>0){
+      if(PrivateDatenArr.SVNummerfeld==0){
+      check=false
+    }
+    }  
+    
+    if(!PrivateDatenArr.Staatsbuergerschaft.trim().toString().length>0){
+      check=false
+    }
+    if(!PrivateDatenArr.GBDatum.trim().toString().length>0){
+      check=false
+    }
+    if(!PrivateDatenArr.GBOrt.trim().toString().length>0){
+      check=false
+    }
+    if(PrivateDatenArr.GBLand==0){
+      PrivateDatenArr.GBLand='Deutschland'
+      
+    }
+    if(!PrivateDatenArr.Kassename.trim().toString().length>0){
+      check=false
+    } 
+    if(!PrivateDatenArr.KVArt>0){
+      check=false
+    }
+
+    if(PrivateDatenArr.KVArt==4){
+      if(!PrivateDatenArr.AndereArbeitgeber.trim().toString().length>4){
+      check=false
+    } 
+    }
+     
+console.log(PrivateDatenArr)
+    if(check){
+      try{
+        const request ={
+          method: 'POST',
+          headers: { 'Content-Type' : 'application/json'},
+          body: JSON.stringify({
+            "query":6,
+            "sozialCheck":PrivateDatenArr.RentenCheck.toString().trim(),
+            "sozinummer":PrivateDatenArr.SVNummerfeld.toString().trim(),
+            "herkunft":PrivateDatenArr.Staatsbuergerschaft.toString().trim(),
+            "gbdatum":PrivateDatenArr.GBDatum.toString().trim(),
+            "gbort":PrivateDatenArr.GBOrt.toString().trim(),
+            "gbland":PrivateDatenArr.GBLand.toString().trim(),
+            "krankenkassename":PrivateDatenArr.Kassename.toString().trim(),
+            "soziSelect":PrivateDatenArr.KVArt.toString().trim(),
+            "arbeitgeberListe":PrivateDatenArr.AndereArbeitgeber.toString().trim(),
+            "mitarbeiterID":mitarbeiterID
+          })
+        };
+        console.log(request.body)
+        const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
+        let e = await d.json();
+        console.log(e)
+        if(e.ergebnis==true){
+          setErfolgscheck(true)  
+          setTimeout(()=>{
+            setErfolgscheck(false)
+          },4000)
+          settab3ausgefuellt(true)
+          settab3(false)
+          console.log('speichertestyeah')
+        }
+        else if(e.ergebnis=='DBerror'){//zeigt Datenbankfehler an keine speicherung
+          setFehlercheck(true)
+          setFehlerText(true)
+          setTimeout(()=>{
+            setFehlercheck(false)
+          },4000)
+          console.log('no Update')
+        }else{//Fehler bei der Eingabe füllen
+          setFehlercheck(true)
+          setFehlerText(false)
+          setTimeout(()=>{
+            setFehlercheck(false)
+          },4000)
+          console.log('Fehler')
+        }
+      }
+      catch(err){
+        console.error(err)
+      }
+    }else{
+      //
+      setFehlercheck(true)
+      setFehlerText(false)
+      setTimeout(()=>{
+        setFehlercheck(false)
+      },4000)
+      setErfolgscheck(false)
+    }
+  }
 
 
   //---------------------------------------------> Name und Anschrift Inhalstabspeicherung
@@ -316,7 +441,7 @@ export default function Seite1({navigation}) {
     if(!(Number(PrivateDatenArr.Steuerklasse)==0) && (Number(PrivateDatenArr.Steuerklasse)>6)){
       check=false
     }
-    if(!PrivateDatenArr.Kinder.trim().toString().length>0){
+    if(!PrivateDatenArr.Kinder>0){
       check=false
     }
     if(!PrivateDatenArr.Konfession.trim().toString().length>2){
@@ -379,6 +504,15 @@ export default function Seite1({navigation}) {
       setErfolgscheck(false)
     }
   }
+  const imglesen = async (param)=>{
+    //loeschen(param)
+    const data=await SecureStore.getItemAsync(param);//BGImage
+    data?setimage({uri:data.toString()}):'';
+  }
+  useEffect(()=>{ 
+    selectPruefer(0)   
+    imglesen('BGImage')    
+  },[])
 
   return (
     <SafeAreaView style={styles.sav} >
@@ -387,17 +521,19 @@ export default function Seite1({navigation}) {
         
       <View style={styles.container}>      
       <View style={styles.AdminButtonContainer}>
-        <TouchableOpacity  style={styles.BackButton}> 
-        <Ionicons  name={'arrow-back'} color={'#FFFFFF'} style={{marginRight:8}}/>
-          <Text style={{color:'#FFFFFF'}} >Back</Text>
-        </TouchableOpacity>
+
+      <TouchableOpacity  style={styles.AdminButton}> 
+        <Text style={{color:'#fff'}} >Admin</Text>
+      </TouchableOpacity>
+
         <View style={styles.SprachButton}>
         <TouchableOpacity onPress={()=>setzesprache(!sprache)} style={styles.InsetSprachButton} > 
           <Text style={{color:'#FFFFFF'}} >{sprache?'EN':'DE'}</Text>
         </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={()=>navigation.navigate({name:"Seite2",params:{PrivateDatenArr}})} style={styles.AdminButton}> 
-          <Text style={{color:'#FFFFFF'}} >Next</Text>
+        
+        <TouchableOpacity onPress={()=>navigation.navigate({name:"Seite4",params:{PrivateDatenArr}})} style={styles.AdminButton}> 
+          <Text style={{color:'#FFFFFF'}} >Sachbearbeiter</Text>
         </TouchableOpacity>
       </View>
 
@@ -524,7 +660,72 @@ export default function Seite1({navigation}) {
     :
     ""
   }
+  {/**Angaben zur Sozialversicherung */}
   
+  <TitleTouch AGB={tab3ausgefuellt} F={settab3} S={tab3} T={sprache?LANG.Angabenueberschriften.Sozial.DE:LANG.Angabenueberschriften.Sozial.EN} />
+    {
+      tab3?
+      <>
+      <SVNummer S={SVCheck} F={setSVCheck}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
+      {
+        SVCheck?
+        ""
+        :
+        <Container Icon={["Krankenversicherung"]} Labname={[sprache?"Sozialversicherungsnummer/Rentennummer":"Social security number/pension number"]} F={settab3} S={tab3} SV={PrivateDatenArr} SF={setPrivateDatenArr}/> 
+      }
+      </>
+      :
+      ""
+    }  
+  
+  <Container Icon={Dataset(sprache?'DE':'EN').SozialData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').SozialData.Eingabefelder} F={settab3} S={tab3} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
+  {
+    tab3?
+  <>
+    <Text  style={styles.TextElemente}>{(sprache?'Art der Krankenversicherung (Pflichtangabe, zutreffendes makieren)':'Type of health insurance (mandatory information, mark as applicable)')}</Text>
+    <View style={{borderRadius:2,borderWidth:1,borderColor:'#4b5563', width:'80%',marginLeft:'10%',backgroundColor:'#6b728090'}}>
+     <Picker style={{color:'#FFF'}}  dropdownIconColor={"#FFF"} selectedValue={SelectedLanguage} multiline={true} numberOfLines={2} onValueChange={(itemValue, itemIndex) =>
+    {selectPruefer(itemValue);setSelectedLanguage(itemValue)}
+  }  >
+    {
+      (sprache?["(1)Gesetzlich","(2)Freiwillig","(3)Privat","(4)Ich übe neben dieser noch weitere Beschäftigungen aus(Bitte fügen Sie eine vollständige Liste aller weiteren Arbeitgeber bei)"]:["(1)Legally","(2)Voluntarily","(3)Private","(4)I have other jobs besides this one (please include a complete list of all other employers)"]).map((item,index)=>(
+        <Picker.Item  key={'pickup'+index+item}  color="#000" label={item} value={index} />
+
+      ))
+    }
+  </Picker> 
+   {tab3?
+   <>
+   {
+    JobCheck&&tab3?
+      <>
+      <EingabeFeld Icon={"Krankenversicherung"} Labname={Textdataset(sprache?'DE':'EN').SoloCheckboxText.OtherJobs}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
+      </>
+      :
+      "" }</>
+      :
+      ""
+      }
+  </View>
+  </>
+  :''
+   }
+ 
+   
+
+
+    
+
+   {
+	  tab3?
+    <> 
+    <TouchableOpacity onPress={()=>datenabruf()} style={styles.Abspeichern}>
+    <Text style={{color:'black'}}>Speichern</Text>
+</TouchableOpacity>
+    </>
+    :
+    ""
+  }
   
   
   </View>

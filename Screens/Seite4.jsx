@@ -11,16 +11,17 @@ import { Minijobtextdataset } from '../Components/Minijobinhaltsvorlagen/Minijob
 import {MiniDataset } from './../Components/Minijobinhaltsvorlagen/Minijobeingabedataset';
 import { Textdataset } from '../utils/Textdataset';
 import SelectPicker from './fragebogencomps/selectBoxencomp/PickerSelectBox'; 
-import SteuerID from './fragebogencomps/selectBoxencomp/SteuerCheckbox';
+import SteuerEinwillligung from './fragebogencomps/MinijobCheckboxen/MiniSteuercheck';
 import { ScrollView } from 'react-native-gesture-handler';
-import PersoenlicheDatenObject from '../utils/Objects/PersoenlicheDatenObject'; 
+import MiniPersoenlicheDatenObject from '../utils/Objects/MiniPersoenlicheDatenObject'; 
 import {isValid} from 'iban'
 import { isSteuerIdValid } from 'validate-steuerid'
 import * as SecureStore from 'expo-secure-store';
 import {Picker} from '@react-native-picker/picker';
-import SVNummer from './fragebogencomps/selectBoxencomp/SozialCheckbox';
+import Privatcheck from './fragebogencomps/MinijobCheckboxen/MiniPrivatCheck';
 import { EingabeFeld } from './fragebogencomps/textFeldcomp/EingabeFeld';
 import Zahlungsart from './fragebogencomps/selectBoxencomp/Checkbox';
+import JaNeinCheckbox from './fragebogencomps/MinijobCheckboxen/MiniJaNeinCheck';
 
 export default function Seite2({navigation}) {
   const [sprache,setzesprache]=useContext(TransactionContext)  
@@ -31,9 +32,11 @@ export default function Seite2({navigation}) {
   const [Barcheck,setBarcheck]=useState(false)
   const [tab3,settab3]=useState(false)
   const [tab3ausgefuellt,settab3ausgefuellt]=useState(false)
-  const [SVCheck,setSVCheck]=useState(false) 
-  const [JobCheck,setJobCheck]=useState(false) 
-  const [SelectedLanguage, setSelectedLanguage] = useState();
+  const [Steuercheck,setSteuercheck]=useState(false) 
+  const [JobCheck,setJobCheck]=useState(false)
+  const [JaNeinCheck,setJaNeinCheck]=useState(true)//flase für verstecken
+  const [Versicherungscheck,setVersicherungscheck]=useState(false) 
+  const [SelectedLanguage, setSelectedLanguage] = useState()
   const [tab4,settab4]=useState(false)
   const [tab4ausgefuellt,settab4ausgefuellt]=useState(false)
   const [tab5,settab5]=useState(false)
@@ -47,7 +50,7 @@ export default function Seite2({navigation}) {
   const [Fehlercheck,setFehlercheck]=useState(false)
   const [FehlerText,setFehlerText]=useState(false)
   const [Erfolgscheck,setErfolgscheck]=useState(false)
-  const [PrivateDatenArr,setPrivateDatenArr]=useState(PersoenlicheDatenObject)    
+  const [PrivateDatenArr,setPrivateDatenArr]=useState(MiniPersoenlicheDatenObject)    
   const [mitarbeiterID,setmitarbeiterID]=useState(0)//Nach dem testen wieder auf 0 setzen
   const [image,setimage]=useState({uri: 'https://images.unsplash.com/photo-1622743941533-cde694bff56a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fE5pZ2h0Y2x1YnxlbnwwfHwwfHx8MA%3D%3D'})
 
@@ -62,17 +65,31 @@ export default function Seite2({navigation}) {
   
     }
   }
+  const JaNeinPruefer=(T)=>{
+    
+    setPrivateDatenArr(O)
+    if((T+1)==4){
+      setJaNeinCheck(true)
+    }else{
+      setJaNeinCheck(false)
+  
+    }
+  }
+
+
+
+
   const datenabruf=async()=>{
     setFehlercheck(false)
     setFehlerText(false)
     setErfolgscheck(false)
     let check=true 
     console.log(["ssjds",PrivateDatenArr])
-    if(!PrivateDatenArr.RentenCheck>0){
-      if(PrivateDatenArr.SVNummerfeld==0){
+    
+      if(!PrivateDatenArr.SVNummerfeld==12){
       check=false
     }
-    }  
+      
     
     if(!PrivateDatenArr.Staatsbuergerschaft.trim().toString().length>0){
       check=false
@@ -176,10 +193,7 @@ console.log(PrivateDatenArr)
             check=false
             console.log('ich binfals1')
     } 
-    if(!(PrivateDatenArr.ArbeitsGrundlage>0)){
-      check=false 
-      console.log('ich binfals2')
-    }
+    
     if(!(PrivateDatenArr.Geschlecht>0)){
       check=false
       console.log('ich binfals3')
@@ -212,7 +226,7 @@ console.log(PrivateDatenArr)
           method: 'POST',
           headers: { 'Content-Type' : 'application/json'},
           body: JSON.stringify({
-            "query":2,
+            "query":7,
             "standortSelect": PrivateDatenArr.BewerberStandort.toString().trim(),
             "geschlechtSelect":PrivateDatenArr.Geschlecht.toString().trim(),
             "vorname":PrivateDatenArr.Vname.toString().trim(),
@@ -220,7 +234,7 @@ console.log(PrivateDatenArr)
             "straßeuzahl":PrivateDatenArr.Adresse.toString().trim(),
             "plz":PrivateDatenArr.PCode.toString().trim(),
             "wohnort":PrivateDatenArr.City.toString().trim(),
-            "grundlage":PrivateDatenArr.ArbeitsGrundlage.toString().trim()
+            
 
             //"username":eingabe1.toString(), teilzeit check box einbinden
           })
@@ -294,7 +308,7 @@ console.log(PrivateDatenArr)
           method: 'POST',
           headers: { 'Content-Type' : 'application/json'},
           body: JSON.stringify({
-            "query":3,
+            "query":8,
             "festnetz":PrivateDatenArr.Festnetz.toString().trim(),
             "mobil":PrivateDatenArr.Mobil.toString().trim(),
             "emailbw":PrivateDatenArr.Email.toString().trim(),
@@ -351,26 +365,27 @@ console.log(PrivateDatenArr)
     setFehlerText(false)
     setErfolgscheck(false) 
     let check=true 
+
+    if(!PrivateDatenArr.Barzahlung>0){
     if(!PrivateDatenArr.Bankname.trim().toString().length>2){ 
       check=false
     }
     if((isValid(PrivateDatenArr.iban.trim().toString())==false)){ 
       check=false
     }
+     }
      
-    if(PrivateDatenArr.Inhaber==0){ 
-      PrivateDatenArr.Inhaber=PrivateDatenArr.Vname.toString()+' '+PrivateDatenArr.Nname.toString()
-    } 
     if(check){
       try{
         const request ={
           method: 'POST',
           headers: { 'Content-Type' : 'application/json'},
           body: JSON.stringify({
-            "query":4,
+            "query":9,
+            "bargeldcheck":PrivateDatenArr.Barzahlung.toString().trim(),
             "bankname":PrivateDatenArr.Bankname.toString().trim(),
             "iban":PrivateDatenArr.iban.toString().trim(), 
-            "inhaber":PrivateDatenArr.Inhaber.toString().trim(),
+            
             "mitarbeiterID":mitarbeiterID 
           })
         };
@@ -424,22 +439,14 @@ console.log(PrivateDatenArr)
     setErfolgscheck(false) 
     let check=true
     
-    //if(!PrivateDatenArr.SteueridCheck>0){
+    
       //if(!isSteuerIdValid(PrivateDatenArr.SteuerID.trim())){
       //check=false
       
     //}
-    //}
     
-    if(!(Number(PrivateDatenArr.Steuerklasse)==0) && (Number(PrivateDatenArr.Steuerklasse)>6)){
-      check=false
-    }
-    if(!PrivateDatenArr.Kinder>0){
-      check=false
-    }
-    if(!PrivateDatenArr.Konfession.trim().toString().length>2){
-      check=false
-    }  
+    
+    
     if(check){
       try{
         const request ={
@@ -447,11 +454,9 @@ console.log(PrivateDatenArr)
           headers: { 'Content-Type' : 'application/json'},
           body: JSON.stringify({
             "query":5,
-            "steuerCheck":PrivateDatenArr.SteueridCheck.toString().trim(),
+            
             "steuerid":PrivateDatenArr.SteuerID.toString().trim(),
-            "steuerklasse":PrivateDatenArr.Steuerklasse.toString().trim(),
-            "kinder":PrivateDatenArr.Kinder.toString().trim(),
-            "konfession":PrivateDatenArr.Konfession.toString().trim(),
+            
             "mitarbeiterID":mitarbeiterID
             //
           })
@@ -497,6 +502,8 @@ console.log(PrivateDatenArr)
       setErfolgscheck(false)
     }
   }
+
+
 
 
 
@@ -635,10 +642,11 @@ console.log(PrivateDatenArr)
   <TitleTouch AGB={tab5ausgefuellt} F={settab5} S={tab5} T={sprache?LANG.MinijobBogenUeberschriften.Steuer.DE:LANG.MinijobBogenUeberschriften.Steuer.EN}/>
     
   <Container W={submitdata4} Icon={MiniDataset(sprache?'DE':'EN').SteuerData.EingabefelderIcons} Labname={MiniDataset(sprache?'DE':'EN').SteuerData.Eingabefelder} F={settab5} S={tab5}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
-  {/** SteuerCheckbox hier */}
+  
   {
 	  tab5?
     <> 
+    <SteuerEinwillligung S={Steuercheck} F={setSteuercheck}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
     <TouchableOpacity onPress={()=>submitdata4()} style={styles.Abspeichern}>
     <Text style={{color:'black'}}>Speichern</Text>
 </TouchableOpacity>
@@ -671,8 +679,44 @@ console.log(PrivateDatenArr)
     ""
   }
         
+        {/**Status zu Beginn der Beschäftigung */}
   <TitleTouch AGB={tab6ausgefuellt} F={settab6} S={tab6} T={sprache?LANG.MinijobBogenUeberschriften.Arbeitsverhältnis.DE:LANG.MinijobBogenUeberschriften.Arbeitsverhältnis.EN}/>
-  
+  {
+    tab6?
+  <>
+    <Text  style={styles.Textelemente}>{(sprache?'Arbeitsstatus':'Work status')}</Text>
+    <View style={{borderRadius:2,borderWidth:1,borderColor:'#4b5563', width:'80%',marginLeft:'10%',backgroundColor:'#6b728090'}}>
+     <Picker style={{color:'#FFF'}}  dropdownIconColor={"#FFF"} selectedValue={SelectedLanguage} multiline={true} numberOfLines={2} onValueChange={(itemValue, itemIndex) =>
+    {selectPruefer(itemValue);setSelectedLanguage(itemValue)}
+  }  >
+    {
+      (sprache?["(1) Schüler(in)","(2) Student(in)","(3) Beamtin/Beamter","(4) Sonstiger"]:["(1) Pupil","(2) student","(3) civil servant","(4) Other"]).map((item,index)=>(
+        <Picker.Item  key={'pickup'+index+item}  color="#000" label={item} value={index} />
+
+      ))
+    }
+  </Picker> 
+   {tab6?
+   <>
+   {
+    JobCheck&&tab6?
+      <>
+      <EingabeFeld Icon={"Krankenversicherung"}   SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
+      </>
+      :
+      "" }</>
+      :
+      ""
+      }
+  </View>
+  </>
+  :''
+   }
+
+
+
+
+
   {
 	  tab6?
     <> 
@@ -683,11 +727,37 @@ console.log(PrivateDatenArr)
     :
     ""
   }
+
+  {/**Angaben zu weiteren Beschäftigungen */}
   <TitleTouch AGB={tab7ausgefuellt} F={settab7} S={tab7} T={sprache?LANG.MinijobBogenUeberschriften.OtherJobs.DE:LANG.MinijobBogenUeberschriften.OtherJobs.EN}/>
   
+
+
   {
 	  tab7?
     <> 
+    
+    <Text style={{color:'#fff', marginHorizontal: '10%',paddingVertical:10}}>{Minijobtextdataset(sprache?'DE':'EN').Texte.BeschreibungJaNeinBox1}</Text>
+    <View style={{flexDirection: 'row' , marginHorizontal: '10%',paddingVertical:10}}>
+    <JaNeinCheckbox SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
+    </View>
+   
+    <Text style={{color:'#fff', marginHorizontal: '10%',paddingVertical:10}}>{Minijobtextdataset(sprache?'DE':'EN').Texte.BeschreibungJaNeinBox2}</Text>
+    <View style={{flexDirection: 'row' , marginHorizontal: '10%',paddingVertical:10}}>
+    <JaNeinCheckbox S={JaNeinCheck} F={setJaNeinCheck}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
+    </View>
+    {JaNeinCheck?
+    <>
+    <Text style={{color:'#fff', marginHorizontal: '10%',paddingVertical:10}}>{Minijobtextdataset(sprache?'DE':'EN').Texte.BeschreibungJaNeinBox3}</Text>
+    <View style={{flexDirection: 'row' , marginHorizontal: '10%',paddingVertical:10}}>
+    <JaNeinCheckbox SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
+    </View>
+    </>
+    :
+    ""
+    }
+
+
     <TouchableOpacity onPress={()=>submitdata7()} style={styles.Abspeichern}>
     <Text style={{color:'black'}}>Speichern</Text>
 </TouchableOpacity>
@@ -695,11 +765,17 @@ console.log(PrivateDatenArr)
     :
     ""
   }
+
+  {/**Krankenversicherung */}
   <TitleTouch AGB={tab8ausgefuellt} F={settab8} S={tab8} T={sprache?LANG.MinijobBogenUeberschriften.Krankenversicherung.DE:LANG.MinijobBogenUeberschriften.Krankenversicherung.EN}/>
+  
+
+  <Container W={submitdata4} Icon={MiniDataset(sprache?'DE':'EN').KrankenData.EingabefelderIcons} Labname={MiniDataset(sprache?'DE':'EN').KrankenData.Eingabefelder} F={settab8} S={tab8}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
   
   {
 	  tab8?
-    <> 
+    <>
+    <Privatcheck S={Versicherungscheck} F={setVersicherungscheck}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/> 
     <TouchableOpacity onPress={()=>submitdata8()} style={styles.Abspeichern}>
     <Text style={{color:'black'}}>Speichern</Text>
 </TouchableOpacity>

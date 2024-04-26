@@ -23,7 +23,7 @@ export const Dataset=(p)=>{
     },
     "SozialData":
     {
-      "Eingabefelder":["Staatsangehärigkeit","Geburtsdatum","Geburtsort (Pflichtangabe)","Geburtsland(nur falls nicht Deutschland)","Krankenkasse (Bitte kompletter Name, also zB. AOK NordWest, nicht AOK)"],
+      "Eingabefelder":["Staatsangehörigkeit","Geburtsdatum","Geburtsort (Pflichtangabe)","Geburtsland (nur falls nicht Deutschland)","Krankenkasse (Bitte kompletter Name, also zB. AOK NordWest, nicht AOK)"],
       "EingabefelderIcons":["Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung"],
     },
     "BankData":
@@ -42,7 +42,7 @@ export const Dataset=(p)=>{
       
       "PerData":
       {
-        "Eingabefelder":["Firstname","Surname","Street name and house number","Postal Code","Location/City name"],
+        "Eingabefelder":["Firstname","Surname","Street name and house number","Postal Code","Location / City name"],
         "EingabefelderIcons":["User","User","User","User","User"],
       },
       "KontaktData":

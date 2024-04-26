@@ -29,6 +29,12 @@ export const MiniDataset=(p)=>{
       "Eingabefelder":["Steuer-ID (Pflichtangabe)"],
       "EingabefelderIcons":["Steuer"],
     },
+    "KrankenData":
+    {
+      "Eingabefelder":["Krankenkasse (Bitte kompletter Name)"],
+      "EingabefelderIcons":["Krankenversicherung"],
+    },
+
   } 
   }else{
     Data={
@@ -57,6 +63,11 @@ export const MiniDataset=(p)=>{
     {
       "Eingabefelder":["Tax ID (mandatory information)"],
       "EingabefelderIcons":["Steuer"],
+    },
+    "KrankenData":
+    {
+      "Eingabefelder":["Health insurance company (full name please)"],
+      "EingabefelderIcons":["Krankenversicherung"],
     },
     } 
   }

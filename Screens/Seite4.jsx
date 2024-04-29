@@ -22,6 +22,10 @@ import Privatcheck from './fragebogencomps/MinijobCheckboxen/MiniPrivatCheck';
 import { EingabeFeld } from './fragebogencomps/textFeldcomp/EingabeFeld';
 import Zahlungsart from './fragebogencomps/selectBoxencomp/Checkbox';
 import JaNeinCheckbox from './fragebogencomps/MinijobCheckboxen/MiniJaNeinCheck';
+import JaNeinCheckbox1 from './fragebogencomps/MinijobCheckboxen/MiniJaNeinCheck1';
+import JaNeinCheckbox2 from './fragebogencomps/MinijobCheckboxen/MiniJaNeinCheck2';
+
+
 
 export default function Seite2({navigation}) {
   const [sprache,setzesprache]=useContext(TransactionContext)  
@@ -34,7 +38,7 @@ export default function Seite2({navigation}) {
   const [tab3ausgefuellt,settab3ausgefuellt]=useState(false)
   const [Steuercheck,setSteuercheck]=useState(false) 
   const [JobCheck,setJobCheck]=useState(false)
-  const [JaNeinCheck,setJaNeinCheck]=useState(true)//flase für verstecken
+  const [JaNeinCheck,setJaNeinCheck]=useState(false)//flase für verstecken
   const [Versicherungscheck,setVersicherungscheck]=useState(false) 
   const [SelectedLanguage, setSelectedLanguage] = useState()
   const [tab4,settab4]=useState(false)
@@ -65,16 +69,7 @@ export default function Seite2({navigation}) {
   
     }
   }
-  const JaNeinPruefer=(T)=>{
-    
-    setPrivateDatenArr(O)
-    if((T+1)==4){
-      setJaNeinCheck(true)
-    }else{
-      setJaNeinCheck(false)
-  
-    }
-  }
+
 
 
 
@@ -84,7 +79,7 @@ export default function Seite2({navigation}) {
     setFehlerText(false)
     setErfolgscheck(false)
     let check=true 
-    console.log(["ssjds",PrivateDatenArr])
+    
     
       if(!PrivateDatenArr.SVNummerfeld==12){
       check=false
@@ -124,7 +119,7 @@ console.log(PrivateDatenArr)
           method: 'POST',
           headers: { 'Content-Type' : 'application/json'},
           body: JSON.stringify({
-            "query":6,
+            "query":11,
             "sozialCheck":PrivateDatenArr.RentenCheck.toString().trim(),
             "sozinummer":PrivateDatenArr.SVNummerfeld.toString().trim(),
             "herkunft":PrivateDatenArr.Staatsbuergerschaft.toString().trim(),
@@ -453,10 +448,10 @@ console.log(PrivateDatenArr)
           method: 'POST',
           headers: { 'Content-Type' : 'application/json'},
           body: JSON.stringify({
-            "query":5,
+            "query":10,
             
             "steuerid":PrivateDatenArr.SteuerID.toString().trim(),
-            
+            "steuereinwilligung":PrivateDatenArr.SteueridCheck.toString().trim(),
             "mitarbeiterID":mitarbeiterID
             //
           })
@@ -503,9 +498,208 @@ console.log(PrivateDatenArr)
     }
   }
 
+  //-----------------------------> Angaben Beginn Beschäftigung
+  const submitdata6=async()=>{
+    setFehlercheck(false)
+    setFehlerText(false)
+    setErfolgscheck(false) 
+    let check=true
+    if(PrivateDatenArr.StatusCheck==4){
+      if(!PrivateDatenArr.Eintragsonstige.trim().toString().length>2){
+      check=false}
+    }
+if(check){
+      try{
+        const request ={
+          method: 'POST',
+          headers: { 'Content-Type' : 'application/json'},
+          body: JSON.stringify({
+            "query": 12,
+            "jobstatus": PrivateDatenArr.StatusCheck.toString().trim(),
+            "selbsteintrag": PrivateDatenArr.Eintragsonstige.toString().trim(),
+            "mitarbeiterID":mitarbeiterID
+            //
+          })
+        };
+        const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
+        let e = await d.json();
+        if(e.ergebnis==true){
+          setErfolgscheck(true)
+          setTimeout(()=>{
+            setErfolgscheck(false)
+          },4000)
+          settab6(false)
+          settab6ausgefuellt(true)  
+          console.log('speichertestyeah')
+        }
+        else if(e.ergebnis=='DBerror'){//zeigt Datenbankfehler an keine speicherung
+          setFehlercheck(true)
+          setFehlerText(true)
+          setTimeout(()=>{
+            setFehlercheck(false)
+          },4000)
+          console.log('no Update')
+        }else{//Fehler bei der Eingabe füllen
+          
+          setFehlercheck(true)
+          setFehlerText(false)
+          setTimeout(()=>{
+            setFehlercheck(false)
+          },4000)
+          console.log('Fehler')
+        }
+      }
+      catch(err){
+        console.error(err)
+      }
+    }else{
+      //
+      setFehlercheck(true) 
+      setFehlerText(false)
+      setTimeout(()=>{
+        setFehlercheck(false)
+      },4000)
+      setErfolgscheck(false)
+    }
+  }
 
+  //-----------------------------> Angaben weitere Beschäftigungen
+  const submitdata7=async()=>{
+    setFehlercheck(false)
+    setFehlerText(false)
+    setErfolgscheck(false) 
+    let check=true
 
+    if(PrivateDatenArr.HauptjobCheck==0){
+      check=false
+    }
+    if(PrivateDatenArr.WeitereJobCheck==1){
+      if(PrivateDatenArr.GeldGrenzeCheck==0){
+        check=false
+      }
+    }else if(PrivateDatenArr.WeitereJobCheck==0){
+      check=false
+    }
+    
+if(check){
+      try{
+        const request ={
+          method: 'POST',
+          headers: { 'Content-Type' : 'application/json'},
+          body: JSON.stringify({
+            "query": 13,
+            
+            //"":,
+            //"":,
+            //"":,
 
+            "mitarbeiterID":mitarbeiterID
+            //
+          })
+        };
+        const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
+        let e = await d.json();
+        if(e.ergebnis==true){
+          setErfolgscheck(true)
+          setTimeout(()=>{
+            setErfolgscheck(false)
+          },4000)
+          settab7(false)
+          settab7ausgefuellt(true)  
+          console.log('speichertestyeah')
+        }
+        else if(e.ergebnis=='DBerror'){//zeigt Datenbankfehler an keine speicherung
+          setFehlercheck(true)
+          setFehlerText(true)
+          setTimeout(()=>{
+            setFehlercheck(false)
+          },4000)
+          console.log('no Update')
+        }else{//Fehler bei der Eingabe füllen
+          
+          setFehlercheck(true)
+          setFehlerText(false)
+          setTimeout(()=>{
+            setFehlercheck(false)
+          },4000)
+          console.log('Fehler')
+        }
+      }
+      catch(err){
+        console.error(err)
+      }
+    }else{
+      //
+      setFehlercheck(true) 
+      setFehlerText(false)
+      setTimeout(()=>{
+        setFehlercheck(false)
+      },4000)
+      setErfolgscheck(false)
+    }
+  }
+//-----------------------------> Krankenversicherung
+  const submitdata8=async()=>{
+    setFehlercheck(false)
+    setFehlerText(false)
+    setErfolgscheck(false) 
+    let check=true
+    if(!PrivateDatenArr.Kassename.trim().toString.length>2){
+      check=false
+    }
+if(check){
+      try{
+        const request ={
+          method: 'POST',
+          headers: { 'Content-Type' : 'application/json'},
+          body: JSON.stringify({
+            "query": 14,
+            "kassename":PrivateDatenArr.Kassename.toString().trim(),
+            "mitarbeiterID":mitarbeiterID
+            //
+          })
+        };
+        const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
+        let e = await d.json();
+        if(e.ergebnis==true){
+          setErfolgscheck(true)
+          setTimeout(()=>{
+            setErfolgscheck(false)
+          },4000)
+          settab8(false)
+          settab8ausgefuellt(true)  
+          console.log('speichertestyeah')
+        }
+        else if(e.ergebnis=='DBerror'){//zeigt Datenbankfehler an keine speicherung
+          setFehlercheck(true)
+          setFehlerText(true)
+          setTimeout(()=>{
+            setFehlercheck(false)
+          },4000)
+          console.log('no Update')
+        }else{//Fehler bei der Eingabe füllen
+          
+          setFehlercheck(true)
+          setFehlerText(false)
+          setTimeout(()=>{
+            setFehlercheck(false)
+          },4000)
+          console.log('Fehler')
+        }
+      }
+      catch(err){
+        console.error(err)
+      }
+    }else{
+      //
+      setFehlercheck(true) 
+      setFehlerText(false)
+      setTimeout(()=>{
+        setFehlercheck(false)
+      },4000)
+      setErfolgscheck(false)
+    }
+  }
 
 
 
@@ -739,7 +933,7 @@ console.log(PrivateDatenArr)
     
     <Text style={{color:'#fff', marginHorizontal: '10%',paddingVertical:10}}>{Minijobtextdataset(sprache?'DE':'EN').Texte.BeschreibungJaNeinBox1}</Text>
     <View style={{flexDirection: 'row' , marginHorizontal: '10%',paddingVertical:10}}>
-    <JaNeinCheckbox SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
+    <JaNeinCheckbox1 SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
     </View>
    
     <Text style={{color:'#fff', marginHorizontal: '10%',paddingVertical:10}}>{Minijobtextdataset(sprache?'DE':'EN').Texte.BeschreibungJaNeinBox2}</Text>
@@ -750,7 +944,7 @@ console.log(PrivateDatenArr)
     <>
     <Text style={{color:'#fff', marginHorizontal: '10%',paddingVertical:10}}>{Minijobtextdataset(sprache?'DE':'EN').Texte.BeschreibungJaNeinBox3}</Text>
     <View style={{flexDirection: 'row' , marginHorizontal: '10%',paddingVertical:10}}>
-    <JaNeinCheckbox SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
+    <JaNeinCheckbox2  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
     </View>
     </>
     :

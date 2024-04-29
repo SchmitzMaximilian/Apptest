@@ -93,8 +93,12 @@ const[txtvalue,settxtvalue]=useState();
       case "Name Ihrer anderen Arbeitgeber"||"Name of your other employers":
         O.AndereArbeitgeber=t
         break;
-      
-      
+      case "Geburtsname (Pflichtangabe, bei abweichendem Nachnamen)"||"Birth name (mandatory, if last name is different)":
+        O.GBName=t
+        break;
+      case "Krankenkasse (Bitte kompletter Name)"||"Health insurance company (full name please)":
+        O.Kassename=t
+        break;
     }
  
     props.SF(O) 
@@ -189,7 +193,12 @@ const[txtvalue,settxtvalue]=useState();
         case "Name Ihrer anderen Arbeitgeber"||"Name of your other employers":
           O.AndereArbeitgeber.trim().toString().length>4?settxtvalue(O.AndereArbeitgeber.toString()):''
           break;
-        
+          case "Geburtsname (Pflichtangabe, bei abweichendem Nachnamen)"||"Birth name (mandatory, if last name is different)":
+            O.GBName.trim().toString().length>2?settxtvalue(O.GBName.toString()):''
+            break;
+          case "Krankenkasse (Bitte kompletter Name)"||"Health insurance company (full name please)":
+            O.Kassename.trim().toString().length>2?settxtvalue(O.Kassename.toString()):''
+            break;
         
       }
 

@@ -21,7 +21,7 @@ const MiniPersoenlicheDatenObject={
   Barzahlung:0,
 
   //------SteuerDaten-----
-  SteueridCheck:0,
+  SteueridCheck:0,//Einwilligung
   SteuerID:"",
   
     
@@ -39,7 +39,7 @@ const MiniPersoenlicheDatenObject={
   Eintragsonstige:"",
 
 
-  //--------JobStatusDaten--------
+  //--------JobStatusDaten (JaNeinCheckboxen)--------
   HauptjobCheck:0,
   WeitereJobCheck:0,
   GeldGrenzeCheck:0,
@@ -47,6 +47,8 @@ const MiniPersoenlicheDatenObject={
   //--------KrankenDaten------
   Kassename:"",
   KVArt:0,
+
+  
 }
 
 export default MiniPersoenlicheDatenObject

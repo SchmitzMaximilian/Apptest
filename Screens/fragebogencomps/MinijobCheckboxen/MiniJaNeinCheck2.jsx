@@ -6,30 +6,21 @@ import { Minijobtextdataset } from '../../../Components/Minijobinhaltsvorlagen/M
 
 
 
-export default function JaNeinCheckbox(props) {
+export default function JaNeinCheckbox2(props) {
   const [checked1, setChecked1] = useState(0)
   const [sprache,setzesprache]=useContext(TransactionContext)
   
   
   const JaNeinPruefer=(isChecked)=>{
-
     let O=props?.SV
-    
-    
-    if(isChecked==1){
-      O.WeitereJobCheck=(1)
-      props.F(true)
-    }else if(isChecked==2){
-      
-      O.WeitereJobCheck=(2)
-      props.F(false)
-  
+        
+    if(checked1==1){
+      O.HauptjobCheck=(1)
     }else{
-      O.WeitereJobCheck=(0)
-      props.F(false)
+      O.HauptjobCheck=(2)
+  
     }
-    
-    props.SF(O) 
+    props.SF(O)
   }
   
   
@@ -37,7 +28,7 @@ export default function JaNeinCheckbox(props) {
         <View style={styles.checkboxContainer}>
         <CheckBox
           value={checked1==1?true:false}//true:false:false 
-          onValueChange={(isChecked) => {setChecked1(1) ,isChecked?JaNeinPruefer(1):""} }
+          onValueChange={(isChecked) => {setChecked1(1) ,isChecked?JaNeinPruefer(1):""}}
           style={styles.checkbox}
           /><Text style={styles.beschreibung}>{Minijobtextdataset(sprache?'DE':'EN').CheckBoxTitel.Ja}</Text>
           </View >

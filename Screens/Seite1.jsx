@@ -532,7 +532,7 @@ console.log(PrivateDatenArr)
         </TouchableOpacity>
         </View>
         
-        <TouchableOpacity onPress={()=>navigation.navigate({name:"Seite4",params:{PrivateDatenArr}})} style={styles.AdminButton}> 
+        <TouchableOpacity onPress={()=>navigation.navigate({name:"Seite2",params:{PrivateDatenArr}})} style={styles.AdminButton}> 
           <Text style={{color:'#FFFFFF'}} >Sachbearbeiter</Text>
         </TouchableOpacity>
       </View>

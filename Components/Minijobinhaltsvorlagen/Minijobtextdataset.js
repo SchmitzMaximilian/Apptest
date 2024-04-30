@@ -19,6 +19,7 @@ export const Minijobtextdataset=(p)=>{
       "Steuereinwilligung":"Ich gestatte den Abruf meiner ELStAM ( nur sinvoll, sofern Stkl. 1 bis 4).",
       "Bank":"Barzahlung",
       "VersicherungPrivat":"Ich bin Mitglied oder Familienversichert in einer privaten Krankenversicherung",
+      "Sonstig":"Bitte hier eintragen"
 
     }
 
@@ -42,6 +43,7 @@ export const Minijobtextdataset=(p)=>{
       "Steuereinwilligung":"I allow my ELStAM to be accessed (only useful if tax class 1 to 4).",
       "Bank":"cash payment",
       "VersicherungPrivat":"I am a member or family member of a private health insurance company",
+      "Sonstig":"Please enter here"
 
     }
 

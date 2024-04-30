@@ -60,7 +60,7 @@ export default function Seite2({navigation}) {
 
   const selectPruefer=(T)=>{
     let O=PrivateDatenArr;
-    O.KVArt=T+1;
+    O.StatusCheck=T+1;
     setPrivateDatenArr(O)
     if((T+1)==4){
       setJobCheck(true)
@@ -81,36 +81,35 @@ export default function Seite2({navigation}) {
     let check=true 
     
     
-      if(!PrivateDatenArr.SVNummerfeld==12){
+      if(!PrivateDatenArr.SVNummerfeld.trim().toString().length==12){
+        console.log('Fehler 1')
       check=false
     }
       
     
     if(!PrivateDatenArr.Staatsbuergerschaft.trim().toString().length>0){
+      console.log('Fehler 2')
       check=false
     }
     if(!PrivateDatenArr.GBDatum.trim().toString().length>0){
+      console.log('Fehler 3')
       check=false
     }
     if(!PrivateDatenArr.GBOrt.trim().toString().length>0){
+      console.log('Fehler 4')
       check=false
     }
     if(PrivateDatenArr.GBLand==0){
       PrivateDatenArr.GBLand='Deutschland'
       
     }
-    if(!PrivateDatenArr.Kassename.trim().toString().length>0){
-      check=false
-    } 
-    if(!PrivateDatenArr.KVArt>0){
-      check=false
+   
+    if(PrivateDatenArr.GBName==0) {
+      PrivateDatenArr.GBName=PrivateDatenArr.Nname.toString()
     }
+   
 
-    if(PrivateDatenArr.KVArt==4){
-      if(!PrivateDatenArr.AndereArbeitgeber.trim().toString().length>4){
-      check=false
-    } 
-    }
+    
      
 console.log(PrivateDatenArr)
     if(check){
@@ -120,15 +119,15 @@ console.log(PrivateDatenArr)
           headers: { 'Content-Type' : 'application/json'},
           body: JSON.stringify({
             "query":11,
-            "sozialCheck":PrivateDatenArr.RentenCheck.toString().trim(),
+
             "sozinummer":PrivateDatenArr.SVNummerfeld.toString().trim(),
             "herkunft":PrivateDatenArr.Staatsbuergerschaft.toString().trim(),
             "gbdatum":PrivateDatenArr.GBDatum.toString().trim(),
             "gbort":PrivateDatenArr.GBOrt.toString().trim(),
             "gbland":PrivateDatenArr.GBLand.toString().trim(),
-            "krankenkassename":PrivateDatenArr.Kassename.toString().trim(),
-            "soziSelect":PrivateDatenArr.KVArt.toString().trim(),
-            "arbeitgeberListe":PrivateDatenArr.AndereArbeitgeber.toString().trim(),
+            "gbname":PrivateDatenArr.GBName.toString().trim(),
+
+
             "mitarbeiterID":mitarbeiterID
           })
         };
@@ -531,6 +530,7 @@ if(check){
           settab6(false)
           settab6ausgefuellt(true)  
           console.log('speichertestyeah')
+         
         }
         else if(e.ergebnis=='DBerror'){//zeigt Datenbankfehler an keine speicherung
           setFehlercheck(true)
@@ -569,7 +569,7 @@ if(check){
     setFehlerText(false)
     setErfolgscheck(false) 
     let check=true
-
+console.log('HJC '+PrivateDatenArr.HauptjobCheck,'WJC '+PrivateDatenArr.WeitereJobCheck,'GGC '+PrivateDatenArr.GeldGrenzeCheck)
     if(PrivateDatenArr.HauptjobCheck==0){
       check=false
     }
@@ -580,7 +580,7 @@ if(check){
     }else if(PrivateDatenArr.WeitereJobCheck==0){
       check=false
     }
-    
+    console.log(check)
 if(check){
       try{
         const request ={
@@ -589,9 +589,9 @@ if(check){
           body: JSON.stringify({
             "query": 13,
             
-            //"":,
-            //"":,
-            //"":,
+            "HauptjobCheck":PrivateDatenArr.HauptjobCheck.toString().trim(),
+            "WeitereJobCheck":PrivateDatenArr.WeitereJobCheck.toString().trim(),
+            "GeldGrenzeCheck":PrivateDatenArr.GeldGrenzeCheck.toString().trim(),
 
             "mitarbeiterID":mitarbeiterID
             //
@@ -655,6 +655,7 @@ if(check){
           body: JSON.stringify({
             "query": 14,
             "kassename":PrivateDatenArr.Kassename.toString().trim(),
+            "binprivatamstart":PrivateDatenArr.KVArt.toString().trim(),
             "mitarbeiterID":mitarbeiterID
             //
           })
@@ -853,7 +854,7 @@ if(check){
   <TitleTouch AGB={tab3ausgefuellt} F={settab3} S={tab3} T={sprache?LANG.MinijobBogenUeberschriften.Sozial.DE:LANG.MinijobBogenUeberschriften.Sozial.EN} />
     
   
-  <Container Icon={MiniDataset(sprache?'DE':'EN').SozialData.EingabefelderIcons} Labname={MiniDataset(sprache?'DE':'EN').SozialData.Eingabefelder} F={settab3} S={tab3} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
+  <Container W={datenabruf} Icon={MiniDataset(sprache?'DE':'EN').SozialData.EingabefelderIcons} Labname={MiniDataset(sprache?'DE':'EN').SozialData.Eingabefelder} F={settab3} S={tab3} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
    
    
  
@@ -895,7 +896,7 @@ if(check){
    {
     JobCheck&&tab6?
       <>
-      <EingabeFeld Icon={"Krankenversicherung"}   SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
+      <EingabeFeld  Icon={"Krankenversicherung"} Labname={Minijobtextdataset(sprache?'DE':'EN').SoloCheckboxText.Sonstig}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
       </>
       :
       "" }</>
@@ -964,7 +965,7 @@ if(check){
   <TitleTouch AGB={tab8ausgefuellt} F={settab8} S={tab8} T={sprache?LANG.MinijobBogenUeberschriften.Krankenversicherung.DE:LANG.MinijobBogenUeberschriften.Krankenversicherung.EN}/>
   
 
-  <Container W={submitdata4} Icon={MiniDataset(sprache?'DE':'EN').KrankenData.EingabefelderIcons} Labname={MiniDataset(sprache?'DE':'EN').KrankenData.Eingabefelder} F={settab8} S={tab8}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
+  <Container W={submitdata8} Icon={MiniDataset(sprache?'DE':'EN').KrankenData.EingabefelderIcons} Labname={MiniDataset(sprache?'DE':'EN').KrankenData.Eingabefelder} F={settab8} S={tab8}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
   
   {
 	  tab8?

@@ -16,7 +16,7 @@ export const MiniDataset=(p)=>{
     },
     "SozialData":
     {
-      "Eingabefelder":["Sozialversicherungsnummer","Staatsangehärigkeit","Geburtsdatum","Geburtsname (Pflichtangabe, bei abweichendem Nachnamen)","Geburtsort (Pflichtangabe)","Geburtsland(nur falls nicht Deutschland)"],
+      "Eingabefelder":["Sozialversicherungsnummer","Staatsangehörigkeit","Geburtsdatum","Geburtsname (Pflichtangabe, bei abweichendem Nachnamen)","Geburtsort (Pflichtangabe)","Geburtsland(nur falls nicht Deutschland)"],
       "EingabefelderIcons":["User","User","User","User","User","User"],
     },
     "BankData":
@@ -51,7 +51,7 @@ export const MiniDataset=(p)=>{
       },
       "SozialData":
     {
-      "Eingabefelder":["Social Security Number","nationality","Birth date","Birth name (mandatory, if last name is different)","Place of birth (mandatory)","Country of birth (only if not Germany)"],
+      "Eingabefelder":["Social security number","Nationality","Birth date","Birth name (mandatory, if last name is different)","Place of birth (mandatory)","Country of birth (only if not Germany)"],
       "EingabefelderIcons":["User","User","User","User","User","User"],
     },
     "BankData":

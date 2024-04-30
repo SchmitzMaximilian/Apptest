@@ -17,15 +17,15 @@ export default function JaNeinCheckbox(props) {
     
     
     if(isChecked==1){
-      O.WeitereJobCheck=(1)
+      O.WeitereJobCheck=1
       props.F(true)
     }else if(isChecked==2){
       
-      O.WeitereJobCheck=(2)
+      O.WeitereJobCheck=2
       props.F(false)
   
     }else{
-      O.WeitereJobCheck=(0)
+      O.WeitereJobCheck=0
       props.F(false)
     }
     
@@ -36,7 +36,7 @@ export default function JaNeinCheckbox(props) {
   return( <>
         <View style={styles.checkboxContainer}>
         <CheckBox
-          value={checked1==1?true:false}//true:false:false 
+          value={checked1==1?true:false}
           onValueChange={(isChecked) => {setChecked1(1) ,isChecked?JaNeinPruefer(1):""} }
           style={styles.checkbox}
           /><Text style={styles.beschreibung}>{Minijobtextdataset(sprache?'DE':'EN').CheckBoxTitel.Ja}</Text>

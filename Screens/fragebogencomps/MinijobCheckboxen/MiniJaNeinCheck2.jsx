@@ -14,10 +14,10 @@ export default function JaNeinCheckbox2(props) {
   const JaNeinPruefer=(isChecked)=>{
     let O=props?.SV
         
-    if(checked1==1){
-      O.HauptjobCheck=(1)
+    if(isChecked==1){
+      O.GeldGrenzeCheck=1
     }else{
-      O.HauptjobCheck=(2)
+      O.GeldGrenzeCheck=2
   
     }
     props.SF(O)
@@ -27,7 +27,7 @@ export default function JaNeinCheckbox2(props) {
   return( <>
         <View style={styles.checkboxContainer}>
         <CheckBox
-          value={checked1==1?true:false}//true:false:false 
+          value={checked1==1?true:false} 
           onValueChange={(isChecked) => {setChecked1(1) ,isChecked?JaNeinPruefer(1):""}}
           style={styles.checkbox}
           /><Text style={styles.beschreibung}>{Minijobtextdataset(sprache?'DE':'EN').CheckBoxTitel.Ja}</Text>

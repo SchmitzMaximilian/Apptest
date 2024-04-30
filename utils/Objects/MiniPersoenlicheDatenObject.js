@@ -27,7 +27,7 @@ const MiniPersoenlicheDatenObject={
     
   //------SozialDaten-----
   
-  SVNummerfeld:"",
+  SVNummerfeld:0,
   Staatsbuergerschaft:"",
   GBDatum:"", 
   GBName:"",

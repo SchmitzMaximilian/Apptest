@@ -70,11 +70,14 @@ const[txtvalue,settxtvalue]=useState();
         O.Konfession=t
         break; 
       
-      //Sozialversicherung      
+      //Sozialversicherung 
+      case "Sozialversicherungsnummer"||"Social security number":
+        O.SVNummerfeld=t
+        break;     
       case "Sozialversicherungsnummer/Rentennummer"||"Social security number/pension number":
         O.SVNummerfeld=t
         break;
-      case "Staatsangehärigkeit"||"Nationality":
+      case "Staatsangehörigkeit"||"Nationality":
         O.Staatsbuergerschaft=t
         break;
       case "Geburtsdatum"||"Birth date":
@@ -99,6 +102,13 @@ const[txtvalue,settxtvalue]=useState();
       case "Krankenkasse (Bitte kompletter Name)"||"Health insurance company (full name please)":
         O.Kassename=t
         break;
+
+
+        //Minijob Arbeitsstatus
+
+        case "Bitte hier eintragen"|| "Please enter here":
+          O.Eintragsonstige=t
+          break;
     }
  
     props.SF(O) 
@@ -170,11 +180,14 @@ const[txtvalue,settxtvalue]=useState();
           O.Konfession.trim().toString().length>2?settxtvalue(O.Konfession.toString()):''
           break; 
         
-        //Sozialversicherung      
+        //Sozialversicherung 
+        case "Sozialversicherungsnummer"||"Social security number":
+          O.SVNummerfeld>2?settxtvalue(O.SVNummerfeld):''
+          break;     
         case "Sozialversicherungsnummer/Rentennummer"||"Social security number/pension number":
           O.SVNummerfeld>2?settxtvalue(O.SVNummerfeld):''
           break;
-        case "Staatsangehärigkeit"||"Nationality":
+        case "Staatsangehörigkeit"||"Nationality":
           O.Staatsbuergerschaft.trim().toString().length>0?settxtvalue(O.Staatsbuergerschaft.toString()):''
           break;
         case "Geburtsdatum"||"Birth date":
@@ -200,6 +213,11 @@ const[txtvalue,settxtvalue]=useState();
             O.Kassename.trim().toString().length>2?settxtvalue(O.Kassename.toString()):''
             break;
         
+            //Minijob Arbeitsstatus
+
+        case "Bitte hier eintragen"|| "Please enter here":
+          O.Eintragsonstige.trim().toString().length>0?settxtvalue(O.Eintragsonstige.toString()):''
+          break;
       }
 
     }

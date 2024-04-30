@@ -14,20 +14,23 @@ export default function JaNeinCheckbox1(props) {
   const JaNeinPruefer=(isChecked)=>{
     let O=props?.SV
         
-    if(checked1==1){
-      O.HauptjobCheck=(1)
+    if(isChecked==1){
+      O.HauptjobCheck=1
+      console.log('ich bin hier')
     }else{
-      O.HauptjobCheck=(2)
+      O.HauptjobCheck=2
+      console.log('change me')
   
     }
     props.SF(O) 
+    console.log('Box '+ O.HauptjobCheck)
   }
   
   
   return( <>
         <View style={styles.checkboxContainer}>
         <CheckBox
-          value={checked1==1?true:false}//true:false:false 
+          value={checked1==1?true:false}
           onValueChange={(isChecked) => {setChecked1(1) ,isChecked?JaNeinPruefer(1):""}}
           style={styles.checkbox}
           /><Text style={styles.beschreibung}>{Minijobtextdataset(sprache?'DE':'EN').CheckBoxTitel.Ja}</Text>

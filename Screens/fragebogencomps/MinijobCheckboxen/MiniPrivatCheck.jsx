@@ -12,9 +12,9 @@ export default function Privatcheck(props) {
    let O=props?.SV
     props.SF(O) 
    if(I==true){
-    O.SteueridCheck=(1)
+    O.KVArt=(1)
    }else{
-    O.SteueridCheck=(0)
+    O.KVArt=(0)
    } 
    
    

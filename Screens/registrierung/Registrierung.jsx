@@ -118,7 +118,10 @@ const Registrierung =()=>{
         const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
         let e = await d.json();
         if(e.ergebnis==true){
-          setErfolgscheck(true)  
+          setErfolgscheck(true)
+          setTimeout(()=>{
+            setErfolgscheck(false)
+          },6000)  
           let AO=AdminObject;
           AO.Benutzername=eingabe1;
           AO.PasswordSha256=sha256.create().update(eingabe2.toString()).digest().toHex()
@@ -137,9 +140,15 @@ const Registrierung =()=>{
         }
         else if(e.ergebnis=='DBerror'){//zeigt Datenbankfehler an keine speicherung
           setFehlercheck(true)
+          setTimeout(()=>{
+            setFehlercheck(false)
+          },6000)
           setFehlerText(true)
         }else{//Fehler bei der Eingabe füllen
           setFehlercheck(true)
+          setTimeout(()=>{
+            setFehlercheck(false)
+          },6000)
           setFehlerText(false)
           console.log('Fehler')
         }
@@ -151,6 +160,9 @@ const Registrierung =()=>{
 
     }else{
       setFehlercheck(true)
+      setTimeout(()=>{
+        setFehlercheck(false)
+      },6000)
       setFehlerText(false)
       setErfolgscheck(false)
     }
@@ -198,6 +210,30 @@ const Registrierung =()=>{
   return(
     <SafeAreaView style={styles.sav} >
       <ImageBackground source={image} resizeMode='cover' style={styles.image}>
+
+{
+      Erfolgscheck?
+      <View style={styles.abgespeichert}>
+        <Text style={{color:'black'}}>
+          {Textdataset(sprache?'DE':'EN').Texte.Speichernerfolgreich}
+        </Text></View>
+      :
+      ""
+} 
+
+  {
+    Fehlercheck?
+    <View style={styles.fehlermeldung}><Text style={{color:'#fff'}}>
+      {
+        FehlerText?
+        Textdataset(sprache?'DE':'EN').Texte.Fehlermeldungdatenbank
+        :
+        Textdataset(sprache?'DE':'EN').Texte.Fehlermeldung}
+      </Text></View>
+    :
+    ""
+  }
+      
       <ScrollView style={{backgroundColor: 'transparent'}}>
 <View style={styles.container}>
   <View style={styles.AdminButtonContainer}>
@@ -252,28 +288,7 @@ const Registrierung =()=>{
     </View>
 
 
-    {
-      Erfolgscheck?
-      <View style={styles.abgespeichert}>
-        <Text style={{color:'black'}}>
-          {Textdataset(sprache?'DE':'EN').Texte.Speichernerfolgreich}
-        </Text></View>
-      :
-      ""
-    } 
 
-  {
-    Fehlercheck?
-    <View style={styles.fehlermeldung}><Text style={{color:'#fff'}}>
-      {
-        FehlerText?
-        Textdataset(sprache?'DE':'EN').Texte.Fehlermeldungdatenbank
-        :
-        Textdataset(sprache?'DE':'EN').Texte.Fehlermeldung}
-      </Text></View>
-    :
-    ""
-  }
   
 <EingabeFeld  Icon={'User'}     Labname={'Benutzername'}   SF={seteingabe1}    />
 <EingabeFeld  Icon={'Pass'}     Labname={'Passwort'}       SF={seteingabe2}    />
@@ -461,6 +476,7 @@ const styles = StyleSheet.create({
     alignSelf:'center',
     borderColor: '#9d174d',
     borderRadius:6,
+    marginTop: 20,
     marginVertical:15,
     flexDirection: 'column',
     alignItems: 'flex-start',
@@ -474,6 +490,7 @@ const styles = StyleSheet.create({
     alignSelf:'center',
     borderColor: '#65a30d',
     borderRadius:6,
+    marginTop: 20,
     marginVertical:15,
     flexDirection: 'column',
     alignItems: 'flex-start',

@@ -14,10 +14,15 @@ import { Textdataset } from '../utils/Textdataset';
 import {Picker} from '@react-native-picker/picker';
 import { SachbearbeitungTextdataset } from '../utils/Sachbearbeitung/SachbearbeitungTextdataset';
 import * as SecureStore from 'expo-secure-store';
+import { EingabeFeld } from './fragebogencomps/textFeldcomp/EingabeFeld';
+import SimpelCheck from './fragebogencomps/sachbearbeitungsComps/SimpelCheck';
+
+
 
 export default function Seite2({route, navigation}) {
   console.log()
   const [sprache,setzesprache]=useContext(TransactionContext)
+  const [checked1, setChecked1] = useState(0)
   const [tab1,settab1]=useState(false)
   const [tab2,settab2]=useState(false)
   const [tab3,settab3]=useState(false)
@@ -43,28 +48,7 @@ export default function Seite2({route, navigation}) {
   return (
     <SafeAreaView style={styles.sav} >
       <ImageBackground source={image} resizeMode='cover' style={styles.image}>
-      <ScrollView style={{backgroundColor: 'transparent'}}>
-      <View style={styles.container}>
-      <View style={styles.AdminButtonContainer}>
-        <TouchableOpacity onPress={()=>navigation.pop()} style={styles.BackButton}> 
-        <Ionicons  name={'arrow-back'} color={'#FFFFFF'} style={{marginRight:8}}/>
-          <Text  style={{color:'#FFFFFF'} } >Back</Text>
-        </TouchableOpacity>
-        <View style={styles.SprachButton}>
-        <TouchableOpacity onPress={()=>setzesprache(!sprache)} style={styles.InsetSprachButton} > 
-          <Text style={{color:'#FFFFFF'}} >{sprache?'EN':'DE'}</Text>
-        </TouchableOpacity>
-        </View>
-        <TouchableOpacity onPress={()=>navigation.navigate({name:"Seite4",params:{PrivateDatenArr}})} style={styles.AdminButton}> 
-          <Text style={{color:'#FFFFFF'}} >Minijob</Text>
-        </TouchableOpacity>
-      </View>
-
-
-    {/**Angabensozialversicherung*/}
-    <View style={styles.ContainerFragebogen}>
-
-    {
+      {
       Erfolgscheck?
       <View style={styles.abgespeichert}>
         <Text style={{color:'black'}}>
@@ -86,11 +70,66 @@ export default function Seite2({route, navigation}) {
     :
     ""
   }
+      <ScrollView style={{backgroundColor: 'transparent'}}>
+      <View style={styles.container}>
+      <View style={styles.AdminButtonContainer}>
+        <TouchableOpacity onPress={()=>navigation.pop()} style={styles.BackButton}> 
+        <Ionicons  name={'arrow-back'} color={'#FFFFFF'} style={{marginRight:8}}/>
+          <Text  style={{color:'#FFFFFF'} } >Back</Text>
+        </TouchableOpacity>
+        <View style={styles.SprachButton}>
+        <TouchableOpacity onPress={()=>setzesprache(!sprache)} style={styles.InsetSprachButton} > 
+          <Text style={{color:'#FFFFFF'}} >{sprache?'EN':'DE'}</Text>
+        </TouchableOpacity>
+        </View>
+        <TouchableOpacity onPress={()=>navigation.navigate({name:"Seite4",params:{PrivateDatenArr}})} style={styles.AdminButton}> 
+          <Text style={{color:'#FFFFFF'}} >Minijob</Text>
+        </TouchableOpacity>
+      </View>
+
+
+    {/**Angaben der Sachbearbeitung*/}
+    <View style={styles.ContainerFragebogen}>
+
+      <Text style={styles.Titel}>Sachbearbeitungsbogen für Festpersonal</Text>
+
+    
     <TitleTouch  F={settab3} S={tab3} T={SachbearbeitungTextdataset(sprache?"DE":"EN").Titel.Zeiten} />
     {
       tab3?
       <>
       
+      <EingabeFeld Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Eintrittsdatum}/>
+      <EingabeFeld Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Enddatum}/>
+      
+      <EingabeFeld Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Job}/>
+      
+      <EingabeFeld Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.ZeitGesamt}/>
+      <Text style={styles.Textelemente}>{SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.ZeitTag}</Text>
+
+      <SimpelCheck Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Mo}/>
+      <EingabeFeld Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Mo}/>
+      
+      <SimpelCheck Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Di}/>
+      <EingabeFeld Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Di}/>
+      
+      <SimpelCheck Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Mi}/>
+      <EingabeFeld Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Mi}/>
+      
+      <SimpelCheck Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Do}/>
+      <EingabeFeld Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Do}/>
+      
+      <SimpelCheck Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Fr}/>
+      <EingabeFeld Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Fr}/>
+      
+      <SimpelCheck Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Sa}/>
+      <EingabeFeld Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Sa}/>
+      
+      <SimpelCheck Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.So}/>
+      <EingabeFeld Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.So}/>
+
+      <EingabeFeld Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Urlaub}/>
+
       </>
       :
       ""
@@ -112,7 +151,17 @@ export default function Seite2({route, navigation}) {
     {
       tab1?
       <>
-      
+      <Text style={styles.Titelklein}>{SachbearbeitungTextdataset(sprache?"DE":"EN").Entlohnungtitel.Lohn}</Text>
+      <SimpelCheck Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Sl}/>
+      <EingabeFeld Icon={"Sachbearbeitung"}/>
+      <EingabeFeld Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Sl}/>
+      <EingabeFeld Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Fl}/>
+      <EingabeFeld Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Fg}/>
+
+      <Text style={styles.Titelklein}>{SachbearbeitungTextdataset(sprache?"DE":"EN").Entlohnungtitel.Zuschlag}</Text>
+      <SimpelCheck Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Entlohnungtitel.Lohn}/>
+      <SimpelCheck Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Mi}/>
+      <EingabeFeld Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Besondere}/>
       </>
       :
       ""
@@ -134,6 +183,10 @@ export default function Seite2({route, navigation}) {
       tab2?
       <>
       
+      <SimpelCheck Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").NachweisCheckliste.CheckSteuerid}/>
+      <SimpelCheck Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").NachweisCheckliste.CheckArbeitsvertrag}/>
+      <SimpelCheck Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").NachweisCheckliste.Erlaubnis}/>
+      <SimpelCheck Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").NachweisCheckliste.GesundCheck}/>
       </>
       :
       ""
@@ -239,7 +292,17 @@ const styles = StyleSheet.create({
       width:'25%', 
     },
     Titel:{
-      fontSize:35,
+      fontSize:30,
+      marginHorizontal:'10%',
+      marginVertical:20,
+      textShadowColor:'#000',
+      textShadowRadius:5,
+      textShadowOffset:{width:3,height:3},
+      color:'#FFF',
+    },
+    Titelklein:{
+      fontSize:20,
+      marginHorizontal: '10%',
       marginTop:20,
       textShadowColor:'#000',
       textShadowRadius:5,
@@ -258,8 +321,20 @@ const styles = StyleSheet.create({
       alignSelf:'center',
       paddingVertical:15,
     },
+
+    Reihe:{
+      paddingHorizontal:10,
+      marginHorizontal:30,
+      width:'80%',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent:'space-between'
+    },
     Textelemente:{
-      color:'#fff'
+      color:'#fff',
+      fontSize: 18,
+      paddingHorizontal:10,
+      paddingVertical:10,
     },
     Abspeichern:{
       alignSelf: 'flex-end',
@@ -283,6 +358,7 @@ const styles = StyleSheet.create({
       alignSelf:'center',
       borderColor: '#9d174d',
       borderRadius:6,
+      marginTop: 20,
       marginVertical:15,
       flexDirection: 'column',
       alignItems: 'flex-start',
@@ -296,6 +372,7 @@ const styles = StyleSheet.create({
       alignSelf:'center',
       borderColor: '#65a30d',
       borderRadius:6,
+      marginTop: 20,
       marginVertical:15,
       flexDirection: 'column',
       alignItems: 'flex-start',

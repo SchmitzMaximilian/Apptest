@@ -139,7 +139,7 @@ console.log(PrivateDatenArr)
           setErfolgscheck(true)  
           setTimeout(()=>{
             setErfolgscheck(false)
-          },4000)
+          },6000)
           settab3ausgefuellt(true)
           settab3(false)
           console.log('speichertestyeah')
@@ -149,14 +149,14 @@ console.log(PrivateDatenArr)
           setFehlerText(true)
           setTimeout(()=>{
             setFehlercheck(false)
-          },4000)
+          },6000)
           console.log('no Update')
         }else{//Fehler bei der Eingabe füllen
           setFehlercheck(true)
           setFehlerText(false)
           setTimeout(()=>{
             setFehlercheck(false)
-          },4000)
+          },6000)
           console.log('Fehler')
         }
       }
@@ -169,7 +169,7 @@ console.log(PrivateDatenArr)
       setFehlerText(false)
       setTimeout(()=>{
         setFehlercheck(false)
-      },4000)
+      },6000)
       setErfolgscheck(false)
     }
   }
@@ -192,7 +192,7 @@ console.log(PrivateDatenArr)
       check=false
       console.log('ich binfals3')
     } 
-    if(!(PrivateDatenArr.Vname.trim().toString().length>2)){
+    if(!(PrivateDatenArr.Vname.trim().toString().length>1)){
       check=false
       console.log('ich binfals4')
     }
@@ -239,7 +239,7 @@ console.log(PrivateDatenArr)
           setErfolgscheck(true)
           setTimeout(()=>{
             setErfolgscheck(false)
-          },4000)
+          },6000)
           settab1(false)
           settab1ausgefuellt(true)
           setmitarbeiterID(e.ergebnis)
@@ -253,14 +253,14 @@ console.log(PrivateDatenArr)
           setFehlerText(true)
           setTimeout(()=>{
             setFehlercheck(false)
-          },4000)
+          },6000)
           console.log('no Update')
         }else{//Fehler bei der Eingabe füllen
           setFehlercheck(true)
           setFehlerText(false)
           setTimeout(()=>{
             setFehlercheck(false)
-          },4000)
+          },6000)
           console.log('Fehler')
         }
       }
@@ -273,7 +273,7 @@ console.log(PrivateDatenArr)
       setFehlerText(false)
       setTimeout(()=>{
         setFehlercheck(false)
-      },4000)
+      },6000)
       setErfolgscheck(false)
     }
   }
@@ -318,7 +318,7 @@ console.log(PrivateDatenArr)
           setErfolgscheck(true) 
           setTimeout(()=>{
             setErfolgscheck(false)
-          },4000)
+          },6000)
           settab2(false)
           settab2ausgefuellt(true)
         }
@@ -328,13 +328,13 @@ console.log(PrivateDatenArr)
           setFehlerText(true)
           setTimeout(()=>{
             setFehlercheck(false)
-          },4000)
+          },6000)
         }else{//Fehler bei der Eingabe füllen
           setFehlercheck(true)
           setFehlerText(false)
           setTimeout(()=>{
             setFehlercheck(false)
-          },4000)
+          },6000)
           console.log('Fehler')
         }
       }
@@ -347,7 +347,7 @@ console.log(PrivateDatenArr)
       setFehlerText(false)
       setTimeout(()=>{
         setFehlercheck(false)
-      },4000)
+      },6000)
       setErfolgscheck(false)
     }
   }
@@ -390,7 +390,7 @@ console.log(PrivateDatenArr)
           setErfolgscheck(true)
           setTimeout(()=>{
             setErfolgscheck(false)
-          },4000)
+          },6000)
           settab4(false)
           settab4ausgefuellt(true)
           console.log('speichertestyeah')
@@ -401,13 +401,13 @@ console.log(PrivateDatenArr)
           setFehlerText(true)
           setTimeout(()=>{
             setFehlercheck(false)
-          },4000)
+          },6000)
         }else{//Fehler bei der Eingabe füllen
           setFehlercheck(true)
           setFehlerText(false)
           setTimeout(()=>{
             setFehlercheck(false)
-          },4000)
+          },6000)
           console.log('Fehler')
         }
       }
@@ -420,7 +420,7 @@ console.log(PrivateDatenArr)
       setFehlerText(false)
       setTimeout(()=>{
         setFehlercheck(false)
-      },4000)
+      },6000)
       setErfolgscheck(false)
       
     }
@@ -463,7 +463,7 @@ console.log(PrivateDatenArr)
           setErfolgscheck(true)
           setTimeout(()=>{
             setErfolgscheck(false)
-          },4000)
+          },6000)
           settab5(false)
           settab5ausgefuellt(true)
           console.log('speichertestyeah')
@@ -473,13 +473,13 @@ console.log(PrivateDatenArr)
           setFehlerText(true)
           setTimeout(()=>{
             setFehlercheck(false)
-          },4000)
+          },6000)
         }else{//Fehler bei der Eingabe füllen
           setFehlercheck(true)
           setFehlerText(false)
           setTimeout(()=>{
             setFehlercheck(false)
-          },4000)
+          },6000)
           console.log('Fehler')
         }
       }
@@ -492,7 +492,7 @@ console.log(PrivateDatenArr)
       setFehlerText(false)
       setTimeout(()=>{
         setFehlercheck(false)
-      },4000)
+      },6000)
       setErfolgscheck(false)
     }
   }
@@ -526,7 +526,7 @@ if(check){
           setErfolgscheck(true)
           setTimeout(()=>{
             setErfolgscheck(false)
-          },4000)
+          },6000)
           settab6(false)
           settab6ausgefuellt(true)  
           console.log('speichertestyeah')
@@ -537,7 +537,7 @@ if(check){
           setFehlerText(true)
           setTimeout(()=>{
             setFehlercheck(false)
-          },4000)
+          },6000)
           console.log('no Update')
         }else{//Fehler bei der Eingabe füllen
           
@@ -545,7 +545,7 @@ if(check){
           setFehlerText(false)
           setTimeout(()=>{
             setFehlercheck(false)
-          },4000)
+          },6000)
           console.log('Fehler')
         }
       }
@@ -558,7 +558,7 @@ if(check){
       setFehlerText(false)
       setTimeout(()=>{
         setFehlercheck(false)
-      },4000)
+      },6000)
       setErfolgscheck(false)
     }
   }
@@ -569,7 +569,7 @@ if(check){
     setFehlerText(false)
     setErfolgscheck(false) 
     let check=true
-console.log('HJC '+PrivateDatenArr.HauptjobCheck,'WJC '+PrivateDatenArr.WeitereJobCheck,'GGC '+PrivateDatenArr.GeldGrenzeCheck)
+
     if(PrivateDatenArr.HauptjobCheck==0){
       check=false
     }
@@ -580,7 +580,7 @@ console.log('HJC '+PrivateDatenArr.HauptjobCheck,'WJC '+PrivateDatenArr.WeitereJ
     }else if(PrivateDatenArr.WeitereJobCheck==0){
       check=false
     }
-    console.log(check)
+    
 if(check){
       try{
         const request ={
@@ -603,7 +603,7 @@ if(check){
           setErfolgscheck(true)
           setTimeout(()=>{
             setErfolgscheck(false)
-          },4000)
+          },6000)
           settab7(false)
           settab7ausgefuellt(true)  
           console.log('speichertestyeah')
@@ -613,7 +613,7 @@ if(check){
           setFehlerText(true)
           setTimeout(()=>{
             setFehlercheck(false)
-          },4000)
+          },6000)
           console.log('no Update')
         }else{//Fehler bei der Eingabe füllen
           
@@ -621,7 +621,7 @@ if(check){
           setFehlerText(false)
           setTimeout(()=>{
             setFehlercheck(false)
-          },4000)
+          },6000)
           console.log('Fehler')
         }
       }
@@ -634,7 +634,7 @@ if(check){
       setFehlerText(false)
       setTimeout(()=>{
         setFehlercheck(false)
-      },4000)
+      },6000)
       setErfolgscheck(false)
     }
   }
@@ -647,6 +647,13 @@ if(check){
     if(!PrivateDatenArr.Kassename.trim().toString.length>2){
       check=false
     }
+    if(PrivateDatenArr.KVArt==1){
+      PrivateDatenArr.KVArt=3
+    }
+    console.log("   ")
+    console.log(check)
+    console.log(PrivateDatenArr.Kassename)
+    console.log(PrivateDatenArr.KVArt)
 if(check){
       try{
         const request ={
@@ -655,7 +662,7 @@ if(check){
           body: JSON.stringify({
             "query": 14,
             "kassename":PrivateDatenArr.Kassename.toString().trim(),
-            "binprivatamstart":PrivateDatenArr.KVArt.toString().trim(),
+            "privatCheck":PrivateDatenArr.KVArt.toString().trim(),
             "mitarbeiterID":mitarbeiterID
             //
           })
@@ -666,7 +673,7 @@ if(check){
           setErfolgscheck(true)
           setTimeout(()=>{
             setErfolgscheck(false)
-          },4000)
+          },6000)
           settab8(false)
           settab8ausgefuellt(true)  
           console.log('speichertestyeah')
@@ -676,7 +683,7 @@ if(check){
           setFehlerText(true)
           setTimeout(()=>{
             setFehlercheck(false)
-          },4000)
+          },6000)
           console.log('no Update')
         }else{//Fehler bei der Eingabe füllen
           
@@ -684,7 +691,7 @@ if(check){
           setFehlerText(false)
           setTimeout(()=>{
             setFehlercheck(false)
-          },4000)
+          },6000)
           console.log('Fehler')
         }
       }
@@ -697,7 +704,7 @@ if(check){
       setFehlerText(false)
       setTimeout(()=>{
         setFehlercheck(false)
-      },4000)
+      },6000)
       setErfolgscheck(false)
     }
   }
@@ -717,6 +724,29 @@ if(check){
   return (
     <SafeAreaView style={styles.sav} backgroundColor={'#335155'}>
       <ImageBackground source={image} resizeMode='cover' style={styles.image}>
+
+        {
+    Fehlercheck?
+    <View style={styles.fehlermeldung}><Text style={{color:'#fff'}}>
+      {
+        FehlerText?
+        Textdataset(sprache?'DE':'EN').Texte.Fehlermeldungdatenbank
+        :
+        Textdataset(sprache?'DE':'EN').Texte.Fehlermeldung}
+      </Text></View>
+    :
+    ""
+  }
+
+  {
+      Erfolgscheck?
+      <View style={styles.abgespeichert}>
+        <Text style={{color:'black'}}>
+          {Textdataset(sprache?'DE':'EN').Texte.Speichernerfolgreich}
+        </Text></View>
+      :
+      ""
+    }
       <ScrollView style={{backgroundColor: 'transparent'}}>
       <View style={styles.container}>
       <View style={styles.AdminButtonContainer}>
@@ -746,28 +776,9 @@ if(check){
     <SelectPicker S={sprache?'DE':'EN'} V={true} I={5} SV={PrivateDatenArr} SF={setPrivateDatenArr} />
     <Text style={{color:'#fff', marginHorizontal: '10%',paddingVertical:10}}>{Minijobtextdataset(sprache?'DE':'EN').Texte.Rechtsbelehrung}</Text>
   </View>
-  {
-      Erfolgscheck?
-      <View style={styles.abgespeichert}>
-        <Text style={{color:'black'}}>
-          {Textdataset(sprache?'DE':'EN').Texte.Speichernerfolgreich}
-        </Text></View>
-      :
-      ""
-    } 
+   
 
-  {
-    Fehlercheck?
-    <View style={styles.fehlermeldung}><Text style={{color:'#fff'}}>
-      {
-        FehlerText?
-        Textdataset(sprache?'DE':'EN').Texte.Fehlermeldungdatenbank
-        :
-        Textdataset(sprache?'DE':'EN').Texte.Fehlermeldung}
-      </Text></View>
-    :
-    ""
-  }
+  
   <View style={{flexDirection:'column', width:'100%',paddingTop:10}}>
 
 
@@ -1129,6 +1140,7 @@ const styles = StyleSheet.create({
     alignSelf:'center',
     borderColor: '#9d174d',
     borderRadius:6,
+    marginTop: 20,
     marginVertical:15,
     flexDirection: 'column',
     alignItems: 'flex-start',
@@ -1142,6 +1154,7 @@ const styles = StyleSheet.create({
     alignSelf:'center',
     borderColor: '#65a30d',
     borderRadius:6,
+    marginTop: 20,
     marginVertical:15,
     flexDirection: 'column',
     alignItems: 'flex-start',

@@ -33,6 +33,9 @@ const LeftIcon = (props) => {
     case "Steuer":
       Icon='checklist'
       break;
+      case "Sachbearbeitung":
+        Icon='file'
+        break;
     default:
       Icon='lock'
       break;

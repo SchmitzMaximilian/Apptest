@@ -26,6 +26,35 @@ export const Textdataset=(p)=>{
       "Steuer":"Ich erkläre, nicht im Besitz einer Steuer-ID zu sein",
       "OtherJobs":"Name Ihrer anderen Arbeitgeber",
     },
+    "Fehler":{
+      //Name und Anschrift
+      "Vorname":"Ein gültiger Vorname besteht aus mindestens ZWEI Buchstaben",
+      "Nachname":"Bitte geben Sie Ihren Nachnamen an",
+      "Straße":"Bitte geben Sie Ihre Adresse an",
+      "PLZ":"Die Postleitzahl besteht aus GENAU FÜNF Zahlen",
+      "Wohnort":"Bitte geben Sie Ihren Wohnort an",
+      //Kommunikation
+      "Festnetz":"",
+      "Mobil":"",
+      "Email":"",
+      //Bankverbindung
+      "Bankname":"Bitte geben Sie den Namen Ihrer Bank an",
+      "Iban":"Ihre IBAN besteht aus GENAU 22 Zeichen, stellen Sie außerdem sicher, dass die angegebene IBAN gültig ist",
+      "Inhaber":"",
+      //Steuer
+      "Steuer-ID":"Stellen Sie sicher, dass Sie eine gültige Steuer-ID angeben",
+      "Steuerklasse":"Steuerklassen gehen nur von 1 bis 6",
+      "AnzahlKinder":"",
+      "Konfession":"Bitte geben Sie Ihre Konfession an",
+      //Sozialversicherung
+      "Rentennummer":"Ihre Rentennummer besteht aus GENAU 12 Zahlen, bitte überprüfen Sie die Gültigkeit der angegebenen Rentennummer",
+      "Staatsangehörigkeit":"Bitte geben Sie Ihre Staatsangehörigkeit an",
+      "GBDatum":"",
+      "GBOrt":"Bitte geben Sie Ihren Geburtssort an",
+      "GBLand":"Ihre Angabe muss mindstens 4 Buchstaben enthalten",
+      "Krankenkasse":"",
+      "Arbeitgeberliste":"",
+    },
   } 
 }else{
   TextData={
@@ -52,6 +81,35 @@ export const Textdataset=(p)=>{
     "Bank":"Cash payment",
     "Steuer":"I declare that I do not have a tax ID",
     "OtherJobs":"Name of your other employers",
+  },
+  "Fehler":{
+    //Name und Anschrift
+    "Vorname":"",
+    "Nachname":"",
+    "Straße":"",
+    "PLZ":"",
+    "Wohnort":"",
+    //Kommunikation
+    "Festnetz":"",
+    "Mobil":"",
+    "Email":"",
+    //Bankverbindung
+    "Bankname":"",
+    "Iban":"",
+    "Inhaber":"",
+    //Steuer
+    "Steuer-ID":"",
+    "Steuerklasse":"",
+    "AnzahlKinder":"",
+    "Konfession":"",
+    //Sozialversicherung
+    "Rentennummer":"",
+    "Staatsangehörigkeit":"",
+    "GBDatum":"",
+    "GBOrt":"",
+    "GBLand":"",
+    "Krankenkasse":"",
+    "Arbeitgeberliste":"",
   },
   } 
 }

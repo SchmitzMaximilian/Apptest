@@ -39,6 +39,9 @@ export default function Seite1({navigation}) {
   const [Fehlercheck,setFehlercheck]=useState(false)
   const [FehlerText,setFehlerText]=useState(false)
   const [Erfolgscheck,setErfolgscheck]=useState(false)
+  const [Fehlernummer,setFehlernummer]=useState(0)
+
+
   const [PrivateDatenArr,setPrivateDatenArr]=useState(PersoenlicheDatenObject)    
   const [mitarbeiterID,setmitarbeiterID]=useState(0)//Nach dem testen wieder auf 0 setzen
   const [image,setimage]=useState({uri: 'https://images.unsplash.com/photo-1622743941533-cde694bff56a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fE5pZ2h0Y2x1YnxlbnwwfHwwfHx8MA%3D%3D'})
@@ -93,6 +96,8 @@ export default function Seite1({navigation}) {
     if(PrivateDatenArr.GBLand==0){
       PrivateDatenArr.GBLand='Deutschland'
       
+    }else if(!PrivateDatenArr.GBLand>3){
+      check=false
     }
     if(!PrivateDatenArr.Kassename.trim().toString().length>0){
       check=false
@@ -182,6 +187,7 @@ console.log(PrivateDatenArr)
     if(!(PrivateDatenArr.BewerberStandort>0)){
             check=false
             console.log('ich binfals1')
+            
     } 
     if(!(PrivateDatenArr.ArbeitsGrundlage>0)){
       check=false 
@@ -194,8 +200,9 @@ console.log(PrivateDatenArr)
     if(!(PrivateDatenArr.Vname.trim().toString().length>1)){
       check=false
       console.log('ich binfals4')
+      setFehlernummer()=1
     }
-    if(!(PrivateDatenArr.Nname.trim().toString().length>2)){
+    if(!(PrivateDatenArr.Nname.trim().toString().length>0)){
       check=false
       console.log('ich binfals5')
     }
@@ -208,7 +215,7 @@ console.log(PrivateDatenArr)
       check=false
       console.log('ich binfals7')
     }
-    if(!(PrivateDatenArr.City.trim().toString().length>2)){
+    if(!(PrivateDatenArr.City.trim().toString().length>1)){
       check=false
       console.log('ich binfals8')
     }

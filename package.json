@@ -27,7 +27,8 @@
     "react-native-gesture-handler": "~2.14.0",
     "react-native-ui-lib": "^7.19.0",
     "react-native-web": "~0.19.6",
-    "validate-steuerid": "^1.0.4"
+    "validate-steuerid": "^1.0.4",
+    "@react-native-community/datetimepicker": "7.6.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

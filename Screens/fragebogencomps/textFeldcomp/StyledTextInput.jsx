@@ -223,11 +223,12 @@ const[txtvalue,settxtvalue]=useState();
     }
    useEffect(()=>{
     lastEingabe()
-   },[])
+    console.log(props.BGInfo)
+   },[props.BGInfo])
   return ( 
   <View>  
-      <LeftIcon P={props.Icon}/>
-      <TextInput  style={styles.StyledInputLabel} onChangeText={text=>textChangeHandler(text)} value={txtvalue}  placeholder={props.Labname} placeholderTextColor={'#f1f5f9'}> 
+      <LeftIcon P={props.Icon} BGInfo={props.BGInfo}/>
+      <TextInput  style={styles(props.BGInfo).StyledInputLabel} onChangeText={text=>textChangeHandler(text)} value={txtvalue}  placeholder={props.Labname} placeholderTextColor={'#f1f5f9'}> 
       </TextInput>  
     </View>
   )
@@ -235,7 +236,7 @@ const[txtvalue,settxtvalue]=useState();
 
 export default StyledTextInput
 
-const styles = StyleSheet.create({
+const styles = (t)=>StyleSheet.create({
   StyledInputLabel : {
     color: '#FFF',
     fontSize:16,
@@ -251,7 +252,8 @@ const styles = StyleSheet.create({
     borderRadius:6,
     marginVertical:15,
     color:'#f8fafc',
-    backgroundColor:'#6b728090'
+    zIndex:10,
+    backgroundColor: t==0?'#6b728090':'#FF000060'
   },
 
 

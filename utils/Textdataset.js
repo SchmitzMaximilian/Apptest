@@ -84,11 +84,11 @@ export const Textdataset=(p)=>{
   },
   "Fehler":{
     //Name und Anschrift
-    "Vorname":"",
-    "Nachname":"",
-    "Straße":"",
-    "PLZ":"",
-    "Wohnort":"",
+    "Vorname":"A valid first name consists of at least TWO letters",
+    "Nachname":"Please enter your last name",
+    "Straße":"Please give your adress",
+    "PLZ":"The zip code consists of EXACTLY FIVE numbers",
+    "Wohnort":"Please indicate your place of residence",
     //Kommunikation
     "Festnetz":"",
     "Mobil":"",

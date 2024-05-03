@@ -13,7 +13,7 @@ export const Dataset=(p)=>{
     "PerData":
     {
       "Eingabefelder":["Vorname","Nachname","Straße und Hausnummer","Postleitzahl","Wohnort"],
-      "EingabefelderIcons":["User","User","User","User","User"],
+      "EingabefelderIcons":["User","User","User","User","User"], 
     },
     "KontaktData":
     {
@@ -23,8 +23,8 @@ export const Dataset=(p)=>{
     },
     "SozialData":
     {
-      "Eingabefelder":["Staatsangehörigkeit","Geburtsdatum","Geburtsort (Pflichtangabe)","Geburtsland (nur falls nicht Deutschland)","Krankenkasse (Bitte kompletter Name, also zB. AOK NordWest, nicht AOK)"],
-      "EingabefelderIcons":["Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung"],
+      "Eingabefelder":["Staatsangehörigkeit","Geburtsort (Pflichtangabe)","Geburtsland (nur falls nicht Deutschland)","Krankenkasse (Bitte kompletter Name, also zB. AOK NordWest, nicht AOK)"],
+      "EingabefelderIcons":["Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung"],
     },
     "BankData":
     {
@@ -43,7 +43,7 @@ export const Dataset=(p)=>{
       "PerData":
       {
         "Eingabefelder":["Firstname","Surname","Street name and house number","Postal Code","Location / City name"],
-        "EingabefelderIcons":["User","User","User","User","User"],
+        "EingabefelderIcons":["User","User","User","User","User"], 
       },
       "KontaktData":
       {
@@ -52,8 +52,8 @@ export const Dataset=(p)=>{
       },
       "SozialData":
     {
-      "Eingabefelder":["Nationality","Birth date","Place of birth (mandatory)","Country of birth (only if not Germany)","Health insurance company (please complete name, e.g. AOK NordWest, not AOK)"],
-      "EingabefelderIcons":["Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung"],
+      "Eingabefelder":["Nationality","Place of birth (mandatory)","Country of birth (only if not Germany)","Health insurance company (please complete name, e.g. AOK NordWest, not AOK)"],
+      "EingabefelderIcons":["Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung"],
     },
     "BankData":
     {

@@ -1,5 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import Fragebogen from '../Screens/pages/Festfragebogen'
 import Seite1 from '../Screens/Seite1';
 import Seite2 from '../Screens/Seite2';
 import Seite3 from '../Screens/Seite3';

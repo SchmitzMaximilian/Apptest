@@ -5,11 +5,15 @@ import LANG from './../lang/lang';
 import Blocktop from './component/seite1comp/blocktop'; 
 import { TransactionContext } from '../utils/Context'; 
 import {Octicons, Ionicons} from '@expo/vector-icons';
+
 import Container from './fragebogencomps/containercomp/Container';
+import SelectPicker from './fragebogencomps/selectBoxencomp/PickerSelectBox'; 
+
+
+
 import TitleTouch from './fragebogencomps/touchTitle/TitleTouch';
 import { Dataset } from '../utils/Dataset';
 import { Textdataset } from '../utils/Textdataset';
-import SelectPicker from './fragebogencomps/selectBoxencomp/PickerSelectBox'; 
 import SteuerID from './fragebogencomps/selectBoxencomp/SteuerCheckbox';
 import { ScrollView } from 'react-native-gesture-handler';
 import PersoenlicheDatenObject from '../utils/Objects/PersoenlicheDatenObject'; 
@@ -19,6 +23,8 @@ import * as SecureStore from 'expo-secure-store';
 import {Picker} from '@react-native-picker/picker';
 import SVNummer from './fragebogencomps/selectBoxencomp/SozialCheckbox';
 import { EingabeFeld } from './fragebogencomps/textFeldcomp/EingabeFeld';
+//import Fehlermeldung from './fragebogencomps/anzeigefelder/Fehlermeldung';
+import  DateTimePicker  from '@react-native-community/datetimepicker';
 
 export default function Seite1({navigation}) {
   const [sprache,setzesprache]=useContext(TransactionContext)  
@@ -30,7 +36,7 @@ export default function Seite1({navigation}) {
   const [tab3,settab3]=useState(false)
   const [tab3ausgefuellt,settab3ausgefuellt]=useState(false)
   const [SVCheck,setSVCheck]=useState(false) 
-  const [JobCheck,setJobCheck]=useState(false) 
+  const [JobCheck,setJobCheck]=useState(false)  
   const [SelectedLanguage, setSelectedLanguage] = useState();
   const [tab4,settab4]=useState(false)
   const [tab4ausgefuellt,settab4ausgefuellt]=useState(false)
@@ -39,6 +45,18 @@ export default function Seite1({navigation}) {
   const [Fehlercheck,setFehlercheck]=useState(false)
   const [FehlerText,setFehlerText]=useState(false)
   const [Erfolgscheck,setErfolgscheck]=useState(false)
+
+  const [nameAnschriftBG,setnameAnschriftBG]=useState([0,0,0,0,0])
+  
+  const [bankBG,setbankBG]=useState([0,0,0])
+  const [steuerBG,setsteuerBG]=useState([0,0,0,0])
+
+  const [rentennummerBG,setrentennummerBG]=([0])  
+  const [soziBG,setsoziBG]=useState([0,0,0,0])
+  const [sonderfall,setsonderfall]=useState([0])
+
+
+  const [Fehlercheckindividuell,setFehlercheckindividuell]=useState(false)
   const [Fehlernummer,setFehlernummer]=useState(0)
 
 
@@ -59,6 +77,20 @@ export default function Seite1({navigation}) {
   //PrivateDatenArr.Geschlecht
 
 
+  const [date, setDate] = useState(new Date());
+  const [dateText, setDateText] = useState("Geburtsdatum")
+  const [showdatePicker,setshowdatePicker] = useState(false);
+ 
+const handleChange = (event, selectedDate) => {  
+  const currentDate = selectedDate; 
+  setDate(currentDate);
+  setDateText(currentDate.toLocaleDateString('de-DE'))
+  let Obj=PrivateDatenArr
+  Obj.GBDatum=Intl.DateTimeFormat('de-DE',{dateStyle:'short'}).format(currentDate).toString()
+  setPrivateDatenArr(Obj)
+  setshowdatePicker(false)
+    };
+
   //Seite2 Integration Sozial Inhaltsspeicherung
 
   const selectPruefer=(T)=>{
@@ -76,43 +108,63 @@ export default function Seite1({navigation}) {
     setFehlercheck(false)
     setFehlerText(false)
     setErfolgscheck(false)
+    let Arr=[]
     let check=true 
     console.log(["ssjds",PrivateDatenArr])
-    if(!PrivateDatenArr.RentenCheck>0){
+    if(!(PrivateDatenArr.RentenCheck>0)){
       if(PrivateDatenArr.SVNummerfeld==0){
       check=false
-    }
+      setrentennummerBG([1])
+      }else{
+        setrentennummerBG([0])
+      }
     }  
     
-    if(!PrivateDatenArr.Staatsbuergerschaft.trim().toString().length>0){
+    if(!(PrivateDatenArr.Staatsbuergerschaft.trim().toString().length>0)){
+      check=false
+      Arr.push(1)
+    }else{
+      Arr.push(0)
+    }
+    if(!(PrivateDatenArr.GBDatum.trim().toString().length>0)){
       check=false
     }
-    if(!PrivateDatenArr.GBDatum.trim().toString().length>0){
+    if(!(PrivateDatenArr.GBOrt.trim().toString().length>0)){
       check=false
-    }
-    if(!PrivateDatenArr.GBOrt.trim().toString().length>0){
-      check=false
+      Arr.push(1)
+    }else{
+      Arr.push(0)
     }
     if(PrivateDatenArr.GBLand==0){
       PrivateDatenArr.GBLand='Deutschland'
       
-    }else if(!PrivateDatenArr.GBLand>3){
+    }else if(!(PrivateDatenArr.GBLand>3)){
       check=false
+      Arr.push(1)
+    }else{
+      Arr.push(0)
     }
-    if(!PrivateDatenArr.Kassename.trim().toString().length>0){
+    if(!(PrivateDatenArr.Kassename.trim().toString().length>0)){
       check=false
+      Arr.push(1)
+    }else{
+      Arr.push(0)
     } 
-    if(!PrivateDatenArr.KVArt>0){
+    if(!(PrivateDatenArr.KVArt>0)){
       check=false
     }
 
     if(PrivateDatenArr.KVArt==4){
-      if(!PrivateDatenArr.AndereArbeitgeber.trim().toString().length>4){
+      if(!(PrivateDatenArr.AndereArbeitgeber.trim().toString().length>4)){
       check=false
+      setsonderfall([1])
+    }else{
+      setsonderfall([0])
     } 
     }
      
 console.log(PrivateDatenArr)
+  setsoziBG(Arr)
     if(check){
       try{
         const request ={
@@ -133,7 +185,7 @@ console.log(PrivateDatenArr)
           })
         };
         console.log(request.body)
-        const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
+        const d = await fetch('http://192.168.2.44/datenbankapi/index.php', request);
         let e = await d.json();
         console.log(e)
         if(e.ergebnis==true){
@@ -166,6 +218,7 @@ console.log(PrivateDatenArr)
       }
     }else{
       //
+      setsoziBG(Arr)
       setFehlercheck(true)
       setFehlerText(false)
       setTimeout(()=>{
@@ -181,7 +234,7 @@ console.log(PrivateDatenArr)
     setFehlercheck(false)
     setFehlerText(false)
     setErfolgscheck(false)
-    
+    let Arr=[]
     console.log(PrivateDatenArr)
     let check=true
     if(!(PrivateDatenArr.BewerberStandort>0)){
@@ -198,29 +251,50 @@ console.log(PrivateDatenArr)
       console.log('ich binfals3')
     } 
     if(!(PrivateDatenArr.Vname.trim().toString().length>1)){
-      check=false
+      check=false;
+      Arr.push(1)
       console.log('ich binfals4')
-      setFehlernummer()=1
+      setFehlernummer(1)
+    }else{
+      Arr.push(0)
     }
     if(!(PrivateDatenArr.Nname.trim().toString().length>0)){
       check=false
       console.log('ich binfals5')
+      setFehlernummer(2)
+      Arr.push(1)
+    }else{
+      Arr.push(0)
     }
     
     if(!(PrivateDatenArr.Adresse.trim().toString().length>2)){
       check=false
       console.log('ich binfals6')
+      setFehlernummer(3)
+      Arr.push(1)
+    }else{
+      Arr.push(0)
     }
-    if(!(PrivateDatenArr.PCode.trim().toString().length==5)){
+    console.log(PrivateDatenArr.PCode)
+    if((PrivateDatenArr.PCode==0) || (PrivateDatenArr.PCode.trim().toString().length!=5)){
       check=false
       console.log('ich binfals7')
+      setFehlernummer(4)
+      Arr.push(1)
+    }else{
+      Arr.push(0)
     }
     if(!(PrivateDatenArr.City.trim().toString().length>1)){
       check=false
       console.log('ich binfals8')
+      setFehlernummer(5)
+      Arr.push(1)
+    }else{
+      Arr.push(0)
     }
-
+    console.log(check)
     if(check){
+      setnameAnschriftBG(Arr)
       try{
         const request ={
           method: 'POST',
@@ -239,8 +313,9 @@ console.log(PrivateDatenArr)
             //"username":eingabe1.toString(), teilzeit check box einbinden
           })
         };
-        const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
+        const d = await fetch('http://192.168.2.44/datenbankapi/index.php', request);
         let e = await d.json(); 
+        console.log(d)
         if(e.ergebnis>0 &&(!isNaN(e.ergebnis))){
           setErfolgscheck(true)
           setTimeout(()=>{
@@ -275,6 +350,7 @@ console.log(PrivateDatenArr)
       }
     }else{
       //
+      setnameAnschriftBG(Arr)
       setFehlercheck(true)
       setFehlerText(false)
       setTimeout(()=>{
@@ -289,20 +365,13 @@ console.log(PrivateDatenArr)
   const submitdata2=async()=>{
     setFehlercheck(false)
     setFehlerText(false)
-    setErfolgscheck(false)  
+    setErfolgscheck(false) 
+     
     let check=true
-    if(!PrivateDatenArr.Festnetz.trim().toString().length>2){
-      check=false
-    }
     
-    if(!PrivateDatenArr.Mobil.trim().toString().length>2){
-      check=false
-    }
-    if(!PrivateDatenArr.Email.trim().toString().length>2){
-      check=false
-    }
      console.log(mitarbeiterID)
     if(check){
+      
       try{
         const request ={
           method: 'POST',
@@ -316,7 +385,7 @@ console.log(PrivateDatenArr)
             
           })
         }; 
-        const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
+        const d = await fetch('http://192.168.2.44/datenbankapi/index.php', request);
         let e = await d.json();
         
         if(e.ergebnis==true){
@@ -349,6 +418,7 @@ console.log(PrivateDatenArr)
       }
     }else{
       //
+      
       setFehlercheck(true)
       setFehlerText(false)
       setTimeout(()=>{
@@ -364,18 +434,28 @@ console.log(PrivateDatenArr)
     setFehlercheck(false)
     setFehlerText(false)
     setErfolgscheck(false) 
+    let Arr=[]
     let check=true 
-    if(!PrivateDatenArr.Bankname.trim().toString().length>2){ 
+    
+    if(!(PrivateDatenArr.Bankname.trim().toString().length>2)){ 
       check=false
+      Arr.push(1)
+    }else{
+      Arr.push(0)
     }
     if((isValid(PrivateDatenArr.iban.trim().toString())==false)){ 
       check=false
+      Arr.push(1)
+    }else{
+      Arr.push(0)
     }
      
     if(PrivateDatenArr.Inhaber==0){ 
       PrivateDatenArr.Inhaber=PrivateDatenArr.Vname.toString()+' '+PrivateDatenArr.Nname.toString()
     } 
+    Arr.push(0)
     if(check){
+      setbankBG(Arr)
       try{
         const request ={
           method: 'POST',
@@ -388,7 +468,7 @@ console.log(PrivateDatenArr)
             "mitarbeiterID":mitarbeiterID 
           })
         };
-        const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
+        const d = await fetch('http://192.168.2.44/datenbankapi/index.php', request);
         let e = await d.json(); 
         if(e.ergebnis==true){
   
@@ -421,6 +501,7 @@ console.log(PrivateDatenArr)
       }
     }else{
       //
+      setbankBG(Arr)
       setFehlercheck(true)
       setFehlerText(false)
       setTimeout(()=>{
@@ -436,25 +517,41 @@ console.log(PrivateDatenArr)
     setFehlercheck(false)
     setFehlerText(false)
     setErfolgscheck(false) 
+    let Arr=[]
     let check=true
     
     //if(!PrivateDatenArr.SteueridCheck>0){
       //if(!isSteuerIdValid(PrivateDatenArr.SteuerID.trim())){
       //check=false
       
+    //Arr.push(1)
+    //}else{
+      //Arr.push(0)
     //}
     //}
     
-    if(!(Number(PrivateDatenArr.Steuerklasse)==0) && (Number(PrivateDatenArr.Steuerklasse)>6)){
+
+   
+    if(PrivateDatenArr.Steuerklasse==0 || (Number(PrivateDatenArr.Steuerklasse)>6)){
       check=false
+      Arr.push(1)
+    }else{
+      Arr.push(0)
     }
-    if(!PrivateDatenArr.Kinder>0){
+    if(!(Number(PrivateDatenArr.Kinder>0))){
       check=false
+      Arr.push(1)
+    }else{
+      Arr.push(0)
     }
-    if(!PrivateDatenArr.Konfession.trim().toString().length>2){
+    if(!(PrivateDatenArr.Konfession.trim().toString().length>4) || PrivateDatenArr.Konfession.trim().toString().length==0){
       check=false
-    }  
+      Arr.push(1)
+    }else{
+      Arr.push(0)
+    } 
     if(check){
+      setsteuerBG(Arr)
       try{
         const request ={
           method: 'POST',
@@ -470,7 +567,7 @@ console.log(PrivateDatenArr)
             //
           })
         };
-        const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
+        const d = await fetch('http://192.168.2.44/datenbankapi/index.php', request);
         let e = await d.json(); 
         
         if(e.ergebnis==true){
@@ -503,6 +600,7 @@ console.log(PrivateDatenArr)
       }
     }else{
       //
+      setsteuerBG(Arr)
       setFehlercheck(true) 
       setFehlerText(false)
       setTimeout(()=>{
@@ -534,6 +632,14 @@ console.log(PrivateDatenArr)
       :
       ""
     } 
+
+    {
+      Fehlercheckindividuell?
+      <Fehlermeldung FN={Fehlernummer}/>
+      :
+      ""
+    }
+
 
   {
     Fehlercheck?
@@ -585,11 +691,11 @@ console.log(PrivateDatenArr)
  
   <View style={{flexDirection:'column', width:'100%',paddingTop:10}}>
 
-
+  
   {/**Name und Anschrift */}  
   <TitleTouch AGB={tab1ausgefuellt} F={settab1} S={tab1} T={sprache?LANG.Angabenueberschriften.Personendaten.DE:LANG.Angabenueberschriften.Personendaten.EN} />
   <SelectPicker S={sprache?'DE':'EN'} V={tab1} I={0} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
-  <Container W={submitdata1} Icon={Dataset(sprache?'DE':'EN').PerData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').PerData.Eingabefelder} F={settab1} S={tab1}  SV={PrivateDatenArr} SF={setPrivateDatenArr} /> 
+  <Container BGInfo={nameAnschriftBG} W={submitdata1} Icon={Dataset(sprache?'DE':'EN').PerData.EingabefelderIcons} Info={Dataset(sprache?'DE':'EN').PerData.EingabefeldInfo} Labname={Dataset(sprache?'DE':'EN').PerData.Eingabefelder} F={settab1} S={tab1}  SV={PrivateDatenArr} SF={setPrivateDatenArr} /> 
   {
 	  tab1?
     <> 
@@ -604,7 +710,7 @@ console.log(PrivateDatenArr)
 
   {/**Kommunikation */}
   <TitleTouch AGB={tab2ausgefuellt} F={settab2} S={tab2} T={sprache?LANG.Angabenueberschriften.Kommunikation.DE:LANG.Angabenueberschriften.Kommunikation.EN} /> 
-  <Container W={submitdata2} Icon={Dataset(sprache?'DE':'EN').KontaktData.EingabefelderIcons}Labname={Dataset(sprache?'DE': 'EN').KontaktData.Eingabefelder} F={settab2} S={tab2}   SV={PrivateDatenArr} SF={setPrivateDatenArr} />
+  <Container BGInfo={kommunikationBG} W={submitdata2} Icon={Dataset(sprache?'DE':'EN').KontaktData.EingabefelderIcons}Labname={Dataset(sprache?'DE': 'EN').KontaktData.Eingabefelder} F={settab2} S={tab2}   SV={PrivateDatenArr} SF={setPrivateDatenArr} />
   {
 	  tab2?
     <> 
@@ -623,7 +729,7 @@ console.log(PrivateDatenArr)
     <>
     <Text style={styles.Bichinweis}>{Textdataset(sprache?'DE':'EN').Texte.BicHinweis}</Text>
     
-      <Container W={submitdata3} Icon={Dataset(sprache?'DE':'EN').BankData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').BankData.Eingabefelder} F={settab4} S={tab4}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
+      <Container BGInfo={bankBG} W={submitdata3} Icon={Dataset(sprache?'DE':'EN').BankData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').BankData.Eingabefelder} F={settab4} S={tab4}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
     
     </>
     :
@@ -652,13 +758,13 @@ console.log(PrivateDatenArr)
       Steuercheck?
       ""
       :
-   <Container W={submitdata4} Icon={["Steuer"]} Labname={[sprache?"Steuer-ID (Pflichtangabe)":"Tax ID (mandatory information)"]} F={settab5} S={tab5}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
+   <Container BGInfo={steuerBG} W={submitdata4} Icon={["Steuer"]} Labname={[sprache?"Steuer-ID (Pflichtangabe)":"Tax ID (mandatory information)"]} F={settab5} S={tab5}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
      }  
     </>
     :
     ""
   }  
-  <Container W={submitdata4} Icon={Dataset(sprache?'DE':'EN').SteuerData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').SteuerData.Eingabefelder} F={settab5} S={tab5}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
+  <Container BGInfo={steuerBG} W={submitdata4} Icon={Dataset(sprache?'DE':'EN').SteuerData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').SteuerData.Eingabefelder} F={settab5} S={tab5}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
   
   {
 	  tab5?
@@ -681,17 +787,33 @@ console.log(PrivateDatenArr)
         SVCheck?
         ""
         :
-        <Container Icon={["Krankenversicherung"]} Labname={[sprache?"Sozialversicherungsnummer/Rentennummer":"Social security number/pension number"]} F={settab3} S={tab3} SV={PrivateDatenArr} SF={setPrivateDatenArr}/> 
+        <Container BGInfo={rentennummerBG} Icon={["Krankenversicherung"]} Labname={[sprache?"Sozialversicherungsnummer/Rentennummer":"Social security number/pension number"]} F={settab3} S={tab3} SV={PrivateDatenArr} SF={setPrivateDatenArr}/> 
       }
       </>
       :
       ""
     }  
   
-  <Container W={datenabruf} Icon={Dataset(sprache?'DE':'EN').SozialData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').SozialData.Eingabefelder} F={settab3} S={tab3} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
+  <Container BGInfo={soziBG} W={datenabruf} Icon={Dataset(sprache?'DE':'EN').SozialData.EingabefelderIcons} Labname={Dataset(sprache?'DE':'EN').SozialData.Eingabefelder} F={settab3} S={tab3} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
   {
     tab3?
   <>
+
+    <TouchableOpacity style={styles.StyledInputLabel} onPress={()=>setshowdatePicker(true)}>
+    <Text style={{color:"white",alignSelf:'center'}}>{dateText}</Text>
+      </TouchableOpacity>
+      {showdatePicker?
+      <DateTimePicker
+            display={"default"}
+            value={date}
+            mode={'date'}
+            is24Hour={true}
+            onChange={handleChange}
+          />
+        :
+        ""}
+          
+    
     <Text  style={styles.Textelemente}>{(sprache?'Art der Krankenversicherung (Pflichtangabe, zutreffendes makieren)':'Type of health insurance (mandatory information, mark as applicable)')}</Text>
     <View style={{borderRadius:2,borderWidth:1,borderColor:'#4b5563', width:'80%',marginLeft:'10%',backgroundColor:'#6b728090'}}>
      <Picker style={{color:'#FFF'}}  dropdownIconColor={"#FFF"} selectedValue={SelectedLanguage} multiline={true} numberOfLines={2} onValueChange={(itemValue, itemIndex) =>
@@ -709,7 +831,7 @@ console.log(PrivateDatenArr)
    {
     JobCheck&&tab3?
       <>
-      <EingabeFeld Icon={"Krankenversicherung"} Labname={Textdataset(sprache?'DE':'EN').SoloCheckboxText.OtherJobs}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
+      <EingabeFeld BGInfo={sonderfall} Icon={"Krankenversicherung"} Labname={Textdataset(sprache?'DE':'EN').SoloCheckboxText.OtherJobs}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
       </>
       :
       "" }</>
@@ -722,7 +844,6 @@ console.log(PrivateDatenArr)
    }
  
    
-
 
     
 
@@ -750,6 +871,24 @@ console.log(PrivateDatenArr)
 }
 
 const styles = StyleSheet.create({
+  StyledInputLabel : {
+    color: '#FFF',
+    fontSize:16,
+    
+    textAlign:'left',
+    padding: 10,
+    
+    paddingHorizontal:15,
+    borderWidth:2,
+    width:'80%',
+    alignSelf:'center',
+    borderColor: '#475569',
+    borderRadius:6,
+    marginVertical:30,
+    color:'#f8fafc',
+    backgroundColor:'#1e40af'
+
+  },
   image:{
     flex: 1,
     justifyContent: 'center',

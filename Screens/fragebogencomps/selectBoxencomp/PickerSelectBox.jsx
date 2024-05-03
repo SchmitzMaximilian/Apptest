@@ -26,7 +26,7 @@ const selectionHandler=(I)=>{
     setSelectedLanguage(I)
     let O=props?.SV
 
-    O.Geschlecht=I+1
+    O.Geschlecht=I
     
     props.SF(O) 
   }

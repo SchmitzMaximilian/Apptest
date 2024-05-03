@@ -38,8 +38,8 @@ const LangOb={
   },
   "Blocktop":{
     "Ueberschrift":{
-      "De": "Personalerfassungsbogen für Festpersonal",
-      "EN": "Personnel registration form for permanent staff"
+      "De": "Erfassungsbogen\n - Festpersonal",
+      "EN": "Registration\n - Permanent labor"
     }
 
   },

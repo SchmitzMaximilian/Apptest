@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View,StyleSheet } from "react-native";
 import {Octicons,Ionicons} from '@expo/vector-icons';
 
 
-const LeftIcon = (props) => { 
+const LeftIcon = (props) => {   
   let Icon;
   switch(props.P.toString()){
     case "User":
@@ -39,19 +39,21 @@ const LeftIcon = (props) => {
     default:
       Icon='lock'
       break;
-  }
-  return (
-    <View style={styles.LeftIcon}>
-      <Octicons  name={Icon} size={25} color={'#7a7c7f'} />
-    </View>
+  } 
+  return ( 
+      <View style={styles.LeftIcon}>
+        <Octicons  name={Icon} size={25}  color={'#FFF'} />
+      </View>
+    
   )
 }
 const styles = StyleSheet.create({
   LeftIcon : {
     left: 90,
-    top: 28,    
+    top: 28,  
+    color:'#CCC',  
     position:'absolute',    
-    zindex:0,
+    zIndex:20,
   },
 
 

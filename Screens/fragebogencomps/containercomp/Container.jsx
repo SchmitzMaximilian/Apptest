@@ -9,7 +9,7 @@ const Container = (props) => {
     {
       props.S&&(props.Icon.length>0)&&props.Icon.map((item,index)=>(
       <View key={index}>
-        <EingabeFeld Icon={item} Labname={props.Labname[index] }  SV={props.SV} SF={props.SF}/>
+        <EingabeFeld BGInfo={props.BGInfo[index]} Info={props.Info} Icon={item} Labname={props.Labname[index] }  SV={props.SV} SF={props.SF}/>
       </View>
       )) 
     }

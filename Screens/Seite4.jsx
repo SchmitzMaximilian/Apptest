@@ -27,7 +27,7 @@ import JaNeinCheckbox2 from './fragebogencomps/MinijobCheckboxen/MiniJaNeinCheck
 
 
 
-export default function Seite2({navigation}) {
+export default function Seite4({navigation}) {
   const [sprache,setzesprache]=useContext(TransactionContext)  
   const [tab1,settab1]=useState(false)
   const [tab1ausgefuellt,settab1ausgefuellt]=useState(false)  

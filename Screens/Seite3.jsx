@@ -8,7 +8,7 @@ import {Octicons, Ionicons} from '@expo/vector-icons';
 import Container from './fragebogencomps/containercomp/Container';
 import TitleTouch from './fragebogencomps/touchTitle/TitleTouch';
 import { Dataset } from '../utils/Dataset';
-export default function Seite2({navigation}) {
+export default function Seite3({navigation}) {
   const [sprache,setzesprache]=useContext(TransactionContext)
   
   return (

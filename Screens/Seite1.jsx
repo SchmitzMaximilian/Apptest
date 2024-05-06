@@ -9,6 +9,8 @@ import {Octicons, Ionicons} from '@expo/vector-icons';
 import Container from './fragebogencomps/containercomp/Container';
 import SelectPicker from './fragebogencomps/selectBoxencomp/PickerSelectBox'; 
 
+import SpeicherButton from './pages/festfragebogenComponents/speicherButoon';
+
 
 
 import TitleTouch from './fragebogencomps/touchTitle/TitleTouch';
@@ -32,7 +34,7 @@ export default function Seite1({navigation}) {
   const [tab1ausgefuellt,settab1ausgefuellt]=useState(false)  
   const [tab2,settab2]=useState(false)
   const [tab2ausgefuellt,settab2ausgefuellt]=useState(false)  
-  const [Steuercheck,setSteuercheck]=useState(false)
+  
   const [tab3,settab3]=useState(false)
   const [tab3ausgefuellt,settab3ausgefuellt]=useState(false)
   const [SVCheck,setSVCheck]=useState(false) 
@@ -40,8 +42,11 @@ export default function Seite1({navigation}) {
   const [SelectedLanguage, setSelectedLanguage] = useState();
   const [tab4,settab4]=useState(false)
   const [tab4ausgefuellt,settab4ausgefuellt]=useState(false)
+
   const [tab5,settab5]=useState(false)
   const [tab5ausgefuellt,settab5ausgefuellt]=useState(false)
+const [Steuercheck,setSteuercheck]=useState(false)
+
   const [Fehlercheck,setFehlercheck]=useState(false)
   const [FehlerText,setFehlerText]=useState(false)
   const [Erfolgscheck,setErfolgscheck]=useState(false)
@@ -54,6 +59,7 @@ export default function Seite1({navigation}) {
   const [rentennummerBG,setrentennummerBG]=([0])  
   const [soziBG,setsoziBG]=useState([0,0,0,0])
   const [sonderfall,setsonderfall]=useState([0])
+  const [kommunikationBG,setkommunikationBG]=useState([0,0,0])
 
 
   const [Fehlercheckindividuell,setFehlercheckindividuell]=useState(false)
@@ -669,7 +675,7 @@ console.log(PrivateDatenArr)
         </TouchableOpacity>
         </View>
         
-        <TouchableOpacity onPress={()=>navigation.navigate({name:"Seite2",params:{PrivateDatenArr}})} style={styles.AdminButton}> 
+        <TouchableOpacity onPress={()=>navigation.navigate({name:"SeiteTest",params:{PrivateDatenArr}})} style={styles.AdminButton}> 
           <Text style={{color:'#FFFFFF'}} >Sachbearbeiter</Text>
         </TouchableOpacity>
       </View>
@@ -714,9 +720,7 @@ console.log(PrivateDatenArr)
   {
 	  tab2?
     <> 
-    <TouchableOpacity onPress={()=>submitdata2()} style={styles.Abspeichern}>
-    <Text style={{color:'black'}}>Speichern</Text>
-</TouchableOpacity>
+    <SpeicherButton SDF={submitdata2}/>
     </>
     :
     ""

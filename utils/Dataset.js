@@ -42,7 +42,7 @@ export const Dataset=(p)=>{
       
       "PerData":
       {
-        "Eingabefelder":["Firstname","Surname","Street name and house number","Postal Code","Location / City name"],
+        "Eingabefelder":["First name","Last name","Street name and house number","Postal Code","Location / City name"],
         "EingabefelderIcons":["User","User","User","User","User"], 
       },
       "KontaktData":
@@ -57,7 +57,7 @@ export const Dataset=(p)=>{
     },
     "BankData":
     {
-      "Eingabefelder":["Name of institute of credit","IBAN","Account holder (if different)"],
+      "Eingabefelder":["Name of institute of credit","IBAN ","Account holder (if different)"],
       "EingabefelderIcons":["Bank","Bank","Bank",],
     },
     "SteuerData":

@@ -9,6 +9,10 @@ import Seite5 from '../Screens/Seite5';
 import SeiteTest from '../Screens/SeiteTest';
 import LoginScreen from '../Screens/LoginScreen';
 import { TransactionProvider } from '../utils/Context';
+import { ErfolgscheckProvider } from '../Screens/pages/functions/contextErfolgscheck';
+import { FehlercheckProvider } from '../Screens/pages/functions/contextFehlercheck';
+import { FehlerTextProvider } from '../Screens/pages/functions/contextFehlertext';
+import { MitarbeiteridProvider } from '../Screens/pages/functions/contextMitarbeiterid';
  
 const Navbar=(Prop)=> { 
     const Stack = createStackNavigator();
@@ -19,6 +23,10 @@ const Navbar=(Prop)=> {
  
   return (
     <TransactionProvider>
+    <MitarbeiteridProvider>
+    <ErfolgscheckProvider>
+    <FehlercheckProvider>
+    <FehlerTextProvider>
     <NavigationContainer>
  
     <Stack.Navigator initialRouteName="Seite1" screenOptions={{headerShown:false, headerMode:'screen', headerTintColor:'white', headerStyle: {backgroundColor:'rgba(0,15,40,0.95)'}}}>
@@ -33,6 +41,10 @@ const Navbar=(Prop)=> {
 
   </Stack.Navigator>
   </NavigationContainer>
+  </FehlerTextProvider>
+  </FehlercheckProvider>
+  </ErfolgscheckProvider>
+  </MitarbeiteridProvider>
   </TransactionProvider> 
   );
 }

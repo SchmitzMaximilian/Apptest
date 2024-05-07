@@ -56,7 +56,7 @@ const [Steuercheck,setSteuercheck]=useState(false)
   const [bankBG,setbankBG]=useState([0,0,0])
   const [steuerBG,setsteuerBG]=useState([0,0,0,0])
 
-  const [rentennummerBG,setrentennummerBG]=([0])  
+  const [rentennummerBG,setrentennummerBG]=useState([0])  
   const [soziBG,setsoziBG]=useState([0,0,0,0])
   const [sonderfall,setsonderfall]=useState([0])
   const [kommunikationBG,setkommunikationBG]=useState([0,0,0])
@@ -111,19 +111,24 @@ const handleChange = (event, selectedDate) => {
     }
   }
   const datenabruf=async()=>{
+    
     setFehlercheck(false)
     setFehlerText(false)
     setErfolgscheck(false)
     let Arr=[]
+    
     let check=true 
     console.log(["ssjds",PrivateDatenArr])
     if(!(PrivateDatenArr.RentenCheck>0)){
-      if(PrivateDatenArr.SVNummerfeld==0){
+      
+      if(!(PrivateDatenArr.SVNummerfeld.length==12)){
       check=false
       setrentennummerBG([1])
       }else{
         setrentennummerBG([0])
       }
+        
+      
     }  
     
     if(!(PrivateDatenArr.Staatsbuergerschaft.trim().toString().length>0)){
@@ -143,8 +148,9 @@ const handleChange = (event, selectedDate) => {
     }
     if(PrivateDatenArr.GBLand==0){
       PrivateDatenArr.GBLand='Deutschland'
+      Arr.push(0)
       
-    }else if(!(PrivateDatenArr.GBLand>3)){
+    }else if(!(PrivateDatenArr.GBLand.trim().toString().length>3)){
       check=false
       Arr.push(1)
     }else{
@@ -170,6 +176,7 @@ const handleChange = (event, selectedDate) => {
     }
      
 console.log(PrivateDatenArr)
+
   setsoziBG(Arr)
     if(check){
       try{
@@ -538,13 +545,13 @@ console.log(PrivateDatenArr)
     
 
    
-    if(PrivateDatenArr.Steuerklasse==0 || (Number(PrivateDatenArr.Steuerklasse)>6)){
+    if(PrivateDatenArr.Steuerklasse==0 || (Number(PrivateDatenArr.Steuerklasse)>6) || !(Number.isInteger(Number(PrivateDatenArr.Steuerklasse)))){
       check=false
       Arr.push(1)
     }else{
       Arr.push(0)
     }
-    if(!(Number(PrivateDatenArr.Kinder>0))){
+    if((Number.isNaN(PrivateDatenArr.Kinder))){
       check=false
       Arr.push(1)
     }else{
@@ -670,7 +677,7 @@ console.log(PrivateDatenArr)
       </TouchableOpacity>
 
         <View style={styles.SprachButton}>
-        <TouchableOpacity onPress={()=>setzesprache(!sprache)} style={styles.InsetSprachButton} > 
+        <TouchableOpacity onPress={()=>(setzesprache(!sprache), dateText=="Geburtsdatum"?setDateText("Date of birth"):setDateText("Geburtsdatum")) } style={styles.InsetSprachButton} > 
           <Text style={{color:'#FFFFFF'}} >{sprache?'EN':'DE'}</Text>
         </TouchableOpacity>
         </View>
@@ -701,7 +708,7 @@ console.log(PrivateDatenArr)
   {/**Name und Anschrift */}  
   <TitleTouch AGB={tab1ausgefuellt} F={settab1} S={tab1} T={sprache?LANG.Angabenueberschriften.Personendaten.DE:LANG.Angabenueberschriften.Personendaten.EN} />
   <SelectPicker S={sprache?'DE':'EN'} V={tab1} I={0} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
-  <Container BGInfo={nameAnschriftBG} W={submitdata1} Icon={Dataset(sprache?'DE':'EN').PerData.EingabefelderIcons} Info={Dataset(sprache?'DE':'EN').PerData.EingabefeldInfo} Labname={Dataset(sprache?'DE':'EN').PerData.Eingabefelder} F={settab1} S={tab1}  SV={PrivateDatenArr} SF={setPrivateDatenArr} /> 
+  <Container BGInfo={nameAnschriftBG} W={submitdata1} Icon={Dataset(sprache?'DE':'EN').PerData.EingabefelderIcons}  Labname={Dataset(sprache?'DE':'EN').PerData.Eingabefelder} F={settab1} S={tab1}  SV={PrivateDatenArr} SF={setPrivateDatenArr} /> 
   {
 	  tab1?
     <> 
@@ -890,7 +897,7 @@ const styles = StyleSheet.create({
     borderRadius:6,
     marginVertical:30,
     color:'#f8fafc',
-    backgroundColor:'#1e40af'
+    backgroundColor:'#6b728090'
 
   },
   image:{

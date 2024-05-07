@@ -3,22 +3,41 @@ import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacit
 import { useContext, useEffect, useState } from 'react';
 import  DateTimePicker  from '@react-native-community/datetimepicker';
 import PersoenlicheDatenObject from '../../../utils/Objects/PersoenlicheDatenObject';
+import { TransactionContext } from '../../../utils/Context';
 
 function GBDatumSelect() {
   const [PrivateDatenArr,setPrivateDatenArr]=useState(PersoenlicheDatenObject)
   const [date, setDate] = useState(new Date());
   const [dateText, setDateText] = useState("Geburtsdatum")
   const [showdatePicker,setshowdatePicker] = useState(false);
+  const [sprache,setzesprache]=useContext(TransactionContext)
  
-const handleChange = (event, selectedDate) => {  
+
+
+
+const handleChange = (event, selectedDate) => { 
+  setshowdatePicker(false) 
   const currentDate = selectedDate; 
   setDate(currentDate);
   setDateText(currentDate.toLocaleDateString('de-DE'))
   let Obj=PrivateDatenArr
   Obj.GBDatum=Intl.DateTimeFormat('de-DE',{dateStyle:'short'}).format(currentDate).toString()
   setPrivateDatenArr(Obj)
-  setshowdatePicker(false)
+  
     };
+
+    useEffect(() => {
+      console.log("Sprache: "+ sprache)
+
+      if(PrivateDatenArr.GBDatum=="")
+        {
+          if(!sprache){
+              setDateText("Date of birth")
+          }else if(sprache){
+            setDateText("Geburtsdatum")
+          }
+        }
+    },[sprache]);
 
   return (
     <>
@@ -54,7 +73,7 @@ const styles = StyleSheet.create({
     borderRadius:6,
     marginVertical:30,
     color:'#f8fafc',
-    backgroundColor:'#1e40af'
+    backgroundColor:'#6b728090'
 
   },
 

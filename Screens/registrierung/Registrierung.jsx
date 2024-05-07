@@ -294,9 +294,9 @@ const Registrierung =()=>{
 <EingabeFeld  Icon={'Pass'}     Labname={'Passwort'}       SF={seteingabe2}    />
 <EingabeFeld  Icon={'Company'}  Labname={'Firma'}          SF={seteingabe3}    /> 
 <EingabeFeld  Icon={'Address'}  Labname={'Adresse'}        SF={seteingabe4}    /> 
-<EingabeFeld  Icon={'Mail'}     Labname={'E-mail Adresse'} SF={seteingabe5}    />
-<EingabeFeld  Icon={'Mail'}     Labname={'E-mail Adresse'} SF={seteingabe6}    />
-<EingabeFeld  Icon={'Mail'}     Labname={'E-mail Adresse'} SF={seteingabe7}    /> 
+<EingabeFeld  Icon={'Mail'}     Labname={'E-Mail-Adresse'} SF={seteingabe5}    />
+<EingabeFeld  Icon={'Mail'}     Labname={'E-Mail-Adresse'} SF={seteingabe6}    />
+<EingabeFeld  Icon={'Mail'}     Labname={'E-Mail-Adresse'} SF={seteingabe7}    /> 
 
 
 

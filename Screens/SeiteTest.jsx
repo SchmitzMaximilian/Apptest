@@ -13,18 +13,22 @@ import SteuerAngaben from './pages/festfragebogenComponents/SteuerAngaben';
 import Sozialversicherung from './pages/festfragebogenComponents/Sozialversicherung';
 import SelectPicker from './pages/festfragebogenComponents/PickerSelectBox';
 import { Textdataset } from '../utils/Textdataset';
+import { FCContext } from './pages/functions/contextFehlercheck';
+import { FTContext } from './pages/functions/contextFehlertext';
+import { ECContext } from './pages/functions/contextErfolgscheck';
+import { MAidContext } from './pages/functions/contextMitarbeiterid';
 
 
 
 function SeiteTest({navigation}) {
   const [image,setimage]=useState({uri: 'https://images.unsplash.com/photo-1622743941533-cde694bff56a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fE5pZ2h0Y2x1YnxlbnwwfHwwfHx8MA%3D%3D'})
-  const [mitarbeiterID,setmitarbeiterID]=useState(0)
+  const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext)
   const [PrivateDatenArr,setPrivateDatenArr]=useState(PersoenlicheDatenObject)
   const [sprache,setzesprache]=useContext(TransactionContext) 
 
-  const [Fehlercheck,setFehlercheck]=useState(false)
-  const [FehlerText,setFehlerText]=useState(false)
-  const [Erfolgscheck,setErfolgscheck]=useState(false)
+  const [Fehlercheck,setFehlercheck]=useContext(FCContext)
+  const [FehlerText,setFehlerText]=useContext(FTContext)
+  const [Erfolgscheck,setErfolgscheck]=useContext(ECContext)
   
   const imglesen = async (param)=>{
     //loeschen(param)
@@ -207,6 +211,14 @@ const styles = StyleSheet.create({
       alignItems: 'flex-start',
       backgroundColor: '#84cc16',
   
+    },
+    InsetSprachButton:{
+      alignItems: 'center',
+      backgroundColor: '#6b7280',
+      padding: 10,
+      alignSelf:'center',  
+      borderRadius:5, 
+      width:'20%', 
     },
 
 })

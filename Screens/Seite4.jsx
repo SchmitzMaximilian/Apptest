@@ -759,8 +759,8 @@ if(check){
           <Text style={{color:'#FFFFFF'}} >{sprache?'EN':'DE'}</Text>
         </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={()=>navigation.navigate("Seite5")} style={styles.AdminButton}> 
-          <Text style={{color:'#FFFFFF'}} >Next</Text>
+        <TouchableOpacity onPress={()=>navigation.navigate({name:"LoginScreen",params:{PrivateDatenArr}})} style={styles.AdminButton}> 
+          <Text style={{color:'#FFFFFF'}} >Next/Sachbearbeitung/Admin</Text>
         </TouchableOpacity>
       </View>
 

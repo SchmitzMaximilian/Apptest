@@ -17,62 +17,120 @@ export const EingabeFeld=(props)=>{
       switch(props.Labname){
         
         //Name und Anschrift
-        case "Vorname"||"Firstname":
+        case "Vorname":
           return 'Minimum 2 Zeichen lang (Pflichtfeld)'
-          case "Nachname"||"Surname":
+          case "First name":
+            return 'Minimum 2 characters long (required)'
+          case "Nachname":
             return 'Minimum 1 Zeichen lang (Pflichtfeld)'
-        case "Straße und Hausnummer"||"Street name and house number":
+            case "Last name":
+            return 'Minimum 1 character long (required)'
+
+
+
+
+        case "Straße und Hausnummer":
           return 'Minimum 2 Zeichen lang (Pflichtfeld). Format (Straße,H-Nr.)'
-        case "Postleitzahl"||"Postal Code":
+          case "Street name and house number":
+          return 'Minimum 2 characters long (required). Format (Street,H-No.)'
+
+        case "Postleitzahl":
           return 'Exakt 5 Zeichen lang (Pflichtfeld)'
-        case "Wohnort"||"Location/City name":
+          case "Postal Code":
+          return 'Exactly 5 characters long (required)'
+        case "Wohnort":
           return 'Minimum 3 Zeichen lang (Pflichtfeld)'
+          case "Location / City name":
+          return 'Minimum 3 characters long (required)'
 
 
          //Kommunikation
-      case "Vorwahl / Rufnummer Festnetz (nur falls verfügbar)"||"Area code / phone number landline (only if available)":
+      case "Vorwahl / Rufnummer Festnetz (nur falls verfügbar)":
         return 'Festnetznummer'
-      case "Vorwahl / Rufnummer Mobiltelefon (nur falls verfügbar)"||"Area code / phone number mobile phone (only if available)":
+        case "Area code / phone number landline (only if available)":
+        return 'Landline number'
+
+      case "Vorwahl / Rufnummer Mobiltelefon (nur falls verfügbar)":
         return 'Aktuelle Handynummer'
-      case "E-Mail-Adresse (nur falls verfügbar)"||"Email address (only if available)":
+        case "Area code / phone number mobile phone (only if available)":
+        return 'Current cell phone number '
+
+      case "E-Mail-Adresse (nur falls verfügbar)":
         return 'Bitte geben Sie eine gültige E-Mail-Adresse an (Pflichtfeld)'
+        case "Email address (only if available)":
+        return 'Please enter a valid email address (required)'
 
 
         //Bankverbindung
-      case"Name des Kreditinstituts" || "Name of institute of credit" :
+      case"Name des Kreditinstituts":
         return 'Bitte geben Sie den Namen Ihrer Bank an (Pflichtfeld)'
-      case"IBAN" || "IBAN" :
-        return 'Ihre IBAN besteht aus GENAU 22 Zeichen, stellen Sie außerdem sicher, dass die angegebene IBAN gültig ist (Pflichtfeld)' 
-      case"Kontoinhaber (falls abweichend)" || "Account holder (if different)" :
+        case"Name of institute of credit" :
+        return 'Please enter the name of your bank (required)'
+
+      case"IBAN":
+        return 'Ihre IBAN besteht aus GENAU 22 Zeichen, stellen Sie außerdem sicher, dass die angegebene IBAN gültig ist (Pflichtfeld)'
+        case"IBAN " :
+        return 'Your IBAN consists of EXACTLY 22 characters, also make sure that the IBAN provided is valid (required)'
+
+      case"Kontoinhaber (falls abweichend)":
         return 'Name der Person auf die das Bankkonto läuft'
+        case"Account holder (if different)" :
+        return 'Name of the person in whose name the bank account is held'
 
 
         //Steuer
       
       
-      case "Steuer-ID (Pflichtangabe)"||"Tax ID (mandatory information)":
+      case "Steuer-ID (Pflichtangabe)":
         return 'Stellen Sie sicher, dass Sie eine gültige Steuer-ID angeben'
-      case "Steuerklasse"||"Tax class":
+        case"Tax ID (mandatory information)":
+        return 'Make sure you provide a valid tax ID'
+
+      case "Steuerklasse":        
         return 'Steuerklassen gehen nur von 1 bis 6 (Pflichtfeld)'
-      case "Anzahl Kinder"||"Number of children":
+        case "Tax class":        
+        return 'Tax classes only range from 1 to 6 (required)'
+
+      case "Anzahl Kinder":
         return 'Wenn Sie keine Kinder haben geben Sie bitte eine 0 ein (Pflichtfeld)'
-      case "Konfession"||"Denomination":
+        case "Number of children":
+        return 'If you do not have children please enter 0 (required)'
+
+      case "Konfession":
         return 'Bitte geben Sie Ihre Konfession an (Pflichtfeld)'
+        case "Denomination":
+        return 'Please enter your denomination (required)'
 
 
         //Sozialversicherung 
            
-      case "Sozialversicherungsnummer/Rentennummer"||"Social security number/pension number":
+      case "Sozialversicherungsnummer/Rentennummer":
         return 'Ihre Rentennummer besteht aus GENAU 12 Zahlen, bitte überprüfen Sie die Gültigkeit der angegebenen Rentennummer (Pflichtfeld)'
-      case "Staatsangehörigkeit"||"Nationality":
+        case "Social security number/pension number":
+          return 'Your pension number consists of EXACTLY 12 numbers, please check the validity of the pension number provided (required)'
+      
+        case "Staatsangehörigkeit":
         return 'Bitte geben Sie Ihre Staatsangehörigkeit an (Pflichtfeld)'
+        case "Nationality":
+        return 'Please enter your nationality (required)'
            
-      case "Geburtsort (Pflichtangabe)"||"Place of birth (mandatory)":
+      case "Geburtsort (Pflichtangabe)":
         return 'Bitte geben Sie Ihren Geburtssort an'
-      case "Geburtsland (nur falls nicht Deutschland)"||"Country of birth (only if not Germany)":
+        case "Place of birth (mandatory)":
+        return 'Please indicate your place of birth'
+      case "Geburtsland (nur falls nicht Deutschland)":
         return 'Ihre Angabe muss mindstens 4 Buchstaben enthalten'
-      case "Krankenkasse (Bitte kompletter Name, also zB. AOK NordWest, nicht AOK)"||"Health insurance company (please complete name, e.g. AOK NordWest, not AOK)":
+        case "Country of birth (only if not Germany)":
+        return 'Your entry must contain at least 4 letters'
+      case "Krankenkasse (Bitte kompletter Name, also zB. AOK NordWest, nicht AOK)":
         return 'Siehe Feldname'
+        case "Health insurance company (please complete name, e.g. AOK NordWest, not AOK)":
+        return 'See field name'
+
+        case"Name Ihrer anderen Arbeitgeber":
+          return 'Sollten Sie mehr als einen anderen Arbeitgeber haben trennen Sie bitte deren namen mit einem Komma: , '
+        case "Name of your other employers":
+          return 'If you have more than one other employer, please separate their names with a comma:  , '
       
 
 

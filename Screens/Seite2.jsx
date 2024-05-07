@@ -14,7 +14,7 @@ import { Textdataset } from '../utils/Textdataset';
 import {Picker} from '@react-native-picker/picker';
 import { SachbearbeitungTextdataset } from '../utils/Sachbearbeitung/SachbearbeitungTextdataset';
 import * as SecureStore from 'expo-secure-store';
-import { EingabeFeld } from './fragebogencomps/textFeldcomp/EingabeFeld';
+import { EingabeFeld } from './registrierung/regcomps/Comps';
 import SimpelCheck from './fragebogencomps/sachbearbeitungsComps/SimpelCheck';
 
 

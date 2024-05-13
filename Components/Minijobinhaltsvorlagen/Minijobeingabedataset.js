@@ -1,11 +1,11 @@
 export const MiniDataset=(p)=>{
   let Data
   if(p=="DE"){
-  Data={
+  Data={//(Pflichtangabe)
     
     "PerData":
     {
-      "Eingabefelder":["Vorname","Nachname","Straße und Hausnummer","Postleitzahl","Wohnort"],
+      "Eingabefelder":["Vorname (Pflichtangabe)","Nachname (Pflichtangabe)","Straße und Hausnummer (Pflichtangabe)","Postleitzahl (Pflichtangabe)","Wohnort (Pflichtangabe)"],
       "EingabefelderIcons":["User","User","User","User","User"],
     },
     "KontaktData":
@@ -16,8 +16,8 @@ export const MiniDataset=(p)=>{
     },
     "SozialData":
     {
-      "Eingabefelder":["Sozialversicherungsnummer","Staatsangehörigkeit","Geburtsdatum","Geburtsname (Pflichtangabe, bei abweichendem Nachnamen)","Geburtsort (Pflichtangabe)","Geburtsland(nur falls nicht Deutschland)"],
-      "EingabefelderIcons":["User","User","User","User","User","User"],
+      "Eingabefelder":["Sozialversicherungsnummer","Staatsangehörigkeit (Pflichtangabe)","Geburtsname (Pflichtangabe, bei abweichendem Nachnamen)","Geburtsort (Pflichtangabe)","Geburtsland (Pflichtangabe nur falls nicht Deutschland)"],
+      "EingabefelderIcons":["User","User","User","User","User"],
     },
     "BankData":
     {
@@ -37,11 +37,11 @@ export const MiniDataset=(p)=>{
 
   } 
   }else{
-    Data={
+    Data={//(mandatory)
       
       "PerData":
       {
-        "Eingabefelder":["First name","Last name","Street name and house number","Postal Code","Location/City name"],
+        "Eingabefelder":["First name (mandatory)","Last name (mandatory)","Street name and house number (mandatory)","Postal Code (mandatory)","Location/City name (mandatory)"],
         "EingabefelderIcons":["User","User","User","User","User"],
       },
       "KontaktData":
@@ -51,8 +51,8 @@ export const MiniDataset=(p)=>{
       },
       "SozialData":
     {
-      "Eingabefelder":["Social security number","Nationality","Birth date","Birth name (mandatory, if last name is different)","Place of birth (mandatory)","Country of birth (only if not Germany)"],
-      "EingabefelderIcons":["User","User","User","User","User","User"],
+      "Eingabefelder":["Social security number","Nationality (mandatory)","Birth name (mandatory, if last name is different)","Place of birth (mandatory)","Country of birth (mandatory only if not Germany)"],
+      "EingabefelderIcons":["User","User","User","User","User"],
     },
     "BankData":
     {

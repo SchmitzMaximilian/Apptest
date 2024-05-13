@@ -1,35 +1,38 @@
-import React from 'react'
+import React from 'react';
 import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity,ImageBackground } from 'react-native';
 import { useContext, useEffect, useState } from 'react';
-import PersoenlicheDatenObject from '../utils/Objects/PersoenlicheDatenObject';
+
 import { ScrollView } from 'react-native-gesture-handler';
 import { TransactionContext } from '../utils/Context';
 import * as SecureStore from 'expo-secure-store';
-import NameAnschrift from './pages/festfragebogenComponents/NameAnschrift';
-import Kommunikation from './pages/festfragebogenComponents/Kommunilation';
-import Blocktop from './component/seite1comp/blocktop';
-import Bankverbindung from './pages/festfragebogenComponents/Bankverbindung';
-import SteuerAngaben from './pages/festfragebogenComponents/SteuerAngaben';
-import Sozialversicherung from './pages/festfragebogenComponents/Sozialversicherung';
-import SelectPicker from './pages/festfragebogenComponents/PickerSelectBox';
+
 import { Textdataset } from '../utils/Textdataset';
 import { FCContext } from './pages/functions/contextFehlercheck';
 import { FTContext } from './pages/functions/contextFehlertext';
 import { ECContext } from './pages/functions/contextErfolgscheck';
 import { MAidContext } from './pages/functions/contextMitarbeiterid';
+import MiniNameAnschrift from './pages/minijobfragebogenComponents/MiniNameAnschrift';
+import MiniBogeneinleitung from './pages/minijobfragebogenComponents/MiniBogeneinleitung';
+import MiniKommunikation from './pages/minijobfragebogenComponents/MiniKommunikation';
+import MiniPersoenlicheDatenObject from '../utils/Objects/MiniPersoenlicheDatenObject';
+import MiniBank from './pages/minijobfragebogenComponents/MiniBank';
+import MiniSteuer from './pages/minijobfragebogenComponents/MiniSteuer';
+import MiniSozial from './pages/minijobfragebogenComponents/MiniSozial';
+import MiniStatus from './pages/minijobfragebogenComponents/MiniStatus';
+import MiniJANEIN from './pages/minijobfragebogenComponents/MiniJANEIN';
+import MiniKV from './pages/minijobfragebogenComponents/MiniKV';
 
 
-
-function SeiteTest({navigation}) {
+function SeiteMinijob({navigation}) {
   const [image,setimage]=useState({uri: 'https://images.unsplash.com/photo-1622743941533-cde694bff56a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fE5pZ2h0Y2x1YnxlbnwwfHwwfHx8MA%3D%3D'})
   const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext)
-  const [PrivateDatenArr,setPrivateDatenArr]=useState(PersoenlicheDatenObject)
+  const [PrivateDatenArr,setPrivateDatenArr]=useState(MiniPersoenlicheDatenObject)
   const [sprache,setzesprache]=useContext(TransactionContext) 
 
   const [Fehlercheck,setFehlercheck]=useContext(FCContext)
   const [FehlerText,setFehlerText]=useContext(FTContext)
   const [Erfolgscheck,setErfolgscheck]=useContext(ECContext)
-  
+
   const imglesen = async (param)=>{
     //loeschen(param)
     const data=await SecureStore.getItemAsync(param);//BGImage
@@ -40,7 +43,6 @@ function SeiteTest({navigation}) {
        
     imglesen('BGImage')    
   },[])
-  
   return (
     <>
     <SafeAreaView style={styles.sav} >
@@ -87,31 +89,30 @@ function SeiteTest({navigation}) {
         </TouchableOpacity>
         </View>
         
-        <TouchableOpacity onPress={()=>navigation.navigate({name:"SeiteMinijob",params:{PrivateDatenArr}})} style={styles.AdminButton}> 
+        <TouchableOpacity onPress={()=>navigation.navigate({name:"LoginScreen",params:{PrivateDatenArr}})} style={styles.AdminButton}> 
           <Text style={{color:'#FFFFFF'}} >Sachbearbeiter</Text>
         </TouchableOpacity>
       </View>
 
 
       <View style={styles.ContainerFragebogen}> 
-
+      <MiniBogeneinleitung/>
 
 
       <View style={{flexDirection:'column', width:'100%',paddingTop:10}}>
-<Blocktop/>
-<SelectPicker S={sprache?'DE':'EN'} V={true} I={4} SV={PrivateDatenArr} SF={setPrivateDatenArr} />
-    <SelectPicker S={sprache?'DE':'EN'} V={true} I={5} SV={PrivateDatenArr} SF={setPrivateDatenArr} />
-    <Text style={{color:'#fff', marginHorizontal: '10%',paddingVertical:10}}>{Textdataset(sprache?'DE':'EN').Texte.Rechtsbelehrung}</Text>
-    <NameAnschrift/>
-    <Kommunikation/>
-    <Bankverbindung/>
-    <SteuerAngaben/>
-    <Sozialversicherung/>
+        <MiniNameAnschrift/>
+        <MiniKommunikation/>
+        <MiniBank/>
+        <MiniSteuer/>
+        <MiniSozial/>
+        <MiniStatus/>
+        <MiniJANEIN/>
+        <MiniKV/>
+
+
 
       </View>
-
       </View>
-
       </View>
       </ScrollView>
       </ImageBackground>
@@ -119,6 +120,8 @@ function SeiteTest({navigation}) {
     </>
   )
 }
+
+
 const styles = StyleSheet.create({
   image:{
     flex: 1,
@@ -222,5 +225,4 @@ const styles = StyleSheet.create({
     },
 
 })
-
-export default SeiteTest
+export default SeiteMinijob

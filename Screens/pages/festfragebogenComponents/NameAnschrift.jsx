@@ -78,7 +78,7 @@ const NameAnschrift = () => {
         Arr.push(0)
       }
       console.log(PrivateDatenArr.PCode)
-      if((PrivateDatenArr.PCode==0) || (PrivateDatenArr.PCode.trim().toString().length!=5)){
+      if((PrivateDatenArr.PCode==0) ){
         check=false
         
         
@@ -95,8 +95,9 @@ const NameAnschrift = () => {
         Arr.push(0)
       }
       console.log(check)
+      setnameAnschriftBG(Arr)
       if(check){
-        setnameAnschriftBG(Arr)
+        
         try{
           const request ={
             method: 'POST',

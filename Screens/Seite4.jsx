@@ -28,6 +28,10 @@ import JaNeinCheckbox2 from './fragebogencomps/MinijobCheckboxen/MiniJaNeinCheck
 
 
 export default function Seite4({navigation}) {
+  const [rentennummerBG,setrentennummerBG]=useState([0])  
+  const [soziBG,setsoziBG]=useState([0,0,0,0])
+  const [sonderfall,setsonderfall]=useState([0])
+  const [steuerBG,setsteuerBG]=useState([0,0,0,0])
   const [sprache,setzesprache]=useContext(TransactionContext)  
   const [tab1,settab1]=useState(false)
   const [tab1ausgefuellt,settab1ausgefuellt]=useState(false)  
@@ -185,33 +189,37 @@ console.log(PrivateDatenArr)
     let check=true
     if(!(PrivateDatenArr.BewerberStandort>0)){
             check=false
-            console.log('ich binfals1')
+            
     } 
     
     if(!(PrivateDatenArr.Geschlecht>0)){
       check=false
-      console.log('ich binfals3')
+      
     } 
     if(!(PrivateDatenArr.Vname.trim().toString().length>1)){
       check=false
-      console.log('ich binfals4')
+      
     }
-    if(!(PrivateDatenArr.Nname.trim().toString().length>2)){
+    if(!(PrivateDatenArr.Nname.trim().toString().length>0)){
       check=false
-      console.log('ich binfals5')
+      
     }
     
     if(!(PrivateDatenArr.Adresse.trim().toString().length>2)){
       check=false
-      console.log('ich binfals6')
+      
     }
-    if(!(PrivateDatenArr.PCode.trim().toString().length==5)){
+    if((PrivateDatenArr.PCode==0) || (PrivateDatenArr.PCode.trim().toString().length!=5)){
       check=false
-      console.log('ich binfals7')
+      
+      
+      Arr.push(1)
+    }else{
+      Arr.push(0)
     }
-    if(!(PrivateDatenArr.City.trim().toString().length>2)){
+    if(!(PrivateDatenArr.City.trim().toString().length>1)){
       check=false
-      console.log('ich binfals8')
+      
     }
 
     if(check){
@@ -765,7 +773,7 @@ if(check){
       </View>
 
 
-      {/**Angabensozialversicherung*/}
+      {/**Blocktop*/}
       <View style={styles.ContainerFragebogen}>
       <View >
       <Text style={styles.Titel}  >{sprache?LANG.MinijobBogenUeberschriften.TitelOben.DE:LANG.MinijobBogenUeberschriften.TitelOben.EN}
@@ -847,7 +855,7 @@ if(check){
   {/**Angaben zur Steuer */}
   <TitleTouch AGB={tab5ausgefuellt} F={settab5} S={tab5} T={sprache?LANG.MinijobBogenUeberschriften.Steuer.DE:LANG.MinijobBogenUeberschriften.Steuer.EN}/>
     
-  <Container W={submitdata4} Icon={MiniDataset(sprache?'DE':'EN').SteuerData.EingabefelderIcons} Labname={MiniDataset(sprache?'DE':'EN').SteuerData.Eingabefelder} F={settab5} S={tab5}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
+  <Container BGInfo={steuerBG} W={submitdata4} Icon={MiniDataset(sprache?'DE':'EN').SteuerData.EingabefelderIcons} Labname={MiniDataset(sprache?'DE':'EN').SteuerData.Eingabefelder} F={settab5} S={tab5}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
   
   {
 	  tab5?
@@ -865,7 +873,7 @@ if(check){
   <TitleTouch AGB={tab3ausgefuellt} F={settab3} S={tab3} T={sprache?LANG.MinijobBogenUeberschriften.Sozial.DE:LANG.MinijobBogenUeberschriften.Sozial.EN} />
     
   
-  <Container W={datenabruf} Icon={MiniDataset(sprache?'DE':'EN').SozialData.EingabefelderIcons} Labname={MiniDataset(sprache?'DE':'EN').SozialData.Eingabefelder} F={settab3} S={tab3} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
+  <Container BGInfo={soziBG} W={datenabruf} Icon={MiniDataset(sprache?'DE':'EN').SozialData.EingabefelderIcons} Labname={MiniDataset(sprache?'DE':'EN').SozialData.Eingabefelder} F={settab3} S={tab3} SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
    
    
  

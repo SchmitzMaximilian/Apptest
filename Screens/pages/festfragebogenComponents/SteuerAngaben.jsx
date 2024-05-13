@@ -60,7 +60,7 @@ function SteuerAngaben() {
       }else{
         Arr.push(0)
       }
-      if(!(PrivateDatenArr.Konfession.trim().toString().length>4) || PrivateDatenArr.Konfession.trim().toString().length==0){
+      if( PrivateDatenArr.Konfession.trim().toString().length==0){
         check=false
         Arr.push(1)
       }else{

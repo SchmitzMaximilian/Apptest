@@ -8,11 +8,11 @@
 export const Dataset=(p)=>{
   let Data
   if(p=="DE"){
-  Data={
+  Data={//(Pflichtangabe)
     
     "PerData":
     {
-      "Eingabefelder":["Vorname","Nachname","Straße und Hausnummer","Postleitzahl","Wohnort"],
+      "Eingabefelder":["Vorname (Pflichtangabe)","Nachname (Pflichtangabe)","Straße und Hausnummer (Pflichtangabe)","Postleitzahl (Pflichtangabe)","Wohnort (Pflichtangabe)"],
       "EingabefelderIcons":["User","User","User","User","User"], 
     },
     "KontaktData":
@@ -23,26 +23,26 @@ export const Dataset=(p)=>{
     },
     "SozialData":
     {
-      "Eingabefelder":["Staatsangehörigkeit","Geburtsort (Pflichtangabe)","Geburtsland (nur falls nicht Deutschland)","Krankenkasse (Bitte kompletter Name, also zB. AOK NordWest, nicht AOK)"],
+      "Eingabefelder":["Staatsangehörigkeit (Pflichtangabe)","Geburtsort (Pflichtangabe)","Geburtsland (Pflichtangabe nur falls nicht Deutschland)","Krankenkasse ((Pflichtangabe) Bitte kompletter Name, also zB. AOK NordWest, nicht AOK)"],
       "EingabefelderIcons":["Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung"],
     },
     "BankData":
     {
-      "Eingabefelder":["Name des Kreditinstituts","IBAN","Kontoinhaber (falls abweichend)"],
+      "Eingabefelder":["Name des Kreditinstituts (Pflichtangabe)","IBAN (Pflichtangabe)","Kontoinhaber (falls abweichend)"],
       "EingabefelderIcons":["Bank","Bank","Bank"],
     },
     "SteuerData":
     {
-      "Eingabefelder":["Steuerklasse","Anzahl Kinder","Konfession"],
+      "Eingabefelder":["Steuerklasse","Anzahl Kinder (Pflichtangabe)","Konfession (Pflichtangabe)"],
       "EingabefelderIcons":["Steuer","Steuer","Steuer"],
     },
   } 
   }else{
-    Data={
+    Data={//(mandatory)
       
       "PerData":
       {
-        "Eingabefelder":["First name","Last name","Street name and house number","Postal Code","Location / City name"],
+        "Eingabefelder":["First name (mandatory)","Last name (mandatory)","Street name and house number (mandatory)","Postal Code (mandatory)","Location / City name (mandatory)"],
         "EingabefelderIcons":["User","User","User","User","User"], 
       },
       "KontaktData":
@@ -52,17 +52,17 @@ export const Dataset=(p)=>{
       },
       "SozialData":
     {
-      "Eingabefelder":["Nationality","Place of birth (mandatory)","Country of birth (only if not Germany)","Health insurance company (please complete name, e.g. AOK NordWest, not AOK)"],
+      "Eingabefelder":["Nationality (mandatory)","Place of birth (mandatory)","Country of birth (mandatory only if not Germany)","Health insurance company ((mandatory) please complete name, e.g. AOK NordWest, not AOK)"],
       "EingabefelderIcons":["Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung"],
     },
     "BankData":
     {
-      "Eingabefelder":["Name of institute of credit","IBAN ","Account holder (if different)"],
+      "Eingabefelder":["Name of institute of credit (mandatory)","IBAN (mandatory)","Account holder (if different)"],
       "EingabefelderIcons":["Bank","Bank","Bank",],
     },
     "SteuerData":
     {
-      "Eingabefelder":["Tax class","Number of children","Denomination"],
+      "Eingabefelder":["Tax class","Number of children (mandatory)","Denomination (mandatory)"],
       "EingabefelderIcons":["Steuer","Steuer","Steuer"],
     },
     } 

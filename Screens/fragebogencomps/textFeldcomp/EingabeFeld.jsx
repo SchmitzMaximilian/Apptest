@@ -105,8 +105,10 @@ export const EingabeFeld=(props)=>{
         //Sozialversicherung 
            
       case "Sozialversicherungsnummer/Rentennummer":
+        case "Sozialversicherungsnummer":
         return 'Ihre Rentennummer besteht aus GENAU 12 Zahlen, bitte überprüfen Sie die Gültigkeit der angegebenen Rentennummer (Pflichtfeld)'
         case "Social security number/pension number":
+          case "Social security number":
           return 'Your pension number consists of EXACTLY 12 numbers, please check the validity of the pension number provided (required)'
       
         case "Staatsangehörigkeit":
@@ -132,7 +134,20 @@ export const EingabeFeld=(props)=>{
         case "Name of your other employers":
           return 'If you have more than one other employer, please separate their names with a comma:  , '
       
+          case "Krankenkasse (Bitte kompletter Name)":
+            return 'Siehe Feldname'
 
+          case"Geburtsname (Pflichtangabe, bei abweichendem Nachnamen)":
+          return 'Ändere mich'
+          case "Birth name (mandatory, if last name is different)":
+            return 'change me'
+            case "Health insurance company (full name please)":
+        return 'See field name'
+
+            case "Bitte hier eintragen":
+              return 'Tragen Sie Ihren Berufsstatus im unteren Feld ein'
+        case "Please enter here":
+          return 'Enter your professional status in the field below'
 
           default:
           return 'text'
@@ -142,7 +157,7 @@ export const EingabeFeld=(props)=>{
   },[text])
   return(
     <View style={{marginTop:20}}>
-         <Text style={styles.info}>{returninfo(props.Labname)}</Text>
+         
         <StyledInputLabel P={props.Labname}>Label</StyledInputLabel>
         <StyledTextInput BGInfo={props.BGInfo} {...props}  SV={props.SV} SF={props.SF} />
     </View>

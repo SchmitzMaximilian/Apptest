@@ -11,25 +11,25 @@ const[txtvalue,settxtvalue]=useState();
     switch(props.Labname){
       
       //Name und Anschrift
-      case "Vorname":
-      case "First name":
+      case "Vorname (Pflichtangabe)":
+      case "First name (mandatory)":
         
         O.Vname=t
         break;
-        case "Nachname":
-        case"Last name":
+        case "Nachname (Pflichtangabe)":
+        case"Last name (mandatory)":
           O.Nname=t
           break;
-      case "Straße und Hausnummer":
-      case"Street name and house number":
+      case "Straße und Hausnummer (Pflichtangabe)":
+      case"Street name and house number (mandatory)":
         O.Adresse=t
         break;
-      case "Postleitzahl":
-      case"Postal Code":
+      case "Postleitzahl (Pflichtangabe)":
+      case"Postal Code (mandatory)":
         O.PCode=t
         break;
-      case "Wohnort":
-      case"Location / City name":
+      case "Wohnort (Pflichtangabe)":
+      case"Location / City name (mandatory)":
         O.City=t
         break;
         
@@ -50,12 +50,12 @@ const[txtvalue,settxtvalue]=useState();
 
 
       //Bankverbindung
-      case"Name des Kreditinstituts" :
-      case "Name of institute of credit" :
+      case"Name des Kreditinstituts (Pflichtangabe)" :
+      case "Name of institute of credit (mandatory)" :
       O.Bankname=t
       break;
-      case"IBAN" :
-      case "IBAN " :
+      case"IBAN (Pflichtangabe)" :
+      case "IBAN (mandatory)" :
       O.iban=t
       break; 
       case"Kontoinhaber (falls abweichend)" :
@@ -78,12 +78,12 @@ const[txtvalue,settxtvalue]=useState();
       case"Tax class":
         O.Steuerklasse=t
         break;
-      case "Anzahl Kinder":
-      case"Number of children":
+      case "Anzahl Kinder (Pflichtangabe)":
+      case"Number of children (mandatory)":
         O.Kinder=t
         break;
-      case "Konfession":
-      case"Denomination":
+      case "Konfession (Pflichtangabe)":
+      case"Denomination (mandatory)":
         O.Konfession=t
         break; 
       
@@ -96,8 +96,8 @@ const[txtvalue,settxtvalue]=useState();
       case"Social security number/pension number":
         O.SVNummerfeld=t
         break;
-      case "Staatsangehörigkeit":
-      case"Nationality":
+      case "Staatsangehörigkeit (Pflichtangabe)":
+      case"Nationality (mandatory)":
         O.Staatsbuergerschaft=t
         break;
       case "Geburtsdatum":
@@ -109,12 +109,12 @@ const[txtvalue,settxtvalue]=useState();
       case"Place of birth (mandatory)":
         O.GBOrt=t
         break;
-      case "Geburtsland (nur falls nicht Deutschland)":
-      case"Country of birth (only if not Germany)":
+      case "Geburtsland (Pflichtangabenur falls nicht Deutschland)":
+      case"Country of birth (mandatoryonly if not Germany)":
         O.GBLand=t
         break;
-      case "Krankenkasse (Bitte kompletter Name, also zB. AOK NordWest, nicht AOK)":
-      case"Health insurance company (please complete name, e.g. AOK NordWest, not AOK)":
+      case "Krankenkasse ((Pflichtangabe) Bitte kompletter Name, also zB. AOK NordWest, nicht AOK)":
+      case"Health insurance company ((mandatory) please complete name, e.g. AOK NordWest, not AOK)":
         O.Kassename=t
         break;
       case "Name Ihrer anderen Arbeitgeber":
@@ -149,24 +149,24 @@ const[txtvalue,settxtvalue]=useState();
       switch(props.Labname){
       
         //Name und Anschrift
-        case "Vorname":
-        case"First name":
+        case "Vorname (Pflichtangabe)":
+        case"First name (mandatory)":
           O.Vname.trim().toString().length>2?settxtvalue(O.Vname.toString()):''
           break;
-          case "Nachname":
-          case"Last name":
+          case "Nachname (Pflichtangabe)":
+          case"Last name (mandatory)":
             O.Nname.trim().toString().length>2?settxtvalue(O.Nname.toString()):''
             break;
-        case "Straße und Hausnummer":
-        case"Street name and house number":
+        case "Straße und Hausnummer (Pflichtangabe)":
+        case"Street name and house number (mandatory)":
           O.Adresse.trim().toString().length>2?settxtvalue(O.Adresse.toString()):''
           break;
-        case "Postleitzahl":
-        case"Postal Code":
-          O.PCode.length==5?settxtvalue(O.PCode):''
+        case "Postleitzahl (Pflichtangabe)":
+        case"Postal Code (mandatory)":
+          O.PCode.length>0?settxtvalue(O.PCode):''
           break;
-        case "Wohnort":
-        case"Location / City name":
+        case "Wohnort (Pflichtangabe)":
+        case"Location / City name (mandatory)":
           O.City.trim().toString().length>2?settxtvalue(O.City.toString()):''
           break;
           
@@ -174,26 +174,26 @@ const[txtvalue,settxtvalue]=useState();
         //Kommunikation
         case "Vorwahl / Rufnummer Festnetz (nur falls verfügbar)":
         case"Area code / phone number landline (only if available)":
-          O.Festnetz.trim().toString().length>2?settxtvalue(O.Festnetz.toString()):''
+          O.Festnetz.trim().toString().length>0?settxtvalue(O.Festnetz.toString()):''
           break;
         case "Vorwahl / Rufnummer Mobiltelefon (nur falls verfügbar)":
         case"Area code / phone number mobile phone (only if available)":
-          O.Mobil.trim().toString().length>2?settxtvalue(O.Mobil.toString()):''
+          O.Mobil.trim().toString().length>0?settxtvalue(O.Mobil.toString()):''
           break;
         case "E-Mail-Adresse (nur falls verfügbar)":
         case"Email address (only if available)":
-          O.Email.trim().toString().length>2?settxtvalue(O.Email.toString()):''
+          O.Email.trim().toString().length>0?settxtvalue(O.Email.toString()):''
           break;
   
   
         //Bankverbindung
-        case"Name des Kreditinstituts" :
-        case "Name of institute of credit" :
+        case"Name des Kreditinstituts (Pflichtangabe)" :
+        case "Name of institute of credit (mandatory)" :
         O.Bankname.trim().toString().length>2?settxtvalue(O.Bankname.toString()):''
         break;
-        case"IBAN" :
-        case "IBAN " :
-        O.iban.trim().toString().length>2?settxtvalue(O.iban.toString()):''
+        case"IBAN (Pflichtangabe)" :
+        case "IBAN (mandatory)" :
+        O.iban.trim().toString().length>0?settxtvalue(O.iban.toString()):''
         break; 
         case"Kontoinhaber (falls abweichend)" :
         case "Account holder (if different)" :
@@ -215,13 +215,13 @@ const[txtvalue,settxtvalue]=useState();
         case"Tax class":
           O.Steuerklasse>0?settxtvalue(O.Steuerklasse):''
           break;
-        case "Anzahl Kinder":
-        case"Number of children":
+        case "Anzahl Kinder (Pflichtangabe)":
+        case"Number of children (mandatory)":
           O.Kinder>0?settxtvalue(O.Kinder):''
           break;
-        case "Konfession":
-        case"Denomination":
-          O.Konfession.trim().toString().length>2?settxtvalue(O.Konfession.toString()):''
+        case "Konfession (Pflichtangabe)":
+        case"Denomination (mandatory)":
+          O.Konfession.trim().toString().length>0?settxtvalue(O.Konfession.toString()):''
           break; 
         
         //Sozialversicherung 
@@ -233,8 +233,8 @@ const[txtvalue,settxtvalue]=useState();
         case"Social security number/pension number":
           O.SVNummerfeld>2?settxtvalue(O.SVNummerfeld):''
           break;
-        case "Staatsangehörigkeit":
-        case"Nationality":
+        case "Staatsangehörigkeit (Pflichtangabe)":
+        case"Nationality (mandatory)":
           O.Staatsbuergerschaft.trim().toString().length>0?settxtvalue(O.Staatsbuergerschaft.toString()):''
           break;
         case "Geburtsdatum":
@@ -246,12 +246,12 @@ const[txtvalue,settxtvalue]=useState();
         case"Place of birth (mandatory)":
           O.GBOrt.trim().toString().length>0?settxtvalue(O.GBOrt.toString()):''
           break;
-        case "Geburtsland (nur falls nicht Deutschland)":
-        case"Country of birth (only if not Germany)":
+        case "Geburtsland (Pflichtangabe nur falls nicht Deutschland)":
+        case"Country of birth (mandatory only if not Germany)":
           O.GBLand.length>0?settxtvalue(O.GBLand):''
           break;
-        case "Krankenkasse (Bitte kompletter Name, also zB. AOK NordWest, nicht AOK)":
-        case"Health insurance company (please complete name, e.g. AOK NordWest, not AOK)":
+        case "Krankenkasse ((Pflichtangabe) Bitte kompletter Name, also zB. AOK NordWest, nicht AOK)":
+        case"Health insurance company ((mandatory) please complete name, e.g. AOK NordWest, not AOK)":
           O.Kassename.trim().toString().length>0?settxtvalue(O.Kassename.toString()):''
           break;
         case "Name Ihrer anderen Arbeitgeber":

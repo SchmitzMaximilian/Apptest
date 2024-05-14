@@ -21,7 +21,7 @@ export const MiniDataset=(p)=>{
     },
     "BankData":
     {
-      "Eingabefelder":["Name des Kreditinstituts","IBAN"],
+      "Eingabefelder":["Name des Kreditinstituts (Pflichtangabe)","IBAN (Pflichtangabe)"],
       "EingabefelderIcons":["Bank","Bank"],
     },
     "SteuerData":
@@ -41,7 +41,7 @@ export const MiniDataset=(p)=>{
       
       "PerData":
       {
-        "Eingabefelder":["First name (mandatory)","Last name (mandatory)","Street name and house number (mandatory)","Postal Code (mandatory)","Location/City name (mandatory)"],
+        "Eingabefelder":["First name (mandatory)","Last name (mandatory)","Street name and house number (mandatory)","Postal Code (mandatory)","Location / City name (mandatory)"],
         "EingabefelderIcons":["User","User","User","User","User"],
       },
       "KontaktData":
@@ -56,7 +56,7 @@ export const MiniDataset=(p)=>{
     },
     "BankData":
     {
-      "Eingabefelder":["Name of institute of credit","IBAN "],
+      "Eingabefelder":["Name of institute of credit (mandatory)","IBAN (mandatory)"],
       "EingabefelderIcons":["Bank","Bank"],
     },
     "SteuerData":

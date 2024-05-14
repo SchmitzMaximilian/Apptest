@@ -42,6 +42,9 @@ function MiniJANEIN() {
       }
     }else if(PrivateDatenArr.WeitereJobCheck==0){
       check=false
+    }else if(PrivateDatenArr.WeitereJobCheck==2){
+      check=true
+      setPrivateDatenArr.GeldGrenzeCheck=0
     }
     
 if(check){
@@ -60,7 +63,7 @@ if(check){
             //
           })
         };
-        const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
+        const d = await fetch('http://192.168.2.44/datenbankapi/index.php', request);
         let e = await d.json();
         if(e.ergebnis==true){
           setErfolgscheck(true)

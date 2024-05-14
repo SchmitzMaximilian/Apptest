@@ -78,10 +78,10 @@ export default function Seite2({route, navigation}) {
           <Text  style={{color:'#FFFFFF'} } >Back</Text>
         </TouchableOpacity>
         <View style={styles.SprachButton}>
-        <TouchableOpacity onPress={()=>setzesprache(!sprache)} style={styles.InsetSprachButton} > 
+        {/*<TouchableOpacity onPress={()=>setzesprache(!sprache)} style={styles.InsetSprachButton} > 
           <Text style={{color:'#FFFFFF'}} >{sprache?'EN':'DE'}</Text>
-        </TouchableOpacity>
-        </View>
+        </TouchableOpacity>*/}
+</View>
         <TouchableOpacity onPress={()=>navigation.navigate({name:"Seite4",params:{PrivateDatenArr}})} style={styles.AdminButton}> 
           <Text style={{color:'#FFFFFF'}} >Minijob</Text>
         </TouchableOpacity>

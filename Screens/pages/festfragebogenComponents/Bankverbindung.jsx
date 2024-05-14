@@ -52,8 +52,9 @@ function Bankverbindung() {
       PrivateDatenArr.Inhaber=PrivateDatenArr.Vname.toString()+' '+PrivateDatenArr.Nname.toString()
     } 
     Arr.push(0)
+    setbankBG(Arr)
     if(check){
-      setbankBG(Arr)
+      
       try{
         const request ={
           method: 'POST',

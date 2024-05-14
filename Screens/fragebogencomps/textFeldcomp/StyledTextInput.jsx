@@ -227,11 +227,11 @@ const[txtvalue,settxtvalue]=useState();
         //Sozialversicherung 
         case "Sozialversicherungsnummer":
         case"Social security number":
-          O.SVNummerfeld>2?settxtvalue(O.SVNummerfeld):''
+          O.SVNummerfeld>11?settxtvalue(O.SVNummerfeld):''
           break;     
         case "Sozialversicherungsnummer/Rentennummer":
         case"Social security number/pension number":
-          O.SVNummerfeld>2?settxtvalue(O.SVNummerfeld):''
+          O.SVNummerfeld>11?settxtvalue(O.SVNummerfeld):''
           break;
         case "Staatsangehörigkeit (Pflichtangabe)":
         case"Nationality (mandatory)":
@@ -244,7 +244,7 @@ const[txtvalue,settxtvalue]=useState();
         
         case "Geburtsort (Pflichtangabe)":
         case"Place of birth (mandatory)":
-          O.GBOrt.trim().toString().length>0?settxtvalue(O.GBOrt.toString()):''
+          O.GBOrt.length>0?settxtvalue(O.GBOrt.toString()):''
           break;
         case "Geburtsland (Pflichtangabe nur falls nicht Deutschland)":
         case"Country of birth (mandatory only if not Germany)":

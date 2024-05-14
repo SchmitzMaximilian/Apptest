@@ -17,8 +17,8 @@ import { FCContext } from './pages/functions/contextFehlercheck';
 import { FTContext } from './pages/functions/contextFehlertext';
 import { ECContext } from './pages/functions/contextErfolgscheck';
 import { MAidContext } from './pages/functions/contextMitarbeiterid';
-
-
+import FehlermeldungIndividuell from './pages/fehlerDatenbank/fehlerswitchcase';
+//<FehlermeldungIndividuell FN={1}/>
 
 function SeiteTest({navigation}) {
   const [image,setimage]=useState({uri: 'https://images.unsplash.com/photo-1622743941533-cde694bff56a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fE5pZ2h0Y2x1YnxlbnwwfHwwfHx8MA%3D%3D'})
@@ -65,11 +65,18 @@ function SeiteTest({navigation}) {
         FehlerText?
         Textdataset(sprache?'DE':'EN').Texte.Fehlermeldungdatenbank
         :
-        Textdataset(sprache?'DE':'EN').Texte.Fehlermeldung}
+        Textdataset(sprache?'DE':'EN').Texte.Fehlermeldung
+      }
       </Text></View>
     :
     ""
   }
+  
+ 
+    
+
+   
+  
     
       
       <ScrollView style={{backgroundColor: 'transparent'}}>

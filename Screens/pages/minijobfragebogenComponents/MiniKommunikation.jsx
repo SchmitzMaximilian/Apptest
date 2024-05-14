@@ -31,17 +31,7 @@ function MiniKommunikation() {
     setErfolgscheck(false)  
    
     let check=true
-    if(!PrivateDatenArr.Festnetz.trim().toString().length>2){
-      check=false
-    }
-    
-    if(!PrivateDatenArr.Mobil.trim().toString().length>2){
-      check=false
-    }
-    if(!PrivateDatenArr.Email.trim().toString().length>2){
-      check=false
-    }
-     console.log(mitarbeiterID)
+  
     if(check){
     
       try{
@@ -57,7 +47,7 @@ function MiniKommunikation() {
             
           })
         }; 
-        const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
+        const d = await fetch('http://192.168.2.44/datenbankapi/index.php', request);
         let e = await d.json();
         
         if(e.ergebnis==true){

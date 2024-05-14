@@ -44,6 +44,11 @@ function MiniSteuer() {
       //   Arr.push(0)
       // }
       // }
+      if(PrivateDatenArr.SteuerID.trim()==0)
+        {
+          check=false
+          Arr.push(1)
+        }else{Arr.push(0)}
     
     
     setsteuerBG(Arr)
@@ -62,7 +67,7 @@ function MiniSteuer() {
             //
           })
         };
-        const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
+        const d = await fetch('http://192.168.2.44/datenbankapi/index.php', request);
         let e = await d.json(); 
         
         if(e.ergebnis==true){

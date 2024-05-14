@@ -54,7 +54,7 @@ function SteuerAngaben() {
       }else{
         Arr.push(0)
       }
-       if((Number.isNaN(PrivateDatenArr.Kinder))){
+       if(!(Number.isInteger(Number(PrivateDatenArr.Kinder)))){
         check=false
         Arr.push(1)
       }else{
@@ -66,8 +66,9 @@ function SteuerAngaben() {
       }else{
         Arr.push(0)
       } 
+      setsteuerBG(Arr)
       if(check){
-        setsteuerBG(Arr)
+        
         try{
           const request ={
             method: 'POST',

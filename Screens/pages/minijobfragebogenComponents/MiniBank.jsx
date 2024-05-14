@@ -32,10 +32,10 @@ function MiniBank() {
     setFehlerText(false)
     setErfolgscheck(false) 
     let check=true 
-    letArr=[]
+    let Arr=[]
 
-    if(!PrivateDatenArr.Barzahlung>0){
-    if(!PrivateDatenArr.Bankname.trim().toString().length>2){ 
+    if((PrivateDatenArr.Barzahlung==0)){
+    if(!(PrivateDatenArr.Bankname.trim().toString().length>2)){ 
       check=false
       Arr.push(1)
     }else{
@@ -48,6 +48,7 @@ function MiniBank() {
       Arr.push(0)
     }
      }
+     
      setbankBG(Arr)
     if(check){
       
@@ -64,7 +65,7 @@ function MiniBank() {
             "mitarbeiterID":mitarbeiterID 
           })
         };
-        const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
+        const d = await fetch('http://192.168.2.44/datenbankapi/index.php', request);
         let e = await d.json(); 
         if(e.ergebnis==true){
   

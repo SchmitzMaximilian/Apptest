@@ -36,7 +36,7 @@ function MiniSozial() {
     let check=true 
     
     
-      if(!PrivateDatenArr.SVNummerfeld.trim().toString().length==12){
+      if(!(PrivateDatenArr.SVNummerfeld.length==12)){
         
       check=false
       Arr.push(1)
@@ -45,21 +45,26 @@ function MiniSozial() {
     }
       
     
-    if(!PrivateDatenArr.Staatsbuergerschaft.trim().toString().length>0){
+    if(!(PrivateDatenArr.Staatsbuergerschaft.trim().toString().length>0)){
       
       check=false
       Arr.push(1)
     }else{
       Arr.push(0)
     }
-    if(!PrivateDatenArr.GBDatum.trim().toString().length>0){
+    if(!(PrivateDatenArr.GBDatum.trim().toString().length>0)){
      
       check=false
-      Arr.push(1)
+      
+    }
+    if(PrivateDatenArr.GBName==0) {
+      PrivateDatenArr.GBName=PrivateDatenArr.Nname.toString()
+      Arr.push(0)
     }else{
       Arr.push(0)
     }
-    if(!PrivateDatenArr.GBOrt.trim().toString().length>0){
+    
+   if((PrivateDatenArr.GBOrt==0)){
       
       check=false
       Arr.push(1)
@@ -69,17 +74,12 @@ function MiniSozial() {
     if(PrivateDatenArr.GBLand==0){
       PrivateDatenArr.GBLand='Deutschland'
       Arr.push(0)
-    }
-   
-    if(PrivateDatenArr.GBName==0) {
-      PrivateDatenArr.GBName=PrivateDatenArr.Nname.toString()
-      Arr.push(0)
-    }
+    }else{Arr.push(0)}
    
 
-    
+    console.log(Arr)
      setsoziBG(Arr)
-console.log(PrivateDatenArr)
+console.log(Arr)
     if(check){
       
       try{
@@ -101,7 +101,7 @@ console.log(PrivateDatenArr)
           })
         };
         console.log(request.body)
-        const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
+        const d = await fetch('http://192.168.2.44/datenbankapi/index.php', request);
         let e = await d.json();
         console.log(e)
         if(e.ergebnis==true){

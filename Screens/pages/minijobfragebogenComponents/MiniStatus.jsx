@@ -47,8 +47,8 @@ function MiniStatus() {
     let check=true
     if(PrivateDatenArr.StatusCheck==4){
       if(PrivateDatenArr.Eintragsonstige.trim().toString().length==0){
-      check=false}
-      Arr.push(1)
+      check=false
+      Arr.push(1)}Arr.push(0)
     }else{
       Arr.push(0)
     }
@@ -66,7 +66,7 @@ if(check){
             //
           })
         };
-        const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
+        const d = await fetch('http://192.168.2.44/datenbankapi/index.php', request);
         let e = await d.json();
         if(e.ergebnis==true){
           setErfolgscheck(true)

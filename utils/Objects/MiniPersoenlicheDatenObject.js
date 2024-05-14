@@ -31,7 +31,7 @@ const MiniPersoenlicheDatenObject={
   Staatsbuergerschaft:"",
   GBDatum:"", 
   GBName:"",
-  GBOrt:"",
+  GBOrt:0,
   GBLand:"",    
   
   //--------JobBeginnDaten------

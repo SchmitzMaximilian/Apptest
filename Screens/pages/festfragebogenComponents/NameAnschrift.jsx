@@ -116,6 +116,7 @@ const NameAnschrift = () => {
               //"username":eingabe1.toString(), teilzeit check box einbinden
             })
           };
+          
           const d = await fetch('http://192.168.2.44/datenbankapi/index.php', request);
           let e = await d.json(); 
           console.log(d)

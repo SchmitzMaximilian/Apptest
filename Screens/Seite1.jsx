@@ -143,6 +143,8 @@ const handleChange = (event, selectedDate) => {
     if(!(PrivateDatenArr.GBOrt.trim().toString().length>0)){
       check=false
       Arr.push(1)
+      //setFehlernummer(1)
+      //return 
     }else{
       Arr.push(0)
     }

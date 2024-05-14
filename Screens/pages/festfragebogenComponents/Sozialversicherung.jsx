@@ -17,6 +17,7 @@ import { MAidContext } from '../functions/contextMitarbeiterid';
 import { FCContext } from '../functions/contextFehlercheck';
 import { FTContext } from '../functions/contextFehlertext';
 import { ECContext } from '../functions/contextErfolgscheck';
+import { EingabeFeld } from '../../fragebogencomps/textFeldcomp/EingabeFeld';
 
 
 function Sozialversicherung() {
@@ -59,7 +60,7 @@ function Sozialversicherung() {
       let check=true 
       
       if(!(PrivateDatenArr.RentenCheck>0)){
-        if(!(PrivateDatenArr.SVNummerfeld.length==0)){
+        if(!(PrivateDatenArr.SVNummerfeld.length==12)){
         check=false
         setrentennummerBG([1])
         }else{
@@ -111,7 +112,6 @@ function Sozialversicherung() {
       } 
       }
        
-    console.log(PrivateDatenArr)
     setsoziBG(Arr)
       if(check){
         try{

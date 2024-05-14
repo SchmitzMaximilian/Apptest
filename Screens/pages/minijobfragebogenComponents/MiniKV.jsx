@@ -30,7 +30,7 @@ function MiniKV() {
     setErfolgscheck(false) 
     let Arr=[]
     let check=true
-    if(!PrivateDatenArr.Kassename.trim().toString.length>2){
+    if(!(PrivateDatenArr.Kassename.trim().toString.length>2)){
       check=false
       Arr.push(1)
     }else{
@@ -40,12 +40,9 @@ function MiniKV() {
       PrivateDatenArr.KVArt=3
      
     }
-    console.log("   ")
-    console.log(check)
-    console.log(PrivateDatenArr.Kassename)
-    console.log(PrivateDatenArr.KVArt)
+    setKVBG(Arr)
 if(check){
-  setKVBG(Arr)
+  
       try{
         const request ={
           method: 'POST',
@@ -58,7 +55,7 @@ if(check){
             //
           })
         };
-        const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
+        const d = await fetch('http://192.168.2.44/datenbankapi/index.php', request);
         let e = await d.json();
         if(e.ergebnis==true){
           setErfolgscheck(true)

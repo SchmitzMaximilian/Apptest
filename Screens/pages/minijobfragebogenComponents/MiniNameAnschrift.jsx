@@ -64,7 +64,7 @@ function MiniNameAnschrift() {
     }else{
       Arr.push(0)
     }
-    if((PrivateDatenArr.PCode==0) || (PrivateDatenArr.PCode.trim().toString().length!=5)){
+    if((PrivateDatenArr.PCode==0) ){
       check=false
       
       
@@ -103,8 +103,9 @@ function MiniNameAnschrift() {
             //"username":eingabe1.toString(), teilzeit check box einbinden
           })
         };
-        const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
+        const d = await fetch('http://192.168.2.44/datenbankapi/index.php', request);
         let e = await d.json(); 
+        console.log(e)
         if(e.ergebnis>0 &&(!isNaN(e.ergebnis))){
           setErfolgscheck(true)
           setTimeout(()=>{

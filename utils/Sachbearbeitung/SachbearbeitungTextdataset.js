@@ -46,7 +46,7 @@ export const SachbearbeitungTextdataset=(p)=>{
 			"KopieKrankenkasse":"Krankenversicherung Nachweis von Privatversicherung",
 			"RVP":"Antrag auf Befreiung von der RV-Pflicht",
 			"Hauptjob":"Erklärung über weitere Arbeitsverhältnisse(falls nach Seite 1 notwendig)",
-			"":"",
+			"ELStAM":"ELStaM-Anmeldung, wenn Steuerklasse 1-4",
 },
 
 }
@@ -96,7 +96,7 @@ SachtextData={
     "KopieKrankenkasse":"Krankenversicherung Nachweis von Privatversicherung",
     "RVP":"Antrag auf Befreiung von der RV-Pflicht",
     "Hauptjob":"Erklärung über weitere Arbeitsverhältnisse(falls nach Seite 1 notwendig)",
-    "":"",
+    "ELStAM":"ELStaM-Anmeldung, wenn Steuerklasse 1-4",
 },
 
 }

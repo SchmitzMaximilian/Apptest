@@ -12,6 +12,8 @@ import { ECContext } from '../functions/contextErfolgscheck';
 import { MAidContext } from '../functions/contextMitarbeiterid';
 import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity,ImageBackground } from 'react-native';
 import { MiniDataset } from '../../../Components/Minijobinhaltsvorlagen/Minijobeingabedataset';
+import Privatcheck from '../../fragebogencomps/MinijobCheckboxen/MiniPrivatCheck';
+import { FNContext } from '../functions/contextFehlernummer';
 
 function MiniKV() {
   const [PrivateDatenArr,setPrivateDatenArr]=useState(MiniPersoenlicheDatenObject)
@@ -20,17 +22,18 @@ function MiniKV() {
   const [FehlerText,setFehlerText]=useContext(FTContext)
   const [Erfolgscheck,setErfolgscheck]=useContext(ECContext)
   const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext)
+  const [Fehlernummer,setFehlernummer]=useContext(FNContext)
   const [KVBG,setKVBG]=useState([0])
   const [tab8,settab8]=useState(false)
   const [tab8ausgefuellt,settab8ausgefuellt]=useState(false)
-
+  
   const submitdata8=async()=>{
     setFehlercheck(false)
     setFehlerText(false)
     setErfolgscheck(false) 
     let Arr=[]
     let check=true
-    if(!(PrivateDatenArr.Kassename.trim().toString.length>2)){
+    if((PrivateDatenArr.Kassename.trim().toString().length==0)){
       check=false
       Arr.push(1)
     }else{
@@ -41,6 +44,7 @@ function MiniKV() {
      
     }
     setKVBG(Arr)
+    
 if(check){
   
       try{
@@ -108,6 +112,7 @@ if(check){
   {
 	  tab8?
     <>
+    <Privatcheck SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
     <MinispeicherButton SDF={submitdata8} />
     </>
     :

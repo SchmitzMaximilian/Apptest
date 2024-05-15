@@ -14,6 +14,7 @@ import { FCContext } from '../functions/contextFehlercheck';
 import { FTContext } from '../functions/contextFehlertext';
 import { ECContext } from '../functions/contextErfolgscheck';
 import { MAidContext } from '../functions/contextMitarbeiterid';
+import { FNContext } from '../functions/contextFehlernummer';
 
 function Bankverbindung() {
   const [PrivateDatenArr,setPrivateDatenArr]=useState(PersoenlicheDatenObject)
@@ -25,6 +26,7 @@ function Bankverbindung() {
   const [FehlerText,setFehlerText]=useContext(FTContext)
   const [Erfolgscheck,setErfolgscheck]=useContext(ECContext)
   const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext)
+  const [Fehlernummer,setFehlernummer]=useContext(FNContext)
 
   const submitdataBank=async()=>{
     

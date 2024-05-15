@@ -8,7 +8,7 @@ export default function Privatcheck(props) {
   const [checked1, setChecked1] = useState(0)//value abfrage hier
   const [sprache,setzesprache]=useContext(TransactionContext)
   const speicherSteuerdata=(I)=>{
-   props.S?props.F(0):props.F(1)
+    checked1?setChecked1(0):setChecked1(1)
    let O=props?.SV
     props.SF(O) 
    if(I==true){
@@ -23,7 +23,7 @@ export default function Privatcheck(props) {
   return( 
         <View style={styles.checkboxContainer}>
         <CheckBox
-          value={props.S?true:false}
+          value={checked1?true:false}
           onValueChange={(itemValue) => speicherSteuerdata(itemValue)}
           style={styles.checkbox}
           /><Text style={styles.beschreibung}>{Minijobtextdataset(sprache?'DE':'EN').SoloCheckboxText.VersicherungPrivat}</Text>

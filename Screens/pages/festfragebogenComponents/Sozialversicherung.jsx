@@ -18,6 +18,7 @@ import { FCContext } from '../functions/contextFehlercheck';
 import { FTContext } from '../functions/contextFehlertext';
 import { ECContext } from '../functions/contextErfolgscheck';
 import { EingabeFeld } from '../../fragebogencomps/textFeldcomp/EingabeFeld';
+import { FNContext } from '../functions/contextFehlernummer';
 
 
 function Sozialversicherung() {
@@ -37,6 +38,7 @@ function Sozialversicherung() {
   const [Fehlercheck,setFehlercheck]=useContext(FCContext)
   const [FehlerText,setFehlerText]=useContext(FTContext)
   const [Erfolgscheck,setErfolgscheck]=useContext(ECContext)
+  const [Fehlernummer,setFehlernummer]=useContext(FNContext)
 
 
   const selectPruefer=(T)=>{

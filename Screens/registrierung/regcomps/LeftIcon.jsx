@@ -22,6 +22,9 @@ const LeftIcon = (props) => {
     case "Mail":
       Icon='mail'
       break;
+      case "Sachbearbeitung":
+      Icon='file'  
+      break;
     case "x-circle-fill":
       Icon="mail"
       break;

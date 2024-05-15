@@ -9,11 +9,13 @@ import Seite5 from '../Screens/Seite5';
 import SeiteMinijob from '../Screens/SeiteMinijob';
 import SeiteTest from '../Screens/SeiteTest';
 import LoginScreen from '../Screens/LoginScreen';
+import SeiteSachbearbeitungMinijob from '../Screens/SeiteSachbearbeitungMinijob';
 import { TransactionProvider } from '../utils/Context';
 import { ErfolgscheckProvider } from '../Screens/pages/functions/contextErfolgscheck';
 import { FehlercheckProvider } from '../Screens/pages/functions/contextFehlercheck';
 import { FehlerTextProvider } from '../Screens/pages/functions/contextFehlertext';
 import { MitarbeiteridProvider } from '../Screens/pages/functions/contextMitarbeiterid';
+import { FehlernummerProvider } from '../Screens/pages/functions/contextFehlernummer';
  
 const Navbar=(Prop)=> { 
     const Stack = createStackNavigator();
@@ -27,6 +29,7 @@ const Navbar=(Prop)=> {
     <MitarbeiteridProvider>
     <ErfolgscheckProvider>
     <FehlercheckProvider>
+    <FehlernummerProvider>
     <FehlerTextProvider>
     <NavigationContainer>
  
@@ -39,10 +42,12 @@ const Navbar=(Prop)=> {
     <Stack.Screen name = "Seite5" component = {Seite5} options={{headerShown:false}} />
     <Stack.Screen name = "SeiteTest" component = {SeiteTest} Prop={Prop} options={{headerShown:false}} />
     <Stack.Screen name = "SeiteMinijob" component = {SeiteMinijob} options={{headerShown:false}} />
+    <Stack.Screen name = "SeiteSachbearbeitungMinijob" component = {SeiteSachbearbeitungMinijob} options={{headerShown:false}} />
 
   </Stack.Navigator>
   </NavigationContainer>
   </FehlerTextProvider>
+  </FehlernummerProvider>
   </FehlercheckProvider>
   </ErfolgscheckProvider>
   </MitarbeiteridProvider>

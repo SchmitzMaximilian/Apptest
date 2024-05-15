@@ -14,6 +14,7 @@ import { Minijobtextdataset } from '../../../Components/Minijobinhaltsvorlagen/M
 import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity,ImageBackground } from 'react-native';
 import { EingabeFeld } from '../../fragebogencomps/textFeldcomp/EingabeFeld';
 import { Picker } from '@react-native-picker/picker';
+import { FNContext } from '../functions/contextFehlernummer';
 function MiniStatus() {
 
   const [EigeneingabeBG,setEigeneingabeBG]=useState([0])
@@ -24,6 +25,7 @@ function MiniStatus() {
   const [FehlerText,setFehlerText]=useContext(FTContext)
   const [Erfolgscheck,setErfolgscheck]=useContext(ECContext)
   const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext)
+  const [Fehlernummer,setFehlernummer]=useContext(FNContext)
   const [SelectedLanguage, setSelectedLanguage] = useState()
   const [tab6,settab6]=useState(false)
   const [tab6ausgefuellt,settab6ausgefuellt]=useState(false)

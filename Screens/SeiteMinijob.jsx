@@ -21,6 +21,8 @@ import MiniSozial from './pages/minijobfragebogenComponents/MiniSozial';
 import MiniStatus from './pages/minijobfragebogenComponents/MiniStatus';
 import MiniJANEIN from './pages/minijobfragebogenComponents/MiniJANEIN';
 import MiniKV from './pages/minijobfragebogenComponents/MiniKV';
+import { FNContext } from './pages/functions/contextFehlernummer';
+//import MiniTopButtonleiste from './pages/minijobfragebogenComponents/MiniTopButtonleiste';
 
 
 function SeiteMinijob({navigation}) {
@@ -32,6 +34,7 @@ function SeiteMinijob({navigation}) {
   const [Fehlercheck,setFehlercheck]=useContext(FCContext)
   const [FehlerText,setFehlerText]=useContext(FTContext)
   const [Erfolgscheck,setErfolgscheck]=useContext(ECContext)
+  const [Fehlernummer,setFehlernummer]=useContext(FNContext)
 
   const imglesen = async (param)=>{
     //loeschen(param)
@@ -93,7 +96,7 @@ function SeiteMinijob({navigation}) {
           <Text style={{color:'#FFFFFF'}} >Sachbearbeiter</Text>
         </TouchableOpacity>
       </View>
-
+  {/*<MiniTopButtonleiste/>*/}
 
       <View style={styles.ContainerFragebogen}> 
       <MiniBogeneinleitung/>

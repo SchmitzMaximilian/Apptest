@@ -24,7 +24,7 @@ export const Textdataset=(p)=>{
       "Sozial":"SV-Nummer nicht vorhanden",
       "Bank":"Barzahlung",
       "Steuer":"Ich erkläre, nicht im Besitz einer Steuer-ID zu sein",
-      "OtherJobs":"Name Ihrer anderen Arbeitgeber",
+      "OtherJobs":"  Name Ihrer anderen Arbeitgeber",
     },
     "Fehler":{
       //Name und Anschrift
@@ -80,7 +80,7 @@ export const Textdataset=(p)=>{
     "Sozial":"SV number not available",
     "Bank":"Cash payment",
     "Steuer":"I declare that I do not have a tax ID",
-    "OtherJobs":"Name of your other employers",
+    "OtherJobs":"  Name of your other employers",
   },
   "Fehler":{
     //Name und Anschrift

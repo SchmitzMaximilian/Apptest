@@ -15,6 +15,7 @@ import { FCContext } from '../functions/contextFehlercheck';
 import { FTContext } from '../functions/contextFehlertext';
 import { ECContext } from '../functions/contextErfolgscheck';
 import { MAidContext } from '../functions/contextMitarbeiterid';
+import { FNContext } from '../functions/contextFehlernummer';
 function SteuerAngaben() {
   const [PrivateDatenArr,setPrivateDatenArr]=useState(PersoenlicheDatenObject)
   const [sprache,setzesprache]=useContext(TransactionContext)
@@ -27,6 +28,7 @@ function SteuerAngaben() {
   const [FehlerText,setFehlerText]=useContext(FTContext)
   const [Erfolgscheck,setErfolgscheck]=useContext(ECContext)
   const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext)
+  const [Fehlernummer,setFehlernummer]=useContext(FNContext)
   
   const submitdataSteuer=async()=>{
 

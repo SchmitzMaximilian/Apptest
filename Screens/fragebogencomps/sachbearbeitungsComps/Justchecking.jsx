@@ -4,15 +4,13 @@ import CheckBox from 'expo-checkbox';
 import { Minijobtextdataset } from '../../../Components/Minijobinhaltsvorlagen/Minijobtextdataset';
 import { TransactionContext } from '../../../utils/Context';
 
-export default function SimpelCheck(props) {
+export default function Justchecking(props) {
   const [checked1, setChecked1] = useState(0)//value abfrage hier
   const [sprache,setzesprache]=useContext(TransactionContext)
   const speicherSteuerdata=(itemValue)=>{
     
     checked1?setChecked1(0):setChecked1(1)
-    if(itemValue==true){
-      props.Arbeitstag(1)
-    }else{props.Arbeitstag(0)}
+    
      
    
    

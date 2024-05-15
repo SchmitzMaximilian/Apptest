@@ -15,6 +15,7 @@ import { FCContext } from '../functions/contextFehlercheck';
 import { FTContext } from '../functions/contextFehlertext';
 import { ECContext } from '../functions/contextErfolgscheck';
 import { MAidContext } from '../functions/contextMitarbeiterid';
+import { FNContext } from '../functions/contextFehlernummer';
 
 
 
@@ -24,6 +25,7 @@ const NameAnschrift = () => {
   const [Fehlercheck,setFehlercheck]=useContext(FCContext)
   const [FehlerText,setFehlerText]=useContext(FTContext)
   const [Erfolgscheck,setErfolgscheck]=useContext(ECContext)
+  const [Fehlernummer,setFehlernummer]=useContext(FNContext)
   const [PrivateDatenArr,setPrivateDatenArr]=useState(PersoenlicheDatenObject)
   const [sprache,setzesprache]=useContext(TransactionContext)
   const [tab1,settab1]=useState(false)
@@ -55,14 +57,14 @@ const NameAnschrift = () => {
       if(!(PrivateDatenArr.Vname.trim().toString().length>1)){
         check=false;
         Arr.push(1)
-        
+        setFehlernummer(1)
         
       }else{
         Arr.push(0)
       }
       if(!(PrivateDatenArr.Nname.trim().toString().length>0)){
         check=false
-        
+        setFehlernummer(2)
         
         Arr.push(1)
       }else{
@@ -71,7 +73,7 @@ const NameAnschrift = () => {
       
       if(!(PrivateDatenArr.Adresse.trim().toString().length>2)){
         check=false
-        
+        setFehlernummer(3)
         
         Arr.push(1)
       }else{
@@ -81,7 +83,7 @@ const NameAnschrift = () => {
       if((PrivateDatenArr.PCode==0) ){
         check=false
         
-        
+        setFehlernummer(4)
         Arr.push(1)
       }else{
         Arr.push(0)
@@ -89,7 +91,7 @@ const NameAnschrift = () => {
       if(!(PrivateDatenArr.City.trim().toString().length>1)){
         check=false
         
-        
+        setFehlernummer(5)
         Arr.push(1)
       }else{
         Arr.push(0)

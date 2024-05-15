@@ -15,6 +15,7 @@ import JaNeinCheckbox from '../../fragebogencomps/MinijobCheckboxen/MiniJaNeinCh
 import JaNeinCheckbox1 from '../../fragebogencomps/MinijobCheckboxen/MiniJaNeinCheck1';
 import JaNeinCheckbox2 from '../../fragebogencomps/MinijobCheckboxen/MiniJaNeinCheck2';
 import { Minijobtextdataset } from '../../../Components/Minijobinhaltsvorlagen/Minijobtextdataset';
+import { FNContext } from '../functions/contextFehlernummer';
 
 function MiniJANEIN() {
   const [PrivateDatenArr,setPrivateDatenArr]=useState(MiniPersoenlicheDatenObject)
@@ -23,6 +24,7 @@ function MiniJANEIN() {
   const [FehlerText,setFehlerText]=useContext(FTContext)
   const [Erfolgscheck,setErfolgscheck]=useContext(ECContext)
   const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext)
+  const [Fehlernummer,setFehlernummer]=useContext(FNContext)
   const [JaNeinCheck,setJaNeinCheck]=useState(false)
   const [tab7,settab7]=useState(false)
   const [tab7ausgefuellt,settab7ausgefuellt]=useState(false)
@@ -43,7 +45,7 @@ function MiniJANEIN() {
     }else if(PrivateDatenArr.WeitereJobCheck==0){
       check=false
     }else if(PrivateDatenArr.WeitereJobCheck==2){
-      check=true
+      
       setPrivateDatenArr.GeldGrenzeCheck=0
     }
     

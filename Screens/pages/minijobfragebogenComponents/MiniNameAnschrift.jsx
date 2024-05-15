@@ -16,11 +16,13 @@ import { MiniDataset } from '../../../Components/Minijobinhaltsvorlagen/Minijobe
 import MiniPersoenlicheDatenObject from '../../../utils/Objects/MiniPersoenlicheDatenObject';
 import MiniSelectPicker from './MiniPickerSelectBox';
 import MinispeicherButton from './MinispeicherButton';
+import { FNContext } from '../functions/contextFehlernummer';
 
 function MiniNameAnschrift() {
   const [Fehlercheck,setFehlercheck]=useContext(FCContext)
   const [FehlerText,setFehlerText]=useContext(FTContext)
   const [Erfolgscheck,setErfolgscheck]=useContext(ECContext)
+  const [Fehlernummer,setFehlernummer]=useContext(FNContext)
   const [PrivateDatenArr,setPrivateDatenArr]=useState(MiniPersoenlicheDatenObject)
   const [sprache,setzesprache]=useContext(TransactionContext)
   const [tab1,settab1]=useState(false)

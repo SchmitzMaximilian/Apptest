@@ -29,7 +29,8 @@ import { EingabeFeld } from './fragebogencomps/textFeldcomp/EingabeFeld';
 import  DateTimePicker  from '@react-native-community/datetimepicker';
 
 export default function Seite1({navigation}) {
-  const [sprache,setzesprache]=useContext(TransactionContext)  
+  const [sprache,setzesprache]=useContext(TransactionContext)
+    
   const [tab1,settab1]=useState(false)
   const [tab1ausgefuellt,settab1ausgefuellt]=useState(false)  
   const [tab2,settab2]=useState(false)
@@ -62,8 +63,8 @@ const [Steuercheck,setSteuercheck]=useState(false)
   const [kommunikationBG,setkommunikationBG]=useState([0,0,0])
 
 
-  const [Fehlercheckindividuell,setFehlercheckindividuell]=useState(false)
-  const [Fehlernummer,setFehlernummer]=useState(0)
+  //const [Fehlercheckindividuell,setFehlercheckindividuell]=useState(false)
+  //const [Fehlernummer,setFehlernummer]=useState(0)
 
 
   const [PrivateDatenArr,setPrivateDatenArr]=useState(PersoenlicheDatenObject)    
@@ -648,11 +649,11 @@ console.log(PrivateDatenArr)
       ""
     } 
 
-    {
+    {/** 
       Fehlercheckindividuell?
       <Fehlermeldung FN={Fehlernummer}/>
       :
-      ""
+      ""*/
     }
 
 

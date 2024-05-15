@@ -17,8 +17,10 @@ import { FCContext } from './pages/functions/contextFehlercheck';
 import { FTContext } from './pages/functions/contextFehlertext';
 import { ECContext } from './pages/functions/contextErfolgscheck';
 import { MAidContext } from './pages/functions/contextMitarbeiterid';
+import { FNContext } from './pages/functions/contextFehlernummer';
 import FehlermeldungIndividuell from './pages/fehlerDatenbank/fehlerswitchcase';
-//<FehlermeldungIndividuell FN={1}/>
+//import TopButtonleiste from './pages/festfragebogenComponents/TopButtonleiste';
+//<FehlermeldungIndividuell FN={Fehlernummer}/>
 
 function SeiteTest({navigation}) {
   const [image,setimage]=useState({uri: 'https://images.unsplash.com/photo-1622743941533-cde694bff56a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fE5pZ2h0Y2x1YnxlbnwwfHwwfHx8MA%3D%3D'})
@@ -29,6 +31,7 @@ function SeiteTest({navigation}) {
   const [Fehlercheck,setFehlercheck]=useContext(FCContext)
   const [FehlerText,setFehlerText]=useContext(FTContext)
   const [Erfolgscheck,setErfolgscheck]=useContext(ECContext)
+  const [Fehlernummer,setFehlernummer]=useContext(FNContext)
   
   const imglesen = async (param)=>{
     //loeschen(param)
@@ -81,7 +84,9 @@ function SeiteTest({navigation}) {
       
       <ScrollView style={{backgroundColor: 'transparent'}}>
         
-      <View style={styles.container}>      
+      <View style={styles.container}>
+        
+              
       <View style={styles.AdminButtonContainer}>
 
       <TouchableOpacity  style={styles.AdminButton}> 
@@ -98,6 +103,11 @@ function SeiteTest({navigation}) {
           <Text style={{color:'#FFFFFF'}} >Sachbearbeiter</Text>
         </TouchableOpacity>
       </View>
+      {/*
+      Soll den AdminButtonContainer und seinen inhalt ersetzen
+      <TopButtonleiste/>
+      
+      */}
 
 
       <View style={styles.ContainerFragebogen}> 

@@ -16,11 +16,11 @@ import { SachbearbeitungTextdataset } from '../utils/Sachbearbeitung/Sachbearbei
 import * as SecureStore from 'expo-secure-store';
 import { EingabeFeld } from './registrierung/regcomps/Comps';
 import SimpelCheck from './fragebogencomps/sachbearbeitungsComps/SimpelCheck';
-import ArbeitstageCheck from './pages/sachbearbeitungComponents/ArbeitstageCheck';
+import ArbeitstageCheck from './pages/sachbearbeitungMiniComponents/ArbeitstageCheck';
 import Justchecking from './fragebogencomps/sachbearbeitungsComps/Justchecking';
-import Unterlagencheckliste from './pages/sachbearbeitungComponents/Unterlagencheckliste';
-import Grundentlohnung from './pages/sachbearbeitungComponents/Grundentlohnung';
-import Zuschläge from './pages/sachbearbeitungComponents/Zuschläge';
+import Unterlagencheckliste from './pages/sachbearbeitungMiniComponents/Unterlagencheckliste';
+import Grundentlohnung from './pages/sachbearbeitungMiniComponents/Grundentlohnung';
+
 
 
 
@@ -89,8 +89,8 @@ export default function Seite2({route, navigation}) {
           <Text style={{color:'#FFFFFF'}} >{sprache?'EN':'DE'}</Text>
         </TouchableOpacity>*/}
 </View>
-        <TouchableOpacity onPress={()=>navigation.navigate({name:"SeiteSachbearbeitungMinijob",params:{PrivateDatenArr}})} style={styles.AdminButton}> 
-          <Text style={{color:'#FFFFFF'}} >SachbearbeitungMinijob</Text>
+        <TouchableOpacity onPress={()=>navigation.navigate({name:"SeiteTest",params:{PrivateDatenArr}})} style={styles.AdminButton}> 
+          <Text style={{color:'#FFFFFF'}} >Festpersonal</Text>
         </TouchableOpacity>
       </View>
 
@@ -98,7 +98,7 @@ export default function Seite2({route, navigation}) {
     {/**Angaben der Sachbearbeitung*/}
     <View style={styles.ContainerFragebogen}>
 
-      <Text style={styles.Titel}>Sachbearbeitungsbogen für Festpersonal</Text>
+      <Text style={styles.Titel}>Sachbearbeitungsbogen für Minijob</Text>
 
     
     <TitleTouch  F={settab3} S={tab3} T={SachbearbeitungTextdataset(sprache?"DE":"EN").Titel.Zeiten} />
@@ -128,7 +128,7 @@ export default function Seite2({route, navigation}) {
       tab1?
       <>
       <Grundentlohnung/>
-      <Zuschläge/>      
+            
       </>
       :
       ""

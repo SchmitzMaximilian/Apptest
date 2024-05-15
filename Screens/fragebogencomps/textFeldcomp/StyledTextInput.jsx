@@ -117,8 +117,8 @@ const[txtvalue,settxtvalue]=useState();
       case"Health insurance company ((mandatory) please complete name, e.g. AOK NordWest, not AOK)":
         O.Kassename=t
         break;
-      case "Name Ihrer anderen Arbeitgeber":
-      case"Name of your other employers":
+      case "  Name Ihrer anderen Arbeitgeber":
+      case"  Name of your other employers":
         O.AndereArbeitgeber=t
         break;
       case "Geburtsname (Pflichtangabe, bei abweichendem Nachnamen)":
@@ -133,8 +133,8 @@ const[txtvalue,settxtvalue]=useState();
 
         //Minijob Arbeitsstatus
 
-        case "Bitte hier eintragen":
-        case "Please enter here":
+        case "  Bitte hier eintragen":
+        case "  Please enter here":
           O.Eintragsonstige=t
           break;
     }
@@ -254,8 +254,8 @@ const[txtvalue,settxtvalue]=useState();
         case"Health insurance company ((mandatory) please complete name, e.g. AOK NordWest, not AOK)":
           O.Kassename.trim().toString().length>0?settxtvalue(O.Kassename.toString()):''
           break;
-        case "Name Ihrer anderen Arbeitgeber":
-        case"Name of your other employers":
+        case "  Name Ihrer anderen Arbeitgeber":
+        case"  Name of your other employers":
           O.AndereArbeitgeber.trim().toString().length>4?settxtvalue(O.AndereArbeitgeber.toString()):''
           break;
           case "Geburtsname (Pflichtangabe, bei abweichendem Nachnamen)":
@@ -269,8 +269,8 @@ const[txtvalue,settxtvalue]=useState();
         
             //Minijob Arbeitsstatus
 
-        case "Bitte hier eintragen":
-        case "Please enter here":
+        case "  Bitte hier eintragen":
+        case "  Please enter here":
           O.Eintragsonstige.trim().toString().length>0?settxtvalue(O.Eintragsonstige.toString()):''
           break;
       }

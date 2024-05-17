@@ -112,16 +112,7 @@ export default function Seite2({route, navigation}) {
     }  
 
 
-   {
-	  tab3?
-    <> 
-    <TouchableOpacity onPress={()=>datenabruf()} style={styles.Abspeichern}>
-    <Text style={{color:'black'}}>Speichern</Text>
-</TouchableOpacity>
-    </>
-    :
-    ""
-  }
+ 
 
 <TitleTouch  F={settab1} S={tab1} T={SachbearbeitungTextdataset(sprache?"DE":"EN").Titel.Lohn} />
     {
@@ -135,16 +126,7 @@ export default function Seite2({route, navigation}) {
     }  
 
 
-   {
-	  tab1?
-    <> 
-    <TouchableOpacity onPress={()=>datenabruf()} style={styles.Abspeichern}>
-    <Text style={{color:'black'}}>Speichern</Text>
-</TouchableOpacity>
-    </>
-    :
-    ""
-  }
+ 
       <TitleTouch  F={settab2} S={tab2} T={SachbearbeitungTextdataset(sprache?"DE":"EN").Titel.Checkliste} />
     {
       tab2?
@@ -156,16 +138,7 @@ export default function Seite2({route, navigation}) {
     }  
 
 
-   {
-	  tab2?
-    <> 
-    <TouchableOpacity onPress={()=>datenabruf()} style={styles.Abspeichern}>
-    <Text style={{color:'black'}}>Speichern</Text>
-</TouchableOpacity>
-    </>
-    :
-    ""
-  }
+   
 
    
   </View>

@@ -13,8 +13,47 @@ export default function SimpelCheck(props) {
     if(itemValue==true){
       props.Arbeitstag(1)
     }else{props.Arbeitstag(0)}
-     
-   
+
+    let O=props?.SV
+    switch(props.Bezeichnung){
+      case "Montag":
+        O.MontagCheck=itemValue
+        break;
+      case "Dienstag":
+        O.DiensttagCheck=itemValue
+        break;
+      case "Mittwoch":
+        O.MittwochCheck=itemValue
+        break;
+      case "Donnerstag":
+        O.DonnerstagCheck=itemValue
+        break;
+      case "Freitag":
+        O.FreitagCheck=itemValue
+        break;
+      case "Samstag":
+        O.SamstagCheck=itemValue
+        break;
+      case "Sonntag":
+        O.SonntagCheck=itemValue
+        break;
+
+
+      case "Stundenlohn":
+        O.Stundenlohncheck=itemValue
+        break;
+      case "Festlohn":
+        O.Festlohncheck=itemValue
+        break;
+      case "Festgehalt":
+        O.Festgehaltcheck=itemValue
+        break;
+      case "Besondere":
+        O.BesondereCheck=itemValue
+        break;      
+
+    }     
+   props.SF(O)
    
   }
   

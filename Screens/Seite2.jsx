@@ -21,6 +21,7 @@ import Justchecking from './fragebogencomps/sachbearbeitungsComps/Justchecking';
 import Unterlagencheckliste from './pages/sachbearbeitungComponents/Unterlagencheckliste';
 import Grundentlohnung from './pages/sachbearbeitungComponents/Grundentlohnung';
 import Zuschläge from './pages/sachbearbeitungComponents/Zuschläge';
+import SpeicherSAButton from './pages/sachbearbeitungtextfeldcomp/speicherSAButton';
 
 
 
@@ -41,6 +42,42 @@ export default function Seite2({route, navigation}) {
   const [SL,setSL]=useState(false)
   const [Beseingabe,setBeseingabe]=useState(false)
   
+
+  const submitLohndaten=async()=>{
+    let check=true
+
+    //prüfungen???
+    if(check){
+      try{
+        const request ={
+          method: 'POST',
+          headers: { 'Content-Type' : 'application/json'},
+          body: JSON.stringify({
+            "query": 6,//ändern
+            "Elstam": SachbearbeitungDatenArr.ELStAMCheck.toString().trim(),//erweitern/ändern
+          })
+        };
+        const d = await fetch('http://192.168.2.44/datenbankapi/indexsachbearbeitung.php', request);
+        let e = await d.json();
+        if(e.ergebnis>0 &&(!isNaN(e.ergebnis))){
+          let NO=SachbearbeitungDatenArr
+          NO.MitarbeiterID=e.ergebnis
+          setSachbearbeitungDatenArr(NO)
+        }
+        else if(e.ergebnis=='DBerror'){
+          console.log('no Update')
+        }else{
+          console.log('Fehler')
+        }
+      }
+      catch(err){
+        console.error(err)
+      }
+    }else{
+      
+    }
+  }
+
   
   const imglesen = async (param)=>{
     //loeschen(param)
@@ -112,16 +149,7 @@ export default function Seite2({route, navigation}) {
     }  
 
 
-   {
-	  tab3?
-    <> 
-    <TouchableOpacity onPress={()=>datenabruf()} style={styles.Abspeichern}>
-    <Text style={{color:'black'}}>Speichern</Text>
-</TouchableOpacity>
-    </>
-    :
-    ""
-  }
+   
 
 <TitleTouch  F={settab1} S={tab1} T={SachbearbeitungTextdataset(sprache?"DE":"EN").Titel.Lohn} />
     {
@@ -138,10 +166,9 @@ export default function Seite2({route, navigation}) {
    {
 	  tab1?
     <> 
-    <TouchableOpacity onPress={()=>datenabruf()} style={styles.Abspeichern}>
-    <Text style={{color:'black'}}>Speichern</Text>
-</TouchableOpacity>
-    </>
+    < SpeicherSAButton SDF={submitLohndaten}/>
+</>
+    
     :
     ""
   }
@@ -156,16 +183,7 @@ export default function Seite2({route, navigation}) {
     }  
 
 
-   {
-	  tab2?
-    <> 
-    <TouchableOpacity onPress={()=>datenabruf()} style={styles.Abspeichern}>
-    <Text style={{color:'black'}}>Speichern</Text>
-</TouchableOpacity>
-    </>
-    :
-    ""
-  }
+   
 
    
   </View>

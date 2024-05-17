@@ -5,19 +5,22 @@ import SimpelCheck from '../../fragebogencomps/sachbearbeitungsComps/SimpelCheck
 import Justchecking from '../../fragebogencomps/sachbearbeitungsComps/Justchecking'
 import { SachbearbeitungTextdataset } from '../../../utils/Sachbearbeitung/SachbearbeitungTextdataset'
 import { TransactionContext } from '../../../utils/Context'
+import SachbearbeitungDatenObject from '../../../utils/Objects/SachbearbeitungDatenObject';
 
 function Zuschläge() {
   const [sprache,setzesprache]=useContext(TransactionContext)
   const [Beseingabe,setBeseingabe]=useState(false)
+  const [SachbearbeitungDatenArr,setSachbearbeitungDatenArr]=useState(SachbearbeitungDatenObject)
+
   return (
     <>
     <Text style={styles.Titelklein}>{SachbearbeitungTextdataset(sprache?"DE":"EN").Entlohnungtitel.Zuschlag}</Text>
-      <Justchecking Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.A}/>
-      <Justchecking Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.uebliche}/>
-      <SimpelCheck Arbeitstag={setBeseingabe} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Besondere}/>
+      <Justchecking SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.A}/>
+      <Justchecking SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.uebliche}/>
+      <SimpelCheck SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Arbeitstag={setBeseingabe} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Besondere}/>
       {
         Beseingabe?
-        <EingabeFeld Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Besondere}/>
+        <EingabeFeld SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Besondere}/>
         :
         ""
       }

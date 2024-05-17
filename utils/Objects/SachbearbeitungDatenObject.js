@@ -1,4 +1,5 @@
 const SachbearbeitungDatenObject={
+MitarbeiterID:0,
 Eintrittsdatum:"",
 Enddatum:"",
 Taetigkeit:"",
@@ -46,6 +47,9 @@ GesundheitsCheck:0,
 BankkarteKopieCheck:0,
 PersoKopieCheck:0,
 PrivatversichertNachweisCheck:0,
+RVPBefreiungsantragCheck:0,
+AndererHauptjobCheck:0,
+ELStAMCheck:0,
 
 }
 

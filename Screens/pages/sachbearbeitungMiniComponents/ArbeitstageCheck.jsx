@@ -4,6 +4,9 @@ import { SachbearbeitungTextdataset } from '../../../utils/Sachbearbeitung/Sachb
 import SimpelCheck from '../../fragebogencomps/sachbearbeitungsComps/SimpelCheck'
 
 import { TransactionContext } from '../../../utils/Context';
+import SachbearbeitungDatenObject from '../../../utils/Objects/SachbearbeitungDatenObject';
+
+import SpeicherSAButton from '../sachbearbeitungtextfeldcomp/speicherSAButton';
 import { EingabeFeld } from '../../registrierung/regcomps/Comps';
 
 function ArbeitstageCheck() {
@@ -15,78 +18,118 @@ function ArbeitstageCheck() {
   const [ArbeitFrCheck,setArbeitFrCheck]=useState(false)
   const [ArbeitSaCheck,setArbeitSaCheck]=useState(false)
   const [ArbeitSoCheck,setArbeitSoCheck]=useState(false)
+  const [SachbearbeitungDatenArr,setSachbearbeitungDatenArr]=useState(SachbearbeitungDatenObject)
+
+  const submitZeitdaten=async()=>{
+    let check=true
+
+    //prüfungen???
+    if(check){
+      try{
+        const request ={
+          method: 'POST',
+          headers: { 'Content-Type' : 'application/json'},
+          body: JSON.stringify({
+            "query": 6,//ändern
+            "Elstam": SachbearbeitungDatenArr.ELStAMCheck.toString().trim(),//erweitern/ändern
+          })
+        };
+        const d = await fetch('http://192.168.2.44/datenbankapi/indexsachbearbeitung.php', request);
+        let e = await d.json();
+        if(e.ergebnis>0 &&(!isNaN(e.ergebnis))){
+          let NO=SachbearbeitungDatenArr
+          NO.MitarbeiterID=e.ergebnis
+          setSachbearbeitungDatenArr(NO)
+        }
+        else if(e.ergebnis=='DBerror'){
+          console.log('no Update')
+        }else{
+          console.log('Fehler')
+        }
+      }
+      catch(err){
+        console.error(err)
+      }
+    }else{
+      
+    }
+  }
+  
   return (<>
-      <EingabeFeld Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Eintrittsdatum}/>
-      <EingabeFeld Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Enddatum}/>
+      <EingabeFeld SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Eintrittsdatum}/>
+      <EingabeFeld SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Enddatum}/>
       
       
       
-      <EingabeFeld Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.ZeitGesamt}/>
+      <EingabeFeld SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.ZeitGesamt}/>
       <Text style={styles.Textelemente}>{SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.ZeitTag}</Text>
 
-      <SimpelCheck  Arbeitstag={setArbeitMoCheck} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Mo}/>
+      <SimpelCheck SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Arbeitstag={setArbeitMoCheck} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Mo}/>
       {
         ArbeitMoCheck?
 
-        <EingabeFeld Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Mo}/>
+        <EingabeFeld Icon={"Sachbearbeitung"} SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Mo}/>
         :
         ""
       }
       
       
-      <SimpelCheck Arbeitstag={setArbeitDiCheck} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Di}/>
+      <SimpelCheck SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Arbeitstag={setArbeitDiCheck} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Di}/>
       
       {
         ArbeitDiCheck?
-        <EingabeFeld Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Di}/>
+        <EingabeFeld Icon={"Sachbearbeitung"} SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Di}/>
         :
         ""
       }
-      <SimpelCheck Arbeitstag={setArbeitMiCheck} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Mi}/>
+      <SimpelCheck SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Arbeitstag={setArbeitMiCheck} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Mi}/>
       
       {
         ArbeitMiCheck?
-        <EingabeFeld Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Mi}/>
+        <EingabeFeld Icon={"Sachbearbeitung"} SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Mi}/>
         :
         ""
       }
-      <SimpelCheck Arbeitstag={setArbeitDoCheck} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Do}/>
+      <SimpelCheck SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Arbeitstag={setArbeitDoCheck} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Do}/>
       
       {
         ArbeitDoCheck?
-        <EingabeFeld Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Do}/>
+        <EingabeFeld Icon={"Sachbearbeitung"} SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Do}/>
         :
         ""
       }
-      <SimpelCheck Arbeitstag={setArbeitFrCheck} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Fr}/>
+      <SimpelCheck SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Arbeitstag={setArbeitFrCheck} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Fr}/>
       
       {
         ArbeitFrCheck?
-        <EingabeFeld Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Fr}/>
+        <EingabeFeld Icon={"Sachbearbeitung"} SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Fr}/>
         :
         ""
       }
-      <SimpelCheck Arbeitstag={setArbeitSaCheck} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Sa}/>
+      <SimpelCheck SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Arbeitstag={setArbeitSaCheck} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Sa}/>
       
       {
         ArbeitSaCheck?
-        <EingabeFeld Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Sa}/>
+        <EingabeFeld Icon={"Sachbearbeitung"} SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Sa}/>
         :
         ""
       }
-      <SimpelCheck Arbeitstag={setArbeitSoCheck} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.So}/>
+      <SimpelCheck SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Arbeitstag={setArbeitSoCheck} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.So}/>
       
       {
         ArbeitSoCheck?
-        <EingabeFeld Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.So}/>
+        <EingabeFeld Icon={"Sachbearbeitung"} SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.So}/>
         :
         ""
       }
-      <EingabeFeld Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Urlaub}/>
+      <EingabeFeld Icon={"Sachbearbeitung"} SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Urlaub}/>
+
+      < SpeicherSAButton SDF={submitZeitdaten}/>
 </>
   )
 }
 const styles = StyleSheet.create({
+  
 
 
 Textelemente:{

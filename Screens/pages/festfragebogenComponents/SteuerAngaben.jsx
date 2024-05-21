@@ -56,13 +56,13 @@ function SteuerAngaben() {
       }else{
         Arr.push(0)
       }
-       if(!(Number.isInteger(Number(PrivateDatenArr.Kinder)))){
+       if(!(Number.isInteger(Number(PrivateDatenArr.Kinder))) || (PrivateDatenArr.Kinder.trim().toString().length>100)){
         check=false
         Arr.push(1)
       }else{
         Arr.push(0)
       }
-      if( PrivateDatenArr.Konfession.trim().toString().length==0){
+      if( PrivateDatenArr.Konfession.trim().toString().length==0 || (PrivateDatenArr.Konfession.trim().toString().length>255)){
         check=false
         Arr.push(1)
       }else{

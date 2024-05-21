@@ -33,7 +33,7 @@ function MiniKV() {
     setErfolgscheck(false) 
     let Arr=[]
     let check=true
-    if((PrivateDatenArr.Kassename.trim().toString().length==0)){
+    if((PrivateDatenArr.Kassename.trim().toString().length==0) || (PrivateDatenArr.Kassename.trim().toString().length>255)){
       check=false
       Arr.push(1)
     }else{

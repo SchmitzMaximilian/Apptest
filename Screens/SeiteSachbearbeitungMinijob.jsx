@@ -20,6 +20,8 @@ import ArbeitstageCheck from './pages/sachbearbeitungMiniComponents/ArbeitstageC
 import Justchecking from './fragebogencomps/sachbearbeitungsComps/Justchecking';
 import Unterlagencheckliste from './pages/sachbearbeitungMiniComponents/Unterlagencheckliste';
 import Grundentlohnung from './pages/sachbearbeitungMiniComponents/Grundentlohnung';
+import MiniSachbearbeitungTop from './pages/sachbearbeitungMiniComponents/MiniSachbearbeitungTop';
+import Meldungerfolg from './pages/functions/meldungerfolg';
 
 
 
@@ -57,10 +59,7 @@ export default function Seite2({route, navigation}) {
       <ImageBackground source={image} resizeMode='cover' style={styles.image}>
       {
       Erfolgscheck?
-      <View style={styles.abgespeichert}>
-        <Text style={{color:'black'}}>
-          {Textdataset(sprache?'DE':'EN').Texte.Speichernerfolgreich}
-        </Text></View>
+      <Meldungerfolg/>
       :
       ""
     } 
@@ -77,22 +76,13 @@ export default function Seite2({route, navigation}) {
     :
     ""
   }
+
+  
       <ScrollView style={{backgroundColor: 'transparent'}}>
       <View style={styles.container}>
-      <View style={styles.AdminButtonContainer}>
-        <TouchableOpacity onPress={()=>navigation.pop()} style={styles.BackButton}> 
-        <Ionicons  name={'arrow-back'} color={'#FFFFFF'} style={{marginRight:8}}/>
-          <Text  style={{color:'#FFFFFF'} } >Back</Text>
-        </TouchableOpacity>
-        <View style={styles.SprachButton}>
-        {/*<TouchableOpacity onPress={()=>setzesprache(!sprache)} style={styles.InsetSprachButton} > 
-          <Text style={{color:'#FFFFFF'}} >{sprache?'EN':'DE'}</Text>
-        </TouchableOpacity>*/}
-</View>
-        <TouchableOpacity onPress={()=>navigation.navigate({name:"SeiteTest",params:{PrivateDatenArr}})} style={styles.AdminButton}> 
-          <Text style={{color:'#FFFFFF'}} >Festpersonal</Text>
-        </TouchableOpacity>
-      </View>
+
+        <MiniSachbearbeitungTop navigation={navigation}/>
+      
 
 
     {/**Angaben der Sachbearbeitung*/}

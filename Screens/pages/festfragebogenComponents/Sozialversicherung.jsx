@@ -70,7 +70,7 @@ function Sozialversicherung() {
         }
       }  
       
-      if(!(PrivateDatenArr.Staatsbuergerschaft.trim().toString().length>0)){
+      if(!(PrivateDatenArr.Staatsbuergerschaft.trim().toString().length>0) || (PrivateDatenArr.Staatsbuergerschaft.trim().toString().length>255)){
         check=false
         Arr.push(1)
       }else{
@@ -79,7 +79,7 @@ function Sozialversicherung() {
       if(!(PrivateDatenArr.GBDatum.trim().toString().length>0)){
         check=false
       }
-      if(!(PrivateDatenArr.GBOrt.trim().toString().length>0)){
+      if(!(PrivateDatenArr.GBOrt.trim().toString().length>0) || (PrivateDatenArr.GBOrt.trim().toString().length>255)){
         check=false
         Arr.push(1)
       }else{
@@ -88,14 +88,14 @@ function Sozialversicherung() {
       if(PrivateDatenArr.GBLand==0){
         PrivateDatenArr.GBLand='Deutschland'
         Arr.push(0)
-      }else if(!(PrivateDatenArr.GBLand.trim().toString().length>3)){
+      }else if(!(PrivateDatenArr.GBLand.trim().toString().length>3) || (PrivateDatenArr.GBLand.trim().toString().length>255)){
         check=false
         Arr.push(1)
         console.log('du doof')
       }else{
         Arr.push(0)
       }
-      if(!(PrivateDatenArr.Kassename.trim().toString().length>0)){
+      if(!(PrivateDatenArr.Kassename.trim().toString().length>0) || (PrivateDatenArr.Kassename.trim().toString().length>255)){
         check=false
         Arr.push(1)
       }else{
@@ -106,7 +106,7 @@ function Sozialversicherung() {
       }
     
       if(PrivateDatenArr.KVArt==4){
-        if(!(PrivateDatenArr.AndereArbeitgeber.trim().toString().length>4)){
+        if(!(PrivateDatenArr.AndereArbeitgeber.trim().toString().length>4) || (PrivateDatenArr.AndereArbeitgeber.trim().toString().length>255)){
         check=false
         setsonderfall([1])
       }else{

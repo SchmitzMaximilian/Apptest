@@ -1,17 +1,13 @@
-import React,{ useContext, useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity ,ImageBackground} from 'react-native';
-import SimpelCheck from '../../fragebogencomps/sachbearbeitungsComps/SimpelCheck'
-
-import { SachbearbeitungTextdataset } from '../../../utils/Sachbearbeitung/SachbearbeitungTextdataset';
-import { TransactionContext } from '../../../utils/Context';
-import SachbearbeitungDatenObject from '../../../utils/Objects/SachbearbeitungDatenObject';
-import SpeicherSAButton from '../sachbearbeitungtextfeldcomp/speicherSAButton';
-import { EingabeFeld } from '../../registrierung/regcomps/Comps';
+import React, { useContext, useEffect, useState } from 'react';
+import Zuschläge from '../sachbearbeitungComponents/Zuschläge';
 import { MAidContext } from '../functions/contextMitarbeiterid';
+import SachbearbeitungDatenObject from '../../../utils/Objects/SachbearbeitungDatenObject';
 
-function Grundentlohnung() {
-  const [SL,setSL]=useState(false)
-  const [FL,setFL]=useState(false)
+import SpeicherSAButton from '../sachbearbeitungtextfeldcomp/speicherSAButton';
+import Grundentlohnung from './Grundentlohnung';
+
+function AngabenEntlohnung() {
   const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext)
   const [SachbearbeitungDatenArr,setSachbearbeitungDatenArr]=useState(SachbearbeitungDatenObject)
 
@@ -28,17 +24,38 @@ function Grundentlohnung() {
         check=false
       }
     }
+    if(SachbearbeitungDatenArr.Festgehaltcheck==1){
+      if(Number(SachbearbeitungDatenArr.Festgehalt)==0){
+        check=false
+      }
+    }
+
+    if(SachbearbeitungDatenArr.BesondereCheck==1){
+      if(SachbearbeitungDatenArr.Besondereliste==0){
+        check=false
+      }
+    }
+
+
+
+    //prüfungen???
     if(check){
       try{
         const request ={
           method: 'POST',
           headers: { 'Content-Type' : 'application/json'},
           body: JSON.stringify({
-            "query": 5,//ändern
+            "query": 2,//ändern
             "SLC" : SachbearbeitungDatenArr.Stundenlohncheck.toString().trim(),
             "SL": SachbearbeitungDatenArr.Stundenlohn.toString().trim(),
             "FLC": SachbearbeitungDatenArr.Festlohncheck.toString().trim(),
             "FL": SachbearbeitungDatenArr.Festlohn.toString().trim(),
+            "FGC": SachbearbeitungDatenArr.Festgehaltcheck.toString().trim(),
+            "FG": SachbearbeitungDatenArr.Festgehalt.toString().trim(),
+            "AlleZuschlaege": SachbearbeitungDatenArr.AlleCheck.toString().trim(),
+            "BetriebsZuschlaege": SachbearbeitungDatenArr.Betriebsueblichecheck.toString().trim(),
+            "BZC": SachbearbeitungDatenArr.BesondereCheck.toString().trim(),
+            "BZL": SachbearbeitungDatenArr.Besondereliste.toString().trim(),
             "mitarbeiterID":mitarbeiterID
           })
         };
@@ -62,43 +79,13 @@ function Grundentlohnung() {
       
     }
   }
-  
-  const [sprache,setzesprache]=useContext(TransactionContext)
-  return (<>
-    <Text style={styles.Titelklein}>{SachbearbeitungTextdataset(sprache?"DE":"EN").Entlohnungtitel.Lohn}</Text>
-      <SimpelCheck SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Arbeitstag={setSL} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Sl}/>
-      {
-        SL?
-        <EingabeFeld SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Sl}/>
-        
-        :
-        ""
-      }
-      <SimpelCheck SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Arbeitstag={setFL} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Fl}/>
-      {
-        FL?
-        <EingabeFeld SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Fl}/>
-        :
-        ""
-      }
-      
+  return (
+    <>
+    <Grundentlohnung/>
+      <Zuschläge/>
       < SpeicherSAButton SDF={submitLohndaten}/>
-      
-      
-
-      </>
+    </>
   )
 }
-const styles = StyleSheet.create({
-  Titelklein:{
-    fontSize:20,
-    marginHorizontal: '10%',
-    marginTop:20,
-    textShadowColor:'#000',
-    textShadowRadius:5,
-    textShadowOffset:{width:3,height:3},
-    color:'#FFF',
-  },
-  
-  })
-export default Grundentlohnung
+
+export default AngabenEntlohnung

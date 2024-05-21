@@ -19,7 +19,9 @@ import { ECContext } from './pages/functions/contextErfolgscheck';
 import { MAidContext } from './pages/functions/contextMitarbeiterid';
 import { FNContext } from './pages/functions/contextFehlernummer';
 import FehlermeldungIndividuell from './pages/fehlerDatenbank/fehlerswitchcase';
-//import TopButtonleiste from './pages/festfragebogenComponents/TopButtonleiste';
+import Meldungerfolg from './pages/functions/meldungerfolg'
+
+import TopButtonleiste from './pages/festfragebogenComponents/TopButtonleiste';
 //<FehlermeldungIndividuell FN={Fehlernummer}/>
 
 function SeiteTest({navigation}) {
@@ -51,10 +53,7 @@ function SeiteTest({navigation}) {
         
       {
       Erfolgscheck?
-      <View style={styles.abgespeichert}>
-        <Text style={{color:'black'}}>
-          {Textdataset(sprache?'DE':'EN').Texte.Speichernerfolgreich}
-        </Text></View>
+      <Meldungerfolg/>
       :
       ""
     } 
@@ -74,40 +73,15 @@ function SeiteTest({navigation}) {
     :
     ""
   }
-  
- 
-    
-
-   
-  
-    
+      
       
       <ScrollView style={{backgroundColor: 'transparent'}}>
         
       <View style={styles.container}>
         
               
-      <View style={styles.AdminButtonContainer}>
-
-      <TouchableOpacity  style={styles.AdminButton}> 
-        <Text style={{color:'#fff'}} >Admin</Text>
-      </TouchableOpacity>
-
-        <View style={styles.SprachButton}>
-        <TouchableOpacity onPress={()=>setzesprache(!sprache)} style={styles.InsetSprachButton} > 
-          <Text style={{color:'#FFFFFF'}} >{sprache?'EN':'DE'}</Text>
-        </TouchableOpacity>
-        </View>
-        
-        <TouchableOpacity onPress={()=>navigation.navigate({name:"SeiteMinijob",params:{PrivateDatenArr}})} style={styles.AdminButton}> 
-          <Text style={{color:'#FFFFFF'}} >Sachbearbeiter</Text>
-        </TouchableOpacity>
-      </View>
-      {/*
-      Soll den AdminButtonContainer und seinen inhalt ersetzen
-      <TopButtonleiste/>
       
-      */}
+      <TopButtonleiste navigation={navigation} />
 
 
       <View style={styles.ContainerFragebogen}> 
@@ -115,8 +89,9 @@ function SeiteTest({navigation}) {
 
 
       <View style={{flexDirection:'column', width:'100%',paddingTop:10}}>
-<Blocktop/>
-<SelectPicker S={sprache?'DE':'EN'} V={true} I={4} SV={PrivateDatenArr} SF={setPrivateDatenArr} />
+
+    <Blocktop/>
+    <SelectPicker S={sprache?'DE':'EN'} V={true} I={4} SV={PrivateDatenArr} SF={setPrivateDatenArr} />
     <SelectPicker S={sprache?'DE':'EN'} V={true} I={5} SV={PrivateDatenArr} SF={setPrivateDatenArr} />
     <Text style={{color:'#fff', marginHorizontal: '10%',paddingVertical:10}}>{Textdataset(sprache?'DE':'EN').Texte.Rechtsbelehrung}</Text>
     <NameAnschrift/>

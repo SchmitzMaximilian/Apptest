@@ -37,9 +37,21 @@ const Kommunikation=()=>{
       setFehlercheck(false)
       setFehlerText(false)
       setErfolgscheck(false) 
-       
+       let Arr=[]
       let check=true
-      
+      if((PrivateDatenArr.Festnetz.trim().toString().length>60)){
+        check=false
+        Arr.push(1)
+      }Arr.push(0)
+      if((PrivateDatenArr.Mobil.trim().toString().length>80)){
+        check=false
+        Arr.push(1)
+      }Arr.push(0)
+      if((PrivateDatenArr.Email.trim().toString().length>150)){
+        check=false
+        Arr.push(1)
+      }Arr.push(0)
+      setkommunikationBG(Arr)
        console.log(mitarbeiterID)
       if(check){
         

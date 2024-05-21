@@ -54,7 +54,7 @@ const NameAnschrift = () => {
         check=false
         
       } 
-      if(!(PrivateDatenArr.Vname.trim().toString().length>1)){
+      if(!(PrivateDatenArr.Vname.trim().toString().length>1) || (PrivateDatenArr.Vname.trim().toString().length>255)){
         check=false;
         Arr.push(1)
         setFehlernummer(1)
@@ -62,7 +62,7 @@ const NameAnschrift = () => {
       }else{
         Arr.push(0)
       }
-      if(!(PrivateDatenArr.Nname.trim().toString().length>0)){
+      if(!(PrivateDatenArr.Nname.trim().toString().length>0) || (PrivateDatenArr.Nname.trim().toString().length>255)){
         check=false
         setFehlernummer(2)
         
@@ -71,7 +71,7 @@ const NameAnschrift = () => {
         Arr.push(0)
       }
       
-      if(!(PrivateDatenArr.Adresse.trim().toString().length>2)){
+      if(!(PrivateDatenArr.Adresse.trim().toString().length>2) || (PrivateDatenArr.Adresse.trim().toString().length>255)){
         check=false
         setFehlernummer(3)
         
@@ -80,7 +80,7 @@ const NameAnschrift = () => {
         Arr.push(0)
       }
       console.log(PrivateDatenArr.PCode)
-      if((PrivateDatenArr.PCode==0) ){
+      if((PrivateDatenArr.PCode==0) || (PrivateDatenArr.PCode.trim().toString().length>8)){
         check=false
         
         setFehlernummer(4)
@@ -88,7 +88,7 @@ const NameAnschrift = () => {
       }else{
         Arr.push(0)
       }
-      if(!(PrivateDatenArr.City.trim().toString().length>1)){
+      if(!(PrivateDatenArr.City.trim().toString().length>1) || (PrivateDatenArr.City.trim().toString().length>255)){
         check=false
         
         setFehlernummer(5)
@@ -121,7 +121,7 @@ const NameAnschrift = () => {
           
           const d = await fetch('http://192.168.2.44/datenbankapi/index.php', request);
           let e = await d.json(); 
-          console.log(d)
+          console.log(e.ergebnis)
           if(e.ergebnis>0 &&(!isNaN(e.ergebnis))){
             setErfolgscheck(true)
             setTimeout(()=>{

@@ -46,27 +46,27 @@ function MiniNameAnschrift() {
       check=false
       
     } 
-    if(!(PrivateDatenArr.Vname.trim().toString().length>1)){
+    if(!(PrivateDatenArr.Vname.trim().toString().length>1) || (PrivateDatenArr.Vname.trim().toString().length>255)){
       check=false
       Arr.push(1)
       
     }else{
       Arr.push(0)
     }
-    if(!(PrivateDatenArr.Nname.trim().toString().length>0)){
+    if(!(PrivateDatenArr.Nname.trim().toString().length>0) || (PrivateDatenArr.Nname.trim().toString().length>255)){
       check=false
       Arr.push(1)
       }else{
         Arr.push(0)
       }
     
-    if(!(PrivateDatenArr.Adresse.trim().toString().length>2)){
+    if(!(PrivateDatenArr.Adresse.trim().toString().length>2) || (PrivateDatenArr.Adresse.trim().toString().length>255)){
       check=false
       Arr.push(1)
     }else{
       Arr.push(0)
     }
-    if((PrivateDatenArr.PCode==0) ){
+    if((PrivateDatenArr.PCode==0) || (PrivateDatenArr.PCode.trim().toString().length>8)){
       check=false
       
       
@@ -74,7 +74,7 @@ function MiniNameAnschrift() {
     }else{
       Arr.push(0)
     }
-    if(!(PrivateDatenArr.City.trim().toString().length>1)){
+    if(!(PrivateDatenArr.City.trim().toString().length>1) || (PrivateDatenArr.City.trim().toString().length>255)){
       check=false
       Arr.push(1)
     }else{

@@ -19,6 +19,15 @@ function Unterlagencheckliste() {
           body: JSON.stringify({
             "query": 6,
             "Elstam": SachbearbeitungDatenArr.ELStAMCheck.toString().trim(),
+            "AVC": SachbearbeitungDatenArr.ArbeitsvertragCheck.toString().trim(),
+            "EC": SachbearbeitungDatenArr.ErlaubnisCheck.toString().trim(),
+            "GC": SachbearbeitungDatenArr.GesundheitsCheck.toString().trim(),
+            "RVPBAC": SachbearbeitungDatenArr.RVPBefreiungsantragCheck.toString().trim(),
+            "AHJC": SachbearbeitungDatenArr.AndererHauptjobCheck.toString().trim(),
+            "BKKC": SachbearbeitungDatenArr.BankkarteKopieCheck.toString().trim(),
+            "PVNC": SachbearbeitungDatenArr.PrivatversichertNachweisCheck.toString().trim(),
+            "PKC": SachbearbeitungDatenArr.PersoKopieCheck.toString().trim(),
+            "mitarbeiterID":mitarbeiterID
           })
         };
         const d = await fetch('http://192.168.2.44/datenbankapi/indexsachbearbeitung.php', request);

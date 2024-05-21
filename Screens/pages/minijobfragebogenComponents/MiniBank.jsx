@@ -37,13 +37,13 @@ function MiniBank() {
     let Arr=[]
 
     if((PrivateDatenArr.Barzahlung==0)){
-    if(!(PrivateDatenArr.Bankname.trim().toString().length>2)){ 
+    if(!(PrivateDatenArr.Bankname.trim().toString().length>2) || (PrivateDatenArr.Bankname.trim().toString().length>255)){ 
       check=false
       Arr.push(1)
     }else{
       Arr.push(0)
     }
-    if((PrivateDatenArr.iban.trim().toString())==0){ 
+    if((PrivateDatenArr.iban.trim().toString())==0 || (PrivateDatenArr.iban.trim().toString().length>35)){ 
       check=false
       Arr.push(1)
     }else{

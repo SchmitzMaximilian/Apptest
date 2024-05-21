@@ -48,7 +48,7 @@ function MiniStatus() {
     let Arr=[] 
     let check=true
     if(PrivateDatenArr.StatusCheck==4){
-      if(PrivateDatenArr.Eintragsonstige.trim().toString().length==0){
+      if(PrivateDatenArr.Eintragsonstige.trim().toString().length==0 || (PrivateDatenArr.Eintragsonstige.trim().toString().length>255)){
       check=false
       Arr.push(1)}Arr.push(0)
     }else{

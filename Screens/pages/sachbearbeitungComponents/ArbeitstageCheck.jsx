@@ -7,7 +7,11 @@ import { TransactionContext } from '../../../utils/Context';
 import { EingabeFeld } from '../../registrierung/regcomps/Comps';
 import SachbearbeitungDatenObject from '../../../utils/Objects/SachbearbeitungDatenObject';
 import SpeicherSAButton from '../sachbearbeitungtextfeldcomp/speicherSAButton';
-
+import Eintrittsdatum from './Eintrittsdatum'
+import Enddatum from './Enddatum'
+import EintrittsdatumSelect from './Eintrittsdatum';
+import EnddatumSelect from './Enddatum';
+import { MAidContext } from '../functions/contextMitarbeiterid';
 function ArbeitstageCheck() {
   const [sprache,setzesprache]=useContext(TransactionContext)
   const [ArbeitMoCheck,setArbeitMoCheck]=useState(false)
@@ -17,20 +21,93 @@ function ArbeitstageCheck() {
   const [ArbeitFrCheck,setArbeitFrCheck]=useState(false)
   const [ArbeitSaCheck,setArbeitSaCheck]=useState(false)
   const [ArbeitSoCheck,setArbeitSoCheck]=useState(false)
+  const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext)
   const [SachbearbeitungDatenArr,setSachbearbeitungDatenArr]=useState(SachbearbeitungDatenObject)
+
 
   const submitZeitendaten=async()=>{
     let check=true
 
-    //prüfungen???
+    if(SachbearbeitungDatenArr.Eintrittsdatum.toString().trim()==0){
+      check=false
+    }
+    if(SachbearbeitungDatenArr.Enddatum.toString().trim()==0){
+      check=false
+    }
+    if(SachbearbeitungDatenArr.Taetigkeit.toString().trim()==0){
+      check=false
+    }
+    if(SachbearbeitungDatenArr.WoechentlicheStunden.toString().trim()==0 || SachbearbeitungDatenArr.WoechentlicheStunden>50){
+      check=false
+    }
+
+    if(SachbearbeitungDatenArr.MontagCheck==1){
+      if(Number(SachbearbeitungDatenArr.MOStunden)==0){
+        check=false
+      }
+    }
+
+    if(SachbearbeitungDatenArr.DiensttagCheck==1){
+      if(Number(SachbearbeitungDatenArr.DIStunden)==0){
+        check=false
+      }
+    }
+    if(SachbearbeitungDatenArr.MittwochCheck==1){
+      if(Number(SachbearbeitungDatenArr.MIStunden)==0){
+        check=false
+      }
+    }
+    if(SachbearbeitungDatenArr.DonnerstagCheck==1){
+      if(Number(SachbearbeitungDatenArr.DOStunden)==0){
+        check=false
+      }
+    }
+    if(SachbearbeitungDatenArr.FreitagCheck==1){
+      if(Number(SachbearbeitungDatenArr.FRStunden)==0){
+        check=false
+      }
+    }
+    if(SachbearbeitungDatenArr.SamstagCheck==1){
+      if(Number(SachbearbeitungDatenArr.SAStunden)==0){
+        check=false
+      }
+    }
+    if(SachbearbeitungDatenArr.SonntagCheck==1){
+      if(Number(SachbearbeitungDatenArr.SOStunden)==0){
+        check=false
+      }
+    }
+
+    if(SachbearbeitungDatenArr.JahresUrlaub.toString().trim()==0){
+      check=false
+    }
+    
     if(check){
       try{
         const request ={
           method: 'POST',
           headers: { 'Content-Type' : 'application/json'},
           body: JSON.stringify({
-            "query": 6,//ändern
-            "Elstam": SachbearbeitungDatenArr.ELStAMCheck.toString().trim(),//erweitern/ändern
+            "query": 1,//ändern
+            "DatumAnfang": SachbearbeitungDatenArr.Eintrittsdatum.toString().trim(),
+            "DatumEnd": SachbearbeitungDatenArr.Enddatum.toString().trim(),
+            "Job": SachbearbeitungDatenArr.Taetigkeit.toString().trim(),
+            "Stundenwoche": SachbearbeitungDatenArr.WoechentlicheStunden.toString().trim(),
+            "MOC": SachbearbeitungDatenArr.MontagCheck.toString().trim(),
+            "MOS": SachbearbeitungDatenArr.MOStunden.toString().trim(),
+            "DIC": SachbearbeitungDatenArr.DiensttagCheck.toString().trim(),
+            "DIS": SachbearbeitungDatenArr.DIStunden.toString().trim(),
+            "MIC": SachbearbeitungDatenArr.MittwochCheck.toString().trim(),
+            "MIS": SachbearbeitungDatenArr.MIStunden.toString().trim(),
+            "DOC": SachbearbeitungDatenArr.DonnerstagCheck.toString().trim(),
+            "DOS": SachbearbeitungDatenArr.DOStunden.toString().trim(),
+            "FRC": SachbearbeitungDatenArr.FreitagCheck.toString().trim(),
+            "FRS": SachbearbeitungDatenArr.FRStunden.toString().trim(),
+            "SAC": SachbearbeitungDatenArr.SamstagCheck.toString().trim(),
+            "SAS": SachbearbeitungDatenArr.SAStunden.toString().trim(),
+            "SOC": SachbearbeitungDatenArr.SonntagCheck.toString().trim(),
+            "SOS": SachbearbeitungDatenArr.SOStunden.toString().trim(),
+            "mitarbeiterID":mitarbeiterID
           })
         };
         const d = await fetch('http://192.168.2.44/datenbankapi/indexsachbearbeitung.php', request);
@@ -53,10 +130,13 @@ function ArbeitstageCheck() {
       
     }
   }
+  //<EingabeFeld SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Eintrittsdatum}/>
+  //<EingabeFeld SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Enddatum}/>
 
   return (<>
-      <EingabeFeld SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Eintrittsdatum}/>
-      <EingabeFeld SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Enddatum}/>
+    <EintrittsdatumSelect/>
+    <EnddatumSelect/>
+      
       
       <EingabeFeld SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Job}/>
       

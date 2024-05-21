@@ -1,9 +1,10 @@
 import React,{ useContext, useEffect, useState }  from 'react'
 import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity,ImageBackground } from 'react-native';
-import MiniPersoenlicheDatenObject from '../../../utils/Objects/MiniPersoenlicheDatenObject'
-import { TransactionContext } from '../../../utils/Context'
+import MiniPersoenlicheDatenObject from '../../../utils/Objects/MiniPersoenlicheDatenObject';
+import { TransactionContext } from '../../../utils/Context';
 
-function MiniTopButtonleiste(navigation) {
+
+const MiniTopButtonleiste=({navigation})=> {
   const [sprache,setzesprache]=useContext(TransactionContext)
   const [PrivateDatenArr,setPrivateDatenArr]=useState(MiniPersoenlicheDatenObject)
   return (

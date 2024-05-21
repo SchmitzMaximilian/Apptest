@@ -46,7 +46,7 @@ function MiniSteuer() {
       //   Arr.push(0)
       // }
       // }
-      if(PrivateDatenArr.SteuerID.trim()==0)
+      if(PrivateDatenArr.SteuerID.trim()==0 || (PrivateDatenArr.SteuerID.trim().toString().length>50))
         {
           check=false
           Arr.push(1)

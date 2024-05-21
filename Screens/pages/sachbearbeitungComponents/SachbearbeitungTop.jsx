@@ -1,39 +1,30 @@
 import React,{ useContext, useEffect, useState }  from 'react'
 import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity,ImageBackground } from 'react-native';
-import PersoenlicheDatenObject from '../../../utils/Objects/PersoenlicheDatenObject';
+
 import { TransactionContext } from '../../../utils/Context';
+import {Octicons, Ionicons} from '@expo/vector-icons';
+import PersoenlicheDatenObject from '../../../utils/Objects/PersoenlicheDatenObject';
 
-/**
- * 
- * navigation.navigate is not a function fehler
- * 
- * 
- */
-
-
-
-
-
-const TopButtonleiste=({navigation})=> {
+const SachbearbeitungTop=({navigation})=> {
   const [sprache,setzesprache]=useContext(TransactionContext)
   const [PrivateDatenArr,setPrivateDatenArr]=useState(PersoenlicheDatenObject)
   return (
+    <>
     <View style={styles.AdminButtonContainer}>
-
-      <TouchableOpacity  style={styles.AdminButton}> 
-        <Text style={{color:'#fff'}} >Admin</Text>
-      </TouchableOpacity>
-
-        <View style={styles.SprachButton}>
-        <TouchableOpacity onPress={()=>setzesprache(!sprache)} style={styles.InsetSprachButton} > 
-          <Text style={{color:'#FFFFFF'}} >{sprache?'EN':'DE'}</Text>
+        <TouchableOpacity onPress={()=>navigation.pop()} style={styles.BackButton}> 
+        <Ionicons  name={'arrow-back'} color={'#FFFFFF'} style={{marginRight:8}}/>
+          <Text  style={{color:'#FFFFFF'} } >Back</Text>
         </TouchableOpacity>
+        <View style={styles.SprachButton}>
+        {/*<TouchableOpacity onPress={()=>setzesprache(!sprache)} style={styles.InsetSprachButton} > 
+          <Text style={{color:'#FFFFFF'}} >{sprache?'EN':'DE'}</Text>
+        </TouchableOpacity>*/}
         </View>
-        
-        <TouchableOpacity onPress={()=>navigation.navigate({name:"SeiteMinijob",params:{PrivateDatenArr}})} style={styles.AdminButton}> 
-          <Text style={{color:'#FFFFFF'}} >Sachbearbeiter</Text>
+        <TouchableOpacity onPress={()=>navigation.navigate({name:"SeiteSachbearbeitungMinijob",params:{PrivateDatenArr}})} style={styles.AdminButton}> 
+          <Text style={{color:'#FFFFFF'}} >SachbearbeitungMinijob</Text>
         </TouchableOpacity>
       </View>
+    </>
   )
 }
 const styles = StyleSheet.create({
@@ -69,6 +60,23 @@ const styles = StyleSheet.create({
     borderRadius:5, 
     width:'20%', 
   },
+  BackButton:{
+    alignItems: 'center',
+    backgroundColor: '#1d4ed8',
+    padding: 10,
+    flex:1,
+    flexDirection:'row',
+    alignSelf:'flex-end',
+    height:'auto',
+    marginTop:20, 
+    borderRadius:5,
+    borderTopColor:'#1e3a8a',
+    borderTopWidth:2,
+    marginRight:5,
+    borderBottomColor:'#1e3a8a',
+    borderBottomWidth:2,
+    width:'15%', 
+  },
 
 })
-export default TopButtonleiste
+export default SachbearbeitungTop

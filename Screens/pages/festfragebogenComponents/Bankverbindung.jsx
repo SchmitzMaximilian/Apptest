@@ -37,13 +37,13 @@ function Bankverbindung() {
     let Arr=[]
     let check=true 
     
-    if(!(PrivateDatenArr.Bankname.trim().toString().length>2)){ 
+    if(!(PrivateDatenArr.Bankname.trim().toString().length>2) || (PrivateDatenArr.Bankname.trim().toString().length>255)){ 
       check=false
       Arr.push(1)
     }else{
       Arr.push(0)
     }
-    if((PrivateDatenArr.iban.trim().toString())==0){ 
+    if((PrivateDatenArr.iban.trim().toString())==0 || (PrivateDatenArr.iban.trim().toString().length>35)){ 
       check=false
       Arr.push(1)
     }else{
@@ -52,7 +52,10 @@ function Bankverbindung() {
      
     if(PrivateDatenArr.Inhaber==0){ 
       PrivateDatenArr.Inhaber=PrivateDatenArr.Vname.toString()+' '+PrivateDatenArr.Nname.toString()
-    } 
+    }else if((PrivateDatenArr.Inhaber.trim().toString().length>255)) {
+      check=false
+      Arr.push(1)
+    }
     Arr.push(0)
     setbankBG(Arr)
     if(check){

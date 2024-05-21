@@ -12,15 +12,22 @@ function Unterlagencheckliste() {
   const submitChecklistdaten=async()=>{
     let check=true
 
-    //prüfungen???
+    
     if(check){
       try{
         const request ={
           method: 'POST',
           headers: { 'Content-Type' : 'application/json'},
           body: JSON.stringify({
-            "query": 6,//ändern
-            "Elstam": SachbearbeitungDatenArr.ELStAMCheck.toString().trim(),//erweitern/ändern
+            "query": 3,
+            "SIDC": SachbearbeitungDatenArr.SteuerIDCheck.toString().trim(),
+            "AVC": SachbearbeitungDatenArr.ArbeitsvertragCheck.toString().trim(),
+            "EC": SachbearbeitungDatenArr.ErlaubnisCheck.toString().trim(),
+            "GC": SachbearbeitungDatenArr.GesundheitsCheck.toString().trim(),
+            "BKKC": SachbearbeitungDatenArr.BankkarteKopieCheck.toString().trim(),
+            "PVNC": SachbearbeitungDatenArr.PrivatversichertNachweisCheck.toString().trim(),
+            "PKC": SachbearbeitungDatenArr.PersoKopieCheck.toString().trim(),
+            "mitarbeiterID":mitarbeiterID
           })
         };
         const d = await fetch('http://192.168.2.44/datenbankapi/indexsachbearbeitung.php', request);

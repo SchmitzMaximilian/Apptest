@@ -19,9 +19,12 @@ import SimpelCheck from './fragebogencomps/sachbearbeitungsComps/SimpelCheck';
 import ArbeitstageCheck from './pages/sachbearbeitungComponents/ArbeitstageCheck';
 import Justchecking from './fragebogencomps/sachbearbeitungsComps/Justchecking';
 import Unterlagencheckliste from './pages/sachbearbeitungComponents/Unterlagencheckliste';
-import Grundentlohnung from './pages/sachbearbeitungComponents/Grundentlohnung';
-import Zuschläge from './pages/sachbearbeitungComponents/Zuschläge';
+
 import SpeicherSAButton from './pages/sachbearbeitungtextfeldcomp/speicherSAButton';
+import { MAidContext } from './pages/functions/contextMitarbeiterid';
+import AngabenEntlohnung from './pages/sachbearbeitungComponents/AngabenEntlohnung';
+import SachbearbeitungTop from './pages/sachbearbeitungComponents/SachbearbeitungTop';
+import Meldungerfolg from './pages/functions/meldungerfolg';
 
 
 
@@ -37,46 +40,14 @@ export default function Seite2({route, navigation}) {
   const [FehlerText,setFehlerText]=useState(false)
   const [Erfolgscheck,setErfolgscheck]=useState(false)
   const [SelectedLanguage, setSelectedLanguage] = useState(); 
-  const [mitarbeiterID,setmitarbeiterID]=useState(route.params.PrivateDatenArr.MitarbeiterID)
+  const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext)
+  //const [mitarbeiterID,setmitarbeiterID]=useState(route.params.PrivateDatenArr.MitarbeiterID)
   const [image,setimage]=useState({uri: 'https://images.unsplash.com/photo-1622743941533-cde694bff56a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fE5pZ2h0Y2x1YnxlbnwwfHwwfHx8MA%3D%3D'})
   const [SL,setSL]=useState(false)
   const [Beseingabe,setBeseingabe]=useState(false)
   
 
-  const submitLohndaten=async()=>{
-    let check=true
-
-    //prüfungen???
-    if(check){
-      try{
-        const request ={
-          method: 'POST',
-          headers: { 'Content-Type' : 'application/json'},
-          body: JSON.stringify({
-            "query": 6,//ändern
-            "Elstam": SachbearbeitungDatenArr.ELStAMCheck.toString().trim(),//erweitern/ändern
-          })
-        };
-        const d = await fetch('http://192.168.2.44/datenbankapi/indexsachbearbeitung.php', request);
-        let e = await d.json();
-        if(e.ergebnis>0 &&(!isNaN(e.ergebnis))){
-          let NO=SachbearbeitungDatenArr
-          NO.MitarbeiterID=e.ergebnis
-          setSachbearbeitungDatenArr(NO)
-        }
-        else if(e.ergebnis=='DBerror'){
-          console.log('no Update')
-        }else{
-          console.log('Fehler')
-        }
-      }
-      catch(err){
-        console.error(err)
-      }
-    }else{
-      
-    }
-  }
+  
 
   
   const imglesen = async (param)=>{
@@ -94,10 +65,7 @@ export default function Seite2({route, navigation}) {
       <ImageBackground source={image} resizeMode='cover' style={styles.image}>
       {
       Erfolgscheck?
-      <View style={styles.abgespeichert}>
-        <Text style={{color:'black'}}>
-          {Textdataset(sprache?'DE':'EN').Texte.Speichernerfolgreich}
-        </Text></View>
+      <Meldungerfolg/>
       :
       ""
     } 
@@ -116,20 +84,10 @@ export default function Seite2({route, navigation}) {
   }
       <ScrollView style={{backgroundColor: 'transparent'}}>
       <View style={styles.container}>
-      <View style={styles.AdminButtonContainer}>
-        <TouchableOpacity onPress={()=>navigation.pop()} style={styles.BackButton}> 
-        <Ionicons  name={'arrow-back'} color={'#FFFFFF'} style={{marginRight:8}}/>
-          <Text  style={{color:'#FFFFFF'} } >Back</Text>
-        </TouchableOpacity>
-        <View style={styles.SprachButton}>
-        {/*<TouchableOpacity onPress={()=>setzesprache(!sprache)} style={styles.InsetSprachButton} > 
-          <Text style={{color:'#FFFFFF'}} >{sprache?'EN':'DE'}</Text>
-        </TouchableOpacity>*/}
-</View>
-        <TouchableOpacity onPress={()=>navigation.navigate({name:"SeiteSachbearbeitungMinijob",params:{PrivateDatenArr}})} style={styles.AdminButton}> 
-          <Text style={{color:'#FFFFFF'}} >SachbearbeitungMinijob</Text>
-        </TouchableOpacity>
-      </View>
+
+      <SachbearbeitungTop navigation={navigation}/>
+      
+      
 
 
     {/**Angaben der Sachbearbeitung*/}
@@ -155,18 +113,7 @@ export default function Seite2({route, navigation}) {
     {
       tab1?
       <>
-      <Grundentlohnung/>
-      <Zuschläge/>      
-      </>
-      :
-      ""
-    }  
-
-
-   {
-	  tab1?
-    <> 
-    < SpeicherSAButton SDF={submitLohndaten}/>
+      <AngabenEntlohnung/>
 </>
     
     :

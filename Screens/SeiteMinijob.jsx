@@ -22,7 +22,8 @@ import MiniStatus from './pages/minijobfragebogenComponents/MiniStatus';
 import MiniJANEIN from './pages/minijobfragebogenComponents/MiniJANEIN';
 import MiniKV from './pages/minijobfragebogenComponents/MiniKV';
 import { FNContext } from './pages/functions/contextFehlernummer';
-//import MiniTopButtonleiste from './pages/minijobfragebogenComponents/MiniTopButtonleiste';
+import MiniTopButtonleiste from './pages/minijobfragebogenComponents/MiniTopButtonleiste';
+import Meldungerfolg from './pages/functions/meldungerfolg';
 
 
 function SeiteMinijob({navigation}) {
@@ -53,10 +54,7 @@ function SeiteMinijob({navigation}) {
         
       {
       Erfolgscheck?
-      <View style={styles.abgespeichert}>
-        <Text style={{color:'black'}}>
-          {Textdataset(sprache?'DE':'EN').Texte.Speichernerfolgreich}
-        </Text></View>
+      <Meldungerfolg/>
       :
       ""
     } 
@@ -80,29 +78,15 @@ function SeiteMinijob({navigation}) {
       <ScrollView style={{backgroundColor: 'transparent'}}>
         
       <View style={styles.container}>      
-      <View style={styles.AdminButtonContainer}>
-
-      <TouchableOpacity  style={styles.AdminButton}> 
-        <Text style={{color:'#fff'}} >Admin</Text>
-      </TouchableOpacity>
-
-        <View style={styles.SprachButton}>
-        <TouchableOpacity onPress={()=>setzesprache(!sprache)} style={styles.InsetSprachButton} > 
-          <Text style={{color:'#FFFFFF'}} >{sprache?'EN':'DE'}</Text>
-        </TouchableOpacity>
-        </View>
-        
-        <TouchableOpacity onPress={()=>navigation.navigate({name:"LoginScreen",params:{PrivateDatenArr}})} style={styles.AdminButton}> 
-          <Text style={{color:'#FFFFFF'}} >Sachbearbeiter</Text>
-        </TouchableOpacity>
-      </View>
-  {/*<MiniTopButtonleiste/>*/}
+      
+      <MiniTopButtonleiste navigation={navigation}/>
 
       <View style={styles.ContainerFragebogen}> 
       <MiniBogeneinleitung/>
 
 
       <View style={{flexDirection:'column', width:'100%',paddingTop:10}}>
+
         <MiniNameAnschrift/>
         <MiniKommunikation/>
         <MiniBank/>
@@ -111,7 +95,6 @@ function SeiteMinijob({navigation}) {
         <MiniStatus/>
         <MiniJANEIN/>
         <MiniKV/>
-
 
 
       </View>

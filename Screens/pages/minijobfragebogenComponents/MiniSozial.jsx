@@ -47,7 +47,7 @@ function MiniSozial() {
     }
       
     
-    if(!(PrivateDatenArr.Staatsbuergerschaft.trim().toString().length>0)){
+    if(!(PrivateDatenArr.Staatsbuergerschaft.trim().toString().length>0) || (PrivateDatenArr.Staatsbuergerschaft.trim().toString().length>255)){
       
       check=false
       Arr.push(1)
@@ -62,11 +62,12 @@ function MiniSozial() {
     if(PrivateDatenArr.GBName==0) {
       PrivateDatenArr.GBName=PrivateDatenArr.Nname.toString()
       Arr.push(0)
-    }else{
-      Arr.push(0)
-    }
+    }else if(PrivateDatenArr.GBName.trim().toString().length>255){
+      check=false
+      Arr.push(1)
+    }Arr.push(0)
     
-   if((PrivateDatenArr.GBOrt==0)){
+   if((PrivateDatenArr.GBOrt==0) || (PrivateDatenArr.GBOrt.trim().toString().length>255)){
       
       check=false
       Arr.push(1)
@@ -76,6 +77,9 @@ function MiniSozial() {
     if(PrivateDatenArr.GBLand==0){
       PrivateDatenArr.GBLand='Deutschland'
       Arr.push(0)
+    }else if(PrivateDatenArr.GBLand.trim().toString().length>255){
+      check=false
+      Arr.push(1)
     }else{Arr.push(0)}
    
 

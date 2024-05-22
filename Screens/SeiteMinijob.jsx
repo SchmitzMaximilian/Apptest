@@ -1,11 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity,ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, ImageBackground } from 'react-native';
 import { useContext, useEffect, useState } from 'react';
-
 import { ScrollView } from 'react-native-gesture-handler';
 import { TransactionContext } from '../utils/Context';
 import * as SecureStore from 'expo-secure-store';
-
 import { Textdataset } from '../utils/Textdataset';
 import { FCContext } from './pages/functions/contextFehlercheck';
 import { FTContext } from './pages/functions/contextFehlertext';

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useContext, useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity,ImageBackground } from 'react-native';
+import { StyleSheet, Text} from 'react-native';
 import MinispeicherButton from './MinispeicherButton'
 import Container from '../../fragebogencomps/containercomp/Container'
 import { MiniDataset } from '../../../Components/Minijobinhaltsvorlagen/Minijobeingabedataset'
@@ -67,7 +67,7 @@ function MiniBank() {
             "mitarbeiterID":mitarbeiterID 
           })
         };
-        const d = await fetch('http://192.168.2.44/datenbankapi/index.php', request);
+        const d = await fetch('https://itsnando.com/datenbankapi/index.php', request);
         let e = await d.json(); 
         if(e.ergebnis==true){
   

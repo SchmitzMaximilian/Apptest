@@ -17,7 +17,7 @@ export const Dataset=(p)=>{
     },
     "KontaktData":
     {
-      "Eingabefelder":["Vorwahl / Rufnummer Festnetz (nur falls verfügbar)","Vorwahl / Rufnummer Mobiltelefon (nur falls verfügbar)","E-Mail-Adresse (nur falls verfügbar)"],
+      "Eingabefelder":["Vorwahl / Rufnummer Festnetz (nur falls verfügbar)","Vorwahl / Rufnummer Mobiltelefon (nur falls verfügbar)","E-Mail-Adresse (Pflichtangabe)"],
       "EingabefelderIcons":["Mail","Mail","Mail"],
       
     },
@@ -47,7 +47,7 @@ export const Dataset=(p)=>{
       },
       "KontaktData":
       {
-        "Eingabefelder":["Area code / phone number landline (only if available)","Area code / phone number mobile phone (only if available)","Email address (only if available)"],
+        "Eingabefelder":["Area code / phone number landline (only if available)","Area code / phone number mobile phone (only if available)","Email address (mandatory)"],
         "EingabefelderIcons":["Mail","Mail","Mail"],
       },
       "SozialData":

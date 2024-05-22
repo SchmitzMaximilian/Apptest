@@ -1,49 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity ,ImageBackground} from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
-import LANG from './../lang/lang'; 
 import { TransactionContext } from '../utils/Context'; 
-import {Octicons, Ionicons} from '@expo/vector-icons';
-import Container from './fragebogencomps/containercomp/Container';
 import TitleTouch from './fragebogencomps/touchTitle/TitleTouch';
-import { Dataset } from '../utils/Dataset'; 
-import SelectPicker from './fragebogencomps/selectBoxencomp/PickerSelectBox';
 import { ScrollView } from 'react-native-gesture-handler';
 import PersoenlicheDatenObject from '../utils/Objects/PersoenlicheDatenObject';
 import { Textdataset } from '../utils/Textdataset';
-import {Picker} from '@react-native-picker/picker';
 import { SachbearbeitungTextdataset } from '../utils/Sachbearbeitung/SachbearbeitungTextdataset';
 import * as SecureStore from 'expo-secure-store';
-import { EingabeFeld } from './registrierung/regcomps/Comps';
-import SimpelCheck from './fragebogencomps/sachbearbeitungsComps/SimpelCheck';
 import ArbeitstageCheck from './pages/sachbearbeitungMiniComponents/ArbeitstageCheck';
-import Justchecking from './fragebogencomps/sachbearbeitungsComps/Justchecking';
 import Unterlagencheckliste from './pages/sachbearbeitungMiniComponents/Unterlagencheckliste';
 import Grundentlohnung from './pages/sachbearbeitungMiniComponents/Grundentlohnung';
 import MiniSachbearbeitungTop from './pages/sachbearbeitungMiniComponents/MiniSachbearbeitungTop';
 import Meldungerfolg from './pages/functions/meldungerfolg';
+import SachbearbeitungDatenObject from '../utils/Objects/SachbearbeitungDatenObject';
 
 
 
 
 export default function Seite2({route, navigation}) {
-  console.log()
   const [sprache,setzesprache]=useContext(TransactionContext)
-  const [checked1, setChecked1] = useState(0)
   const [tab1,settab1]=useState(false)
   const [tab2,settab2]=useState(false)
   const [tab3,settab3]=useState(false)
-  const [PrivateDatenArr,setPrivateDatenArr]=useState(route.params.PrivateDatenArr)
   const [Fehlercheck,setFehlercheck]=useState(false)
   const [FehlerText,setFehlerText]=useState(false)
-  const [Erfolgscheck,setErfolgscheck]=useState(false)
-  const [SelectedLanguage, setSelectedLanguage] = useState(); 
-  const [mitarbeiterID,setmitarbeiterID]=useState(route.params.PrivateDatenArr.MitarbeiterID)
+  const [Erfolgscheck,setErfolgscheck]=useState(false) 
   const [image,setimage]=useState({uri: 'https://images.unsplash.com/photo-1622743941533-cde694bff56a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fE5pZ2h0Y2x1YnxlbnwwfHwwfHx8MA%3D%3D'})
-  const [SL,setSL]=useState(false)
-  const [Beseingabe,setBeseingabe]=useState(false)
-  
-  
+  const [SachbearbeitungDatenArr,setSachbearbeitungDatenArr]=useState({})
+
+  const iduebergabe=()=>{
+    let OBJ=SachbearbeitungDatenObject
+    OBJ.MitarbeiterID=route.params.user 
+    setSachbearbeitungDatenArr(OBJ)
+  }
+
   const imglesen = async (param)=>{
     //loeschen(param)
     const data=await SecureStore.getItemAsync(param);//BGImage
@@ -51,7 +41,7 @@ export default function Seite2({route, navigation}) {
   }
   
   useEffect(()=>{ 
-    
+    iduebergabe()
     imglesen('BGImage')
   },[])
   return (
@@ -95,7 +85,7 @@ export default function Seite2({route, navigation}) {
     {
       tab3?
       <>       
-      <ArbeitstageCheck/>  
+      <ArbeitstageCheck S={setSachbearbeitungDatenArr} D={SachbearbeitungDatenArr}/>  
       </>
       :
       ""
@@ -108,7 +98,7 @@ export default function Seite2({route, navigation}) {
     {
       tab1?
       <>
-      <Grundentlohnung/>
+      <Grundentlohnung S={setSachbearbeitungDatenArr} D={SachbearbeitungDatenArr}/>
             
       </>
       :
@@ -121,7 +111,7 @@ export default function Seite2({route, navigation}) {
     {
       tab2?
       <>
-      <Unterlagencheckliste/>      
+      <Unterlagencheckliste S={setSachbearbeitungDatenArr} D={SachbearbeitungDatenArr}/>      
       </>
       :
       ""

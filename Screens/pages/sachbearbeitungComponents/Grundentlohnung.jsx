@@ -1,5 +1,5 @@
 import React,{ useContext, useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity ,ImageBackground} from 'react-native';
+import { StyleSheet, Text} from 'react-native';
 import SimpelCheck from '../../fragebogencomps/sachbearbeitungsComps/SimpelCheck'
 import { EingabeFeld } from '../../registrierung/regcomps/Comps'
 import { SachbearbeitungTextdataset } from '../../../utils/Sachbearbeitung/SachbearbeitungTextdataset';

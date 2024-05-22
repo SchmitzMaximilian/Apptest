@@ -1,19 +1,15 @@
-import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity ,ImageBackground} from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
 import Zuschläge from '../sachbearbeitungComponents/Zuschläge';
-import { MAidContext } from '../functions/contextMitarbeiterid';
 import SachbearbeitungDatenObject from '../../../utils/Objects/SachbearbeitungDatenObject';
-
 import SpeicherSAButton from '../sachbearbeitungtextfeldcomp/speicherSAButton';
 import Grundentlohnung from './Grundentlohnung';
 
-function AngabenEntlohnung() {
-  const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext)
-  const [SachbearbeitungDatenArr,setSachbearbeitungDatenArr]=useState(SachbearbeitungDatenObject)
+function AngabenEntlohnung(props) {
+  const [SachbearbeitungDatenArr,setSachbearbeitungDatenArr]=useState(props.D)
 
   const submitLohndaten=async()=>{
     let check=true
-
+console.log(SachbearbeitungDatenArr )
     if(SachbearbeitungDatenArr.Stundenlohncheck==1){
       if(Number(SachbearbeitungDatenArr.Stundenlohn)==0){
         check=false
@@ -56,10 +52,10 @@ function AngabenEntlohnung() {
             "BetriebsZuschlaege": SachbearbeitungDatenArr.Betriebsueblichecheck.toString().trim(),
             "BZC": SachbearbeitungDatenArr.BesondereCheck.toString().trim(),
             "BZL": SachbearbeitungDatenArr.Besondereliste.toString().trim(),
-            "mitarbeiterID":mitarbeiterID
+            "MAID": SachbearbeitungDatenArr.MitarbeiterID
           })
         };
-        const d = await fetch('http://192.168.2.44/datenbankapi/indexsachbearbeitung.php', request);
+        const d = await fetch('https://itsnando.com/datenbankapi/indexsachbearbeitung.php', request);
         let e = await d.json();
         if(e.ergebnis>0 &&(!isNaN(e.ergebnis))){
           let NO=SachbearbeitungDatenArr
@@ -79,6 +75,10 @@ function AngabenEntlohnung() {
       
     }
   }
+  
+  useEffect(()=>{
+
+  },[props])
   return (
     <>
     <Grundentlohnung/>

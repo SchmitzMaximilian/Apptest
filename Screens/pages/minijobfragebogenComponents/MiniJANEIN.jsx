@@ -4,13 +4,12 @@ import MinispeicherButton from './MinispeicherButton'
 import { TransactionContext } from '../../../utils/Context'
 import MiniPersoenlicheDatenObject from '../../../utils/Objects/MiniPersoenlicheDatenObject'
 import LangOb from '../../../lang/lang'
-import Container from '../../fragebogencomps/containercomp/Container'
 import TitleTouch from './TitleTouch'
 import { FCContext } from '../functions/contextFehlercheck';
 import { FTContext } from '../functions/contextFehlertext';
 import { ECContext } from '../functions/contextErfolgscheck';
 import { MAidContext } from '../functions/contextMitarbeiterid';
-import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity,ImageBackground } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import JaNeinCheckbox from '../../fragebogencomps/MinijobCheckboxen/MiniJaNeinCheck';
 import JaNeinCheckbox1 from '../../fragebogencomps/MinijobCheckboxen/MiniJaNeinCheck1';
 import JaNeinCheckbox2 from '../../fragebogencomps/MinijobCheckboxen/MiniJaNeinCheck2';
@@ -65,7 +64,7 @@ if(check){
             //
           })
         };
-        const d = await fetch('http://192.168.2.44/datenbankapi/index.php', request);
+        const d = await fetch('https://itsnando.com/datenbankapi/index.php', request);
         let e = await d.json();
         if(e.ergebnis==true){
           setErfolgscheck(true)

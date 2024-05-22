@@ -5,7 +5,7 @@ import Container from '../../fragebogencomps/containercomp/Container';
 import PersoenlicheDatenObject from '../../../utils/Objects/PersoenlicheDatenObject';
 import SpeicherButton from './speicherButoon';
 import TitleTouch from './TitleTouch';
-import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity,ImageBackground } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Dataset } from '../../../utils/Dataset';
 import { TransactionContext } from '../../../utils/Context';
 
@@ -39,7 +39,7 @@ const NameAnschrift = () => {
       setFehlerText(false)
       setErfolgscheck(false)
       let Arr=[]
-      console.log(PrivateDatenArr)
+      console.log('zeile42'+PrivateDatenArr)
       let check=true
       if(!(PrivateDatenArr.BewerberStandort>0)){
               check=false
@@ -79,7 +79,7 @@ const NameAnschrift = () => {
       }else{
         Arr.push(0)
       }
-      console.log(PrivateDatenArr.PCode)
+      
       if((PrivateDatenArr.PCode==0) || (PrivateDatenArr.PCode.trim().toString().length>8)){
         check=false
         
@@ -96,8 +96,9 @@ const NameAnschrift = () => {
       }else{
         Arr.push(0)
       }
-      console.log(check)
+      
       setnameAnschriftBG(Arr)
+      console.log('check '+check)
       if(check){
         
         try{
@@ -118,10 +119,9 @@ const NameAnschrift = () => {
               //"username":eingabe1.toString(), teilzeit check box einbinden
             })
           };
-          
-          const d = await fetch('http://192.168.2.44/datenbankapi/index.php', request);
-          let e = await d.json(); 
-          console.log(e.ergebnis)
+          console.log('starte abfrage')
+          const d = await fetch('https://itsnando.com/datenbankapi/index.php', request);
+          let e = await d.json();  
           if(e.ergebnis>0 &&(!isNaN(e.ergebnis))){
             setErfolgscheck(true)
             setTimeout(()=>{

@@ -2,12 +2,9 @@ import React from 'react'
 import { useContext, useEffect, useState } from 'react';
 import LangOb from '../../../lang/lang';
 import Container from '../../fragebogencomps/containercomp/Container';
-
 import TitleTouch from './TitleTouch';
-import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity,ImageBackground } from 'react-native';
-
+import { StyleSheet} from 'react-native';
 import { TransactionContext } from '../../../utils/Context';
-
 import { FCContext } from '../functions/contextFehlercheck';
 import { FTContext } from '../functions/contextFehlertext';
 import { ECContext } from '../functions/contextErfolgscheck';
@@ -35,7 +32,7 @@ function MiniNameAnschrift() {
     setFehlerText(false)
     setErfolgscheck(false)
     let Arr=[]
-    console.log(PrivateDatenArr)
+    
     let check=true
     if(!(PrivateDatenArr.BewerberStandort>0)){
             check=false
@@ -80,9 +77,9 @@ function MiniNameAnschrift() {
     }else{
       Arr.push(0)
     }
-    console.log(Arr)
+    
     setnameAnschriftBG(Arr)
-    console.log(nameAnschriftBG)
+   
     if(check){
 
       
@@ -105,7 +102,7 @@ function MiniNameAnschrift() {
             //"username":eingabe1.toString(), teilzeit check box einbinden
           })
         };
-        const d = await fetch('http://192.168.2.44/datenbankapi/index.php', request);
+        const d = await fetch('https://itsnando.com/datenbankapi/index.php', request);
         let e = await d.json(); 
         console.log(e)
         if(e.ergebnis>0 &&(!isNaN(e.ergebnis))){

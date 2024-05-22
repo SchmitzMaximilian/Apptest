@@ -55,9 +55,9 @@ export const EingabeFeld=(props)=>{
         case "Area code / phone number mobile phone (only if available)":
         return 'Current cell phone number '
 
-      case "E-Mail-Adresse (nur falls verfügbar)":
+      case "E-Mail-Adresse (Pflichtfeld)":
         return 'Bitte geben Sie eine gültige E-Mail-Adresse an (Pflichtfeld)'
-        case "Email address (only if available)":
+        case "Email address (required)":
         return 'Please enter a valid email address (required)'
 
 

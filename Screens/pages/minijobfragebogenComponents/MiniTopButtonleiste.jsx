@@ -1,12 +1,10 @@
 import React,{ useContext, useEffect, useState }  from 'react'
-import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity,ImageBackground } from 'react-native';
-import MiniPersoenlicheDatenObject from '../../../utils/Objects/MiniPersoenlicheDatenObject';
+import { StyleSheet, Text, View,  TouchableOpacity,} from 'react-native';
 import { TransactionContext } from '../../../utils/Context';
 
 
 const MiniTopButtonleiste=({navigation})=> {
   const [sprache,setzesprache]=useContext(TransactionContext)
-  const [PrivateDatenArr,setPrivateDatenArr]=useState(MiniPersoenlicheDatenObject)
   return (
     <View style={styles.AdminButtonContainer}>
 
@@ -20,7 +18,7 @@ const MiniTopButtonleiste=({navigation})=> {
         </TouchableOpacity>
         </View>
         
-        <TouchableOpacity onPress={()=>navigation.navigate({name:"LoginScreen",params:{PrivateDatenArr}})} style={styles.AdminButton}> 
+        <TouchableOpacity onPress={()=>navigation.navigate({name:"LoginScreenMini"})} style={styles.AdminButton}> 
           <Text style={{color:'#FFFFFF'}} >Sachbearbeiter</Text>
         </TouchableOpacity>
       </View>

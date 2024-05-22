@@ -13,7 +13,7 @@ import { isSteuerIdValid } from 'validate-steuerid'
 import SteuerEinwillligung from '../../fragebogencomps/MinijobCheckboxen/MiniSteuercheck'
 import Container from '../../fragebogencomps/containercomp/Container'
 import TitleTouch from './TitleTouch'
-import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity,ImageBackground } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { FNContext } from '../functions/contextFehlernummer';
 
 function MiniSteuer() {
@@ -23,7 +23,6 @@ function MiniSteuer() {
   const [tab5ausgefuellt,settab5ausgefuellt]=useState(false)
   const [Steuercheck,setSteuercheck]=useState(false)
   const [steuerBG,setsteuerBG]=useState([0])
-   
   const [Fehlercheck,setFehlercheck]=useContext(FCContext)
   const [FehlerText,setFehlerText]=useContext(FTContext)
   const [Erfolgscheck,setErfolgscheck]=useContext(ECContext)
@@ -69,7 +68,7 @@ function MiniSteuer() {
             //
           })
         };
-        const d = await fetch('http://192.168.2.44/datenbankapi/index.php', request);
+        const d = await fetch('https://itsnando.com/datenbankapi/index.php', request);
         let e = await d.json(); 
         
         if(e.ergebnis==true){

@@ -5,9 +5,8 @@ import PersoenlicheDatenObject from '../../../utils/Objects/PersoenlicheDatenObj
 import Container from '../../fragebogencomps/containercomp/Container';
 import TitleTouch from './TitleTouch';
 import SpeicherButton from './speicherButoon';
-import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity,ImageBackground } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { TransactionContext } from '../../../utils/Context';
-
 import { Dataset } from '../../../utils/Dataset';
 import { MAidContext } from '../functions/contextMitarbeiterid';
 import { FCContext } from '../functions/contextFehlercheck';
@@ -47,12 +46,12 @@ const Kommunikation=()=>{
         check=false
         Arr.push(1)
       }Arr.push(0)
-      if((PrivateDatenArr.Email.trim().toString().length>150)){
+      if((PrivateDatenArr.Email.trim().toString().length>255) || PrivateDatenArr.Email.trim().toString().length==0){
         check=false
         Arr.push(1)
       }Arr.push(0)
       setkommunikationBG(Arr)
-       console.log(mitarbeiterID)
+       
       if(check){
         
         try{
@@ -68,7 +67,7 @@ const Kommunikation=()=>{
               
             })
           }; 
-          const d = await fetch('http://192.168.2.44/datenbankapi/index.php', request);
+          const d = await fetch('https://itsnando.com/datenbankapi/index.php', request);
           let e = await d.json();
           
           if(e.ergebnis==true){

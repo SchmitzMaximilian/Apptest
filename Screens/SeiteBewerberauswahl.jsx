@@ -1,128 +1,88 @@
-import { StyleSheet, Text, View, SafeAreaView,ImageBackground} from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView,ImageBackground,TouchableOpacity} from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
 import { TransactionContext } from '../utils/Context'; 
-import TitleTouch from './fragebogencomps/touchTitle/TitleTouch';
-import { ScrollView } from 'react-native-gesture-handler';
-import { Textdataset } from '../utils/Textdataset';
-import { SachbearbeitungTextdataset } from '../utils/Sachbearbeitung/SachbearbeitungTextdataset';
 import * as SecureStore from 'expo-secure-store';
-import ArbeitstageCheck from './pages/sachbearbeitungComponents/ArbeitstageCheck';
-import Unterlagencheckliste from './pages/sachbearbeitungComponents/Unterlagencheckliste';
-import AngabenEntlohnung from './pages/sachbearbeitungComponents/AngabenEntlohnung';
-import SachbearbeitungTop from './pages/sachbearbeitungComponents/SachbearbeitungTop';
-import Meldungerfolg from './pages/functions/meldungerfolg';
-import SachbearbeitungDatenObject from '../utils/Objects/SachbearbeitungDatenObject';
+import { ScrollView } from 'react-native-gesture-handler';
+import {Octicons, Ionicons} from '@expo/vector-icons';
+import { Checkboxdataset } from '../utils/Checkboxdataset';
+import { Picker } from '@react-native-picker/picker';
+import ListeBewerber from './pages/sachbearbeitungtextfeldcomp/ListeBewerber';
 
-
-
-export default function Seite2({ route,navigation}) {
+function SeiteBewerberauswahl({navigation}) {  
   const [sprache,setzesprache]=useContext(TransactionContext)
-  const [tab1,settab1]=useState(false)
-  const [tab2,settab2]=useState(false)
-  const [tab3,settab3]=useState(false)
-  const [Fehlercheck,setFehlercheck]=useState(false)
-  const [FehlerText,setFehlerText]=useState(false)
-  const [Erfolgscheck,setErfolgscheck]=useState(false) 
   const [image,setimage]=useState({uri: 'https://images.unsplash.com/photo-1622743941533-cde694bff56a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fE5pZ2h0Y2x1YnxlbnwwfHwwfHx8MA%3D%3D'})
-console.log(route.params.user +' testhier ')
-  const [SachbearbeitungDatenArr,setSachbearbeitungDatenArr]=useState({})
-
+  const [selectionArr,setselectionArr]=useState([])
+  const [selection,setselection]=useState(0)
   
-const iduebergabe=()=>{
-  let OBJ=SachbearbeitungDatenObject
-  OBJ.MitarbeiterID=route.params.user 
-  setSachbearbeitungDatenArr(OBJ)
-}
   
   const imglesen = async (param)=>{
     //loeschen(param)
     const data=await SecureStore.getItemAsync(param);//BGImage
     data?setimage({uri:data.toString()}):'';
   }
-  
+  const getData=async (i)=>{
+    const restaurant=i+1
+    const request ={
+      method: 'POST',
+      headers: { 'Content-Type' : 'application/json'},
+      body: JSON.stringify({
+        "query":15,
+        "restaurant": restaurant 
+      })
+    }; 
+    const d = await fetch('https://itsnando.com/datenbankapi/index.php', request);
+    let e = await d.json();  
+    setselectionArr(e)
+  }
   useEffect(()=>{ 
-    iduebergabe()
+    getData(0)
     imglesen('BGImage')
   },[])
   return (
-    <SafeAreaView style={styles.sav} >
+      <SafeAreaView style={styles.sav} >
       <ImageBackground source={image} resizeMode='cover' style={styles.image}>
-      {
-      Erfolgscheck?
-      <Meldungerfolg/>
-      :
-      ""
-    } 
-
-  {
-    Fehlercheck?
-    <View style={styles.fehlermeldung}><Text style={{color:'#fff'}}>
-      {
-        FehlerText?
-        Textdataset(sprache?'DE':'EN').Texte.Fehlermeldungdatenbank
-        :
-        Textdataset(sprache?'DE':'EN').Texte.Fehlermeldung}
-      </Text></View>
-    :
-    ""
-  }
       <ScrollView style={{backgroundColor: 'transparent'}}>
       <View style={styles.container}>
+      <View style={styles.AdminButtonContainer}>
 
-      <SachbearbeitungTop navigation={navigation}/>
-      
-      
+        <TouchableOpacity onPress={()=>navigation.pop()} style={styles.BackButton}> 
+        <Ionicons  name={'arrow-back'} color={'#FFFFFF'} style={{marginRight:8}}/>
+          <Text  style={{color:'#FFFFFF'} } >Ausloggen</Text>
+        </TouchableOpacity>
+        <View style={styles.SprachButton}>
+        {/*<TouchableOpacity onPress={()=>setzesprache(!sprache)} style={styles.InsetSprachButton} > 
+          <Text style={{color:'#FFFFFF'}} >{sprache?'EN':'DE'}</Text>
+        </TouchableOpacity>*/}
+        </View>
+        <TouchableOpacity onPress={()=>navigation.navigate({name:"SeiteMinijob"})} style={styles.AdminButton}> 
+          <Text style={{color:'#FFFFFF'}} >Minijob</Text>
+        </TouchableOpacity>
+      </View>
 
 
-    {/**Angaben der Sachbearbeitung*/}
-    <View style={styles.ContainerFragebogen}>
+      <View style={styles.ContainerFragebogen}>
 
-      <Text style={styles.Titel}>Sachbearbeitungsbogen für Festpersonal</Text>
+       
+      <View style={{borderRadius:2,borderWidth:1,borderColor:'#4b5563', width:'80%',marginLeft:'10%',paddingVertical:10,marginVertical:10,backgroundColor:'#6b728090'}}>
+       <Picker style={{color:'#FFF'}}  dropdownIconColor={"#FFF"} selectedValue={selection} multiline={true} numberOfLines={2} 
+       onValueChange={(itemValue, itemIndex) =>{setselection(itemValue);getData(itemValue)}}  >
+        {
+          Checkboxdataset('DE').SubSelectboxenLabel[5].length>0&&Checkboxdataset('DE').SubSelectboxenLabel[5].map((item,index)=>(
+            <Picker.Item  key={'pickup'+'index'+item}  color="#000" label={item} value={index} />
+  
+          ))
+        }
+      </Picker> 
+      </View>
+      <ListeBewerber Arr={selectionArr} navigation={navigation}/>
 
+      </View>
+      </View>
+      </ScrollView>
+      </ImageBackground>
+      </SafeAreaView>
     
-    <TitleTouch  F={settab3} S={tab3} T={SachbearbeitungTextdataset(sprache?"DE":"EN").Titel.Zeiten} />
-    {
-      tab3?
-      <>       
-      <ArbeitstageCheck S={setSachbearbeitungDatenArr} D={SachbearbeitungDatenArr}/>  
-      </>
-      :
-      ""
-    }  
-
-
-   
-
-<TitleTouch  F={settab1} S={tab1} T={SachbearbeitungTextdataset(sprache?"DE":"EN").Titel.Lohn} />
-    {
-      tab1?
-      <>
-      <AngabenEntlohnung S={setSachbearbeitungDatenArr} D={SachbearbeitungDatenArr}/>
-</>
-    
-    :
-    ""
-  }
-      <TitleTouch  F={settab2} S={tab2} T={SachbearbeitungTextdataset(sprache?"DE":"EN").Titel.Checkliste} />
-    {
-      tab2?
-      <>
-      <Unterlagencheckliste S={setSachbearbeitungDatenArr} D={SachbearbeitungDatenArr}/>      
-      </>
-      :
-      ""
-    }  
-
-
-   
-
-   
-  </View>
-  </View>
-  </ScrollView>
-  </ImageBackground>
-    </SafeAreaView>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -292,3 +252,4 @@ const styles = StyleSheet.create({
     },
 
 });
+export default SeiteBewerberauswahl

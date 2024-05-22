@@ -1,6 +1,5 @@
 import React,{ useContext, useEffect, useState }  from 'react'
-import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity,ImageBackground } from 'react-native';
-
+import { StyleSheet, Text, View,TouchableOpacity } from 'react-native';
 import { TransactionContext } from '../../../utils/Context';
 import {Octicons, Ionicons} from '@expo/vector-icons';
 import PersoenlicheDatenObject from '../../../utils/Objects/PersoenlicheDatenObject';
@@ -13,15 +12,15 @@ const MiniSachbearbeitungTop=({navigation})=> {
     <View style={styles.AdminButtonContainer}>
         <TouchableOpacity onPress={()=>navigation.pop()} style={styles.BackButton}> 
         <Ionicons  name={'arrow-back'} color={'#FFFFFF'} style={{marginRight:8}}/>
-          <Text  style={{color:'#FFFFFF'} } >Back</Text>
+          <Text  style={{color:'#FFFFFF'} } >Ausloggen</Text>
         </TouchableOpacity>
         <View style={styles.SprachButton}>
         {/*<TouchableOpacity onPress={()=>setzesprache(!sprache)} style={styles.InsetSprachButton} > 
           <Text style={{color:'#FFFFFF'}} >{sprache?'EN':'DE'}</Text>
         </TouchableOpacity>*/}
         </View>
-        <TouchableOpacity onPress={()=>navigation.navigate({name:"SeiteSachbearbeitungMinijob",params:{PrivateDatenArr}})} style={styles.AdminButton}> 
-          <Text style={{color:'#FFFFFF'}} >SachbearbeitungMinijob</Text>
+        <TouchableOpacity onPress={()=>navigation.navigate({name:"SeiteTest",params:{PrivateDatenArr}})} style={styles.AdminButton}> 
+          <Text style={{color:'#FFFFFF'}} >Festpersonal</Text>
         </TouchableOpacity>
       </View>
     </>

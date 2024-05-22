@@ -5,13 +5,12 @@ import Container from '../../fragebogencomps/containercomp/Container';
 import PersoenlicheDatenObject from '../../../utils/Objects/PersoenlicheDatenObject';
 import SpeicherButton from './speicherButoon';
 import TitleTouch from './TitleTouch';
-import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity,ImageBackground } from 'react-native';
+import { StyleSheet, Text, View} from 'react-native';
 import { Dataset } from '../../../utils/Dataset';
 import { Textdataset } from '../../../utils/Textdataset';
 import { TransactionContext } from '../../../utils/Context';
 import SVNummer from '../../fragebogencomps/selectBoxencomp/SozialCheckbox';
 import GBDatumSelect from './BirthdaySelect';
-
 import {Picker} from '@react-native-picker/picker';
 import { MAidContext } from '../functions/contextMitarbeiterid';
 import { FCContext } from '../functions/contextFehlercheck';
@@ -91,7 +90,7 @@ function Sozialversicherung() {
       }else if(!(PrivateDatenArr.GBLand.trim().toString().length>3) || (PrivateDatenArr.GBLand.trim().toString().length>255)){
         check=false
         Arr.push(1)
-        console.log('du doof')
+        
       }else{
         Arr.push(0)
       }
@@ -134,8 +133,8 @@ function Sozialversicherung() {
               "mitarbeiterID":mitarbeiterID
             })
           };
-          console.log(request.body)
-          const d = await fetch('http://192.168.2.44/datenbankapi/index.php', request);
+          
+          const d = await fetch('https://itsnando.com/datenbankapi/index.php', request);
           let e = await d.json();
           console.log(e)
           if(e.ergebnis==true){

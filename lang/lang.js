@@ -87,8 +87,8 @@ const LangOb={
       "De":"Vorwahl / Rufnummer Mobiltelefon (nur falls verfügbar)",
       "EN":"Area code / phone number mobile phone (only if available)",
     },"EMail":{
-      "De":"E-Mail-Adresse (nur falls verfügbar)",
-      "EN":"Email address (only if available)",
+      "De":"E-Mail-Adresse (Pflichtangabe)",
+      "EN":"Email address (mandatory)",
     },
   },
   

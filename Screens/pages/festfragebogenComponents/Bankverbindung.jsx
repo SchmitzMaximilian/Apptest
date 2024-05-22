@@ -5,7 +5,7 @@ import Container from '../../fragebogencomps/containercomp/Container';
 import PersoenlicheDatenObject from '../../../utils/Objects/PersoenlicheDatenObject';
 import SpeicherButton from './speicherButoon';
 import TitleTouch from './TitleTouch';
-import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity,ImageBackground } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import { Textdataset } from '../../../utils/Textdataset';
 import { Dataset } from '../../../utils/Dataset';
 import { TransactionContext } from '../../../utils/Context';
@@ -72,7 +72,7 @@ function Bankverbindung() {
             "mitarbeiterID":mitarbeiterID 
           })
         };
-        const d = await fetch('http://192.168.2.44/datenbankapi/index.php', request);
+        const d = await fetch('https://itsnando.com/datenbankapi/index.php', request);
         let e = await d.json(); 
         if(e.ergebnis==true){
   

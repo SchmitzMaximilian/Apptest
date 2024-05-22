@@ -5,9 +5,9 @@ import { TransactionContext } from '../../../utils/Context'
 import SachbearbeitungDatenObject from '../../../utils/Objects/SachbearbeitungDatenObject';
 import SpeicherSAButton from '../sachbearbeitungtextfeldcomp/speicherSAButton';
 
-function Unterlagencheckliste() {
+function Unterlagencheckliste(props) {
   const [sprache,setzesprache]=useContext(TransactionContext)
-  const [SachbearbeitungDatenArr,setSachbearbeitungDatenArr]=useState(SachbearbeitungDatenObject)
+  const [SachbearbeitungDatenArr,setSachbearbeitungDatenArr]=useState(props.D)
 
   const submitCheckdaten=async()=>{
     let check=true
@@ -27,10 +27,10 @@ function Unterlagencheckliste() {
             "BKKC": SachbearbeitungDatenArr.BankkarteKopieCheck.toString().trim(),
             "PVNC": SachbearbeitungDatenArr.PrivatversichertNachweisCheck.toString().trim(),
             "PKC": SachbearbeitungDatenArr.PersoKopieCheck.toString().trim(),
-            "mitarbeiterID":mitarbeiterID
+            "MAID": SachbearbeitungDatenArr.MitarbeiterID
           })
         };
-        const d = await fetch('http://192.168.2.44/datenbankapi/indexsachbearbeitung.php', request);
+        const d = await fetch('https://itsnando.com/datenbankapi/indexsachbearbeitung.php', request);
         let e = await d.json();
         if(e.ergebnis>0 &&(!isNaN(e.ergebnis))){
           let NO=SachbearbeitungDatenArr
@@ -50,6 +50,11 @@ function Unterlagencheckliste() {
       
     }
   }
+
+  
+  useEffect(()=>{
+
+  },[props])
   return (<>
       <Justchecking SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").NachweisCheckliste.ELStAM}/>
       <Justchecking SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").NachweisCheckliste.CheckArbeitsvertrag}/>

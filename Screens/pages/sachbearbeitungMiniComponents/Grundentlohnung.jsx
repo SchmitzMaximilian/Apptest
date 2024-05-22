@@ -1,19 +1,15 @@
 import React,{ useContext, useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity ,ImageBackground} from 'react-native';
+import { StyleSheet, Text} from 'react-native';
 import SimpelCheck from '../../fragebogencomps/sachbearbeitungsComps/SimpelCheck'
-
 import { SachbearbeitungTextdataset } from '../../../utils/Sachbearbeitung/SachbearbeitungTextdataset';
 import { TransactionContext } from '../../../utils/Context';
-import SachbearbeitungDatenObject from '../../../utils/Objects/SachbearbeitungDatenObject';
 import SpeicherSAButton from '../sachbearbeitungtextfeldcomp/speicherSAButton';
 import { EingabeFeld } from '../../registrierung/regcomps/Comps';
-import { MAidContext } from '../functions/contextMitarbeiterid';
 
-function Grundentlohnung() {
+function Grundentlohnung(props) {
   const [SL,setSL]=useState(false)
   const [FL,setFL]=useState(false)
-  const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext)
-  const [SachbearbeitungDatenArr,setSachbearbeitungDatenArr]=useState(SachbearbeitungDatenObject)
+  const [SachbearbeitungDatenArr,setSachbearbeitungDatenArr]=useState(props.D)
 
   const submitLohndaten=async()=>{
     let check=true
@@ -39,10 +35,10 @@ function Grundentlohnung() {
             "SL": SachbearbeitungDatenArr.Stundenlohn.toString().trim(),
             "FLC": SachbearbeitungDatenArr.Festlohncheck.toString().trim(),
             "FL": SachbearbeitungDatenArr.Festlohn.toString().trim(),
-            "mitarbeiterID":mitarbeiterID
+            "MAID": SachbearbeitungDatenArr.MitarbeiterID
           })
         };
-        const d = await fetch('http://192.168.2.44/datenbankapi/indexsachbearbeitung.php', request);
+        const d = await fetch('https://itsnando.com/datenbankapi/indexsachbearbeitung.php', request);
         let e = await d.json();
         if(e.ergebnis>0 &&(!isNaN(e.ergebnis))){
           let NO=SachbearbeitungDatenArr
@@ -62,6 +58,11 @@ function Grundentlohnung() {
       
     }
   }
+
+  
+  useEffect(()=>{
+
+  },[props])
   
   const [sprache,setzesprache]=useContext(TransactionContext)
   return (<>

@@ -9,6 +9,8 @@ import Seite5 from '../Screens/Seite5';
 import SeiteMinijob from '../Screens/SeiteMinijob';
 import SeiteTest from '../Screens/SeiteTest';
 import LoginScreen from '../Screens/LoginScreen';
+import LoginScreenMini from '../Screens/LoginScreenMini';
+import SeiteBewerberauswahl from '../Screens/SeiteBewerberauswahl';
 import SeiteSachbearbeitungMinijob from '../Screens/SeiteSachbearbeitungMinijob';
 import { TransactionProvider } from '../utils/Context';
 import { ErfolgscheckProvider } from '../Screens/pages/functions/contextErfolgscheck';
@@ -34,15 +36,17 @@ const Navbar=(Prop)=> {
     <NavigationContainer>
  
     <Stack.Navigator initialRouteName="SeiteTest" screenOptions={{headerShown:false, headerMode:'screen', headerTintColor:'white', headerStyle: {backgroundColor:'rgba(0,15,40,0.95)'}}}>
-    <Stack.Screen name = "Seite1" component = {Seite1} Prop={Prop} />
-    <Stack.Screen name = "LoginScreen" component = {LoginScreen} options={{headerShown:false}} />
-    <Stack.Screen name = "Seite2" component = {Seite2} options={{headerShown:false}}/>
-    <Stack.Screen name = "Seite3" component = {Seite3} options={{headerShown:false}} />
-    <Stack.Screen name = "Seite4" component = {Seite4} options={{headerShown:false}} />
-    <Stack.Screen name = "Seite5" component = {Seite5} options={{headerShown:false}} />
-    <Stack.Screen name = "SeiteTest" component = {SeiteTest} Prop={Prop} options={{headerShown:false}} />
-    <Stack.Screen name = "SeiteMinijob" component = {SeiteMinijob} options={{headerShown:false}} />
-    <Stack.Screen name = "SeiteSachbearbeitungMinijob" component = {SeiteSachbearbeitungMinijob} options={{headerShown:false}} />
+    <Stack.Screen name = "Seite1"                       component = {Seite1} Prop={Prop} />
+    <Stack.Screen name = "LoginScreen"                  component = {LoginScreen} options={{headerShown:false}} />
+    <Stack.Screen name = "LoginScreenMini"              component = {LoginScreenMini} options={{headerShown:false}} />
+    <Stack.Screen name = "Seite2"                       component = {Seite2} options={{headerShown:false}}/>
+    <Stack.Screen name = "Seite3"                       component = {Seite3} options={{headerShown:false}} />
+    <Stack.Screen name = "Seite4"                       component = {Seite4} options={{headerShown:false}} />
+    <Stack.Screen name = "Seite5"                       component = {Seite5} options={{headerShown:false}} />
+    <Stack.Screen name = "SeiteTest"                    component = {SeiteTest} Prop={Prop} options={{headerShown:false}} />
+    <Stack.Screen name = "SeiteMinijob"                 component = {SeiteMinijob} options={{headerShown:false}} />
+    <Stack.Screen name = "SeiteBewerberauswahl"         component = {SeiteBewerberauswahl} options={{headerShown:false}} />
+    <Stack.Screen name = "SeiteSachbearbeitungMinijob"  component = {SeiteSachbearbeitungMinijob} options={{headerShown:false}} />
 
   </Stack.Navigator>
   </NavigationContainer>

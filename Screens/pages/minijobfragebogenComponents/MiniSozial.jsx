@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity,ImageBackground } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { useContext, useEffect, useState } from 'react';
 import MinispeicherButton from './MinispeicherButton'
 import { TransactionContext } from '../../../utils/Context'
@@ -20,7 +20,6 @@ function MiniSozial() {
   const [sprache,setzesprache]=useContext(TransactionContext)
   const [tab3,settab3]=useState(false)
   const [tab3ausgefuellt,settab3ausgefuellt]=useState(false)
-  const [SelectedLanguage, setSelectedLanguage] = useState();
   const [Fehlercheck,setFehlercheck]=useContext(FCContext)
   const [FehlerText,setFehlerText]=useContext(FTContext)
   const [Erfolgscheck,setErfolgscheck]=useContext(ECContext)
@@ -83,9 +82,9 @@ function MiniSozial() {
     }else{Arr.push(0)}
    
 
-    console.log(Arr)
+    
      setsoziBG(Arr)
-console.log(Arr)
+
     if(check){
       
       try{
@@ -107,7 +106,7 @@ console.log(Arr)
           })
         };
         console.log(request.body)
-        const d = await fetch('http://192.168.2.44/datenbankapi/index.php', request);
+        const d = await fetch('https://itsnando.com/datenbankapi/index.php', request);
         let e = await d.json();
         console.log(e)
         if(e.ergebnis==true){

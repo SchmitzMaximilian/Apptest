@@ -1,18 +1,13 @@
 import React,{ useContext, useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity ,ImageBackground} from 'react-native';
+import { StyleSheet, Text} from 'react-native';
 import { SachbearbeitungTextdataset } from '../../../utils/Sachbearbeitung/SachbearbeitungTextdataset'
 import SimpelCheck from '../../fragebogencomps/sachbearbeitungsComps/SimpelCheck'
-
 import { TransactionContext } from '../../../utils/Context';
 import { EingabeFeld } from '../../registrierung/regcomps/Comps';
-import SachbearbeitungDatenObject from '../../../utils/Objects/SachbearbeitungDatenObject';
 import SpeicherSAButton from '../sachbearbeitungtextfeldcomp/speicherSAButton';
-import Eintrittsdatum from './Eintrittsdatum'
-import Enddatum from './Enddatum'
 import EintrittsdatumSelect from './Eintrittsdatum';
 import EnddatumSelect from './Enddatum';
-import { MAidContext } from '../functions/contextMitarbeiterid';
-function ArbeitstageCheck() {
+function ArbeitstageCheck(props) {
   const [sprache,setzesprache]=useContext(TransactionContext)
   const [ArbeitMoCheck,setArbeitMoCheck]=useState(false)
   const [ArbeitDiCheck,setArbeitDiCheck]=useState(false)
@@ -21,13 +16,12 @@ function ArbeitstageCheck() {
   const [ArbeitFrCheck,setArbeitFrCheck]=useState(false)
   const [ArbeitSaCheck,setArbeitSaCheck]=useState(false)
   const [ArbeitSoCheck,setArbeitSoCheck]=useState(false)
-  const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext)
-  const [SachbearbeitungDatenArr,setSachbearbeitungDatenArr]=useState(SachbearbeitungDatenObject)
+  const [SachbearbeitungDatenArr,setSachbearbeitungDatenArr]=useState(props.D)
 
 
   const submitZeitendaten=async()=>{
     let check=true
-
+console.log('Funktionierts '+ SachbearbeitungDatenArr)
     if(SachbearbeitungDatenArr.Eintrittsdatum.toString().trim()==0){
       check=false
     }
@@ -107,10 +101,11 @@ function ArbeitstageCheck() {
             "SAS": SachbearbeitungDatenArr.SAStunden.toString().trim(),
             "SOC": SachbearbeitungDatenArr.SonntagCheck.toString().trim(),
             "SOS": SachbearbeitungDatenArr.SOStunden.toString().trim(),
-            "mitarbeiterID":mitarbeiterID
+            "Urlaubjahr": SachbearbeitungDatenArr.JahresUrlaub.toString().trim(),
+            "MAID": SachbearbeitungDatenArr.MitarbeiterID
           })
         };
-        const d = await fetch('http://192.168.2.44/datenbankapi/indexsachbearbeitung.php', request);
+        const d = await fetch('https://itsnando.com/datenbankapi/indexsachbearbeitung.php', request);
         let e = await d.json();
         if(e.ergebnis>0 &&(!isNaN(e.ergebnis))){
           let NO=SachbearbeitungDatenArr
@@ -130,6 +125,9 @@ function ArbeitstageCheck() {
       
     }
   }
+  useEffect(()=>{
+
+  },[props])
   //<EingabeFeld SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Eintrittsdatum}/>
   //<EingabeFeld SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Enddatum}/>
 

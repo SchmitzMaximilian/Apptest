@@ -43,8 +43,8 @@ const[txtvalue,settxtvalue]=useState();
       case"Area code / phone number mobile phone (only if available)":
         O.Mobil=t
         break;
-      case "E-Mail-Adresse (nur falls verfügbar)":
-      case"Email address (only if available)":
+      case "E-Mail-Adresse (Pflichtangabe)":
+      case"Email address (mandatory)":
         O.Email=t
         break;
 
@@ -180,8 +180,8 @@ const[txtvalue,settxtvalue]=useState();
         case"Area code / phone number mobile phone (only if available)":
           O.Mobil.trim().toString().length>0?settxtvalue(O.Mobil.toString()):''
           break;
-        case "E-Mail-Adresse (nur falls verfügbar)":
-        case"Email address (only if available)":
+        case "E-Mail-Adresse (Pflichtangabe)":
+        case"Email address (mandatory)":
           O.Email.trim().toString().length>0?settxtvalue(O.Email.toString()):''
           break;
   

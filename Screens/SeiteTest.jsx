@@ -22,14 +22,13 @@ import FehlermeldungIndividuell from './pages/fehlerDatenbank/fehlerswitchcase';
 import Meldungerfolg from './pages/functions/meldungerfolg'
 
 import TopButtonleiste from './pages/festfragebogenComponents/TopButtonleiste';
-//<FehlermeldungIndividuell FN={Fehlernummer}/>
+//
 
 function SeiteTest({navigation}) {
   const [image,setimage]=useState({uri: 'https://images.unsplash.com/photo-1622743941533-cde694bff56a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fE5pZ2h0Y2x1YnxlbnwwfHwwfHx8MA%3D%3D'})
   const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext)
   const [PrivateDatenArr,setPrivateDatenArr]=useState(PersoenlicheDatenObject)
   const [sprache,setzesprache]=useContext(TransactionContext) 
-
   const [Fehlercheck,setFehlercheck]=useContext(FCContext)
   const [FehlerText,setFehlerText]=useContext(FTContext)
   const [Erfolgscheck,setErfolgscheck]=useContext(ECContext)
@@ -62,19 +61,19 @@ function SeiteTest({navigation}) {
 
   {
     Fehlercheck?
-    <View style={styles.fehlermeldung}><Text style={{color:'#fff'}}>
+    <><View style={styles.fehlermeldung}><Text style={{color:'#fff'}}>
       {
         FehlerText?
         Textdataset(sprache?'DE':'EN').Texte.Fehlermeldungdatenbank
         :
-        Textdataset(sprache?'DE':'EN').Texte.Fehlermeldung
+        Textdataset(sprache?'DE':'EN').Texte.Fehlermeldung+FehlerText
       }
-      </Text></View>
+      </Text> 
+      </View>
+    </>
     :
     ""
   }
-      
-      
       <ScrollView style={{backgroundColor: 'transparent'}}>
         
       <View style={styles.container}>

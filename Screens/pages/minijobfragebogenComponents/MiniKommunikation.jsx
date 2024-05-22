@@ -9,9 +9,8 @@ import { TransactionContext } from '../../../utils/Context';
 import { useContext, useEffect, useState } from 'react';
 import Container from '../../fragebogencomps/containercomp/Container';
 import TitleTouch from './TitleTouch';
-
 import MiniPersoenlicheDatenObject from '../../../utils/Objects/MiniPersoenlicheDatenObject';
-import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity,ImageBackground } from 'react-native';
+import { StyleSheet} from 'react-native';
 import MinispeicherButton from './MinispeicherButton';
 import { FNContext } from '../functions/contextFehlernummer';
 
@@ -41,7 +40,7 @@ function MiniKommunikation() {
     check=false
     Arr.push(1)
   }Arr.push(0)
-  if((PrivateDatenArr.Email.trim().toString().length>150)){
+  if((PrivateDatenArr.Email.trim().toString().length>255) || PrivateDatenArr.Email.trim().toString().length==0){
     check=false
     Arr.push(1)
   }Arr.push(0)
@@ -62,7 +61,7 @@ function MiniKommunikation() {
             
           })
         }; 
-        const d = await fetch('http://192.168.2.44/datenbankapi/index.php', request);
+        const d = await fetch('https://itsnando.com/datenbankapi/index.php', request);
         let e = await d.json();
         
         if(e.ergebnis==true){

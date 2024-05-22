@@ -3,7 +3,7 @@ import { Feather } from '@expo/vector-icons';
 import React, { useContext, useEffect, useState } from 'react';
 import CheckBox from 'expo-checkbox';
 import * as SecureStore from 'expo-secure-store';
-export default function LoginScreen({navigation}) {
+export default function LoginScreenMini({navigation}) {
     const [image,setimage]=useState({uri: 'https://images.unsplash.com/photo-1622743941533-cde694bff56a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fE5pZ2h0Y2x1YnxlbnwwfHwwfHx8MA%3D%3D'})
 
 
@@ -12,11 +12,10 @@ export default function LoginScreen({navigation}) {
     const [showPassword, setShowPassword] = useState(false);
     const [isChecked, setChecked] = useState(false)
     const [isPressed, setIsPressed] = useState(false)
-    
 
      function handleSubmit (mail, password) {
 
-        navigation.navigate({name:"SeiteBewerberauswahl"});
+        navigation.navigate({name:"SeiteSachbearbeitungMinijob"});
         console.log("MAIL: "+mail)
         console.log("PASSWORD: "+password)
      }

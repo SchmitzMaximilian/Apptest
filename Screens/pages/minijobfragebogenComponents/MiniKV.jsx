@@ -10,7 +10,6 @@ import { FCContext } from '../functions/contextFehlercheck';
 import { FTContext } from '../functions/contextFehlertext';
 import { ECContext } from '../functions/contextErfolgscheck';
 import { MAidContext } from '../functions/contextMitarbeiterid';
-import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity,ImageBackground } from 'react-native';
 import { MiniDataset } from '../../../Components/Minijobinhaltsvorlagen/Minijobeingabedataset';
 import Privatcheck from '../../fragebogencomps/MinijobCheckboxen/MiniPrivatCheck';
 import { FNContext } from '../functions/contextFehlernummer';
@@ -59,7 +58,7 @@ if(check){
             //
           })
         };
-        const d = await fetch('http://192.168.2.44/datenbankapi/index.php', request);
+        const d = await fetch('https://itsnando.com/datenbankapi/index.php', request);
         let e = await d.json();
         if(e.ergebnis==true){
           setErfolgscheck(true)

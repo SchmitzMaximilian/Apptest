@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from 'react';
 import { Fehlerdataset } from './fehlermeldungdataset';
 import { TransactionContext } from '../../../utils/Context';
 
-function FehlermeldungIndividuell(props) {
+const FehlermeldungIndividuell=(props) =>{
   const [sprache,setzesprache]=useContext(TransactionContext)
   const [fehlertext,setfehlertext]=useState('')
 switch(props.FN){

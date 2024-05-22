@@ -30,7 +30,7 @@ const TopButtonleiste=({navigation})=> {
         </TouchableOpacity>
         </View>
         
-        <TouchableOpacity onPress={()=>navigation.navigate({name:"SeiteMinijob",params:{PrivateDatenArr}})} style={styles.AdminButton}> 
+        <TouchableOpacity onPress={()=>navigation.navigate({name:"LoginScreen"})} style={styles.AdminButton}> 
           <Text style={{color:'#FFFFFF'}} >Sachbearbeiter</Text>
         </TouchableOpacity>
       </View>

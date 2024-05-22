@@ -5,7 +5,7 @@ import Container from '../../fragebogencomps/containercomp/Container';
 import PersoenlicheDatenObject from '../../../utils/Objects/PersoenlicheDatenObject';
 import SpeicherButton from './speicherButoon';
 import TitleTouch from './TitleTouch';
-import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity,ImageBackground } from 'react-native';
+import { StyleSheet, Text} from 'react-native';
 import { Dataset } from '../../../utils/Dataset';
 import { Textdataset } from '../../../utils/Textdataset';
 import { TransactionContext } from '../../../utils/Context';
@@ -23,7 +23,6 @@ function SteuerAngaben() {
   const [tab5ausgefuellt,settab5ausgefuellt]=useState(false)
   const [Steuercheck,setSteuercheck]=useState(false)
   const [steuerBG,setsteuerBG]=useState([0,0,0,0])
-  const [SVCheck,setSVCheck]=useState(false) 
   const [Fehlercheck,setFehlercheck]=useContext(FCContext)
   const [FehlerText,setFehlerText]=useContext(FTContext)
   const [Erfolgscheck,setErfolgscheck]=useContext(ECContext)
@@ -86,7 +85,7 @@ function SteuerAngaben() {
               //
             })
           };
-          const d = await fetch('http://192.168.2.44/datenbankapi/index.php', request);
+          const d = await fetch('https://itsnando.com/datenbankapi/index.php', request);
           let e = await d.json(); 
           
           if(e.ergebnis==true){

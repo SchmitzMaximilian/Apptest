@@ -10,7 +10,7 @@ const SachbearbeitungTop=({navigation})=> {
     <View style={styles.AdminButtonContainer}>
         <TouchableOpacity onPress={()=>navigation.pop()} style={styles.BackButton}> 
         <Ionicons  name={'arrow-back'} color={'#FFFFFF'} style={{marginRight:8}}/>
-          <Text  style={{color:'#FFFFFF'} } >Ausloggen</Text>
+          <Text  style={{color:'#FFFFFF'} } >Zurück</Text>
         </TouchableOpacity>
         <View style={styles.SprachButton}>
         {/*<TouchableOpacity onPress={()=>setzesprache(!sprache)} style={styles.InsetSprachButton} > 

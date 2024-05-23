@@ -5,8 +5,8 @@ import  DateTimePicker  from '@react-native-community/datetimepicker';
 import { TransactionContext } from '../../../utils/Context';
 import SachbearbeitungDatenObject from '../../../utils/Objects/SachbearbeitungDatenObject';
 
-function EnddatumSelect() {
-  const [SachbearbeitungDatenArr,setSachbearbeitungDatenArr]=useState(SachbearbeitungDatenObject)
+function EnddatumSelect(props) {
+  const [SachbearbeitungDatenArr,setSachbearbeitungDatenArr]=useState(props.SV)
   const [date, setDate] = useState(new Date());
   const [dateText, setDateText] = useState("Befristet bis:")
   const [showdatePicker,setshowdatePicker] = useState(false);
@@ -23,12 +23,15 @@ const handleChange = (event, selectedDate) => {
   let Obj=SachbearbeitungDatenArr
   Obj.Enddatum=Intl.DateTimeFormat('de-DE',{dateStyle:'short'}).format(currentDate).toString()
   setSachbearbeitungDatenArr(Obj)
-  
+  props.SF(Obj)
     };
 
     useEffect(() => {
       console.log("Sprache: "+ sprache)
-
+      if(props.UD){
+        setDate(Date.parse(props.UD.toString()))
+        setDateText(props.UD)
+      }
       if(SachbearbeitungDatenArr.Enddatum=="")
         {
           if(!sprache){

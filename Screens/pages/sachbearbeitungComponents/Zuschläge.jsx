@@ -7,20 +7,24 @@ import { SachbearbeitungTextdataset } from '../../../utils/Sachbearbeitung/Sachb
 import { TransactionContext } from '../../../utils/Context'
 import SachbearbeitungDatenObject from '../../../utils/Objects/SachbearbeitungDatenObject';
 
-function Zuschläge() {
+function Zuschläge(props) {
   const [sprache,setzesprache]=useContext(TransactionContext)
   const [Beseingabe,setBeseingabe]=useState(false)
   const [SachbearbeitungDatenArr,setSachbearbeitungDatenArr]=useState(SachbearbeitungDatenObject)
-
+  useEffect(()=>{
+    if(props.SV.BesondereCheck!=0){
+      setBeseingabe(props.SV.BesondereCheck)
+    }
+  },[])
   return (
     <>
     <Text style={styles.Titelklein}>{SachbearbeitungTextdataset(sprache?"DE":"EN").Entlohnungtitel.Zuschlag}</Text>
-      <Justchecking SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.A}/>
-      <Justchecking SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.uebliche}/>
-      <SimpelCheck SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Arbeitstag={setBeseingabe} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Besondere}/>
+      <Justchecking SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} UG={props.SV.AlleCheck!=0?props.SV.AlleCheck:0} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.A}/>
+      <Justchecking SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} UG={props.SV.Betriebsueblichecheck!=0?props.SV.Betriebsueblichecheck:0} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.uebliche}/>
+      <SimpelCheck SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} UG={props.SV.BesondereCheck!=0?props.SV.BesondereCheck:0} Arbeitstag={setBeseingabe} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Besondere}/>
       {
         Beseingabe?
-        <EingabeFeld SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Besondere}/>
+        <EingabeFeld SV={props.SV.Besondereliste?props.SV.Besondereliste:''} SF={props.L} Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Besondere}/>
         :
         ""
       }

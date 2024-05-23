@@ -12,11 +12,14 @@ function StyledTextInput(props) {
   function textChangeHandler(t){ 
     console.log(t)
     settxtvalue(t)
-    props.SF(t)
+    props?.SF(t)
      text = t;
     }
   useEffect(()=>{
     props.P?setshowHide(true):setshowHide(false)
+    if(props.SV){
+      settxtvalue(props.SV)
+    }
   },[])
   return (
     <>

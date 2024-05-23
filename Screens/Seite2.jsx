@@ -17,15 +17,12 @@ import SachbearbeitungDatenObject from '../utils/Objects/SachbearbeitungDatenObj
 
 export default function Seite2({ route,navigation}) {
   const [sprache,setzesprache]=useContext(TransactionContext)
-  const [tab1,settab1]=useState(false)
-  const [tab2,settab2]=useState(false)
-  const [tab3,settab3]=useState(false)
   const [Fehlercheck,setFehlercheck]=useState(false)
   const [FehlerText,setFehlerText]=useState(false)
   const [Erfolgscheck,setErfolgscheck]=useState(false) 
   const [image,setimage]=useState({uri: 'https://images.unsplash.com/photo-1622743941533-cde694bff56a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fE5pZ2h0Y2x1YnxlbnwwfHwwfHx8MA%3D%3D'})
-console.log(route.params.user +' testhier ')
-  const [SachbearbeitungDatenArr,setSachbearbeitungDatenArr]=useState({})
+ 
+  const [SachbearbeitungDatenArr,setSachbearbeitungDatenArr]=useState(SachbearbeitungDatenObject)
 
   
 const iduebergabe=()=>{
@@ -79,39 +76,16 @@ const iduebergabe=()=>{
 
       <Text style={styles.Titel}>Sachbearbeitungsbogen für Festpersonal</Text>
 
+    <ArbeitstageCheck S={setSachbearbeitungDatenArr} D={SachbearbeitungDatenArr} U={route.params.user}/>
     
-    <TitleTouch  F={settab3} S={tab3} T={SachbearbeitungTextdataset(sprache?"DE":"EN").Titel.Zeiten} />
-    {
-      tab3?
-      <>       
-      <ArbeitstageCheck S={setSachbearbeitungDatenArr} D={SachbearbeitungDatenArr}/>  
-      </>
-      :
-      ""
-    }  
 
 
+   <AngabenEntlohnung S={setSachbearbeitungDatenArr} D={SachbearbeitungDatenArr} U={route.params.user}/>
    
+   
+   <Unterlagencheckliste S={setSachbearbeitungDatenArr} D={SachbearbeitungDatenArr} U={route.params.user}/>
 
-<TitleTouch  F={settab1} S={tab1} T={SachbearbeitungTextdataset(sprache?"DE":"EN").Titel.Lohn} />
-    {
-      tab1?
-      <>
-      <AngabenEntlohnung S={setSachbearbeitungDatenArr} D={SachbearbeitungDatenArr}/>
-</>
-    
-    :
-    ""
-  }
-      <TitleTouch  F={settab2} S={tab2} T={SachbearbeitungTextdataset(sprache?"DE":"EN").Titel.Checkliste} />
-    {
-      tab2?
-      <>
-      <Unterlagencheckliste S={setSachbearbeitungDatenArr} D={SachbearbeitungDatenArr}/>      
-      </>
-      :
-      ""
-    }  
+      
 
 
    

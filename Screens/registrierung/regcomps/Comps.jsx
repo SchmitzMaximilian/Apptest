@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {View,Text,Button, TextInput, StyleSheet} from 'react-native'
 import {Octicons, Ionicons} from '@expo/vector-icons';
 import LeftIcon from './LeftIcon';
@@ -16,8 +16,7 @@ import {MdDelete} from 'react-icons'
 export const EingabeFeld=(props)=>{
   const [text,settext]=useState('')
   const [showPass,setshowPass]=useState(false)
-  console.log(props.Icon)
-  
+  console.log(props.Icon) 
   return(
     <View style={{marginTop:20}}>
         {
@@ -27,7 +26,7 @@ export const EingabeFeld=(props)=>{
           <LeftIcon P={props.Icon}/> 
         }
         <StyledInputLabel P={props.Labname}>Label</StyledInputLabel>
-        <StyledTextInput {...props} P={showPass} S={setshowPass}/>
+        <StyledTextInput {...props} P={showPass} S={setshowPass} SF={props.SF}/>
     </View>
   )
 }

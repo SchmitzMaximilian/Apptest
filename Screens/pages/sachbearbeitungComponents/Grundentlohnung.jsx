@@ -6,34 +6,44 @@ import { SachbearbeitungTextdataset } from '../../../utils/Sachbearbeitung/Sachb
 import { TransactionContext } from '../../../utils/Context';
 import SachbearbeitungDatenObject from '../../../utils/Objects/SachbearbeitungDatenObject';
 
-function Grundentlohnung() {
+function Grundentlohnung(props) {
   const [SL,setSL]=useState(false)
   const [FL,setFL]=useState(false)
   const [FG,setFG]=useState(false)
-  const [sprache,setzesprache]=useContext(TransactionContext)
-  const [SachbearbeitungDatenArr,setSachbearbeitungDatenArr]=useState(SachbearbeitungDatenObject)
+  const [sprache,setzesprache]=useContext(TransactionContext) 
+  useEffect(()=>{
+    if(props.SV.Stundenlohncheck!=0){
+      setSL(props.SV.Stundenlohncheck)
+    }
+    if(props.SV.Festlohncheck!=0){
+      setFL(props.SV.Festlohncheck)
+    }
+    if(props.SV.Festgehaltcheck!=0){
+      setFG(props.SV.Festgehaltcheck)
+    }
+  },[])
   return (<>
     <Text style={styles.Titelklein}>{SachbearbeitungTextdataset(sprache?"DE":"EN").Entlohnungtitel.Lohn}</Text>
-      <SimpelCheck SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Arbeitstag={setSL} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Sl}/>
+      <SimpelCheck SV={props.SV} SF={props.SF} UG={props.SV.Stundenlohncheck!=0?props.SV.Stundenlohncheck:0} Arbeitstag={setSL} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Sl}/>
       {
         SL?
-        <EingabeFeld SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Sl}/>        
+        <EingabeFeld SV={props.SV.Stundenlohn?props.SV.Stundenlohn:''} SF={props.Stl} Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Sl}/>        
         :
         ""
       }
       
-      <SimpelCheck SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Arbeitstag={setFL} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Fl}/>
+      <SimpelCheck SV={props.SV} SF={props.SF} UG={props.SV.Festlohncheck!=0?props.SV.Festlohncheck:0} Arbeitstag={setFL} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Fl}/>
       {
         FL?
-        <EingabeFeld SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Fl}/>
+        <EingabeFeld SV={props.SV.Festlohn?props.SV.Festlohn:''} SF={props.Fl} Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Fl}/>
         :
         ""
       }
 
-      <SimpelCheck SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Arbeitstag={setFG} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Fg}/>
+      <SimpelCheck SV={props.SV} SF={props.SF} UG={props.SV.Festgehaltcheck!=0?props.SV.Festgehaltcheck:0} Arbeitstag={setFG} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Fg}/>
       {
         FG?
-        <EingabeFeld SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Fg}/>
+        <EingabeFeld SV={props.SV.Festgehalt?props.SV.Festgehalt:''} SF={props.Fg} Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Fg}/>
         :
         ""
       }

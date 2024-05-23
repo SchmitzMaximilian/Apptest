@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import {StyleSheet, Text, View } from 'react-native';
 import CheckBox from 'expo-checkbox';
 import { Minijobtextdataset } from '../../../Components/Minijobinhaltsvorlagen/Minijobtextdataset';
@@ -56,7 +56,11 @@ export default function SimpelCheck(props) {
    props.SF(O)
    
   }
-  
+  useEffect(()=>{
+    if(props.UG){
+      setChecked1(props.UG)
+    }
+  },[])
   return( 
         <View style={styles.checkboxContainer}>
         <CheckBox

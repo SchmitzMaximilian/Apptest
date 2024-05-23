@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, TextInput, Pressable,ImageBackground } from "react-native"
+import { View, StyleSheet, Text, TextInput, Pressable,ImageBackground, TouchableOpacity} from "react-native"
 import { Feather } from '@expo/vector-icons';
 import React, { useContext, useEffect, useState } from 'react';
 import CheckBox from 'expo-checkbox';
@@ -67,6 +67,9 @@ export default function LoginScreen({navigation}) {
                     
                     </View>
             </View>
+            <TouchableOpacity onPress={()=>navigation.navigate({name:"SeiteTest"})} style={styles.AdminButton}> 
+          <Text style={{color:'#FFFFFF'}} >Personalfragebogen</Text>
+        </TouchableOpacity>
         </View>
                </ImageBackground>
 )
@@ -122,6 +125,22 @@ const styles = StyleSheet.create({
          
           borderColor: 'rgba(255,255,255,0.3)',
           borderRadius: 10,
+      },
+      AdminButton:{
+        alignItems: 'center',
+        backgroundColor: '#1d4ed8',
+        padding: 10,
+        height:'auto',
+        
+        alignSelf:'center',
+        marginTop:20,
+        borderRadius:5,
+        borderTopColor:'#1e3a8a',
+        borderTopWidth:2,
+        marginLeft:5,
+        borderBottomColor:'#1e3a8a',
+        borderBottomWidth:2,
+        width:'80%', 
       },
 
     component: {

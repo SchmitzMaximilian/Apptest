@@ -2,6 +2,7 @@ import React,{ useContext, useEffect, useState }  from 'react'
 import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity,ImageBackground } from 'react-native';
 import PersoenlicheDatenObject from '../../../utils/Objects/PersoenlicheDatenObject';
 import { TransactionContext } from '../../../utils/Context';
+import { Textdataset } from '../../../utils/Textdataset';
 
 /**
  * 
@@ -14,24 +15,24 @@ import { TransactionContext } from '../../../utils/Context';
 
 
 
-const TopButtonleiste=({navigation})=> {
+const BottomButtonleiste=({navigation})=> {
   const [sprache,setzesprache]=useContext(TransactionContext)
   const [PrivateDatenArr,setPrivateDatenArr]=useState(PersoenlicheDatenObject)
   return (
     <View style={styles.AdminButtonContainer}>
 
-      <TouchableOpacity onPress={()=>navigation.navigate({name:"LoginScreen"})} style={styles.AdminButton}> 
-        <Text style={{color:'#fff'}} >Admin</Text>
+      <TouchableOpacity onPress={()=>navigation.navigate({name:"SeiteMinijob"})} style={styles.AdminButton}> 
+        <Text style={{color:'#fff'}} >{Textdataset(sprache?"DE":"EN").Buttons.Versenden}</Text>
       </TouchableOpacity>
 
         <View style={styles.SprachButton}>
-        <TouchableOpacity onPress={()=>setzesprache(!sprache)} style={styles.InsetSprachButton} > 
+        {/*<TouchableOpacity onPress={()=>setzesprache(!sprache)} style={styles.InsetSprachButton} > 
           <Text style={{color:'#FFFFFF'}} >{sprache?'EN':'DE'}</Text>
-        </TouchableOpacity>
-        </View>
+        </TouchableOpacity>*/}
+          </View>
         
         <TouchableOpacity onPress={()=>navigation.navigate({name:"SeiteMinijob"})} style={styles.AdminButton}> 
-          <Text style={{color:'#FFFFFF'}} >Minijob</Text>
+          <Text style={{color:'#FFFFFF'}} >{Textdataset(sprache?"DE":"EN").Buttons.Fertig}</Text>
         </TouchableOpacity>
       </View>
   )
@@ -71,4 +72,4 @@ const styles = StyleSheet.create({
   },
 
 })
-export default TopButtonleiste
+export default BottomButtonleiste

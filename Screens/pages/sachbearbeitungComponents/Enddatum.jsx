@@ -28,8 +28,7 @@ const handleChange = (event, selectedDate) => {
 
     useEffect(() => {
       console.log("Sprache: "+ sprache)
-      if(props.UD){
-        setDate(Date.parse(props.UD.toString()))
+      if(props.UD){ 
         setDateText(props.UD)
       }
       if(SachbearbeitungDatenArr.Enddatum=="")

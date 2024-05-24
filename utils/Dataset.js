@@ -23,7 +23,7 @@ export const Dataset=(p)=>{
     },
     "SozialData":
     {
-      "Eingabefelder":["Staatsangehörigkeit (Pflichtangabe)","Geburtsort (Pflichtangabe)","Geburtsland (Pflichtangabe nur falls nicht Deutschland)","Krankenkasse ((Pflichtangabe) Bitte kompletter Name, also zB. AOK NordWest, nicht AOK)"],
+      "Eingabefelder":["Staatsangehörigkeit (Pflichtangabe)","Geburtsort (Pflichtangabe)","Geburtsland (Pflichtangabe nur falls nicht Deutschland)","Krankenkasse (Pflichtangabe bitte kompletter Name, also zB. AOK NordWest, nicht AOK)"],
       "EingabefelderIcons":["Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung"],
     },
     "BankData":
@@ -52,7 +52,7 @@ export const Dataset=(p)=>{
       },
       "SozialData":
     {
-      "Eingabefelder":["Nationality (mandatory)","Place of birth (mandatory)","Country of birth (mandatory only if not Germany)","Health insurance company ((mandatory) please complete name, e.g. AOK NordWest, not AOK)"],
+      "Eingabefelder":["Nationality (mandatory)","Place of birth (mandatory)","Country of birth (mandatory only if not Germany)","Health insurance company (mandatory please complete name, e.g. AOK NordWest, not AOK)"],
       "EingabefelderIcons":["Krankenversicherung","Krankenversicherung","Krankenversicherung","Krankenversicherung"],
     },
     "BankData":

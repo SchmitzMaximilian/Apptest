@@ -113,8 +113,8 @@ const[txtvalue,settxtvalue]=useState();
       case"Country of birth (mandatoryonly if not Germany)":
         O.GBLand=t
         break;
-      case "Krankenkasse ((Pflichtangabe) Bitte kompletter Name, also zB. AOK NordWest, nicht AOK)":
-      case"Health insurance company ((mandatory) please complete name, e.g. AOK NordWest, not AOK)":
+      case "Krankenkasse (Pflichtangabe bitte kompletter Name, also zB. AOK NordWest, nicht AOK)":
+      case"Health insurance company (mandatory please complete name, e.g. AOK NordWest, not AOK)":
         O.Kassename=t
         break;
       case "  Name Ihrer anderen Arbeitgeber":
@@ -250,8 +250,8 @@ const[txtvalue,settxtvalue]=useState();
         case"Country of birth (mandatory only if not Germany)":
           O.GBLand.length>0?settxtvalue(O.GBLand):''
           break;
-        case "Krankenkasse ((Pflichtangabe) Bitte kompletter Name, also zB. AOK NordWest, nicht AOK)":
-        case"Health insurance company ((mandatory) please complete name, e.g. AOK NordWest, not AOK)":
+        case "Krankenkasse (Pflichtangabe bitte kompletter Name, also zB. AOK NordWest, nicht AOK)":
+        case"Health insurance company (mandatory please complete name, e.g. AOK NordWest, not AOK)":
           O.Kassename.trim().toString().length>0?settxtvalue(O.Kassename.toString()):''
           break;
         case "  Name Ihrer anderen Arbeitgeber":

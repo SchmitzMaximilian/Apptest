@@ -22,6 +22,7 @@ import MiniKV from './pages/minijobfragebogenComponents/MiniKV';
 import { FNContext } from './pages/functions/contextFehlernummer';
 import MiniTopButtonleiste from './pages/minijobfragebogenComponents/MiniTopButtonleiste';
 import Meldungerfolg from './pages/functions/meldungerfolg';
+import BottomButtonleiste from './pages/minijobfragebogenComponents/BottomButtonleiste';
 
 
 function SeiteMinijob({navigation}) {
@@ -97,6 +98,7 @@ function SeiteMinijob({navigation}) {
 
       </View>
       </View>
+      <BottomButtonleiste/>
       </View>
       </ScrollView>
       </ImageBackground>

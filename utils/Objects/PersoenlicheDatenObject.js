@@ -35,7 +35,7 @@ const PersoenlicheDatenObject={
   GBOrt:"",
   GBLand:"",
   Kassename:"",
-  KVArt:0,
+  KVArt:1,
   AndereArbeitgeber:"",
 }
 

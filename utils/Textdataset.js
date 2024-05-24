@@ -55,6 +55,14 @@ export const Textdataset=(p)=>{
       "Krankenkasse":"",
       "Arbeitgeberliste":"",
     },
+    "Buttons":{
+      "Admin":"Administrator",
+      "Sachbearbeitung":"Sachbearbeiter",
+      "Versenden":"Placeholder",
+      "Fertig":"Bewerbungabschließen",
+      "Speichern":"Speichern"
+
+    },
   } 
 }else{
   TextData={
@@ -110,6 +118,14 @@ export const Textdataset=(p)=>{
     "GBLand":"",
     "Krankenkasse":"",
     "Arbeitgeberliste":"",
+  },
+  "Buttons":{
+    "Admin":"Administrator",
+    "Sachbearbeitung":"Sachbearbeiter",
+    "Versenden":"Placeholder",
+    "Fertig":"Bewerbungabschließen",
+    "Speichern":"Save"
+
   },
   } 
 }

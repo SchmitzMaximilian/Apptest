@@ -13,9 +13,9 @@ export default function LoginScreenMini({navigation}) {
     const [isChecked, setChecked] = useState(false)
     const [isPressed, setIsPressed] = useState(false)
 
-     function handleSubmit (mail, password) {
+     function handleSubmit (id,mail, password) {
 
-        navigation.navigate({name:"SeiteBewerberauswahl"});
+        navigation.navigate({name:"SeiteBewerberauswahl",params:{user: id}});
         console.log("MAIL: "+mail)
         console.log("PASSWORD: "+password)
      }

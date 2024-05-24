@@ -20,7 +20,7 @@ import { MAidContext } from './pages/functions/contextMitarbeiterid';
 import { FNContext } from './pages/functions/contextFehlernummer';
 import FehlermeldungIndividuell from './pages/fehlerDatenbank/fehlerswitchcase';
 import Meldungerfolg from './pages/functions/meldungerfolg'
-
+import BottomButtonleiste from './pages/festfragebogenComponents/BottomButtonleiste'
 import TopButtonleiste from './pages/festfragebogenComponents/TopButtonleiste';
 //
 
@@ -102,7 +102,7 @@ function SeiteTest({navigation}) {
       </View>
 
       </View>
-
+      <BottomButtonleiste navigation={navigation}/>
       </View>
       </ScrollView>
       </ImageBackground>

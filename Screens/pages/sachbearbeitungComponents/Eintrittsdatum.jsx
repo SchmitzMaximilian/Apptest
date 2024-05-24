@@ -10,8 +10,7 @@ function EintrittsdatumSelect(props) {
   const [date, setDate] = useState(new Date());
   const [dateText, setDateText] = useState("Eintrittsdatum")
   const [showdatePicker,setshowdatePicker] = useState(false);
-  const [sprache,setzesprache]=useContext(TransactionContext)
- 
+  const [sprache,setzesprache]=useContext(TransactionContext) 
 
 
 
@@ -28,8 +27,7 @@ const handleChange = (event, selectedDate) => {
 
     useEffect(() => {
       console.log("Sprache: "+ sprache)
-      if(props.UD){
-        setDate(Date.parse(props.UD.toString()))
+      if(props.UD){ 
         setDateText(props.UD)
       }
       if(SachbearbeitungDatenArr.Eintrittsdatum=="")

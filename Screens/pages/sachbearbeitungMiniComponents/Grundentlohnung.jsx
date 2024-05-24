@@ -11,19 +11,22 @@ function Grundentlohnung(props) {
   const [SL,setSL]=useState(false)
   const [FL,setFL]=useState(false)
   const [tab1ausgefuellt,settab1ausgefuellt]=useState(false)
-  const [tab1,settab1]=useState(false)
-  const [SachbearbeitungDatenArr,setSachbearbeitungDatenArr]=useState(props.D)
-
+  const [tab1,settab1]=useState(false) 
+  const updatefullstate=(t,num)=>{
+    let v=props.E
+    t?v=Number(num)+1:v=Number(num)-1;
+    props.ES(v)
+  }
   const submitLohndaten=async()=>{
     let check=true
 
-    if(SachbearbeitungDatenArr.Stundenlohncheck==1){
-      if(Number(SachbearbeitungDatenArr.Stundenlohn)==0){
+    if(props.D.Stundenlohncheck==1){
+      if(Number(props.D.Stundenlohn)==0){
         check=false
       }
     }
-    if(SachbearbeitungDatenArr.Festlohncheck==1){
-      if(Number(SachbearbeitungDatenArr.Festlohn)==0){
+    if(props.D.Festlohncheck==1){
+      if(Number(props.D.Festlohn)==0){
         check=false
       }
     }
@@ -34,25 +37,29 @@ function Grundentlohnung(props) {
           headers: { 'Content-Type' : 'application/json'},
           body: JSON.stringify({
             "query": 5,//ändern
-            "SLC" : SachbearbeitungDatenArr.Stundenlohncheck?1:0,
-            "SL": SachbearbeitungDatenArr.Stundenlohn.toString().trim(),
-            "FLC": SachbearbeitungDatenArr.Festlohncheck?1:0,
-            "FL": SachbearbeitungDatenArr.Festlohn.toString().trim(),
+            "SLC" : props.D.Stundenlohncheck?1:0,
+            "SL": props.D.Stundenlohn.toString().trim(),
+            "FLC": props.D.Festlohncheck?1:0,
+            "FL": props.D.Festlohn.toString().trim(),
             "MAID": props.U
           })
         };
         const d = await fetch('https://itsnando.com/datenbankapi/indexsachbearbeitung.php', request);
+        console.log(props.D)
         let e = await d.json();
         if(e.ergebnis==true){
           settab1ausgefuellt(true)
+          updatefullstate(true,1)
           settab1(false)
-          let NO=SachbearbeitungDatenArr
-          NO.MitarbeiterID=e.ergebnis
-          setSachbearbeitungDatenArr(NO)
+          let NO=props.D
+          NO.MitarbeiterID=props.U
+          props.S(NO)
         }
         else if(e.ergebnis=='DBerror'){
+          updatefullstate(false,1)
           console.log('no Update')
         }else{
+          updatefullstate(false,1)
           console.log('Fehler')
         }
       }
@@ -64,23 +71,23 @@ function Grundentlohnung(props) {
     }
   }
   const stl=(t)=>{
-    let NO=SachbearbeitungDatenArr
+    let NO=props.D
     NO.Stundenlohn=t
-    setSachbearbeitungDatenArr(NO)
+    props.S(NO)
   }
   const fl=(t)=>{
-    let NO=SachbearbeitungDatenArr
+    let NO=props.D
     NO.Festlohn=t
-    setSachbearbeitungDatenArr(NO)
+    props.S(NO)
   }
 
   
   useEffect(()=>{
-    if(SachbearbeitungDatenArr.Stundenlohncheck!=0){
-      setSL(SachbearbeitungDatenArr.Stundenlohncheck)
+    if(props.D.Stundenlohncheck!=0){
+      setSL(props.D.Stundenlohncheck)
     }
-    if(SachbearbeitungDatenArr.Festlohncheck!=0){
-      setFL(SachbearbeitungDatenArr.Festlohncheck)
+    if(props.D.Festlohncheck!=0){
+      setFL(props.D.Festlohncheck)
     }
   },[props])
   
@@ -88,23 +95,23 @@ function Grundentlohnung(props) {
   return (<>
 
   
-<TitleTouch  F={settab1} S={tab1} T={SachbearbeitungTextdataset(sprache?"DE":"EN").Titel.Lohn} />
+<TitleTouch AGB={tab1ausgefuellt} F={settab1} S={tab1} T={SachbearbeitungTextdataset(sprache?"DE":"EN").Titel.Lohn} />
     {
       tab1?
       <>
       <Text style={styles.Titelklein}>{SachbearbeitungTextdataset(sprache?"DE":"EN").Entlohnungtitel.Lohn}</Text>
-      <SimpelCheck SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} UG={SachbearbeitungDatenArr.Stundenlohncheck!=0?setSachbearbeitungDatenArr.Stundenlohncheck:0} Arbeitstag={setSL} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Sl}/>
+      <SimpelCheck SV={props.D} SF={props.S} UG={props.D.Stundenlohncheck!=0?props.D.Stundenlohncheck:0} Arbeitstag={setSL} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Sl}/>
       {
         SL?
-        <EingabeFeld SV={SachbearbeitungDatenArr.Stundenlohn?SachbearbeitungDatenArr.Stundenlohn:''} SF={stl} Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Sl}/>
+        <EingabeFeld SV={props.D.Stundenlohn?props.D.Stundenlohn:''} SF={stl} Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Sl}/>
         
         :
         ""
       }
-      <SimpelCheck SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} UG={SachbearbeitungDatenArr.Festlohncheck!=0?setSachbearbeitungDatenArr.Festlohncheck:0} Arbeitstag={setFL} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Fl}/>
+      <SimpelCheck SV={props.D} SF={props.S} UG={props.D.Festlohncheck!=0?props.D.Festlohncheck:0} Arbeitstag={setFL} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Fl}/>
       {
         FL?
-        <EingabeFeld SV={SachbearbeitungDatenArr.Festlohn?SachbearbeitungDatenArr.Festlohn:''} SF={fl} Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Fl}/>
+        <EingabeFeld SV={props.D.Festlohn?props.D.Festlohn:''} SF={fl} Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Fl}/>
         :
         ""
       }

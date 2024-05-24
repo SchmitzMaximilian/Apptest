@@ -6,7 +6,6 @@ import { TransactionContext } from '../../../utils/Context';
 import SachbearbeitungDatenObject from '../../../utils/Objects/SachbearbeitungDatenObject';
 
 function EnddatumSelect(props) {
-  const [SachbearbeitungDatenArr,setSachbearbeitungDatenArr]=useState(props.SV)
   const [date, setDate] = useState(new Date());
   const [dateText, setDateText] = useState("Befristet bis:")
   const [showdatePicker,setshowdatePicker] = useState(false);
@@ -20,19 +19,18 @@ const handleChange = (event, selectedDate) => {
   const currentDate = selectedDate; 
   setDate(currentDate);
   setDateText(currentDate.toLocaleDateString('de-DE'))
-  let Obj=SachbearbeitungDatenArr
+  let Obj=props.SV
   Obj.Enddatum=Intl.DateTimeFormat('de-DE',{dateStyle:'short'}).format(currentDate).toString()
-  setSachbearbeitungDatenArr(Obj)
+  
   props.SF(Obj)
     };
 
     useEffect(() => {
       console.log("Sprache: "+ sprache)
-      if(props.UD){
-        setDate(Date.parse(props.UD.toString()))
+      if(props.UD){ 
         setDateText(props.UD)
       }
-      if(SachbearbeitungDatenArr.Enddatum=="")
+      if(props.SV.Enddatum=="")
         {
           if(!sprache){
               setDateText("Befristet bis:")

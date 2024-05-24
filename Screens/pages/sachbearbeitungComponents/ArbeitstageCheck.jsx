@@ -18,7 +18,6 @@ function ArbeitstageCheck(props) {
   const [ArbeitSaCheck,setArbeitSaCheck]=useState(false)
   const [ArbeitSoCheck,setArbeitSoCheck]=useState(false)
   const [datum,setdatum]=useState('AA')
-  const [datumende,setdatumende]=useState('AA')
   const [tab3,settab3]=useState(false)
   const [tab3ausgefuellt,settab3ausgefuellt]=useState(false)
   const [SachbearbeitungDatenArr,setSachbearbeitungDatenArr]=useState(props.D)

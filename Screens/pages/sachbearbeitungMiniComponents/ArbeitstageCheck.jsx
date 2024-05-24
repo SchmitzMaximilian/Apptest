@@ -18,106 +18,112 @@ function ArbeitstageCheck(props) {
   const [ArbeitDoCheck,setArbeitDoCheck]=useState(false)
   const [ArbeitFrCheck,setArbeitFrCheck]=useState(false)
   const [ArbeitSaCheck,setArbeitSaCheck]=useState(false)
-  const [ArbeitSoCheck,setArbeitSoCheck]=useState(false)
+  const [ArbeitSoCheck,setArbeitSoCheck]=useState(false)  
+  const [datum,setdatum]=useState('AA')
   const [tab3,settab3]=useState(false)
   const [tab3ausgefuellt,settab3ausgefuellt]=useState(false)
-  const [SachbearbeitungDatenArr,setSachbearbeitungDatenArr]=useState(props.D)
+
 
 
   
   
   const wa=(t)=>{
-    let NO=SachbearbeitungDatenArr
+    let NO=props.D
     NO.WoechentlicheStunden=t
-    setSachbearbeitungDatenArr(NO)
+    props.S(NO)
   }
   const mo=(t)=>{
-    let NO=SachbearbeitungDatenArr
+    let NO=props.D
     NO.MOStunden=t
-    setSachbearbeitungDatenArr(NO)
+    props.S(NO)
   }
   const di=(t)=>{
-    let NO=SachbearbeitungDatenArr
+    let NO=props.D
     NO.DIStunden=t
-    setSachbearbeitungDatenArr(NO)
+    props.S(NO)
   }
   const mi=(t)=>{
-    let NO=SachbearbeitungDatenArr
+    let NO=props.D
     NO.MIStunden=t
-    setSachbearbeitungDatenArr(NO)
+    props.S(NO)
   }
   const don=(t)=>{
-    let NO=SachbearbeitungDatenArr
+    let NO=props.D
     NO.DOStunden=t
-    setSachbearbeitungDatenArr(NO)
+    props.S(NO)
   }
   const fr=(t)=>{
-    let NO=SachbearbeitungDatenArr
+    let NO=props.D
     NO.FRStunden=t
-    setSachbearbeitungDatenArr(NO)
+    props.S(NO)
   }
   const sa=(t)=>{
-    let NO=SachbearbeitungDatenArr
+    let NO=props.D
     NO.SAStunden=t
-    setSachbearbeitungDatenArr(NO)
+    props.S(NO)
   }
   const so=(t)=>{
-    let NO=SachbearbeitungDatenArr
+    let NO=props.D
     NO.SOStunden=t
-    setSachbearbeitungDatenArr(NO)
+    props.S(NO)
+  }
+  const updatefullstate=(t,num)=>{
+    let v=props.E
+    t?v=Number(num)+1:v=Number(num)-1;
+    props.ES(v)
   }
   const submitZeitdaten=async()=>{
     let check=true
 
-    if(SachbearbeitungDatenArr.Eintrittsdatum.toString().trim().length==0){
+    if(props.D.Eintrittsdatum.toString().trim().length==0){
       check=false
     }
-    if(SachbearbeitungDatenArr.Enddatum.toString().trim().length==0){
+    if(props.D.Enddatum.toString().trim().length==0){
       check=false
     }
     
-    if(SachbearbeitungDatenArr.WoechentlicheStunden.toString().trim().length==0 || SachbearbeitungDatenArr.WoechentlicheStunden.length>50){
+    if(props.D.WoechentlicheStunden.toString().trim().length==0 || props.D.WoechentlicheStunden.length>50){
       check=false
     }
 
-    if(SachbearbeitungDatenArr.MontagCheck==1){
-      if(Number(SachbearbeitungDatenArr.MOStunden)==0){
+    if(props.D.MontagCheck==1){
+      if(Number(props.D.MOStunden)==0){
         check=false
       }
     }
 
-    if(SachbearbeitungDatenArr.DiensttagCheck==1){
-      if(Number(SachbearbeitungDatenArr.DIStunden)==0){
+    if(props.D.DiensttagCheck==1){
+      if(Number(props.D.DIStunden)==0){
         check=false
       }
     }
-    if(SachbearbeitungDatenArr.MittwochCheck==1){
-      if(Number(SachbearbeitungDatenArr.MIStunden)==0){
+    if(props.D.MittwochCheck==1){
+      if(Number(props.D.MIStunden)==0){
         check=false
       }
     }
-    if(SachbearbeitungDatenArr.DonnerstagCheck==1){
-      if(Number(SachbearbeitungDatenArr.DOStunden)==0){
+    if(props.D.DonnerstagCheck==1){
+      if(Number(props.D.DOStunden)==0){
         check=false
       }
     }
-    if(SachbearbeitungDatenArr.FreitagCheck==1){
-      if(Number(SachbearbeitungDatenArr.FRStunden)==0){
+    if(props.D.FreitagCheck==1){
+      if(Number(props.D.FRStunden)==0){
         check=false
       }
     }
-    if(SachbearbeitungDatenArr.SamstagCheck==1){
-      if(Number(SachbearbeitungDatenArr.SAStunden)==0){
+    if(props.D.SamstagCheck==1){
+      if(Number(props.D.SAStunden)==0){
         check=false
       }
     }
-    if(SachbearbeitungDatenArr.SonntagCheck==1){
-      if(Number(SachbearbeitungDatenArr.SOStunden)==0){
+    if(props.D.SonntagCheck==1){
+      if(Number(props.D.SOStunden)==0){
         check=false
       }
     }
 
-    
+    console.log(props.D)
     if(check){
       try{
         const request ={
@@ -125,23 +131,23 @@ function ArbeitstageCheck(props) {
           headers: { 'Content-Type' : 'application/json'},
           body: JSON.stringify({
             "query": 4,//ändern
-            "DatumAnfang": SachbearbeitungDatenArr.Eintrittsdatum.toString().trim(),
-            "DatumEnd": SachbearbeitungDatenArr.Enddatum.toString().trim(),            
-            "Stundenwoche": SachbearbeitungDatenArr.WoechentlicheStunden.toString().trim(),
-            "MOC": SachbearbeitungDatenArr.MontagCheck?1:0,
-            "MOS": SachbearbeitungDatenArr.MOStunden.toString().trim(),
-            "DIC": SachbearbeitungDatenArr.DiensttagCheck?1:0,
-            "DIS": SachbearbeitungDatenArr.DIStunden.toString().trim(),
-            "MIC": SachbearbeitungDatenArr.MittwochCheck?1:0,
-            "MIS": SachbearbeitungDatenArr.MIStunden.toString().trim(),
-            "DOC": SachbearbeitungDatenArr.DonnerstagCheck?1:0,
-            "DOS": SachbearbeitungDatenArr.DOStunden.toString().trim(),
-            "FRC": SachbearbeitungDatenArr.FreitagCheck?1:0,
-            "FRS": SachbearbeitungDatenArr.FRStunden.toString().trim(),
-            "SAC": SachbearbeitungDatenArr.SamstagCheck?1:0,
-            "SAS": SachbearbeitungDatenArr.SAStunden.toString().trim(),
-            "SOC": SachbearbeitungDatenArr.SonntagCheck?1:0,
-            "SOS": SachbearbeitungDatenArr.SOStunden.toString().trim(),
+            "DatumAnfang": props.D.Eintrittsdatum.toString().trim(),
+            "DatumEnd": props.D.Enddatum.toString().trim(),            
+            "Stundenwoche": props.D.WoechentlicheStunden.toString().trim(),
+            "MOC": props.D.MontagCheck?1:0,
+            "MOS": props.D.MOStunden.toString().trim(),
+            "DIC": props.D.DiensttagCheck?1:0,
+            "DIS": props.D.DIStunden.toString().trim(),
+            "MIC": props.D.MittwochCheck?1:0,
+            "MIS": props.D.MIStunden.toString().trim(),
+            "DOC": props.D.DonnerstagCheck?1:0,
+            "DOS": props.D.DOStunden.toString().trim(),
+            "FRC": props.D.FreitagCheck?1:0,
+            "FRS": props.D.FRStunden.toString().trim(),
+            "SAC": props.D.SamstagCheck?1:0,
+            "SAS": props.D.SAStunden.toString().trim(),
+            "SOC": props.D.SonntagCheck?1:0,
+            "SOS": props.D.SOStunden.toString().trim(),
             "MAID": props.U
           })
         };
@@ -149,14 +155,17 @@ function ArbeitstageCheck(props) {
         let e = await d.json();
         if(e.ergebnis==true){
           settab3ausgefuellt(true)
+          updatefullstate(true,0)
           settab3(false)
-          let NO=SachbearbeitungDatenArr
-          NO.MitarbeiterID=e.ergebnis
-          setSachbearbeitungDatenArr(NO)
+          let NO=props.D
+          NO.MitarbeiterID=props.U
+          props.S(NO)
         }
         else if(e.ergebnis=='DBerror'){
+          updatefullstate(false,0)
           console.log('no Update')
         }else{
+          updatefullstate(false,0)
           console.log('Fehler')
         }
       }
@@ -170,7 +179,27 @@ function ArbeitstageCheck(props) {
 
   
   useEffect(()=>{
-
+    if(props.D.MontagCheck!=0){
+      setArbeitMoCheck(props.D.MontagCheck)
+    }
+    if(props.D.DiensttagCheck!=0){
+      setArbeitDiCheck(props.D.DiensttagCheck)
+    }
+    if(props.D.MittwochCheck!=0){
+      setArbeitMiCheck(props.D.MittwochCheck)
+    }
+    if(props.D.DonnerstagCheck!=0){
+      setArbeitDoCheck(props.D.DonnerstagCheck)
+    }
+    if(props.D.FreitagCheck!=0){
+      setArbeitFrCheck(props.D.FreitagCheck)
+    }
+    if(props.D.SamstagCheck!=0){
+      setArbeitSaCheck(props.D.SamstagCheck)
+    }
+    if(props.D.SonntagCheck!=0){
+      setArbeitSoCheck(props.D.SonntagCheck)
+    }
   },[props]) 
   
   return (<>
@@ -179,69 +208,69 @@ function ArbeitstageCheck(props) {
     {
       tab3?
       <>       
-        <EintrittsdatumSelect SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} UD={SachbearbeitungDatenArr.Eintrittsdatum?SachbearbeitungDatenArr.Eintrittsdatum:Intl.DateTimeFormat('De-de',{dateStyle:'short'}).format(new Date())}/>
-  <EnddatumSelect SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} UD={SachbearbeitungDatenArr.Enddatum?SachbearbeitungDatenArr.Enddatum:Intl.DateTimeFormat('De-de',{dateStyle:'short'}).format(new Date())}/>
+        <EintrittsdatumSelect SV={props.D} SF={props.S} UD={props.D.Eintrittsdatum?props.D.Eintrittsdatum:Intl.DateTimeFormat('De-de',{dateStyle:'short'}).format(new Date())}/>
+  <EnddatumSelect SV={props.D} SF={props.S} UD={props.D.Enddatum?props.D.Enddatum:Intl.DateTimeFormat('De-de',{dateStyle:'short'}).format(new Date())}/>
       
       
       
-      <EingabeFeld SV={SachbearbeitungDatenArr.WoechentlicheStunden?SachbearbeitungDatenArr.WoechentlicheStunden:''} SF={wa} Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.ZeitGesamt}/>
+      <EingabeFeld SV={props.D.WoechentlicheStunden?props.D.WoechentlicheStunden:''} SF={wa} Icon={"Sachbearbeitung"} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.ZeitGesamt}/>
       <Text style={styles.Textelemente}>{SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.ZeitTag}</Text>
 
-      <SimpelCheck SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} UG={SachbearbeitungDatenArr.MontagCheck!=0?SachbearbeitungDatenArr.MontagCheck:0} Arbeitstag={setArbeitMoCheck} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Mo}/>
+      <SimpelCheck SV={props.D} SF={props.S} UG={props.D.MontagCheck!=0?props.D.MontagCheck:0} Arbeitstag={setArbeitMoCheck} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Mo}/>
       {
         ArbeitMoCheck?
 
-        <EingabeFeld Icon={"Sachbearbeitung"} SV={SachbearbeitungDatenArr.MOStunden?SachbearbeitungDatenArr.MOStunden:''} SF={mo} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Mo}/>
+        <EingabeFeld Icon={"Sachbearbeitung"} SV={props.D.MOStunden?props.D.MOStunden:''} SF={mo} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Mo}/>
         :
         ""
       }
       
       
-      <SimpelCheck SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} UG={SachbearbeitungDatenArr.DiensttagCheck!=0?SachbearbeitungDatenArr.DiensttagCheck:0} Arbeitstag={setArbeitDiCheck} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Di}/>
+      <SimpelCheck SV={props.D} SF={props.S} UG={props.D.DiensttagCheck!=0?props.D.DiensttagCheck:0} Arbeitstag={setArbeitDiCheck} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Di}/>
       
       {
         ArbeitDiCheck?
-        <EingabeFeld Icon={"Sachbearbeitung"} SV={SachbearbeitungDatenArr.DIStunden?SachbearbeitungDatenArr.DIStunden:''} SF={di} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Di}/>
+        <EingabeFeld Icon={"Sachbearbeitung"} SV={props.D.DIStunden?props.D.DIStunden:''} SF={di} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Di}/>
         :
         ""
       }
-      <SimpelCheck SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} UG={SachbearbeitungDatenArr.MittwochCheck!=0?SachbearbeitungDatenArr.MittwochCheck:0} Arbeitstag={setArbeitMiCheck} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Mi}/>
+      <SimpelCheck SV={props.D} SF={props.S} UG={props.D.MittwochCheck!=0?props.D.MittwochCheck:0} Arbeitstag={setArbeitMiCheck} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Mi}/>
       
       {
         ArbeitMiCheck?
-        <EingabeFeld Icon={"Sachbearbeitung"} SV={SachbearbeitungDatenArr.MIStunden?SachbearbeitungDatenArr.MIStunden:''} SF={mi} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Mi}/>
+        <EingabeFeld Icon={"Sachbearbeitung"} SV={props.D.MIStunden?props.D.MIStunden:''} SF={mi} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Mi}/>
         :
         ""
       }
-      <SimpelCheck SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} UG={SachbearbeitungDatenArr.DonnerstagCheck!=0?SachbearbeitungDatenArr.DonnerstagCheck:0} Arbeitstag={setArbeitDoCheck} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Do}/>
+      <SimpelCheck SV={props.D} SF={props.S} UG={props.D.DonnerstagCheck!=0?props.D.DonnerstagCheck:0} Arbeitstag={setArbeitDoCheck} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Do}/>
       
       {
         ArbeitDoCheck?
-        <EingabeFeld Icon={"Sachbearbeitung"} SV={SachbearbeitungDatenArr.DOStunden?SachbearbeitungDatenArr.DOStunden:''} SF={don} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Do}/>
+        <EingabeFeld Icon={"Sachbearbeitung"} SV={props.D.DOStunden?props.D.DOStunden:''} SF={don} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Do}/>
         :
         ""
       }
-      <SimpelCheck SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} UG={SachbearbeitungDatenArr.FreitagCheck!=0?SachbearbeitungDatenArr.FreitagCheck:0} Arbeitstag={setArbeitFrCheck} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Fr}/>
+      <SimpelCheck SV={props.D} SF={props.S} UG={props.D.FreitagCheck!=0?props.D.FreitagCheck:0} Arbeitstag={setArbeitFrCheck} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Fr}/>
       
       {
         ArbeitFrCheck?
-        <EingabeFeld Icon={"Sachbearbeitung"} SV={SachbearbeitungDatenArr.FRStunden?SachbearbeitungDatenArr.FRStunden:''} SF={fr} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Fr}/>
+        <EingabeFeld Icon={"Sachbearbeitung"} SV={props.D.FRStunden?props.D.FRStunden:''} SF={fr} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Fr}/>
         :
         ""
       }
-      <SimpelCheck SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} UG={SachbearbeitungDatenArr.SamstagCheck!=0?SachbearbeitungDatenArr.SamstagCheck:0} Arbeitstag={setArbeitSaCheck} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Sa}/>
+      <SimpelCheck SV={props.D} SF={props.S} UG={props.D.SamstagCheck!=0?props.D.SamstagCheck:0} Arbeitstag={setArbeitSaCheck} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Sa}/>
       
       {
         ArbeitSaCheck?
-        <EingabeFeld Icon={"Sachbearbeitung"} SV={SachbearbeitungDatenArr.SAStunden?SachbearbeitungDatenArr.SAStunden:''} SF={sa} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Sa}/>
+        <EingabeFeld Icon={"Sachbearbeitung"} SV={props.D.SAStunden?props.D.SAStunden:''} SF={sa} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.Sa}/>
         :
         ""
       }
-      <SimpelCheck SV={SachbearbeitungDatenArr} SF={setSachbearbeitungDatenArr} UG={SachbearbeitungDatenArr.SonntagCheck!=0?SachbearbeitungDatenArr.SonntagCheck:0} Arbeitstag={setArbeitSoCheck} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.So}/>
+      <SimpelCheck SV={props.D} SF={props.S} UG={props.D.SonntagCheck!=0?props.D.SonntagCheck:0} Arbeitstag={setArbeitSoCheck} Bezeichnung={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.So}/>
       
       {
         ArbeitSoCheck?
-        <EingabeFeld Icon={"Sachbearbeitung"} SV={SachbearbeitungDatenArr.SOStunden?SachbearbeitungDatenArr.SOStunden:''} SF={so} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.So}/>
+        <EingabeFeld Icon={"Sachbearbeitung"} SV={props.D.SOStunden?props.D.SOStunden:''} SF={so} Labname={SachbearbeitungTextdataset(sprache?"DE":"EN").Feldname.So}/>
         :
         ""
       }

@@ -17,15 +17,22 @@ import SachbearbeitungDatenObject from '../utils/Objects/SachbearbeitungDatenObj
 
 
 
-export default function Seite2({route, navigation}) {
+export default function Seite2({ route, navigation}) {
   const [sprache,setzesprache]=useContext(TransactionContext) 
   const [Fehlercheck,setFehlercheck]=useState(false)
+  const [endcheck,setendcheck]=useState(0) 
+  const [user,setuser]=useState(route.params.user)
   const [FehlerText,setFehlerText]=useState(false)
   const [Erfolgscheck,setErfolgscheck]=useState(false) 
   const [image,setimage]=useState({uri: 'https://images.unsplash.com/photo-1622743941533-cde694bff56a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fE5pZ2h0Y2x1YnxlbnwwfHwwfHx8MA%3D%3D'})
   const [SachbearbeitungDatenArr,setSachbearbeitungDatenArr]=useState(SachbearbeitungDatenObject)
-
+  console.log(route.params.user)
+  const beende=()=>{ 
+     
+    navigation.navigate({name:"LoginScreen"})
+  }
   const iduebergabe=()=>{
+
     let OBJ=SachbearbeitungDatenObject
     OBJ.MitarbeiterID=route.params.user 
     setSachbearbeitungDatenArr(OBJ)
@@ -36,7 +43,7 @@ export default function Seite2({route, navigation}) {
     const data=await SecureStore.getItemAsync(param);//BGImage
     data?setimage({uri:data.toString()}):'';
   }
-  
+   
   useEffect(()=>{ 
     iduebergabe()
     imglesen('BGImage')
@@ -79,18 +86,24 @@ export default function Seite2({route, navigation}) {
 
     
      
-<ArbeitstageCheck S={setSachbearbeitungDatenArr} D={SachbearbeitungDatenArr} U={route.params.user}/>
+<ArbeitstageCheck S={setSachbearbeitungDatenArr} D={SachbearbeitungDatenArr} U={route.params.user} E={endcheck} ES={setendcheck}/>
 
  
 
-<Grundentlohnung S={setSachbearbeitungDatenArr} D={SachbearbeitungDatenArr} U={route.params.user}/>
+<Grundentlohnung S={setSachbearbeitungDatenArr} D={SachbearbeitungDatenArr} U={route.params.user} E={endcheck} ES={setendcheck}/>
 
  
       
-<Unterlagencheckliste S={setSachbearbeitungDatenArr} D={SachbearbeitungDatenArr} U={route.params.user}/>
+<Unterlagencheckliste S={setSachbearbeitungDatenArr} D={SachbearbeitungDatenArr} U={route.params.user} E={endcheck} ES={setendcheck}/>
 
    
-
+  {
+    endcheck==3?
+      <TouchableOpacity  onPress={()=>beende()} style={styles.Abspeichern}>
+        <Text style={{color:'black'}}>Abschließen</Text>
+      </TouchableOpacity>
+      :''
+  }
    
   </View>
   </View>
@@ -225,7 +238,7 @@ const styles = StyleSheet.create({
     Abspeichern:{
       alignSelf: 'flex-end',
       alignItems: 'center',
-      backgroundColor: '#166534',
+      backgroundColor: '#22c55e',
       padding: 10,
       height:'auto',    
       borderRadius:5,

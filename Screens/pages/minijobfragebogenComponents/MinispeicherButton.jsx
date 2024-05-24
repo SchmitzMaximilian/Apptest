@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   Abspeichern:{
     alignSelf: 'flex-end',
     alignItems: 'center',
-    backgroundColor: '#166534',
+    backgroundColor: '#22c55e',
     padding: 10,
     height:'auto',    
     borderRadius:5,

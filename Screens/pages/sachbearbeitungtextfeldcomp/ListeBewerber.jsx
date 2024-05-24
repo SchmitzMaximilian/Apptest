@@ -23,7 +23,7 @@ const ListeBewerber = (props) => {
         <>
         {
           props.Arr.map((item,index)=>(
-            <TouchableOpacity onPress={()=>pruefenWeiterleitung(item.id,item.arbeitszeit)}>
+            <TouchableOpacity key={'bewerber'+index} onPress={()=>pruefenWeiterleitung(item.id,item.arbeitszeit)}>
             <View key={'user'+item+index} style={styles.User}>
               <Octicons style={{position:'absolute',left:15, top:10}} name={'person'} size={25}  color={'#FFF'} />
             <Text style={styles.TextElemente}>{item.arbeitszeit==0?'Minijob':item.arbeitszeit==1?'Vollzeit':item.arbeitszeit==2?'Teilzeit':'(über 520€)'} {item.bwvorname} {item.bwnachname}, {item.geschlecht==1?'weiblich':item.geschlecht==2?'männlich':item.geschlecht==3?'divers':'unbestimmt'} </Text>

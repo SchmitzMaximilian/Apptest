@@ -22,13 +22,13 @@ export default function Justchecking(props) {
       case "Steuer-ID":
         O.SteuerIDCheck=itemValue
         break;        
-      case "Arbeitsvertrag(es besteht grundsätzliche Vertragspflicht seit 2006)":
+      case "Arbeitsvertrag (es besteht grundsätzliche Vertragspflicht seit 2006)":
         O.ArbeitsvertragCheck=itemValue
         break;
       case "Aufenthalts- oder Arbeitserlaubnis bei Nicht-EU/EWR-Personen":
         O.ErlaubnisCheck=itemValue
         break;
-      case "Gesundheitszeugnis(bei Mitarbeitern in Lebensmittelverarbeitung und Gesundheitswesen)":
+      case "Gesundheitszeugnis (bei Mitarbeitern in Lebensmittelverarbeitung und Gesundheitswesen)":
         O.GesundheitsCheck=itemValue
         break;
       case "Kopie der Bankkarte":
@@ -43,7 +43,7 @@ export default function Justchecking(props) {
       case "Antrag auf Befreiung von der RV-Pflicht":
         O.RVPBefreiungsantragCheck=itemValue
         break;
-      case "Erklärung über weitere Arbeitsverhältnisse(falls nach Seite 1 notwendig)":
+      case "Erklärung über weitere Arbeitsverhältnisse (falls nach Seite 1 notwendig)":
         O.AndererHauptjobCheck=itemValue
         break;          
       case "ELStaM-Anmeldung, wenn Steuerklasse 1-4":

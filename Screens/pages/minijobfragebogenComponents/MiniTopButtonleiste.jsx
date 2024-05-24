@@ -8,7 +8,7 @@ const MiniTopButtonleiste=({navigation})=> {
   return (
     <View style={styles.AdminButtonContainer}>
 
-      <TouchableOpacity  style={styles.AdminButton}> 
+      <TouchableOpacity onPress={()=>navigation.navigate({name:"LoginScreenMini"})} style={styles.AdminButton}> 
         <Text style={{color:'#fff'}} >Admin</Text>
       </TouchableOpacity>
 
@@ -18,8 +18,8 @@ const MiniTopButtonleiste=({navigation})=> {
         </TouchableOpacity>
         </View>
         
-        <TouchableOpacity onPress={()=>navigation.navigate({name:"LoginScreenMini"})} style={styles.AdminButton}> 
-          <Text style={{color:'#FFFFFF'}} >Sachbearbeiter</Text>
+        <TouchableOpacity onPress={()=>navigation.navigate({name:"SeiteTest"})} style={styles.AdminButton}> 
+          <Text style={{color:'#FFFFFF'}} >Festpersonal</Text>
         </TouchableOpacity>
       </View>
   )

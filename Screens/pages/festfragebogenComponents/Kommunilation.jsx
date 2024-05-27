@@ -11,8 +11,7 @@ import { Dataset } from '../../../utils/Dataset';
 import { MAidContext } from '../functions/contextMitarbeiterid';
 import { FCContext } from '../functions/contextFehlercheck';
 import { FTContext } from '../functions/contextFehlertext';
-import { ECContext } from '../functions/contextErfolgscheck';
-import { FNContext } from '../functions/contextFehlernummer';
+import { ECContext } from '../functions/contextErfolgscheck'; 
 
 
 
@@ -26,7 +25,6 @@ const Kommunikation=()=>{
   const [Fehlercheck,setFehlercheck]=useContext(FCContext)
   const [FehlerText,setFehlerText]=useContext(FTContext)
   const [Erfolgscheck,setErfolgscheck]=useContext(ECContext)
-  const [Fehlernummer,setFehlernummer]=useContext(FNContext)
   const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext)
 
 

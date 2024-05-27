@@ -27,7 +27,7 @@ async function getValueFor(key) {
 
  */
 export default function App() { 
-  const[isAdmin,setisAdmin]=useState(false);/*true für Login screen false für Bogen */
+  const[isAdmin,setisAdmin]=useState(true);/*true für Login screen false für Bogen */
   const loeschen = async (param)=>{
     await SecureStore.deleteItemAsync(param)
   }
@@ -47,12 +47,11 @@ export default function App() {
      const data= await lesen('Admin')
      console.log('Appjs' +data)
     if(data===null){  
-      //setisAdmin(true)
+      setisAdmin(true)
   }else{
-      //setisAdmin(false)
+      setisAdmin(false)
     }
-  }
-
+  } 
   useEffect(()=>{
     //speichern('Admin',"true")
     //speichern('BGImage','https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YnVpc25lc3N8ZW58MHx8MHx8fDA%3D');
@@ -64,7 +63,7 @@ export default function App() {
     isAdmin?
     <RegisterStack />
     :
-    <Navbar Prop={"test"} />
+    <Navbar  />
   }
 </TransactionProvider> 
 

@@ -34,7 +34,7 @@ const SelectPicker = (props)=> {
   }
   useEffect(()=>{ 
     selectionHandler(0)
-  },[])
+  },[props])
   return( <Fragment>
     {
       props.V?

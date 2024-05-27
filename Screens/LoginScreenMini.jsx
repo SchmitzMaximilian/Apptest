@@ -3,21 +3,41 @@ import { Feather } from '@expo/vector-icons';
 import React, { useContext, useEffect, useState } from 'react';
 import CheckBox from 'expo-checkbox';
 import * as SecureStore from 'expo-secure-store';
+import { sha256 } from "node-forge";
 export default function LoginScreenMini({navigation}) {
     const [image,setimage]=useState({uri: 'https://images.unsplash.com/photo-1622743941533-cde694bff56a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fE5pZ2h0Y2x1YnxlbnwwfHwwfHx8MA%3D%3D'})
 
-
+    const [hasMailError, sethasMailError]=useState(false);
     const [mail, setMail]=useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [isChecked, setChecked] = useState(false)
     const [isPressed, setIsPressed] = useState(false)
 
-     function handleSubmit (id,mail, password) {
+     async function handleSubmit (mail, password,id) {
 
+      sethasMailError(false)
+      let Hashedmail=sha256.create().update(mail.trim().toString()).digest().toHex()
+      let Hashedpass=sha256.create().update(password.trim().toString()).digest().toHex() 
+      const request ={
+        method: 'POST',
+        headers: { 'Content-Type' : 'application/json'},
+        body: JSON.stringify({
+          "query": 16,//ändern
+          "mail": Hashedmail,
+          "pass": Hashedpass  
+        })
+      };
+      const d = await fetch('https://itsnando.com/datenbankapi/index.php', request);
+      let e = await d.json();
+      console.log(e)
+        if(e==true){
         navigation.navigate({name:"SeiteBewerberauswahl",params:{user: id}});
-        console.log("MAIL: "+mail)
-        console.log("PASSWORD: "+password)
+        }else{
+          sethasMailError(true)
+          
+        }
+        
      }
      const imglesen = async (param)=>{
         //loeschen(param)
@@ -40,23 +60,20 @@ export default function LoginScreenMini({navigation}) {
                         <Text style={{color:'white', overflow:"scroll"}}>E-Mail</Text>
 
                         <View style={{flexDirection:'row-reverse',alignSelf:"flex-start"}} >
-                            <TextInput textContentType="emailAddress" defaultValue={mail} onChangeText={(value)=>setMail(value)} style={[styles.input, {width:"100%"}/*hasMailError?{borderColor: 'red'}:""*/]} placeholder={"E-Mail-Adresse"}/>
+                            <TextInput textContentType="emailAddress" defaultValue={mail} onChangeText={(value)=>setMail(value)} style={[styles.input, {width:"100%"},hasMailError?{borderColor: 'red'}:""]} placeholder={"E-Mail-Adresse"}/>
                             <Feather name="mail" style={{position:'absolute', padding: 10, alignSelf:"center", backgroundColor:'rgba(0,0,0,0)'}} size={24} color="rgba(0,0,0,0.5)" /> 
                         </View>
 
                         <Text style={{color:'white', overflow:"scroll"}}>Passwort</Text>
 
                         <View style={{flexDirection:'row-reverse',alignItems: "center"}} > 
-                            <TextInput secureTextEntry={!showPassword} textContentType='password' defaultValue={password} onChangeText={(value)=>setPassword(value)} style={[styles.input, {width:"100%"}/*hasMailError?{borderColor: 'red'}:""*/]} placeholder={"Passwort"}/>
+                            <TextInput secureTextEntry={!showPassword} textContentType='password' defaultValue={password} onChangeText={(value)=>setPassword(value)} style={[styles.input, {width:"100%"},hasMailError?{borderColor: 'red'}:""]} placeholder={"Passwort"}/>
                             <Pressable onPress ={()=>setShowPassword(!showPassword)} style={[styles.button, {position:'absolute', backgroundColor:'rgba(0,0,0,0)'}]}>
                                 {!showPassword?<Feather name="eye" size={24} color="rgba(0,0,0,0.5)" />:<Feather name="eye-off" size={24} color="rgba(0,0,0,0.5)" /> }
                             </Pressable>    
                         </View>
                         
-                        <View style={{flexDirection:"row",alignItems:"center"}} >
-                            <CheckBox style ={{ margin:8, marginLeft:0,}} color="lightgrey" value={isChecked} onValueChange={setChecked} />
-                            <Text style={{color:'white', overflow:"scroll"}}> Login Speichern</Text>
-                        </View>
+                        
                         
 
                         <Pressable onPress ={()=>handleSubmit(mail,password)} onPressIn={()=>setIsPressed(true)} onPressOut={()=>setIsPressed(false)} style={!isPressed?[styles.button, {marginTop:15, backgroundColor:'green', width:"100%"}]:[styles.button, {marginTop:15, backgroundColor:'green', width:"100%", opacity:0.5,}]} >

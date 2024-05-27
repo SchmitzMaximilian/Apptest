@@ -1,9 +1,11 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import { Text ,View,StyleSheet,TouchableOpacity} from 'react-native'
 import { EingabeFeld } from '../textFeldcomp/EingabeFeld'
 
 const Container = (props) => {   
-
+  useEffect(()=>{
+    console.log(props.SV)
+  },[props])
   return (
     <>
     {

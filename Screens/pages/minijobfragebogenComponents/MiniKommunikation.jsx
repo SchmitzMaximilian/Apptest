@@ -11,8 +11,7 @@ import Container from '../../fragebogencomps/containercomp/Container';
 import TitleTouch from './TitleTouch';
 import MiniPersoenlicheDatenObject from '../../../utils/Objects/MiniPersoenlicheDatenObject';
 import { StyleSheet} from 'react-native';
-import MinispeicherButton from './MinispeicherButton';
-import { FNContext } from '../functions/contextFehlernummer';
+import MinispeicherButton from './MinispeicherButton'; 
 
 function MiniKommunikation() {
   const [PrivateDatenArr,setPrivateDatenArr]=useState(MiniPersoenlicheDatenObject)
@@ -23,8 +22,7 @@ function MiniKommunikation() {
   const [Fehlercheck,setFehlercheck]=useContext(FCContext)
   const [FehlerText,setFehlerText]=useContext(FTContext)
   const [Erfolgscheck,setErfolgscheck]=useContext(ECContext)
-  const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext)
-  const [Fehlernummer,setFehlernummer]=useContext(FNContext)
+  const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext) 
 
   const submitdata2=async()=>{
     setFehlercheck(false)

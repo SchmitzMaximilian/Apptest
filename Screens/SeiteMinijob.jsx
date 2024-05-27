@@ -18,10 +18,9 @@ import MiniSteuer from './pages/minijobfragebogenComponents/MiniSteuer';
 import MiniSozial from './pages/minijobfragebogenComponents/MiniSozial';
 import MiniStatus from './pages/minijobfragebogenComponents/MiniStatus';
 import MiniJANEIN from './pages/minijobfragebogenComponents/MiniJANEIN';
-import MiniKV from './pages/minijobfragebogenComponents/MiniKV';
-import { FNContext } from './pages/functions/contextFehlernummer';
+import MiniKV from './pages/minijobfragebogenComponents/MiniKV'; 
 import MiniTopButtonleiste from './pages/minijobfragebogenComponents/MiniTopButtonleiste';
-import Meldungerfolg from './pages/functions/meldungerfolg';
+import Meldungerfolg from '../Components/Meldungerfolg';
 import BottomButtonleiste from './pages/minijobfragebogenComponents/BottomButtonleiste';
 
 
@@ -33,8 +32,7 @@ function SeiteMinijob({navigation}) {
 
   const [Fehlercheck,setFehlercheck]=useContext(FCContext)
   const [FehlerText,setFehlerText]=useContext(FTContext)
-  const [Erfolgscheck,setErfolgscheck]=useContext(ECContext)
-  const [Fehlernummer,setFehlernummer]=useContext(FNContext)
+  const [Erfolgscheck,setErfolgscheck]=useContext(ECContext) 
 
   const imglesen = async (param)=>{
     //loeschen(param)

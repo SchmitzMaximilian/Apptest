@@ -20,7 +20,8 @@ function StyledTextInput(props) {
     if(props.SV){
       settxtvalue(props.SV)
     }
-  },[])
+     
+  },[props])
   return (
     <>
     {

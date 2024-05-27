@@ -13,6 +13,11 @@ function AngabenEntlohnung(props) {
   const [tab1ausgefuellt,settab1ausgefuellt]=useState(false)
   const [SachbearbeitungDatenArr,setSachbearbeitungDatenArr]=useState() 
 
+  const updatefullstate=(t,num)=>{
+    let v=props.E
+    t?v=Number(num)+1:v=Number(num)-1;
+    props.ES(v)
+  }
   const submitLohndaten=async()=>{
     let check=true 
     if(SachbearbeitungDatenArr.Stundenlohncheck==1){
@@ -64,6 +69,7 @@ function AngabenEntlohnung(props) {
          
         if(e.ergebnis==true){
           settab1ausgefuellt(true)
+          updatefullstate(true,1)
           settab1(false)
           let NO=SachbearbeitungDatenArr
           NO.MitarbeiterID=props.U

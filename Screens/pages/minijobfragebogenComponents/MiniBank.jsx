@@ -14,8 +14,7 @@ import { MAidContext } from '../functions/contextMitarbeiterid';
 import LangOb from '../../../lang/lang'
 import TitleTouch from './TitleTouch';
 //import {isValid} from 'iban'
-import { TransactionContext } from '../../../utils/Context';
-import { FNContext } from '../functions/contextFehlernummer';
+import { TransactionContext } from '../../../utils/Context'; 
 function MiniBank() {
   const [PrivateDatenArr,setPrivateDatenArr]=useState(MiniPersoenlicheDatenObject)
   const [sprache,setzesprache]=useContext(TransactionContext)
@@ -25,8 +24,7 @@ function MiniBank() {
   const [Fehlercheck,setFehlercheck]=useContext(FCContext)
   const [FehlerText,setFehlerText]=useContext(FTContext)
   const [Erfolgscheck,setErfolgscheck]=useContext(ECContext)
-  const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext)
-  const [Fehlernummer,setFehlernummer]=useContext(FNContext)
+  const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext) 
   const [Barcheck,setBarcheck]=useState(false)
 
   const submitdata3=async()=>{

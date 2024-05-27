@@ -13,8 +13,7 @@ import { isSteuerIdValid } from 'validate-steuerid'
 import SteuerEinwillligung from '../../fragebogencomps/MinijobCheckboxen/MiniSteuercheck'
 import Container from '../../fragebogencomps/containercomp/Container'
 import TitleTouch from './TitleTouch'
-import { StyleSheet } from 'react-native';
-import { FNContext } from '../functions/contextFehlernummer';
+import { StyleSheet } from 'react-native'; 
 
 function MiniSteuer() {
   const [PrivateDatenArr,setPrivateDatenArr]=useState(MiniPersoenlicheDatenObject)
@@ -26,8 +25,7 @@ function MiniSteuer() {
   const [Fehlercheck,setFehlercheck]=useContext(FCContext)
   const [FehlerText,setFehlerText]=useContext(FTContext)
   const [Erfolgscheck,setErfolgscheck]=useContext(ECContext)
-  const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext)
-  const [Fehlernummer,setFehlernummer]=useContext(FNContext)
+  const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext) 
 
   const submitdata4=async()=>{
     setFehlercheck(false)

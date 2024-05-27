@@ -14,8 +14,7 @@ import SteuerID from '../../fragebogencomps/selectBoxencomp/SteuerCheckbox';
 import { FCContext } from '../functions/contextFehlercheck';
 import { FTContext } from '../functions/contextFehlertext';
 import { ECContext } from '../functions/contextErfolgscheck';
-import { MAidContext } from '../functions/contextMitarbeiterid';
-import { FNContext } from '../functions/contextFehlernummer';
+import { MAidContext } from '../functions/contextMitarbeiterid'; 
 function SteuerAngaben() {
   const [PrivateDatenArr,setPrivateDatenArr]=useState(PersoenlicheDatenObject)
   const [sprache,setzesprache]=useContext(TransactionContext)
@@ -23,11 +22,11 @@ function SteuerAngaben() {
   const [tab5ausgefuellt,settab5ausgefuellt]=useState(false)
   const [Steuercheck,setSteuercheck]=useState(false)
   const [steuerBG,setsteuerBG]=useState([0,0,0,0])
+  const [steuerBGid,setsteuerBGid]=useState([0])
   const [Fehlercheck,setFehlercheck]=useContext(FCContext)
   const [FehlerText,setFehlerText]=useContext(FTContext)
   const [Erfolgscheck,setErfolgscheck]=useContext(ECContext)
-  const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext)
-  const [Fehlernummer,setFehlernummer]=useContext(FNContext)
+  const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext) 
   
   const submitdataSteuer=async()=>{
 
@@ -35,17 +34,18 @@ function SteuerAngaben() {
       setFehlerText(false)
       setErfolgscheck(false) 
       let Arr=[]
+      let idArr=[]
       let check=true
       
-      // if(!PrivateDatenArr.SteueridCheck>0){
-      //   if(!isSteuerIdValid(PrivateDatenArr.SteuerID.trim())){
-      //   check=false
-        
-      // Arr.push(1)
-      // }else{
-      //   Arr.push(0)
-      // }
-      // }
+      
+      if(!PrivateDatenArr.SteueridCheck>0){
+        if(PrivateDatenArr.SteuerID.trim()==0 || (PrivateDatenArr.SteuerID.trim().toString().length>50))
+          {
+            check=false
+            idArr.push(1)
+          }else{idArr.push(0)}
+      
+     }else{idArr.push(0)}
       
     
      
@@ -67,7 +67,9 @@ function SteuerAngaben() {
       }else{
         Arr.push(0)
       } 
+      console.log(Arr)
       setsteuerBG(Arr)
+      setsteuerBGid(idArr)
       if(check){
         
         try{
@@ -118,7 +120,7 @@ function SteuerAngaben() {
         }
       }else{
         //
-        setsteuerBG(Arr)
+        
         setFehlercheck(true) 
         setFehlerText(false)
         setTimeout(()=>{
@@ -142,7 +144,7 @@ function SteuerAngaben() {
       Steuercheck?
       ""
       :
-   <Container BGInfo={steuerBG} W={submitdataSteuer} Icon={["Steuer"]} Labname={[sprache?"Steuer-ID (Pflichtangabe)":"Tax ID (mandatory information)"]} F={settab5} S={tab5}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
+   <Container BGInfo={steuerBGid} W={submitdataSteuer} Icon={["Steuer"]} Labname={[sprache?"Steuer-ID (Pflichtangabe)":"Tax ID (mandatory information)"]} F={settab5} S={tab5}  SV={PrivateDatenArr} SF={setPrivateDatenArr}/>
      }  
     </>
     :

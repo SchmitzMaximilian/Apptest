@@ -12,14 +12,12 @@ import { MAidContext } from '../functions/contextMitarbeiterid';
 import { MiniDataset } from '../../../Components/Minijobinhaltsvorlagen/Minijobeingabedataset';
 import MiniPersoenlicheDatenObject from '../../../utils/Objects/MiniPersoenlicheDatenObject';
 import MiniSelectPicker from './MiniPickerSelectBox';
-import MinispeicherButton from './MinispeicherButton';
-import { FNContext } from '../functions/contextFehlernummer';
+import MinispeicherButton from './MinispeicherButton'; 
 
 function MiniNameAnschrift() {
   const [Fehlercheck,setFehlercheck]=useContext(FCContext)
   const [FehlerText,setFehlerText]=useContext(FTContext)
-  const [Erfolgscheck,setErfolgscheck]=useContext(ECContext)
-  const [Fehlernummer,setFehlernummer]=useContext(FNContext)
+  const [Erfolgscheck,setErfolgscheck]=useContext(ECContext) 
   const [PrivateDatenArr,setPrivateDatenArr]=useState(MiniPersoenlicheDatenObject)
   const [sprache,setzesprache]=useContext(TransactionContext)
   const [tab1,settab1]=useState(false)

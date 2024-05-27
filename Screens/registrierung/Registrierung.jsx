@@ -27,8 +27,9 @@ hot reload
 
  */
 
-const Registrierung =()=>{
+const Registrierung =({navigation})=>{
   const [sprache,setzesprache]=useContext(TransactionContext)
+  const [SecObj,setSecObj]=useState({"Benutzername":"","PasswordSha256":"","Firma":"","Adresse":"","Mail":"","Mail2":"","Mail3":""})
   const [eingabe1,seteingabe1]=useState('')
   const [eingabe2,seteingabe2]=useState('')
   const [eingabe3,seteingabe3]=useState('')
@@ -91,13 +92,7 @@ const Registrierung =()=>{
     } 
     let mail2=eingabe6,
         mail3=eingabe7
-    if(eingabe6.trim().length==0){ 
-      mail2='';
-    }
-    if(eingabe7.trim().length==0){ 
-      mail3='';
-
-    }
+    
     if(check){
       try{ 
         const request = {
@@ -105,8 +100,8 @@ const Registrierung =()=>{
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 "query":1,
-                "username":eingabe1.toString(),
-                "passwort":sha256.create().update(eingabe2.toString()).digest().toHex(),
+                "username":eingabe1.toString().toLowerCase(),
+                "passwort":sha256.create().update(eingabe2.toString().toLowerCase()).digest().toHex(),
                 "firma"   :eingabe3.toString(),
                 "adresse" :eingabe4.toString(),
                 "email1"  :eingabe5.toString(),
@@ -115,7 +110,7 @@ const Registrierung =()=>{
             }) 
         };
       
-        const d = await fetch('http://192.168.2.154/datenbankapi/index.php', request);
+        const d = await fetch('https://itsnando.com/datenbankapi/index.php', request);
         let e = await d.json();
         if(e.ergebnis==true){
           setErfolgscheck(true)
@@ -124,7 +119,7 @@ const Registrierung =()=>{
           },6000)  
           let AO=AdminObject;
           AO.Benutzername=eingabe1;
-          AO.PasswordSha256=sha256.create().update(eingabe2.toString()).digest().toHex()
+          AO.PasswordSha256=eingabe2.toString()
           AO.Firma=eingabe3;
           AO.Adresse=eingabe4;
           AO.Mail=eingabe5;
@@ -132,8 +127,11 @@ const Registrierung =()=>{
           AO.Mail3=eingabe7;
 
           let value=JSON.stringify(AO)
-          speichern('Admin',value)
-          console.log('Erfolg')
+          speichern('Admin',value) 
+          setTimeout(()=>{
+            navigation.navigate({name:"FESTPERSONALFB"})
+          },1000)
+          
           
 
           //Restart();
@@ -190,20 +188,26 @@ const Registrierung =()=>{
     //loeschen(param)
     const data=await SecureStore.getItemAsync(param);//BGImage
     data?setimageWiedergabe({uri:data.toString()}):'';
+  } 
+  const getData=async()=>{
+    if(await SecureStore.getItemAsync('Admin')){
+      let SAD=await SecureStore.getItemAsync('Admin') 
+      console.log(SAD) 
+      SAD=JSON.parse(SAD)
+      seteingabe1(SAD.Benutzername.toString())
+      seteingabe2(SAD.PasswordSha256.toString())
+      seteingabe3(SAD.Firma.toString())
+      seteingabe4(SAD.Adresse.toString())
+      seteingabe5(SAD.Mail.toString())
+      seteingabe6(SAD.Mail2.toString())
+      seteingabe7(SAD.Mail3.toString())
+    }
   }
-  {/*const ergaenzenFeld=()=>{ 
-    let altarr=[...counter]
-    if(altarr.length!=2)
-    {
-    altarr.push(altarr.length)
-    setcounter(altarr)
-    console.log("Test altarr")}
-    altarr.length>0?setTimeout(()=>{setclap(true)},200):''
-  }*/}
   
   useEffect(()=>{
-    speichern('Admin', "true")
+    //speichern('Admin', "true")
     imglesen('BGImage')
+    getData()
     console.log("test")
   },[counter])
 
@@ -237,9 +241,7 @@ const Registrierung =()=>{
       <ScrollView style={{backgroundColor: 'transparent'}}>
 <View style={styles.container}>
   <View style={styles.AdminButtonContainer}>
-  <TouchableOpacity  style={styles.AdminButton}> 
-    <Text style={{color:'#60a5fa'}} >Admin</Text>
-  </TouchableOpacity>
+   
   </View>
   <View>
     <Text style={styles.Titel}>Registrierung</Text>
@@ -290,13 +292,13 @@ const Registrierung =()=>{
 
 
   
-<EingabeFeld  Icon={'User'}     Labname={'Benutzername'}   SF={seteingabe1}    />
-<EingabeFeld  Icon={'Pass'}     Labname={'Passwort'}       SF={seteingabe2}    />
-<EingabeFeld  Icon={'Company'}  Labname={'Firma'}          SF={seteingabe3}    /> 
-<EingabeFeld  Icon={'Address'}  Labname={'Adresse'}        SF={seteingabe4}    /> 
-<EingabeFeld  Icon={'Mail'}     Labname={'E-Mail-Adresse'} SF={seteingabe5}    />
-<EingabeFeld  Icon={'Mail'}     Labname={'E-Mail-Adresse'} SF={seteingabe6}    />
-<EingabeFeld  Icon={'Mail'}     Labname={'E-Mail-Adresse'} SF={seteingabe7}    /> 
+<EingabeFeld  Icon={'User'}     Labname={'Benutzername'}  SV={eingabe1} SF={seteingabe1}     />
+<EingabeFeld  Icon={'Pass'}     Labname={'Passwort'}       SV={eingabe2} SF={seteingabe2}    />
+<EingabeFeld  Icon={'Company'}  Labname={'Firma'}          SV={eingabe3} SF={seteingabe3}     /> 
+<EingabeFeld  Icon={'Address'}  Labname={'Adresse'}        SV={eingabe4} SF={seteingabe4}     /> 
+<EingabeFeld  Icon={'Mail'}     Labname={'E-Mail-Adresse 1'} SV={eingabe5} SF={seteingabe5}     />
+<EingabeFeld  Icon={'Mail'}     Labname={'E-Mail-Adresse 2'} SV={eingabe6} SF={seteingabe6}     />
+<EingabeFeld  Icon={'Mail'}     Labname={'E-Mail-Adresse 3'} SV={eingabe7} SF={seteingabe7}     /> 
 
 
 
@@ -313,7 +315,7 @@ const Registrierung =()=>{
 </View>
 
 <View style={styles.UntenButton}>
-<TouchableOpacity style={styles.Abbrechen}>
+<TouchableOpacity onPress={()=>navigation.navigate({name:"FESTPERSONALFB"})} style={styles.Abbrechen}>
     <Text style={{color:'#dc2626'}}>Abbrechen</Text>
 </TouchableOpacity>
 
@@ -435,7 +437,7 @@ const styles = StyleSheet.create({
   Abspeichern:{
     alignSelf: 'flex-end',
     alignItems: 'center',
-    backgroundColor: '#166534',
+    backgroundColor: '#22c55e',
     padding: 10,
     height:'auto',    
     borderRadius:5,

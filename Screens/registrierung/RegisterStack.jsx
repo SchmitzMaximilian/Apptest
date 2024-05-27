@@ -14,8 +14,8 @@ const RegisterStack=(Prop)=> {
     <TransactionProvider>
     <NavigationContainer >
       
-    <Stack.Navigator initialRouteName="Seite1"  screenOptions={{headerShown:false, headerMode:'screen', headerTintColor:'white', headerStyle: {backgroundColor:'rgba(0,15,40,0.95)'}}}>
-    <Stack.Screen name = "Seite1" component = {Registrierung} options={{headerBackTitle: 'Custom Back',
+    <Stack.Navigator initialRouteName="FESTPERSONALFB"  screenOptions={{headerShown:false, headerMode:'screen', headerTintColor:'white', headerStyle: {backgroundColor:'rgba(0,15,40,0.95)'}}}>
+    <Stack.Screen name = "Registrierung" component = {Registrierung} options={{headerBackTitle: 'Custom Back',
       headerBackTitleStyle: { fontSize: 30 }}}  />
    
   </Stack.Navigator>

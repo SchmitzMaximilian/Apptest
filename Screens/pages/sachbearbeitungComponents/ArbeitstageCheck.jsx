@@ -22,6 +22,14 @@ function ArbeitstageCheck(props) {
   const [tab3ausgefuellt,settab3ausgefuellt]=useState(false)
   const [SachbearbeitungDatenArr,setSachbearbeitungDatenArr]=useState(props.D)
   console.log(props.D)
+
+  const updatefullstate=(t,num)=>{
+    let v=props.E
+    t?v=Number(num)+1:v=Number(num)-1;
+    props.ES(v)
+  }
+
+
   const job=(t)=>{
     let NO=SachbearbeitungDatenArr
     NO.Taetigkeit=t
@@ -162,6 +170,7 @@ function ArbeitstageCheck(props) {
         let e = await d.json(); 
         if(e.ergebnis==true){
           settab3ausgefuellt(true)
+          updatefullstate(true,0)
           settab3(false)
           let NO=SachbearbeitungDatenArr
           NO.MitarbeiterID=props.U
@@ -181,6 +190,27 @@ function ArbeitstageCheck(props) {
     }
   }
   useEffect(()=>{
+    if(SachbearbeitungDatenArr.MontagCheck!=0){
+      setArbeitMoCheck(SachbearbeitungDatenArr.MontagCheck)
+    }
+    if(SachbearbeitungDatenArr.DiensttagCheck!=0){
+      setArbeitDiCheck(SachbearbeitungDatenArr.DiensttagCheck)
+    }
+    if(SachbearbeitungDatenArr.MittwochCheck!=0){
+      setArbeitMiCheck(SachbearbeitungDatenArr.MittwochCheck)
+    }
+    if(SachbearbeitungDatenArr.DonnerstagCheck!=0){
+      setArbeitDoCheck(SachbearbeitungDatenArr.DonnerstagCheck)
+    }
+    if(SachbearbeitungDatenArr.FreitagCheck!=0){
+      setArbeitFrCheck(SachbearbeitungDatenArr.FreitagCheck)
+    }
+    if(SachbearbeitungDatenArr.SamstagCheck!=0){
+      setArbeitSaCheck(SachbearbeitungDatenArr.SamstagCheck)
+    }
+    if(SachbearbeitungDatenArr.SonntagCheck!=0){
+      setArbeitSoCheck(SachbearbeitungDatenArr.SonntagCheck)
+    }
 
   },[props])
  

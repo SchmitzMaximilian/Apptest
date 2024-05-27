@@ -58,7 +58,7 @@ export const Textdataset=(p)=>{
     "Buttons":{
       "Admin":"Administrator",
       "Sachbearbeitung":"Sachbearbeiter",
-      "Versenden":"Placeholder",
+      "Versenden":"Admin-App",
       "Fertig":"Bewerbungabschließen",
       "Speichern":"Speichern"
 
@@ -122,7 +122,7 @@ export const Textdataset=(p)=>{
   "Buttons":{
     "Admin":"Administrator",
     "Sachbearbeitung":"Sachbearbeiter",
-    "Versenden":"Placeholder",
+    "Versenden":"Admin-App",
     "Fertig":"Bewerbungabschließen",
     "Speichern":"Save"
 

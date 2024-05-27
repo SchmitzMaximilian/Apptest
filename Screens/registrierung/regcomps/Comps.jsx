@@ -16,7 +16,8 @@ import {MdDelete} from 'react-icons'
 export const EingabeFeld=(props)=>{
   const [text,settext]=useState('')
   const [showPass,setshowPass]=useState(false)
-  console.log(props.Icon) 
+  console.log(props) 
+  
   return(
     <View style={{marginTop:20}}>
         {
@@ -26,7 +27,7 @@ export const EingabeFeld=(props)=>{
           <LeftIcon P={props.Icon}/> 
         }
         <StyledInputLabel P={props.Labname}>Label</StyledInputLabel>
-        <StyledTextInput {...props} P={showPass} S={setshowPass} SF={props.SF}/>
+        <StyledTextInput {...props}  P={showPass} S={setshowPass} SF={props.SF}/>
     </View>
   )
 }

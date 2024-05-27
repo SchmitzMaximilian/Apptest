@@ -1,10 +1,10 @@
 import React from 'react'
 import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity,ImageBackground } from 'react-native';
-import { Textdataset } from '../../../utils/Textdataset'
-import { TransactionContext } from '../../../utils/Context';
+import { Textdataset } from '../utils/Textdataset'
+import { TransactionContext } from '../utils/Context';
 import { useContext, useEffect, useState } from 'react';
 
-function Meldungerfolg() {
+const Meldungerfolg=()=>{
   const [sprache,setzesprache]=useContext(TransactionContext)
   return (
     <View style={styles.abgespeichert}>

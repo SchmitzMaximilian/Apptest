@@ -10,8 +10,7 @@ import StyledInputLabel from './StyledInputLabel';
  * @param {*} style style
  * @returns 
  */
-export const EingabeFeld=(props)=>{
-  const [text,settext]=useState('')
+export const EingabeFeld=(props)=>{ 
   
   const returninfo=()=>{
       switch(props.Labname){
@@ -154,7 +153,8 @@ export const EingabeFeld=(props)=>{
       }  
   } 
   useEffect(()=>{
-  },[text])
+   // console.log(props.SV) 
+  },[props])
   return(
     <View style={{marginTop:20}}>
          

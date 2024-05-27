@@ -18,7 +18,7 @@ const MiniTopButtonleiste=({navigation})=> {
         </TouchableOpacity>
         </View>
         
-        <TouchableOpacity onPress={()=>navigation.navigate({name:"SeiteTest"})} style={styles.AdminButton}> 
+        <TouchableOpacity onPress={()=>navigation.navigate({name:"FESTPERSONALFB"})} style={styles.AdminButton}> 
           <Text style={{color:'#FFFFFF'}} >Festpersonal</Text>
         </TouchableOpacity>
       </View>

@@ -1,49 +1,44 @@
-import React from 'react'
-import { StyleSheet, Text, View, TextInput,Button, SafeAreaView, TouchableOpacity,ImageBackground } from 'react-native';
-import { useContext, useEffect, useState } from 'react';
+import React,{ useContext, useEffect, useState } from 'react'
+import { StyleSheet, Text, View, SafeAreaView, ImageBackground } from 'react-native'; 
 import PersoenlicheDatenObject from '../utils/Objects/PersoenlicheDatenObject';
 import { ScrollView } from 'react-native-gesture-handler';
-import { TransactionContext } from '../utils/Context';
-import * as SecureStore from 'expo-secure-store';
+import { TransactionContext } from '../utils/Context'; 
+import { Textdataset } from '../utils/Textdataset';
+import { FCContext } from './pages/functions/contextFehlercheck';
+import { FTContext } from './pages/functions/contextFehlertext';
+import { ECContext } from './pages/functions/contextErfolgscheck'; 
 import NameAnschrift from './pages/festfragebogenComponents/NameAnschrift';
 import Kommunikation from './pages/festfragebogenComponents/Kommunilation';
 import Blocktop from './component/seite1comp/blocktop';
 import Bankverbindung from './pages/festfragebogenComponents/Bankverbindung';
 import SteuerAngaben from './pages/festfragebogenComponents/SteuerAngaben';
 import Sozialversicherung from './pages/festfragebogenComponents/Sozialversicherung';
-import SelectPicker from './pages/festfragebogenComponents/PickerSelectBox';
-import { Textdataset } from '../utils/Textdataset';
-import { FCContext } from './pages/functions/contextFehlercheck';
-import { FTContext } from './pages/functions/contextFehlertext';
-import { ECContext } from './pages/functions/contextErfolgscheck';
-import { MAidContext } from './pages/functions/contextMitarbeiterid';
-import { FNContext } from './pages/functions/contextFehlernummer';
-import FehlermeldungIndividuell from './pages/fehlerDatenbank/fehlerswitchcase';
-import Meldungerfolg from './pages/functions/meldungerfolg'
+import SelectPicker from './pages/festfragebogenComponents/PickerSelectBox'; 
+import Meldungerfolg from '../Components/Meldungerfolg'
 import BottomButtonleiste from './pages/festfragebogenComponents/BottomButtonleiste'
 import TopButtonleiste from './pages/festfragebogenComponents/TopButtonleiste';
-//
+import { imglesen } from '../utils/functions/functionHandler';
 
-function SeiteTest({navigation}) {
+
+  const FESTPERSONALFB=(props)=>{
+
   const [image,setimage]=useState({uri: 'https://images.unsplash.com/photo-1622743941533-cde694bff56a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fE5pZ2h0Y2x1YnxlbnwwfHwwfHx8MA%3D%3D'})
-  const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext)
   const [PrivateDatenArr,setPrivateDatenArr]=useState(PersoenlicheDatenObject)
   const [sprache,setzesprache]=useContext(TransactionContext) 
   const [Fehlercheck,setFehlercheck]=useContext(FCContext)
   const [FehlerText,setFehlerText]=useContext(FTContext)
-  const [Erfolgscheck,setErfolgscheck]=useContext(ECContext)
-  const [Fehlernummer,setFehlernummer]=useContext(FNContext)
-  
-  const imglesen = async (param)=>{
-    //loeschen(param)
-    const data=await SecureStore.getItemAsync(param);//BGImage
-    data?setimage({uri:data.toString()}):'';
+  const [Erfolgscheck,setErfolgscheck]=useContext(ECContext) 
+  const readImage=(param,setimage)=>{
+    imglesen(param,setimage)
+  } 
+  const updateObject=()=>{ 
+    let O=PersoenlicheDatenObject
+    setPrivateDatenArr(O)  
   }
-
   useEffect(()=>{ 
-       
-    imglesen('BGImage')    
-  },[])
+    console.log(PrivateDatenArr)
+    readImage('BGImage',setimage)    
+  },[PrivateDatenArr])
   
   return (
     <>
@@ -80,7 +75,7 @@ function SeiteTest({navigation}) {
         
               
       
-      <TopButtonleiste navigation={navigation} />
+      <TopButtonleiste navigation={props.navigation} />
 
 
       <View style={styles.ContainerFragebogen}> 
@@ -93,7 +88,7 @@ function SeiteTest({navigation}) {
     <SelectPicker S={sprache?'DE':'EN'} V={true} I={4} SV={PrivateDatenArr} SF={setPrivateDatenArr} />
     <SelectPicker S={sprache?'DE':'EN'} V={true} I={5} SV={PrivateDatenArr} SF={setPrivateDatenArr} />
     <Text style={{color:'#fff', marginHorizontal: '10%',paddingVertical:10}}>{Textdataset(sprache?'DE':'EN').Texte.Rechtsbelehrung}</Text>
-    <NameAnschrift/>
+    <NameAnschrift SV={PrivateDatenArr} SF={setPrivateDatenArr} />
     <Kommunikation/>
     <Bankverbindung/>
     <SteuerAngaben/>
@@ -102,7 +97,7 @@ function SeiteTest({navigation}) {
       </View>
 
       </View>
-      <BottomButtonleiste navigation={navigation}/>
+      <BottomButtonleiste navigation={props.navigation} D={PrivateDatenArr} TS={updateObject}/>
       </View>
       </ScrollView>
       </ImageBackground>
@@ -214,4 +209,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default SeiteTest
+export default FESTPERSONALFB

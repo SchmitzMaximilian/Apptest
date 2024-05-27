@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import CheckBox from 'expo-checkbox';
 import * as SecureStore from 'expo-secure-store';
 import { sha256 } from "node-forge";
-export default function LoginScreen({navigation}) {
+export default function LoginScreenAdminApp({navigation}) {
     const [image,setimage]=useState({uri: 'https://images.unsplash.com/photo-1622743941533-cde694bff56a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fE5pZ2h0Y2x1YnxlbnwwfHwwfHx8MA%3D%3D'})
 
 
@@ -18,8 +18,8 @@ export default function LoginScreen({navigation}) {
 
      async function handleSubmit (mail, password,id) {
       sethasMailError(false)
-      let Hashedmail=sha256.create().update(mail.trim().toString()).digest().toHex()
-      let Hashedpass=sha256.create().update(password.trim().toString()).digest().toHex() 
+      let Hashedmail=sha256.create().update(mail.trim().toString().toLowerCase()).digest().toHex()
+      let Hashedpass=sha256.create().update(password.trim().toString().toLowerCase()).digest().toHex() 
       const request ={
         method: 'POST',
         headers: { 'Content-Type' : 'application/json'},

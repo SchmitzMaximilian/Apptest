@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, SafeAreaView,ImageBackground} from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView,ImageBackground, TouchableOpacity} from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
 import { TransactionContext } from '../utils/Context'; 
 import TitleTouch from './fragebogencomps/touchTitle/TitleTouch';
@@ -10,7 +10,7 @@ import ArbeitstageCheck from './pages/sachbearbeitungComponents/ArbeitstageCheck
 import Unterlagencheckliste from './pages/sachbearbeitungComponents/Unterlagencheckliste';
 import AngabenEntlohnung from './pages/sachbearbeitungComponents/AngabenEntlohnung';
 import SachbearbeitungTop from './pages/sachbearbeitungComponents/SachbearbeitungTop';
-import Meldungerfolg from './pages/functions/meldungerfolg';
+import Meldungerfolg from '../Components/Meldungerfolg';
 import SachbearbeitungDatenObject from '../utils/Objects/SachbearbeitungDatenObject';
 
 
@@ -21,9 +21,12 @@ export default function Seite2({ route,navigation}) {
   const [FehlerText,setFehlerText]=useState(false)
   const [Erfolgscheck,setErfolgscheck]=useState(false) 
   const [image,setimage]=useState({uri: 'https://images.unsplash.com/photo-1622743941533-cde694bff56a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fE5pZ2h0Y2x1YnxlbnwwfHwwfHx8MA%3D%3D'})
- 
+  const [endcheck,setendcheck]=useState(0)
   const [SachbearbeitungDatenArr,setSachbearbeitungDatenArr]=useState(SachbearbeitungDatenObject)
-
+  const beende=()=>{ 
+     
+    navigation.navigate({name:"LoginScreen"})
+  }
   
 const iduebergabe=()=>{
   let OBJ=SachbearbeitungDatenObject
@@ -76,19 +79,23 @@ const iduebergabe=()=>{
 
       <Text style={styles.Titel}>Sachbearbeitungsbogen für Festpersonal</Text>
 
-    <ArbeitstageCheck S={setSachbearbeitungDatenArr} D={SachbearbeitungDatenArr} U={route.params.user}/>
+    <ArbeitstageCheck S={setSachbearbeitungDatenArr} D={SachbearbeitungDatenArr} U={route.params.user} E={endcheck} ES={setendcheck}/>
     
 
 
-   <AngabenEntlohnung S={setSachbearbeitungDatenArr} D={SachbearbeitungDatenArr} U={route.params.user}/>
+   <AngabenEntlohnung S={setSachbearbeitungDatenArr} D={SachbearbeitungDatenArr} U={route.params.user} E={endcheck} ES={setendcheck}/>
    
    
-   <Unterlagencheckliste S={setSachbearbeitungDatenArr} D={SachbearbeitungDatenArr} U={route.params.user}/>
+   <Unterlagencheckliste S={setSachbearbeitungDatenArr} D={SachbearbeitungDatenArr} U={route.params.user} E={endcheck} ES={setendcheck}/>
 
       
-
-
-   
+    {
+      endcheck==3?
+        <TouchableOpacity  onPress={()=>beende()} style={styles.Abspeichern}>
+          <Text style={{color:'black'}}>Abschließen</Text>
+        </TouchableOpacity>
+        :''
+    }  
 
    
   </View>
@@ -224,7 +231,7 @@ const styles = StyleSheet.create({
     Abspeichern:{
       alignSelf: 'flex-end',
       alignItems: 'center',
-      backgroundColor: '#166534',
+      backgroundColor: '#22c55e',
       padding: 10,
       height:'auto',    
       borderRadius:5,

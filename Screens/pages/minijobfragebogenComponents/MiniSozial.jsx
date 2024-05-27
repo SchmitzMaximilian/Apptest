@@ -12,8 +12,7 @@ import { FTContext } from '../functions/contextFehlertext';
 import { ECContext } from '../functions/contextErfolgscheck';
 import { MAidContext } from '../functions/contextMitarbeiterid';
 import MiniBirthdaySelect from './MiniBirthdaySelect';
-import { MiniDataset } from '../../../Components/Minijobinhaltsvorlagen/Minijobeingabedataset';
-import { FNContext } from '../functions/contextFehlernummer';
+import { MiniDataset } from '../../../Components/Minijobinhaltsvorlagen/Minijobeingabedataset'; 
 
 function MiniSozial() {
   const [PrivateDatenArr,setPrivateDatenArr]=useState(MiniPersoenlicheDatenObject)
@@ -23,8 +22,7 @@ function MiniSozial() {
   const [Fehlercheck,setFehlercheck]=useContext(FCContext)
   const [FehlerText,setFehlerText]=useContext(FTContext)
   const [Erfolgscheck,setErfolgscheck]=useContext(ECContext)
-  const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext)
-  const [Fehlernummer,setFehlernummer]=useContext(FNContext)
+  const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext) 
   const [soziBG,setsoziBG]=useState([0,0,0,0,0])
 
 

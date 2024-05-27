@@ -3,10 +3,10 @@ import {  Pressable, StyleSheet,TextInput, View } from "react-native";
 import LeftIcon from './LeftIcon';
 import { DateTimePicker } from "react-native-ui-lib";
 function StyledTextInput(props) { 
-const[txtvalue,settxtvalue]=useState(); 
+const[txtvalue,settxtvalue]=useState(''); 
    
   function textChangeHandler(t){  
-    let O=props?.SV
+    let O=props.SV
     
     switch(props.Labname){
       
@@ -144,60 +144,60 @@ const[txtvalue,settxtvalue]=useState();
     text = t; 
     }
     const lastEingabe=()=>{
-      let O=props?.SV
+      let O=props.SV
       
       switch(props.Labname){
       
         //Name und Anschrift
         case "Vorname (Pflichtangabe)":
         case"First name (mandatory)":
-          O.Vname.trim().toString().length>2?settxtvalue(O.Vname.toString()):''
+          O.Vname.trim()!=""?settxtvalue(O.Vname.toString()):settxtvalue('')
           break;
           case "Nachname (Pflichtangabe)":
           case"Last name (mandatory)":
-            O.Nname.trim().toString().length>2?settxtvalue(O.Nname.toString()):''
+            O.Nname.trim().toString().length>2?settxtvalue(O.Nname.toString()):settxtvalue('')
             break;
         case "Straße und Hausnummer (Pflichtangabe)":
         case"Street name and house number (mandatory)":
-          O.Adresse.trim().toString().length>2?settxtvalue(O.Adresse.toString()):''
+          O.Adresse.trim().toString().length>2?settxtvalue(O.Adresse.toString()):settxtvalue('')
           break;
         case "Postleitzahl (Pflichtangabe)":
         case"Postal Code (mandatory)":
-          O.PCode.length>0?settxtvalue(O.PCode):''
+          O.PCode.length>0?settxtvalue(O.PCode):settxtvalue('')
           break;
         case "Wohnort (Pflichtangabe)":
         case"Location / City name (mandatory)":
-          O.City.trim().toString().length>2?settxtvalue(O.City.toString()):''
+          O.City.trim().toString().length>2?settxtvalue(O.City.toString()):settxtvalue('')
           break;
           
   
         //Kommunikation
         case "Vorwahl / Rufnummer Festnetz (nur falls verfügbar)":
         case"Area code / phone number landline (only if available)":
-          O.Festnetz.trim().toString().length>0?settxtvalue(O.Festnetz.toString()):''
+          O.Festnetz.trim().toString().length>0?settxtvalue(O.Festnetz.toString()):settxtvalue('')
           break;
         case "Vorwahl / Rufnummer Mobiltelefon (nur falls verfügbar)":
         case"Area code / phone number mobile phone (only if available)":
-          O.Mobil.trim().toString().length>0?settxtvalue(O.Mobil.toString()):''
+          O.Mobil.trim().toString().length>0?settxtvalue(O.Mobil.toString()):settxtvalue('')
           break;
         case "E-Mail-Adresse (Pflichtangabe)":
         case"Email address (mandatory)":
-          O.Email.trim().toString().length>0?settxtvalue(O.Email.toString()):''
+          O.Email.trim().toString().length>0?settxtvalue(O.Email.toString()):settxtvalue('')
           break;
   
   
         //Bankverbindung
         case"Name des Kreditinstituts (Pflichtangabe)" :
         case "Name of institute of credit (mandatory)" :
-        O.Bankname.trim().toString().length>2?settxtvalue(O.Bankname.toString()):''
+        O.Bankname.trim().toString().length>2?settxtvalue(O.Bankname.toString()):settxtvalue('')
         break;
         case"IBAN (Pflichtangabe)" :
         case "IBAN (mandatory)" :
-        O.iban.trim().toString().length>0?settxtvalue(O.iban.toString()):''
+        O.iban.trim().toString().length>0?settxtvalue(O.iban.toString()):settxtvalue('')
         break; 
         case"Kontoinhaber (falls abweichend)" :
         case "Account holder (if different)" :
-        O.Inhaber.toString().length>1?settxtvalue(O.Inhaber.toString()):''
+        O.Inhaber.toString().length>1?settxtvalue(O.Inhaber.toString()):settxtvalue('')
         break;
   
   
@@ -209,77 +209,78 @@ const[txtvalue,settxtvalue]=useState();
         
         case "Steuer-ID (Pflichtangabe)":
         case"Tax ID (mandatory information)":
-          O.SteuerID>0?settxtvalue(O.SteuerID):''
+          O.SteuerID>0?settxtvalue(O.SteuerID):settxtvalue('')
           break;
         case "Steuerklasse":
         case"Tax class":
-          O.Steuerklasse>0?settxtvalue(O.Steuerklasse):''
+          O.Steuerklasse>0?settxtvalue(O.Steuerklasse):settxtvalue('')
           break;
         case "Anzahl Kinder (Pflichtangabe)":
         case"Number of children (mandatory)":
-          O.Kinder>0?settxtvalue(O.Kinder):''
+          O.Kinder>0?settxtvalue(O.Kinder):settxtvalue('')
           break;
         case "Konfession (Pflichtangabe)":
         case"Denomination (mandatory)":
-          O.Konfession.trim().toString().length>0?settxtvalue(O.Konfession.toString()):''
+          O.Konfession.trim().toString().length>0?settxtvalue(O.Konfession.toString()):settxtvalue('')
           break; 
         
         //Sozialversicherung 
         case "Sozialversicherungsnummer":
         case"Social security number":
-          O.SVNummerfeld>11?settxtvalue(O.SVNummerfeld):''
+          O.SVNummerfeld>11?settxtvalue(O.SVNummerfeld):settxtvalue('')
           break;     
         case "Sozialversicherungsnummer/Rentennummer":
         case"Social security number/pension number":
-          O.SVNummerfeld>11?settxtvalue(O.SVNummerfeld):''
+          O.SVNummerfeld>11?settxtvalue(O.SVNummerfeld):settxtvalue('')
           break;
         case "Staatsangehörigkeit (Pflichtangabe)":
         case"Nationality (mandatory)":
-          O.Staatsbuergerschaft.trim().toString().length>0?settxtvalue(O.Staatsbuergerschaft.toString()):''
+          O.Staatsbuergerschaft.trim().toString().length>0?settxtvalue(O.Staatsbuergerschaft.toString()):settxtvalue('')
           break;
         case "Geburtsdatum":
         case"Birth date":
-          O.GBDatum.trim().toString().length>0?settxtvalue(O.GBDatum.toString()):''
+          O.GBDatum.trim().toString().length>0?settxtvalue(O.GBDatum.toString()):settxtvalue('')
           break;
         
         case "Geburtsort (Pflichtangabe)":
         case"Place of birth (mandatory)":
-          O.GBOrt.length>0?settxtvalue(O.GBOrt.toString()):''
+          O.GBOrt.length>0?settxtvalue(O.GBOrt.toString()):settxtvalue('')
           break;
         case "Geburtsland (Pflichtangabe nur falls nicht Deutschland)":
         case"Country of birth (mandatory only if not Germany)":
-          O.GBLand.length>0?settxtvalue(O.GBLand):''
+          O.GBLand.length>0?settxtvalue(O.GBLand):settxtvalue('')
           break;
         case "Krankenkasse (Pflichtangabe bitte kompletter Name, also zB. AOK NordWest, nicht AOK)":
         case"Health insurance company (mandatory please complete name, e.g. AOK NordWest, not AOK)":
-          O.Kassename.trim().toString().length>0?settxtvalue(O.Kassename.toString()):''
+          O.Kassename.trim().toString().length>0?settxtvalue(O.Kassename.toString()):settxtvalue('')
           break;
         case "  Name Ihrer anderen Arbeitgeber":
         case"  Name of your other employers":
-          O.AndereArbeitgeber.trim().toString().length>4?settxtvalue(O.AndereArbeitgeber.toString()):''
+          O.AndereArbeitgeber.trim().toString().length>4?settxtvalue(O.AndereArbeitgeber.toString()):settxtvalue('')
           break;
           case "Geburtsname (Pflichtangabe, bei abweichendem Nachnamen)":
           case"Birth name (mandatory, if last name is different)":
-            O.GBName.trim().toString().length>2?settxtvalue(O.GBName.toString()):''
+            O.GBName.trim().toString().length>2?settxtvalue(O.GBName.toString()):settxtvalue('')
             break;
           case "Krankenkasse (Bitte kompletter Name)":
           case"Health insurance company (full name please)":
-            O.Kassename.trim().toString().length>2?settxtvalue(O.Kassename.toString()):''
+            O.Kassename.trim().toString().length>2?settxtvalue(O.Kassename.toString()):settxtvalue('')
             break;
         
             //Minijob Arbeitsstatus
 
         case "  Bitte hier eintragen":
         case "  Please enter here":
-          O.Eintragsonstige.trim().toString().length>0?settxtvalue(O.Eintragsonstige.toString()):''
+          O.Eintragsonstige.trim().toString().length>0?settxtvalue(O.Eintragsonstige.toString()):settxtvalue('')
           break;
       }
 
     }
    useEffect(()=>{
     lastEingabe()
-    console.log(props.BGInfo)
-   },[props.BGInfo])
+    
+    //console.log(props)
+   },[props.BGInfo,props])
   return ( 
   <View>  
       <LeftIcon P={props.Icon} BGInfo={props.BGInfo}/>

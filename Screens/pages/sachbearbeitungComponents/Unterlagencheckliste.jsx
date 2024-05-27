@@ -12,6 +12,11 @@ function Unterlagencheckliste(props) {
   const [tab2ausgefuellt,settab2ausgefuellt]=useState(false)
   const [SachbearbeitungDatenArr,setSachbearbeitungDatenArr]=useState(props.D)
 
+  const updatefullstate=(t,num)=>{
+    let v=props.E
+    t?v=Number(num)+1:v=Number(num)-1;
+    props.ES(v)
+  }
   const submitChecklistdaten=async()=>{
     let check=true
 
@@ -43,6 +48,7 @@ function Unterlagencheckliste(props) {
         console.log(e)
         if(e.ergebnis==true){
           settab2ausgefuellt(true)
+          updatefullstate(true,2)
           settab2(false)
           console.log('speichertestyeah')
           let NO=SachbearbeitungDatenArr

@@ -11,8 +11,7 @@ import { FTContext } from '../functions/contextFehlertext';
 import { ECContext } from '../functions/contextErfolgscheck';
 import { MAidContext } from '../functions/contextMitarbeiterid';
 import { MiniDataset } from '../../../Components/Minijobinhaltsvorlagen/Minijobeingabedataset';
-import Privatcheck from '../../fragebogencomps/MinijobCheckboxen/MiniPrivatCheck';
-import { FNContext } from '../functions/contextFehlernummer';
+import Privatcheck from '../../fragebogencomps/MinijobCheckboxen/MiniPrivatCheck';  
 
 function MiniKV() {
   const [PrivateDatenArr,setPrivateDatenArr]=useState(MiniPersoenlicheDatenObject)
@@ -20,8 +19,7 @@ function MiniKV() {
   const [Fehlercheck,setFehlercheck]=useContext(FCContext)
   const [FehlerText,setFehlerText]=useContext(FTContext)
   const [Erfolgscheck,setErfolgscheck]=useContext(ECContext)
-  const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext)
-  const [Fehlernummer,setFehlernummer]=useContext(FNContext)
+  const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext) 
   const [KVBG,setKVBG]=useState([0])
   const [tab8,settab8]=useState(false)
   const [tab8ausgefuellt,settab8ausgefuellt]=useState(false)

@@ -11,7 +11,7 @@ import ArbeitstageCheck from './pages/sachbearbeitungMiniComponents/ArbeitstageC
 import Unterlagencheckliste from './pages/sachbearbeitungMiniComponents/Unterlagencheckliste';
 import Grundentlohnung from './pages/sachbearbeitungMiniComponents/Grundentlohnung';
 import MiniSachbearbeitungTop from './pages/sachbearbeitungMiniComponents/MiniSachbearbeitungTop';
-import Meldungerfolg from './pages/functions/meldungerfolg';
+import Meldungerfolg from '../Components/Meldungerfolg';
 import SachbearbeitungDatenObject from '../utils/Objects/SachbearbeitungDatenObject';
 
 
@@ -29,7 +29,7 @@ export default function Seite2({ route, navigation}) {
   console.log(route.params.user)
   const beende=()=>{ 
      
-    navigation.navigate({name:"LoginScreen"})
+    navigation.navigate({name:"LoginScreenMini"})
   }
   const iduebergabe=()=>{
 

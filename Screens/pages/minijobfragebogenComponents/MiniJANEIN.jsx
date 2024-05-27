@@ -13,8 +13,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import JaNeinCheckbox from '../../fragebogencomps/MinijobCheckboxen/MiniJaNeinCheck';
 import JaNeinCheckbox1 from '../../fragebogencomps/MinijobCheckboxen/MiniJaNeinCheck1';
 import JaNeinCheckbox2 from '../../fragebogencomps/MinijobCheckboxen/MiniJaNeinCheck2';
-import { Minijobtextdataset } from '../../../Components/Minijobinhaltsvorlagen/Minijobtextdataset';
-import { FNContext } from '../functions/contextFehlernummer';
+import { Minijobtextdataset } from '../../../Components/Minijobinhaltsvorlagen/Minijobtextdataset'; 
 
 function MiniJANEIN() {
   const [PrivateDatenArr,setPrivateDatenArr]=useState(MiniPersoenlicheDatenObject)
@@ -22,8 +21,7 @@ function MiniJANEIN() {
   const [Fehlercheck,setFehlercheck]=useContext(FCContext)
   const [FehlerText,setFehlerText]=useContext(FTContext)
   const [Erfolgscheck,setErfolgscheck]=useContext(ECContext)
-  const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext)
-  const [Fehlernummer,setFehlernummer]=useContext(FNContext)
+  const [mitarbeiterID,setmitarbeiterID]=useContext(MAidContext) 
   const [JaNeinCheck,setJaNeinCheck]=useState(false)
   const [tab7,settab7]=useState(false)
   const [tab7ausgefuellt,settab7ausgefuellt]=useState(false)

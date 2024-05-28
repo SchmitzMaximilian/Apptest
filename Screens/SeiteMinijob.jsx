@@ -96,7 +96,7 @@ function SeiteMinijob({navigation}) {
 
       </View>
       </View>
-      <BottomButtonleiste/>
+      <BottomButtonleiste navigation={navigation} D={PrivateDatenArr} />
       </View>
       </ScrollView>
       </ImageBackground>

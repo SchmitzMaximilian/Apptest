@@ -4,7 +4,7 @@ import PersoenlicheDatenObject from '../../../utils/Objects/PersoenlicheDatenObj
 import { TransactionContext } from '../../../utils/Context';
 import { Textdataset } from '../../../utils/Textdataset';
 import {Octicons, Ionicons,FontAwesome5} from '@expo/vector-icons';
-import {Restart} from 'fiction-expo-restart';
+import { BackHandler } from "react-native";
 /**
  * 
  * navigation.navigate is not a function fehler
@@ -40,9 +40,9 @@ import {Restart} from 'fiction-expo-restart';
         const d = await fetch('https://itsnando.com/datenbankapi/index.php', request); 
         let e = await d.json();
         if(e){
-          TS()
-          //Alert.alert('Info','Ihre Daten wurden gespeichert.',[{text: 'OK', onPress: () => {console.log('OK');}}])
-          //navigation.navigate({name:"SeiteTest",params:{"T":1}}) 
+          
+          Alert.alert('Info','Ihre Daten wurden gespeichert.',[{text: 'OK', onPress: () => {BackHandler.exitApp();}}])
+            
         }
       }else{
         //ERROR

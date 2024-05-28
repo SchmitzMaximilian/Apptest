@@ -98,7 +98,7 @@ import { imglesen } from '../utils/functions/functionHandler';
       </View>
 
       </View>
-      <BottomButtonleiste navigation={props.navigation} D={PrivateDatenArr} TS={updateObject}/>
+      <BottomButtonleiste navigation={props.navigation} D={PrivateDatenArr}/>
       </View>
       </ScrollView>
       </ImageBackground>

@@ -28,6 +28,7 @@ import { imglesen } from '../utils/functions/functionHandler';
   const [Fehlercheck,setFehlercheck]=useContext(FCContext)
   const [FehlerText,setFehlerText]=useContext(FTContext)
   const [Erfolgscheck,setErfolgscheck]=useContext(ECContext) 
+  const [reseter,setreseter]=useState(false)
   const readImage=(param,setimage)=>{
     imglesen(param,setimage)
   } 
@@ -38,7 +39,7 @@ import { imglesen } from '../utils/functions/functionHandler';
   useEffect(()=>{ 
     console.log(PrivateDatenArr)
     readImage('BGImage',setimage)    
-  },[PrivateDatenArr])
+  },[props])
   
   return (
     <>

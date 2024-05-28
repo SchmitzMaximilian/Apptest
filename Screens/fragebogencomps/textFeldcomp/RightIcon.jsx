@@ -5,7 +5,7 @@ import {Octicons, Ionicons} from '@expo/vector-icons';
 
 const RightIcon = (props) => {
   
-  useEffect(()=>{console.log(props)
+  useEffect(()=>{
 
   },[])
   return (

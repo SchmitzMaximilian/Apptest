@@ -7,7 +7,7 @@ import Navbar from './Components/Navbar';
 import { TransactionProvider } from './utils/Context';
 import * as SecureStore from 'expo-secure-store';
 import RegisterStack from './Screens/registrierung/RegisterStack';
-
+import {Restart} from 'fiction-expo-restart';
 /**
 
 async function save(key, value) {
@@ -52,6 +52,9 @@ export default function App() {
       setisAdmin(false)
     }
   } 
+  const resetapp=()=>{
+    Restart()
+  }
   useEffect(()=>{
     //speichern('Admin',"true")
     //speichern('BGImage','https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YnVpc25lc3N8ZW58MHx8MHx8fDA%3D');
@@ -63,7 +66,7 @@ export default function App() {
     isAdmin?
     <RegisterStack />
     :
-    <Navbar  />
+    <Navbar R={resetapp} />
   }
 </TransactionProvider> 
 

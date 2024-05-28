@@ -13,10 +13,9 @@ import { FehlercheckProvider } from '../Screens/pages/functions/contextFehlerche
 import { FehlerTextProvider } from '../Screens/pages/functions/contextFehlertext';
 import { MitarbeiteridProvider } from '../Screens/pages/functions/contextMitarbeiterid'; 
 import Registrierung from '../Screens/registrierung/Registrierung';
-import LoginScreenAdminApp from '../Screens/LoginScreenAdminApp';
-import App from '../App';
- 
-const Navbar=(Prop)=> { 
+import LoginScreenAdminApp from '../Screens/LoginScreenAdminApp'; 
+import PersoenlicheDatenObject from '../utils/Objects/PersoenlicheDatenObject';
+const Navbar=(props)=> { 
     const Stack = createStackNavigator();
  
  
@@ -29,15 +28,15 @@ const Navbar=(Prop)=> {
     <ErfolgscheckProvider>
     <FehlercheckProvider> 
     <FehlerTextProvider>
-    <NavigationContainer>
+    <NavigationContainer >
  
     <Stack.Navigator initialRouteName="FESTPERSONALFB" screenOptions={{headerShown:false, headerMode:'screen', headerTintColor:'white', headerStyle: {backgroundColor:'rgba(0,15,40,0.95)'}}}>
     <Stack.Screen name = "Startadmin"                   component = {Registrierung}  />
-    <Stack.Screen name = "LoginScreen"                  component = {LoginScreen} options={{headerShown:false}} />
+    <Stack.Screen name = "LoginScreen"                  component = {LoginScreen} options={{headerShown:false}} /> 
     <Stack.Screen name = "AdminApp"                     component = {LoginScreenAdminApp} options={{headerShown:false}} />
     <Stack.Screen name = "LoginScreenMini"              component = {LoginScreenMini} options={{headerShown:false}} />
     <Stack.Screen name = "Seite2"                       component = {Seite2} options={{headerShown:false}}/> 
-    <Stack.Screen name = "FESTPERSONALFB"                    component = {FESTPERSONALFB} options={{headerShown:false}} />
+    <Stack.Screen name = "FESTPERSONALFB"               component = {FESTPERSONALFB} initialParams={{'po':PersoenlicheDatenObject}}  options={{headerShown:false}} />
     <Stack.Screen name = "SeiteMinijob"                 component = {SeiteMinijob} options={{headerShown:false}} />
     <Stack.Screen name = "SeiteBewerberauswahl"         component = {SeiteBewerberauswahl} options={{headerShown:false}} />
     <Stack.Screen name = "SeiteSachbearbeitungMinijob"  component = {SeiteSachbearbeitungMinijob} options={{headerShown:false}} />
